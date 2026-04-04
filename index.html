@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -69,6 +70,9 @@
       color: var(--off-white);
       text-decoration: none;
       transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .nav-logo span {
@@ -607,7 +611,10 @@
 
   <!-- ─── NAV ─── -->
   <nav>
-    <a href="#" class="nav-logo">THE <span>JAWS</span> ADVANTAGE</a>
+    <a href="#" class="nav-logo">
+      <img src="logo.svg" alt="The JAWS Advantage" style="height: 50px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
     <ul class="nav-links">
       <li><a href="#the-take">The Take</a></li>
       <li><a href="#playbook">The Playbook</a></li>
