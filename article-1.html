@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nobody tells you this on your first day. They should. — The JAWS Advantage</title>
+  <meta name="description" content="You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 300'><g transform='translate(48,50)'><path d='M125 150 Q115 90 90 40 Q75 20 60 10 Q55 40 45 80 Q30 110 10 135 Q0 145 0 150 Z' fill='%23c0392b'/></g></svg>">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #c0392b;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-logo:hover {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white) !important;
+      border: 1px solid var(--red);
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--off-white) !important;
+    }
+
+    /* ─── ARTICLE LAYOUT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 48px 120px;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192, 57, 43, 0.1);
+      border: 1px solid rgba(192, 57, 43, 0.25);
+      padding: 5px 12px;
+    }
+
+    .article-issue {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+
+    .article-standfirst {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--off-white-dim);
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin: 56px 0 20px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-pull-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      margin: 56px 0;
+      padding: 40px 0 40px 28px;
+      border-left: 4px solid var(--red);
+      position: relative;
+    }
+
+    .article-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 28px;
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.25;
+    }
+
+    .article-closing {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+    }
+
+    .article-closing strong {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ─── BACK LINK ─── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      margin-bottom: 56px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--red);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+    }
+
+    .footer-logo span {
+      color: var(--red);
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(184, 181, 176, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.3);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .article-wrap {
+        padding: 120px 24px 80px;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <svg width="35" height="35" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg"><g transform="translate(48, 50)"><path d="M125 150 Q115 90 90 40 Q75 20 60 10 Q55 40 45 80 Q30 110 10 135 Q0 145 0 150 Z" fill="#c0392b"/></g></svg>
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#the-take">The Take</a></li>
+      <li><a href="index.html#playbook">The Playbook</a></li>
+      <li><a href="index.html#roles">12 Roles</a></li>
+      <li><a href="index.html#the-take" class="nav-cta">Get the Edge</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── ARTICLE ─── -->
+  <main class="article-wrap">
+
+    <a href="index.html" class="back-link fade-in">&larr; Back to The Take</a>
+
+    <header class="article-header fade-in">
+      <div class="article-eyebrow">
+        <span class="article-tag">Networking</span>
+        <span class="article-issue">Issue 01</span>
+      </div>
+      <h1 class="article-title">Nobody tells you this on your first day. They should.</h1>
+      <p class="article-standfirst">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations — and why the sooner you understand it, the better.</p>
+    </header>
+
+    <div class="article-body fade-in">
+
+      <p>On your first day, someone will show you where the bathrooms are, introduce you to twelve people whose names you'll immediately forget, and sit you in front of a laptop with a hundred unread emails. Nobody will tell you the thing that matters most.</p>
+
+      <p>Your career will not be built on how well you do your job. It will be built on who knows you're doing it.</p>
+
+      <p>That sounds cynical. It isn't. It's just honest — and it's the difference between people who spend fifteen years waiting to be noticed and people who move.</p>
+
+      <blockquote class="article-pull-quote">Talent gets you in the room. Relationships decide what happens next.</blockquote>
+
+      <h2 class="article-section-heading">The myth they sell you</h2>
+
+      <p>Work hard. Keep your head down. Deliver results. The right people will notice. That's the story. And it works — right up until it doesn't. Until someone less experienced than you gets the role you wanted. Until a project you led quietly disappears. Until you realise the decision was made three weeks before the meeting where everyone pretended to decide.</p>
+
+      <p>Big organisations are not meritocracies. They are relationship networks that reward results. There's a difference. Results are the price of admission. Relationships are the game.</p>
+
+      <h2 class="article-section-heading">What networking actually means</h2>
+
+      <p>Forget the word networking. It sounds like a conference name badge and a warm glass of wine. What it actually means is this: making sure the right people know who you are, before you need them to.</p>
+
+      <p>That's it. It's not complicated. It's not fake. It's not sucking up. It's being deliberate about your presence inside the organisation — showing up in the right rooms, asking good questions, listening more than you talk, and being useful to people before you ever ask for anything.</p>
+
+      <p>The people who do this early — not when they want a promotion, but from week one — are the ones who seem to move effortlessly. They're not smarter. They're not luckier. They just started earlier.</p>
+
+      <blockquote class="article-pull-quote">Don't wait until you want something. That's already too late.</blockquote>
+
+      <h2 class="article-section-heading">What to do on Monday</h2>
+
+      <p>Find one person outside your immediate team whose work intersects with yours. Ask them for twenty minutes to understand what they do. Ask questions. Listen. Don't talk about yourself. Do this once a week for a month.</p>
+
+      <p>You'll know more about how the organisation actually works than most people who've been there five years. And four people will know your name who didn't before. That is networking. That's all it is.</p>
+
+      <p>Do it before you need it. Do it before there's a role you want. Do it before your manager moves on. Do it now, while your only agenda is to learn.</p>
+
+      <h2 class="article-section-heading">One last thing</h2>
+
+      <p>You will feel awkward. You will wonder if people think you're being fake. They won't — because you're not. You're being curious and deliberate, which is exactly what good organisations reward. The ones who think it's beneath them are the ones who'll still be waiting to be noticed in ten years.</p>
+
+      <p>You've just started. This is your advantage. Use it.</p>
+
+      <div class="article-closing">
+        <strong>This is what JAWS Advantage is here for</strong> — the playbook nobody hands you on day one. More where this came from.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── SCROLL ANIMATIONS ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20
+        ? 'rgba(245, 243, 239, 0.12)'
+        : 'var(--border)';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
