@@ -469,92 +469,6 @@
       transition: transform 0.2s, color 0.2s;
     }
 
-    /* ─── EMAIL SIGNUP ─── */
-    .signup {
-      background: var(--black-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .signup-inner {
-      max-width: 640px;
-    }
-
-    .signup-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(44px, 6vw, 72px);
-      letter-spacing: 0.03em;
-      color: var(--off-white);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .signup-title span {
-      color: var(--red);
-    }
-
-    .signup-sub {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--off-white-dim);
-      line-height: 1.65;
-      margin-bottom: 40px;
-      max-width: 480px;
-    }
-
-    .signup-form {
-      display: flex;
-      gap: 0;
-      max-width: 520px;
-    }
-
-    .signup-input {
-      flex: 1;
-      background: var(--black);
-      border: 1px solid var(--border);
-      border-right: none;
-      color: var(--off-white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      padding: 16px 20px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .signup-input::placeholder {
-      color: rgba(184, 181, 176, 0.4);
-    }
-
-    .signup-input:focus {
-      border-color: var(--red);
-    }
-
-    .signup-btn {
-      background: var(--red);
-      border: 1px solid var(--red);
-      color: var(--off-white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 16px 32px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-
-    .signup-btn:hover {
-      background: var(--red-dark);
-    }
-
-    .signup-disclaimer {
-      font-size: 12px;
-      color: rgba(184, 181, 176, 0.4);
-      margin-top: 16px;
-      letter-spacing: 0.02em;
-    }
-
     /* ─── FOOTER ─── */
     footer {
       padding: 64px 48px;
@@ -631,7 +545,6 @@
       .hero,
       section,
       .manifesto,
-      .signup,
       footer {
         padding-left: 24px;
         padding-right: 24px;
@@ -682,19 +595,6 @@
         gap: 16px;
       }
 
-      .signup-form {
-        flex-direction: column;
-      }
-
-      .signup-input {
-        border-right: 1px solid var(--border);
-        border-bottom: none;
-      }
-
-      .signup-input:focus {
-        border-color: var(--red);
-      }
-
       .footer-inner {
         flex-direction: column;
         gap: 20px;
@@ -712,7 +612,7 @@
       <li><a href="#the-take">The Take</a></li>
       <li><a href="#playbook">The Playbook</a></li>
       <li><a href="#roles">12 Roles</a></li>
-      <li><a href="#signup" class="nav-cta">Get the Edge</a></li>
+      <li><a href="#the-take" class="nav-cta">Get the Edge</a></li>
     </ul>
   </nav>
 
@@ -839,28 +739,6 @@
     </div>
   </section>
 
-  <!-- ─── EMAIL SIGNUP ─── -->
-  <section class="signup" id="signup">
-    <div class="signup-inner">
-      <p class="section-label">Get the Edge</p>
-      <h2 class="signup-title fade-in">Get the <span>unfiltered</span> edge.</h2>
-      <p class="signup-sub fade-in">
-        No corporate fluff. No motivational noise. Just direct, tactical intelligence on how to move in large organizations — delivered straight to your inbox.
-      </p>
-      <form class="signup-form fade-in" onsubmit="handleSignup(event)">
-        <input
-          type="email"
-          class="signup-input"
-          placeholder="your@email.com"
-          required
-          autocomplete="email"
-        />
-        <button type="submit" class="signup-btn">Subscribe</button>
-      </form>
-      <p class="signup-disclaimer">No spam. Unsubscribe anytime. Your edge, your terms.</p>
-    </div>
-  </section>
-
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
@@ -908,19 +786,6 @@
     }, { threshold: 0.5 });
 
     sections.forEach(s => navObserver.observe(s));
-
-    // ─── EMAIL SIGNUP ───
-    function handleSignup(e) {
-      e.preventDefault();
-      const input = e.target.querySelector('.signup-input');
-      const btn = e.target.querySelector('.signup-btn');
-      btn.textContent = 'You\'re In.';
-      btn.style.background = '#1a6632';
-      btn.style.borderColor = '#1a6632';
-      input.value = '';
-      input.disabled = true;
-      btn.disabled = true;
-    }
 
     // ─── NAV BACKGROUND ON SCROLL ───
     const nav = document.querySelector('nav');
