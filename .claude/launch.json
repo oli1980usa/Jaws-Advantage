@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Static Site (Python)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "."],
+      "port": 3000
+    },
+    {
+      "name": "Static Site (npx http-server)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "3000", "--cors"],
+      "port": 3000
+    }
+  ]
+}
