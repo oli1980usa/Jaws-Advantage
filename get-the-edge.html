@@ -460,40 +460,55 @@
     /* ─── FLOATING CHAT BAR ─── */
     .float-chat {
       position: fixed;
-      bottom: 0;
-      right: 32px;
-      width: 320px;
-      z-index: 200;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      z-index: 300;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 40px rgba(165, 42, 26, 0.6), 0 0 80px rgba(165, 42, 26, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
     }
 
     .float-chat-bar {
-      background: #111111;
-      border: 1px solid rgba(165, 42, 26, 0.35);
-      border-bottom: none;
+      background: #a52a1a;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 1.2rem 2rem;
       cursor: pointer;
       user-select: none;
-      transition: background 0.2s;
+      transition: background 0.2s, box-shadow 0.2s;
     }
 
     .float-chat-bar:hover {
-      background: #1a1a1a;
+      background: #bf3120;
     }
 
     .float-chat-label {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--off-white-dim);
-      letter-spacing: 0.04em;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
     }
 
     .float-chat-label strong {
-      color: var(--red);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .float-chat-chevron {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+
+    .float-chat.is-open .float-chat-chevron {
+      transform: rotate(180deg);
     }
 
     .float-chat-close {
@@ -541,7 +556,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 300;
-      padding: 14px 16px;
+      padding: 20px 24px;
     }
 
     .float-chat-input::placeholder {
@@ -549,17 +564,18 @@
     }
 
     .float-chat-submit {
-      background: var(--red);
+      background: #a52a1a;
       border: none;
-      color: var(--off-white);
-      padding: 14px 16px;
-      font-size: 16px;
+      color: #ffffff;
+      padding: 20px 24px;
+      font-size: 18px;
       cursor: pointer;
       transition: background 0.2s;
+      flex-shrink: 0;
     }
 
     .float-chat-submit:hover {
-      background: var(--red-dark);
+      background: #bf3120;
     }
 
     /* ─── COOKIE BANNER ─── */
@@ -570,8 +586,8 @@
       right: 0;
       z-index: 300;
       background: #111111;
-      border-top: 1px solid rgba(245, 243, 239, 0.1);
-      padding: 14px 48px;
+      border-top: 3px solid #a52a1a;
+      padding: 24px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -589,10 +605,10 @@
     }
 
     .cookie-text {
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--off-white-dim);
-      line-height: 1.5;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--off-white);
+      line-height: 1.6;
       flex: 1;
     }
 
@@ -702,7 +718,7 @@
 
     <!-- Page title -->
     <div class="chat-header">
-      <h1 class="chat-title">ASK JAWS 🦈</h1>
+      <h1 class="chat-title">ASK JAWS</h1>
       <p class="chat-subtitle">Career intelligence, unfiltered. <span>Ask anything.</span></p>
     </div>
 
@@ -714,7 +730,7 @@
 
       <!-- Typing indicator -->
       <div class="typing-indicator" id="typingIndicator">
-        <span class="typing-label">JAWS 🦈</span>
+        <span class="typing-label">JAWS</span>
         <div class="typing-dots">
           <span></span><span></span><span></span>
         </div>
@@ -752,8 +768,8 @@
   <!-- ─── FLOATING CHAT BAR ─── -->
   <div class="float-chat" id="floatChat">
     <div class="float-chat-bar" id="floatChatBar">
-      <span class="float-chat-label">Ask <strong>JAWS</strong> 🦈</span>
-      <button class="float-chat-close" id="floatChatClose" aria-label="Close">✕</button>
+      <span class="float-chat-label">Ask JAWS — Career Intelligence On Demand</span>
+      <span class="float-chat-chevron" id="floatChatChevron">&#8964;</span>
     </div>
     <div class="float-chat-input-wrap" id="floatChatInputWrap">
       <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" />
@@ -899,7 +915,7 @@
       row.className = 'msg-row jaws';
       var label = document.createElement('div');
       label.className = 'msg-label';
-      label.textContent = 'JAWS 🦈';
+      label.textContent = 'JAWS';
       var bubble = document.createElement('div');
       bubble.className = 'msg-bubble';
       // Render newlines as paragraph breaks
@@ -954,11 +970,45 @@
     }
 
     // ─── SEND MESSAGE ───
-    async function sendMessage(text) {
+    async function sendMessage(userMessage) {
+      conversationHistory.push({ role: 'user', content: userMessage });
+
+      try {
+        const response = await fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: conversationHistory
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + response.status);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error.message || 'API error');
+        }
+
+        const assistantMessage = data.content[0].text;
+        conversationHistory.push({ role: 'assistant', content: assistantMessage });
+        return assistantMessage;
+
+      } catch (error) {
+        console.error('Error:', error);
+        throw error;
+      }
+    }
+
+    async function handleUserInput(text) {
       if (!text || isWaiting) return;
 
       if (isLimitReached()) {
-        appendSystemMessage("You've used your 10 free questions today. Come back tomorrow for more career intelligence. 🦈");
+        appendSystemMessage("You've used your 10 free questions today. Come back tomorrow for more career intelligence.");
         setInputDisabled(true);
         updateHint();
         return;
@@ -966,35 +1016,17 @@
 
       isWaiting = true;
       setInputDisabled(true);
-
       appendUserMessage(text);
-      conversationHistory.push({ role: 'user', content: text });
-
       showTyping();
 
       try {
-        var response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: conversationHistory })
-        });
-
+        const reply = await sendMessage(text);
         hideTyping();
-
-        if (!response.ok) {
-          throw new Error('HTTP ' + response.status);
-        }
-
-        var data = await response.json();
-        var reply = (data && data.response) ? data.response : 'Something went wrong. Please try again.';
-
-        conversationHistory.push({ role: 'assistant', content: reply });
         appendJAWSMessage(reply);
 
         var newCount = incrementCount();
-
         if (newCount >= DAILY_LIMIT) {
-          appendSystemMessage("You've used your 10 free questions today. Come back tomorrow for more career intelligence. 🦈");
+          appendSystemMessage("You've used your 10 free questions today. Come back tomorrow for more career intelligence.");
           setInputDisabled(true);
         } else {
           setInputDisabled(false);
@@ -1005,7 +1037,7 @@
         hideTyping();
         appendJAWSMessage('Something went wrong. Please try again.');
         setInputDisabled(false);
-        // Don't count failed requests against the limit
+        // Remove the user message that was pushed in sendMessage on failure
         conversationHistory.pop();
       }
 
@@ -1018,7 +1050,8 @@
       var text = inputEl.value.trim();
       if (!text) return;
       inputEl.value = '';
-      sendMessage(text);
+      handleUserInput(text);
+
     });
 
     inputEl.addEventListener('keydown', function (e) {
@@ -1027,7 +1060,8 @@
         var text = inputEl.value.trim();
         if (!text) return;
         inputEl.value = '';
-        sendMessage(text);
+        handleUserInput(text);
+
       }
     });
 
@@ -1057,7 +1091,8 @@
             var text = inputEl.value.trim();
             if (text) {
               inputEl.value = '';
-              sendMessage(text);
+              handleUserInput(text);
+
             }
           }, 600);
         }

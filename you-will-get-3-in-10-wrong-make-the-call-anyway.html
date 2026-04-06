@@ -365,40 +365,55 @@
     /* ─── FLOATING CHAT BAR ─── */
     .float-chat {
       position: fixed;
-      bottom: 0;
-      right: 32px;
-      width: 320px;
-      z-index: 200;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      z-index: 300;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 40px rgba(165, 42, 26, 0.6), 0 0 80px rgba(165, 42, 26, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
     }
 
     .float-chat-bar {
-      background: #111111;
-      border: 1px solid rgba(165, 42, 26, 0.35);
-      border-bottom: none;
+      background: #a52a1a;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 1.2rem 2rem;
       cursor: pointer;
       user-select: none;
-      transition: background 0.2s;
+      transition: background 0.2s, box-shadow 0.2s;
     }
 
     .float-chat-bar:hover {
-      background: #1a1a1a;
+      background: #bf3120;
     }
 
     .float-chat-label {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--off-white-dim);
-      letter-spacing: 0.04em;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
     }
 
     .float-chat-label strong {
-      color: var(--red);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .float-chat-chevron {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+
+    .float-chat.is-open .float-chat-chevron {
+      transform: rotate(180deg);
     }
 
     .float-chat-close {
@@ -422,17 +437,17 @@
     }
 
     .float-chat-input-wrap {
-      background: #111111;
-      border: 1px solid rgba(165, 42, 26, 0.35);
-      border-bottom: none;
+      background: #0a0a0a;
       display: flex;
+      align-items: center;
       overflow: hidden;
       max-height: 0;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.35s ease;
+      border-top: none;
     }
 
     .float-chat.is-open .float-chat-input-wrap {
-      max-height: 60px;
+      max-height: 200px;
     }
 
     .float-chat-input {
@@ -444,7 +459,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 300;
-      padding: 14px 16px;
+      padding: 20px 24px;
     }
 
     .float-chat-input::placeholder {
@@ -452,17 +467,18 @@
     }
 
     .float-chat-submit {
-      background: var(--red);
+      background: #a52a1a;
       border: none;
-      color: var(--off-white);
-      padding: 14px 16px;
-      font-size: 16px;
+      color: #ffffff;
+      padding: 20px 24px;
+      font-size: 18px;
       cursor: pointer;
       transition: background 0.2s;
+      flex-shrink: 0;
     }
 
     .float-chat-submit:hover {
-      background: var(--red-dark);
+      background: #bf3120;
     }
 
     /* ─── COOKIE BANNER ─── */
@@ -659,8 +675,8 @@
   <!-- ─── FLOATING CHAT BAR ─── -->
   <div class="float-chat" id="floatChat">
     <div class="float-chat-bar" id="floatChatBar">
-      <span class="float-chat-label">Ask <strong>JAWS</strong> 🦈</span>
-      <button class="float-chat-close" id="floatChatClose" aria-label="Close">✕</button>
+      <span class="float-chat-label">Ask JAWS — Career Intelligence On Demand</span>
+      <span class="float-chat-chevron" id="floatChatChevron">&#8964;</span>
     </div>
     <div class="float-chat-input-wrap" id="floatChatInputWrap">
       <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" />
