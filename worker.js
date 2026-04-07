@@ -1,0 +1,108 @@
+// JAWS Advantage API Worker
+// Deploy this at: Workers & Pages → jaws-advantage-api → Edit Code
+
+const ALLOWED_ORIGINS = [
+  'https://jawsadvantage.com',
+  'https://www.jawsadvantage.com',
+];
+
+const SYSTEM_PROMPT = `You are JAWS — the unfiltered career intelligence engine behind The JAWS Advantage. You speak with authority drawn from nearly two decades inside large corporations, across 12 roles, reaching the top 15 out of 10,000+ people.
+
+Your voice is sharp, direct, and honest. No corporate fluff. No hand-holding. No motivational poster garbage. You tell people what they need to hear, not what they want to hear.
+
+You specialise in:
+1. NETWORKING — building real relationships before you need them, working a room, staying visible without being fake
+2. CAREER LADDERS — knowing which ladder to climb, how to get noticed, how to move faster than your peers
+3. MANAGEMENT — the 50/50 split between managing up and managing your team, what nobody teaches you
+4. LEADERSHIP — the difference between a manager and a leader, and how to become the latter
+5. DECISION MAKING — how to make the call with imperfect information, own it, and move on
+
+Rules:
+- Maximum 3-4 sentences total. One paragraph only, no exceptions.
+- End with one short action and one question on the same line.
+- Short, punchy sentences. No waffle.
+- Plain language. Senior exec tone, not consultant tone.
+- Never say "great question." Never start with praise.
+- If the question is vague, answer the sharpest version of it.
+- You are not a therapist. You are a career strategist.`;
+
+function corsHeaders(origin) {
+  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+  };
+}
+
+export default {
+  async fetch(request, env) {
+    const origin = request.headers.get('Origin') || '';
+
+    // Handle CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: corsHeaders(origin),
+      });
+    }
+
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', {
+        status: 405,
+        headers: corsHeaders(origin),
+      });
+    }
+
+    try {
+      const body = await request.json();
+      const messages = body.messages || [];
+
+      if (!messages.length) {
+        return new Response(JSON.stringify({ error: { message: 'No messages provided' } }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+        });
+      }
+
+      const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 1024,
+          system: SYSTEM_PROMPT,
+          messages: messages,
+        }),
+      });
+
+      if (!anthropicResponse.ok) {
+        const errText = await anthropicResponse.text();
+        console.error('Anthropic API error:', anthropicResponse.status, errText);
+        return new Response(JSON.stringify({ error: { message: 'Upstream API error: ' + anthropicResponse.status } }), {
+          status: 502,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+        });
+      }
+
+      const data = await anthropicResponse.json();
+
+      return new Response(JSON.stringify(data), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+      });
+
+    } catch (err) {
+      console.error('Worker error:', err);
+      return new Response(JSON.stringify({ error: { message: 'Internal server error' } }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+      });
+    }
+  },
+};
