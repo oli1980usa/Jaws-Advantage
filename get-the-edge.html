@@ -749,7 +749,8 @@
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/\n\n/g, '<br><br>')
-        .replace(/\n/g, '<br>');
+        .replace(/\n/g, '<br>')
+        .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#a52a1a;text-decoration:underline;">$1</a>');
       row.appendChild(label);
       row.appendChild(bubble);
       messagesEl.appendChild(row);
