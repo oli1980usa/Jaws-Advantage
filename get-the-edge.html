@@ -738,7 +738,11 @@
       var bubble = document.createElement('div');
       bubble.className = 'msg-bubble';
       // Render newlines as paragraph breaks
-      bubble.innerHTML = text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+      bubble.innerHTML = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '<br><br>')
+        .replace(/\n/g, '<br>');
       row.appendChild(label);
       row.appendChild(bubble);
       messagesEl.appendChild(row);
