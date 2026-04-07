@@ -834,20 +834,15 @@
       }
     }
 
-    @keyframes textFlicker {
-      0%   { opacity: 1; }
-      8%   { opacity: 0.1; }
-      12%  { opacity: 1; }
-      20%  { opacity: 0.3; }
-      25%  { opacity: 1; }
-      70%  { opacity: 1; }
-      75%  { opacity: 0.2; }
-      80%  { opacity: 1; }
-      100% { opacity: 1; }
+     textGlow {
+      0%   { text-shadow: none; }
+      30%  { text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(165, 42, 26, 0.8), 0 0 120px rgba(165, 42, 26, 0.4); }
+      60%  { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 30px rgba(165, 42, 26, 0.5); }
+      100% { text-shadow: none; }
     }
 
-    .hero-flicker {
-      animation: textFlicker 1.2s ease forwards;
+    .hero-glow {
+      animation: textGlow 1.5s ease forwards;
     }
   </style>
 </head>
@@ -1163,8 +1158,8 @@
 
       function flicker(el) {
         if (!el) return;
-        el.classList.add('hero-flicker');
-        setTimeout(function () { el.classList.remove('hero-flicker'); }, 1500);
+        el.classList.add('hero-glow');
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
       }
 
       // Flicker on load
