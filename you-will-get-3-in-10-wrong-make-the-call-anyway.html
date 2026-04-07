@@ -548,6 +548,21 @@
         gap: 12px;
       }
     }
+    @keyframes textFlicker {
+      0%   { opacity: 1; }
+      8%   { opacity: 0.1; }
+      12%  { opacity: 1; }
+      20%  { opacity: 0.3; }
+      25%  { opacity: 1; }
+      70%  { opacity: 1; }
+      75%  { opacity: 0.2; }
+      80%  { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    .hero-flicker {
+      animation: textFlicker 1.2s ease forwards;
+    }
   </style>
 </head>
 <body>
@@ -765,6 +780,19 @@
         if (e.key === 'Enter') submitFloat();
         if (e.key === 'Escape') closeWidget();
       });
+    })();
+
+    // ─── FLICKER ANIMATION ───
+    (function () {
+      var headline = document.querySelector('.article-title');
+
+      function flicker(el) {
+        if (!el) return;
+        el.classList.add('hero-flicker');
+        setTimeout(function () { el.classList.remove('hero-flicker'); }, 1500);
+      }
+
+      setTimeout(function () { flicker(headline); }, 300);
     })();
   </script>
 
