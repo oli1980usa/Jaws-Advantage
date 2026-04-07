@@ -733,6 +733,7 @@
       row.appendChild(bubble);
       messagesEl.appendChild(row);
       scrollToBottom();
+      saveChatHtml();
     }
 
     function appendJAWSMessage(text) {
@@ -753,6 +754,7 @@
       row.appendChild(bubble);
       messagesEl.appendChild(row);
       scrollToBottom();
+      saveChatHtml();
     }
 
     function appendSystemMessage(text) {
@@ -773,6 +775,18 @@
 
     function scrollToBottom() {
       messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // ─── SESSION PERSISTENCE ───
+    function saveHistory() {
+      sessionStorage.setItem('jaws_chat_history', JSON.stringify(conversationHistory));
+    }
+
+    function saveChatHtml() {
+      var clone = messagesEl.cloneNode(true);
+      var ti = clone.querySelector('#typingIndicator');
+      if (ti) ti.remove();
+      sessionStorage.setItem('jaws_chat_html', clone.innerHTML);
     }
 
     function showTyping() {
@@ -802,6 +816,7 @@
     // ─── SEND MESSAGE ───
     async function sendMessage(userMessage) {
       conversationHistory.push({ role: 'user', content: userMessage });
+      saveHistory();
 
       try {
         const response = await fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
@@ -826,6 +841,7 @@
 
         const assistantMessage = data.content[0].text;
         conversationHistory.push({ role: 'assistant', content: assistantMessage });
+        saveHistory();
         return assistantMessage;
 
       } catch (error) {
@@ -869,6 +885,7 @@
         setInputDisabled(false);
         // Remove the user message that was pushed in sendMessage on failure
         conversationHistory.pop();
+        saveHistory();
       }
 
       updateHint();
@@ -897,6 +914,20 @@
 
     // ─── INIT ───
     (function init() {
+      // Restore session if available
+      var savedHistory = sessionStorage.getItem('jaws_chat_history');
+      var savedHtml = sessionStorage.getItem('jaws_chat_html');
+      if (savedHistory && savedHtml) {
+        try {
+          conversationHistory = JSON.parse(savedHistory);
+          messagesEl.innerHTML = savedHtml;
+          scrollToBottom();
+        } catch (e) {
+          sessionStorage.removeItem('jaws_chat_history');
+          sessionStorage.removeItem('jaws_chat_html');
+        }
+      }
+
       // Check cookie consent and show note if declined
       var consent = localStorage.getItem('jaws_cookie_consent');
       if (consent === 'declined') {
