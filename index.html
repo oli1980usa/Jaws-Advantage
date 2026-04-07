@@ -834,15 +834,15 @@
       }
     }
 
-     textGlow {
+    @keyframes textGlow {
       0%   { text-shadow: none; }
       30%  { text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(165, 42, 26, 0.8), 0 0 120px rgba(165, 42, 26, 0.4); }
-      60%  { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 30px rgba(165, 42, 26, 0.5); }
+      60%  { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 30px rgba(165, 42, 26, 0.4); }
       100% { text-shadow: none; }
     }
 
     .hero-glow {
-      animation: textGlow 1.5s ease forwards;
+      animation: textGlow 2s ease forwards;
     }
   </style>
 </head>
@@ -1152,23 +1152,30 @@
       });
     })();
 
-    // ─── FLICKER ANIMATION ───
+    // ─── GLOW ANIMATION ───
     (function () {
-      var headline = document.querySelector('.hero-headline');
+      var headline    = document.querySelector('.hero-headline');
+      var pillarsHead = document.querySelector('#playbook .section-title');
+      var takeHead    = document.querySelector('#the-take .section-title');
 
-      function flicker(el) {
+      function glow(el) {
         if (!el) return;
+        el.classList.remove('hero-glow');
+        // Force reflow so re-adding the class restarts the animation
+        void el.offsetWidth;
         el.classList.add('hero-glow');
-        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 2000);
       }
 
-      // Flicker on load
-      setTimeout(function () { flicker(headline); }, 300);
+      // Staggered glow on page load
+      setTimeout(function () { glow(headline); },    300);
+      setTimeout(function () { glow(pillarsHead); }, 800);
+      setTimeout(function () { glow(takeHead); },    1300);
 
-      // Flicker on nav link click before navigating
+      // Glow hero headline on nav link click
       document.querySelectorAll('.nav-links a').forEach(function (link) {
         link.addEventListener('click', function () {
-          flicker(headline);
+          glow(headline);
         });
       });
     })();
