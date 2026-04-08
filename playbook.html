@@ -175,89 +175,142 @@
       max-width: 600px;
     }
 
-    /* ─── PILLARS ─── */
-    .pillars-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px 120px;
+    /* ─── SECTION LAYOUT ─── */
+    .pillars-section {
+      padding: 80px 48px 120px;
     }
 
-    .playbook-row {
-      display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 40px;
-      align-items: start;
-      padding: 64px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .playbook-row:first-child {
-      padding-top: 72px;
-    }
-
-    .playbook-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      letter-spacing: 0.04em;
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       color: var(--red);
-      line-height: 1;
-      opacity: 0.45;
-      padding-top: 4px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .playbook-content {
-      min-width: 0;
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--red);
     }
 
-    .playbook-title {
+    .section-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(34px, 4vw, 52px);
+      font-size: clamp(36px, 5vw, 56px);
       letter-spacing: 0.04em;
       color: var(--off-white);
+      margin-bottom: 0;
+      line-height: 1.05;
+    }
+
+    /* ─── PILLARS GRID ─── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-top: 56px;
+    }
+
+    .pillar {
+      padding: 48px 36px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar:last-child {
+      border-right: none;
+    }
+
+    .pillar:hover {
+      background: var(--black-3);
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .pillar:hover::before {
+      transform: scaleX(1);
+    }
+
+    .pillar-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
       line-height: 1;
+      color: var(--border);
       margin-bottom: 20px;
+      transition: color 0.3s;
     }
 
-    .playbook-desc {
-      font-size: 17px;
+    .pillar:hover .pillar-number {
+      color: rgba(165, 42, 26, 0.2);
+    }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .pillar-desc {
+      font-size: 14px;
       font-weight: 300;
-      line-height: 1.75;
+      line-height: 1.7;
       color: var(--off-white-dim);
-      max-width: 640px;
+      flex: 1;
+      margin-bottom: 28px;
     }
 
-    .playbook-action {
-      padding-top: 8px;
-      flex-shrink: 0;
-    }
-
-    .playbook-btn {
+    .pillar-btn {
       display: inline-block;
       font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 12px 24px;
+      padding: 10px 18px;
       text-decoration: none;
-      white-space: nowrap;
+      align-self: flex-start;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
 
-    .playbook-btn-live {
+    .pillar-btn-live {
       background: var(--red);
       color: var(--off-white);
       border: 1px solid var(--red);
     }
 
-    .playbook-btn-live:hover {
+    .pillar-btn-live:hover {
       background: #bf3120;
       border-color: #bf3120;
     }
 
-    .playbook-btn-soon {
+    .pillar-btn-soon {
       background: transparent;
-      color: rgba(184, 181, 176, 0.25);
+      color: rgba(184, 181, 176, 0.2);
       border: 1px solid rgba(245, 243, 239, 0.07);
       cursor: default;
       pointer-events: none;
@@ -333,6 +386,21 @@
     }
 
     /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pillar:nth-child(2) {
+        border-right: none;
+      }
+
+      .pillar:nth-child(1),
+      .pillar:nth-child(2) {
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
     @media (max-width: 768px) {
       nav {
         padding: 0 24px;
@@ -346,22 +414,17 @@
         padding: 100px 24px 64px;
       }
 
-      .pillars-wrap {
-        padding: 0 24px 80px;
+      .pillars-section {
+        padding: 64px 24px 80px;
       }
 
-      .playbook-row {
-        grid-template-columns: 48px 1fr;
-        gap: 24px;
+      .pillars-grid {
+        grid-template-columns: 1fr;
       }
 
-      .playbook-action {
-        grid-column: 2;
-        padding-top: 16px;
-      }
-
-      .playbook-number {
-        font-size: 36px;
+      .pillar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
       }
 
       footer {
@@ -600,54 +663,41 @@
     <p class="hero-sub fade-in">Four pillars. Seventeen years. One multi-billion dollar company. This is the unfiltered playbook on how careers actually move — what nobody hands you on day one, and what separates the people who climb from the people who plateau.</p>
   </section>
 
-  <!-- ─── PILLAR ROWS ─── -->
-  <div class="pillars-wrap">
+  <!-- ─── PILLAR GRID ─── -->
+  <section class="pillars-section">
+    <p class="section-label">The Four Pillars</p>
+    <div class="pillars-grid">
 
-    <div class="playbook-row fade-in">
-      <div class="playbook-number">01</div>
-      <div class="playbook-content">
-        <h2 class="playbook-title">Engineer Your Presence</h2>
-        <p class="playbook-desc">Visibility is not vanity. Networking is not luck — it's architecture. The right people, the right rooms, the right moment. Being known by the people who matter before you need them is the single biggest lever in your career.</p>
+      <div class="pillar fade-in">
+        <div class="pillar-number">01</div>
+        <h3 class="pillar-title">Engineer Your Presence</h3>
+        <p class="pillar-desc">Visibility is not vanity. Networking is not luck — it's architecture. The right people, the right rooms, the right moment. Being known by the people who matter before you need them is the single biggest lever in your career.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
       </div>
-      <div class="playbook-action">
-        <span class="playbook-btn playbook-btn-soon">Coming Soon</span>
+
+      <div class="pillar fade-in">
+        <div class="pillar-number">02</div>
+        <h3 class="pillar-title">Be Courageous and Curious</h3>
+        <p class="pillar-desc">Make the call. Own it. Nobody respects a leader who delegates decisions upwards. Stay curious enough to ask better questions than everyone else — and decisive enough to act on the answers, even with imperfect information.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
       </div>
+
+      <div class="pillar fade-in">
+        <div class="pillar-number">03</div>
+        <h3 class="pillar-title">Lead With and Through Others</h3>
+        <p class="pillar-desc">You cannot do it alone. The shift from individual contributor to leader happens when you stop asking what you can deliver and start asking what your team can deliver. Empower them. Their success is your success.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
+      </div>
+
+      <div class="pillar fade-in">
+        <div class="pillar-number">04</div>
+        <h3 class="pillar-title">Manage and Influence Upwards</h3>
+        <p class="pillar-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
+        <a href="manage-and-influence-upwards.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
+      </div>
+
     </div>
-
-    <div class="playbook-row fade-in">
-      <div class="playbook-number">02</div>
-      <div class="playbook-content">
-        <h2 class="playbook-title">Be Courageous and Curious</h2>
-        <p class="playbook-desc">Make the call. Own it. Nobody respects a leader who delegates decisions upwards. Stay curious enough to ask better questions than everyone else — and decisive enough to act on the answers, even with imperfect information.</p>
-      </div>
-      <div class="playbook-action">
-        <span class="playbook-btn playbook-btn-soon">Coming Soon</span>
-      </div>
-    </div>
-
-    <div class="playbook-row fade-in">
-      <div class="playbook-number">03</div>
-      <div class="playbook-content">
-        <h2 class="playbook-title">Lead With and Through Others</h2>
-        <p class="playbook-desc">You cannot do it alone. The shift from individual contributor to leader happens when you stop asking what you can deliver and start asking what your team can deliver. Empower them. Their success is your success.</p>
-      </div>
-      <div class="playbook-action">
-        <span class="playbook-btn playbook-btn-soon">Coming Soon</span>
-      </div>
-    </div>
-
-    <div class="playbook-row fade-in">
-      <div class="playbook-number">04</div>
-      <div class="playbook-content">
-        <h2 class="playbook-title">Manage and Influence Upwards</h2>
-        <p class="playbook-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
-      </div>
-      <div class="playbook-action">
-        <a href="manage-and-influence-upwards.html" class="playbook-btn playbook-btn-live">Read the Playbook</a>
-      </div>
-    </div>
-
-  </div>
+  </section>
 
   <!-- ─── CONTACT BAR ─── -->
   <div class="contact-bar">
