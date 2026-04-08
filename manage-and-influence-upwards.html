@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage and Influence Upwards | The JAWS Advantage</title>
+  <meta name="description" content="Most people manage their team. Very few manage their boss. The ones who do are the ones who move.">
+  <meta property="og:title" content="Manage and Influence Upwards | The JAWS Advantage">
+  <meta property="og:description" content="Most people manage their team. Very few manage their boss. The ones who do are the ones who move.">
+  <meta property="og:url" content="https://jawsadvantage.com/manage-and-influence-upwards.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Manage and Influence Upwards | The JAWS Advantage">
+  <meta name="twitter:description" content="Most people manage their team. Very few manage their boss. The ones who do are the ones who move.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="shark-logo.png">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-logo:hover {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white) !important;
+      border: 1px solid var(--red);
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--off-white) !important;
+    }
+
+    /* ─── ARTICLE LAYOUT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 48px 120px;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 8px 18px;
+    }
+
+    .article-issue {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+
+    .article-standfirst {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--off-white-dim);
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin: 56px 0 20px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-pull-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      margin: 56px 0;
+      padding: 40px 0 40px 28px;
+      border-left: 4px solid var(--red);
+      position: relative;
+    }
+
+    .article-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 28px;
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.25;
+    }
+
+    /* ─── EXAMPLE BOX ─── */
+    .article-example {
+      margin: 48px 0;
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 24px 28px 28px;
+      background: rgba(165, 42, 26, 0.04);
+    }
+
+    .article-example-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.12);
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 4px 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .article-example p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--off-white-dim);
+      margin-bottom: 0 !important;
+    }
+
+    .article-closing {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+    }
+
+    .article-closing strong {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ─── BACK LINK ─── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      margin-bottom: 56px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--red);
+    }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(184, 181, 176, 0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-bar a {
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-bar a:hover {
+      color: var(--red);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+    }
+
+    .footer-logo span {
+      color: var(--red);
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(184, 181, 176, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.3);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .article-wrap {
+        padding: 120px 24px 80px;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+
+    /* ─── FLOATING CHAT BAR ─── */
+    .float-chat {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 44px;
+      z-index: 300;
+      border-radius: 999px;
+      background: #a52a1a;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 30px rgba(165, 42, 26, 0.5), 0 4px 20px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+    }
+
+    .float-chat.is-open {
+      width: 500px;
+      height: 52px;
+      cursor: default;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.9), 0 0 40px rgba(165, 42, 26, 0.7), 0 0 80px rgba(165, 42, 26, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
+    }
+
+    .float-chat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .float-chat.is-open .float-chat-label {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .float-chat-input-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 6px 0 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease 0.15s;
+      pointer-events: none;
+    }
+
+    .float-chat.is-open .float-chat-input-wrap {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .float-chat-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      min-width: 0;
+    }
+
+    .float-chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .float-chat-submit {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      border: none;
+      color: #ffffff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .float-chat-submit:hover {
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    /* ─── COOKIE BANNER ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      background: #111111;
+      border-top: 1px solid rgba(245, 243, 239, 0.1);
+      padding: 14px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .cookie-banner.visible {
+      transform: translateY(0);
+    }
+
+    .cookie-banner.hidden {
+      display: none;
+    }
+
+    .cookie-text {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cookie-accept {
+      background: var(--red);
+      color: var(--off-white);
+      border: 1px solid var(--red);
+    }
+
+    .cookie-accept:hover {
+      background: var(--red-dark);
+      border-color: var(--red-dark);
+    }
+
+    .cookie-decline {
+      background: transparent;
+      color: var(--off-white-dim);
+      border: 1px solid rgba(245, 243, 239, 0.2);
+    }
+
+    .cookie-decline:hover {
+      border-color: var(--off-white-dim);
+      color: var(--off-white);
+    }
+
+    @media (max-width: 768px) {
+      .float-chat.is-open {
+        width: calc(100vw - 48px);
+        height: 52px;
+      }
+
+      .cookie-banner {
+        padding: 14px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    @keyframes textGlow {
+      0%   { text-shadow: none; }
+      30%  { text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(165, 42, 26, 0.8), 0 0 120px rgba(165, 42, 26, 0.4); }
+      60%  { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 30px rgba(165, 42, 26, 0.5); }
+      100% { text-shadow: none; }
+    }
+
+    .hero-glow {
+      animation: textGlow 1.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#playbook">The Playbook</a></li>
+      <li><a href="index.html#the-take">The Take</a></li>
+      <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── ARTICLE ─── -->
+  <main class="article-wrap">
+
+    <a href="index.html" class="back-link fade-in">&larr; Back to The Take</a>
+
+    <header class="article-header fade-in">
+      <div class="article-eyebrow">
+        <span class="article-tag">Leadership Strategy</span>
+        <span class="article-issue">Issue 07</span>
+      </div>
+      <h1 class="article-title">Manage and influence upwards.</h1>
+      <p class="article-standfirst">Most people manage their team. Very few manage their boss. The ones who do are the ones who move. This is the half of the job nobody talks about — and the single biggest lever in your career.</p>
+    </header>
+
+    <div class="article-body fade-in">
+
+      <p>Most people walk into a room with senior leadership and do one thing: agree. They nod. They validate. They say yes. It feels safe. It feels respectful. It feels like the right thing to do when you're trying to make a good impression.</p>
+
+      <p>It's career suicide. Slow, invisible, painless — until it isn't.</p>
+
+      <p>Leaders don't need more yes-people. They have plenty. What they're short of is people who make them think. People who are curious enough to ask the question nobody else will ask. People who are confident enough to say "I'd like to challenge that" — and then actually do it, cleanly, respectfully, without waffling.</p>
+
+      <p>That person gets remembered. Every single time.</p>
+
+      <blockquote class="article-pull-quote">Your CEO doesn't need someone to confirm he's right. He needs someone who makes him sharper. Be that person.</blockquote>
+
+      <h2 class="article-section-heading">Why people default to yes</h2>
+
+      <p>Fear. Almost always fear. Fear of consequences. Fear of getting it wrong in front of the wrong people. Fear of being seen as difficult, political, above their station. Early in your career, when you don't yet know the rules and every decision feels high stakes, saying yes feels like the safe option.</p>
+
+      <p>Here's what nobody tells you: it isn't. Yes-people don't get fired. But they don't get promoted either. They become furniture. Reliable, invisible, replaceable. The people who move are the ones who show up with a point of view — and the courage to voice it.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Yes-Person</span>
+        <p>Sarah joined the same graduate programme as three others. Bright, hardworking, never missed a deadline. In every meeting she agreed with her manager. Every new initiative was a great idea. Every decision was absolutely the right call. Eighteen months in, her manager couldn't tell you one thing Sarah actually thought about the business. She got a solid performance review. She did not get the promotion. The colleague who asked uncomfortable questions in team meetings did.</p>
+      </div>
+
+      <h2 class="article-section-heading">The structured challenge</h2>
+
+      <p>Challenging upwards is a skill. Done badly it looks arrogant. Done well it looks like exactly what it is — independent thinking, intellectual curiosity, and the confidence to hold your ground.</p>
+
+      <p><strong>Signal it.</strong> Don't ambush. Say it openly: "I'd like to challenge that." It frames what's coming. It shows respect. It gives the other person a moment to prepare rather than react.</p>
+
+      <p><strong>Smile.</strong> Seriously. A challenge delivered with warmth is completely different to a challenge delivered with tension. You're questioning the idea, not the person. Your body language has to say that.</p>
+
+      <p><strong>Be humble.</strong> You might be wrong. Acknowledge that possibility. "I could be missing something here, but..." is not weakness — it's intellectual honesty. It makes people more open to what comes next.</p>
+
+      <p><strong>Structure it.</strong> One clear point. No waffle. Say the thing, stop talking. The leaders who remember you are the ones who remember that you were concise and clear — not that you made a long, rambling point that eventually got somewhere.</p>
+
+      <p><strong>Land it and stop.</strong> Don't over-explain. Don't backfill with qualifications. Make the challenge, hold the space, let it land.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Team Meeting</span>
+        <p>The regional director presents a new customer reporting process to the team. It's been signed off. It's happening. Everyone nods. James, eight months into his first corporate role, puts his hand up. "I'd like to challenge one part of this if that's okay." He smiles. "The weekly cadence makes sense for the business, but our customer base is seasonal — in Q1 we'd be reporting on data that's three months old by the time anyone acts on it. Would a quarterly deep-dive work better alongside the weekly snapshot?" The director pauses. "That's actually a fair point. Let's look at that." James doesn't get credit in the meeting. But the director remembers his name. Three months later James is asked to join a cross-functional working group. Nobody else from his team is invited.</p>
+      </div>
+
+      <blockquote class="article-pull-quote">The person who asks the question nobody else will ask is the person the leader looks for when they walk into the room.</blockquote>
+
+      <h2 class="article-section-heading">Pick your moments</h2>
+
+      <p>This isn't about challenging everything. That's not independent thinking — that's noise. The most effective challengers read the room. Sometimes you give the leader an easy question they can knock back confidently — that's not sycophancy, that's emotional intelligence. You're warming the room, building the dynamic.</p>
+
+      <p>But when you have a real one — a hard question, a genuine challenge, something that makes them stop and think — you ask it. That's the moment they remember. That's the moment careers move.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Skip-Level Meeting</span>
+        <p>Every quarter the VP runs an open forum. Thirty people in the room. The agenda is dense. Most people sit quietly, answer direct questions, and leave. Maya is six months into her second corporate job. She prepared one question the night before — not about her team, not about her own role, but about a market shift she'd been reading about and how the business was positioned for it. When the VP opened the floor she asked it. Clearly. Concisely. No preamble. The VP stopped, thought for a moment, gave a considered answer, and then said "good question — I want to come back to that." After the meeting Maya's manager pulled her aside. "How did you know to ask that?" She didn't know. She was just curious. That's the point.</p>
+      </div>
+
+      <h2 class="article-section-heading">Managing up beyond the meeting room</h2>
+
+      <p>Influence upwards isn't just about what happens in meetings. It's about understanding what your leader needs, communicating in their language, and making their life easier — not harder. Know their priorities. Know what keeps them up at night. Bring them solutions, not problems. Make them look good in the rooms you're not in.</p>
+
+      <p>That relationship — built over time, through consistency and trust — is the single biggest lever in your career. More than your technical skills. More than your output. More than how hard you work.</p>
+
+      <p>The people above you control your visibility, your resources, your opportunities and your reputation at the levels you haven't reached yet. Manage that relationship deliberately. It doesn't happen by accident.</p>
+
+      <div class="article-closing">
+        <strong>In your next meeting with senior leadership, prepare one question in advance.</strong> Not a soft one. A real one — something you're genuinely curious about, something that shows you've thought about the business beyond your immediate role. Signal it, smile, structure it, stop. See what happens.<br><br>
+        Who in your organisation do you need to be influencing more deliberately — and what's stopping you?
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING CHAT BAR ─── -->
+  <div class="float-chat" id="floatChat">
+    <span class="float-chat-label">Ask JAWS</span>
+    <div class="float-chat-input-wrap" id="floatChatInputWrap">
+      <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
+    </div>
+  </div>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-text">We use cookies to remember your preferences and limit free questions fairly. No tracking or advertising cookies.</p>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-accept" id="cookieAccept">Accept</button>
+      <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
+    </div>
+  </div>
+
+  <script>
+    const ARTICLE_CONTEXT = "the article about managing and influencing upwards, challenging senior leaders constructively, and why yes-people plateau";
+
+    // ─── SCROLL ANIMATIONS ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20
+        ? 'rgba(245, 243, 239, 0.12)'
+        : 'var(--border)';
+    }, { passive: true });
+
+    // ─── COOKIE CONSENT ───
+    (function () {
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('jaws_cookie_consent');
+      if (consent) {
+        banner.classList.add('hidden');
+      } else {
+        setTimeout(function () { banner.classList.add('visible'); }, 800);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        localStorage.setItem('jaws_cookie_consent', 'accepted');
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      });
+      document.getElementById('cookieDecline').addEventListener('click', function () {
+        localStorage.setItem('jaws_cookie_consent', 'declined');
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      });
+    })();
+
+    // ─── FLOATING CHAT BAR ───
+    (function () {
+      var widget = document.getElementById('floatChat');
+      var input = document.getElementById('floatChatInput');
+      var submitBtn = document.getElementById('floatChatSubmit');
+
+      function openWidget() {
+        widget.classList.add('is-open');
+        setTimeout(function () { input.focus(); }, 300);
+      }
+
+      function closeWidget() {
+        widget.classList.remove('is-open');
+        input.value = '';
+      }
+
+      widget.addEventListener('click', function () {
+        if (!widget.classList.contains('is-open')) {
+          openWidget();
+        }
+      });
+
+      input.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== submitBtn) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      submitBtn.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== input) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      function submitFloat() {
+        var q = input.value.trim();
+        var query = q
+          ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q
+          : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
+      }
+
+      submitBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        submitFloat();
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitFloat();
+        if (e.key === 'Escape') closeWidget();
+      });
+    })();
+
+    // ─── GLOW ANIMATION ───
+    (function () {
+      var headline = document.querySelector('.article-title');
+
+      function glow(el) {
+        if (!el) return;
+        el.classList.remove('hero-glow');
+        void el.offsetWidth;
+        el.classList.add('hero-glow');
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
+      }
+
+      setTimeout(function () { glow(headline); }, 300);
+    })();
+  </script>
+
+</body>
+</html>
