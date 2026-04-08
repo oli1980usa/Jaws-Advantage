@@ -681,6 +681,8 @@
   </div>
 
   <script>
+    const ARTICLE_CONTEXT = "the article about managing up and the half of management nobody teaches you";
+
     // ─── SCROLL ANIMATIONS ───
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -762,8 +764,10 @@
 
       function submitFloat() {
         var q = input.value.trim();
-        if (!q) return;
-        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(q);
+        var query = q
+          ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q
+          : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
       }
 
       submitBtn.addEventListener('click', function (e) {
