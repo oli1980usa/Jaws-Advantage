@@ -306,6 +306,8 @@
       position: relative;
       overflow: hidden;
       transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
     .pillar:last-child {
@@ -360,6 +362,40 @@
       font-weight: 300;
       line-height: 1.7;
       color: var(--off-white-dim);
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .pillar-btn {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .pillar-btn-live {
+      background: var(--red);
+      color: var(--off-white);
+      border: 1px solid var(--red);
+    }
+
+    .pillar-btn-live:hover {
+      background: #bf3120;
+      border-color: #bf3120;
+    }
+
+    .pillar-btn-soon {
+      background: transparent;
+      color: rgba(184, 181, 176, 0.2);
+      border: 1px solid rgba(245, 243, 239, 0.07);
+      cursor: default;
+      pointer-events: none;
     }
 
     /* ─── ARTICLES ─── */
@@ -910,21 +946,25 @@
         <div class="pillar-number">01</div>
         <h3 class="pillar-title">Engineer Your Presence</h3>
         <p class="pillar-desc">Visibility is not vanity. Networking is not luck — it's architecture. The right people, the right rooms, the right moment. Being known by the people who matter before you need them is the single biggest lever in your career.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
       </div>
       <div class="pillar fade-in">
         <div class="pillar-number">02</div>
         <h3 class="pillar-title">Be Courageous and Curious</h3>
         <p class="pillar-desc">Make the call. Own it. Nobody respects a leader who delegates decisions upwards. Stay curious enough to ask better questions than everyone else — and decisive enough to act on the answers, even with imperfect information.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
       </div>
       <div class="pillar fade-in">
         <div class="pillar-number">03</div>
         <h3 class="pillar-title">Lead With and Through Others</h3>
         <p class="pillar-desc">You cannot do it alone. The shift from individual contributor to leader happens when you stop asking what you can deliver and start asking what your team can deliver. Empower them. Their success is your success.</p>
+        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
       </div>
       <div class="pillar fade-in">
         <div class="pillar-number">04</div>
         <h3 class="pillar-title">Manage and Influence Upwards</h3>
         <p class="pillar-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
+        <a href="manage-and-influence-upwards.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
       </div>
     </div>
   </section>
