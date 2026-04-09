@@ -486,16 +486,40 @@
       transform: none;
     }
 
+    .chat-input-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 10px auto 0;
+    }
+
+    .clear-chat-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      padding: 0;
+      transition: color 0.2s;
+      opacity: 0.45;
+    }
+
+    .clear-chat-btn:hover {
+      color: var(--red);
+      opacity: 1;
+    }
+
     .char-hint {
-      text-align: center;
+      text-align: right;
       font-size: 11px;
       font-weight: 300;
       color: rgba(184, 181, 176, 0.3);
       letter-spacing: 0.06em;
-      margin-top: 10px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     /* ─── FOOTER ─── */
@@ -717,7 +741,10 @@
           />
           <button class="chat-send-btn" id="chatSendBtn" aria-label="Send">&#10148;</button>
         </div>
-        <p class="char-hint" id="charHint">10 free questions per day &mdash; career intelligence, unfiltered</p>
+        <div class="chat-input-meta">
+          <button class="clear-chat-btn" id="clearChatBtn">Clear Chat</button>
+          <p class="char-hint" id="charHint">10 free questions per day &mdash; career intelligence, unfiltered</p>
+        </div>
       </div>
     </div>
 
@@ -902,6 +929,16 @@
         charHint.textContent = remaining + ' of ' + DAILY_LIMIT + ' free questions remaining today';
       }
     }
+
+    // ─── CLEAR CHAT ───
+    document.getElementById('clearChatBtn').addEventListener('click', function () {
+      messagesEl.innerHTML = '';
+      messagesEl.appendChild(typingEl);
+      conversationHistory = [];
+      sessionStorage.removeItem('jaws_chat_history');
+      sessionStorage.removeItem('jaws_chat_html');
+      updateHint();
+    });
 
     // ─── SEND MESSAGE ───
     async function sendMessage(userMessage) {
