@@ -44,10 +44,6 @@
       --border: rgba(245, 243, 239, 0.08);
     }
 
-    html, body {
-      height: 100%;
-    }
-
     html {
       scroll-behavior: smooth;
     }
@@ -59,8 +55,6 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
     }
 
     /* ─── SCROLLBAR ─── */
@@ -218,11 +212,8 @@
 
     /* ─── PAGE WRAPPER ─── */
     .chat-page {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      display: block;
       padding-top: 64px;
-      min-height: 0;
     }
 
     /* ─── PAGE TITLE AREA ─── */
@@ -264,16 +255,11 @@
 
     /* ─── CHAT WINDOW ─── */
     .chat-window {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      overflow: hidden;
+      display: block;
     }
 
     .chat-messages {
-      flex: 1;
-      overflow-y: auto;
+      min-height: 60vh;
       padding: 28px 48px;
       display: flex;
       flex-direction: column;
@@ -413,10 +399,12 @@
 
     /* ─── INPUT BAR ─── */
     .chat-input-bar {
-      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
       padding: 16px 48px 28px;
       background: var(--black-2);
       border-top: 1px solid var(--border);
+      z-index: 10;
     }
 
     .chat-input-inner {
@@ -488,10 +476,9 @@
 
     .chat-input-meta {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       max-width: 800px;
-      margin: 10px auto 0;
+      margin: 0 auto 8px;
     }
 
     .clear-chat-btn {
@@ -515,16 +502,17 @@
     }
 
     .char-hint {
-      text-align: right;
+      text-align: center;
       font-size: 11px;
       font-weight: 300;
       color: rgba(184, 181, 176, 0.3);
       letter-spacing: 0.06em;
+      max-width: 800px;
+      margin: 10px auto 0;
     }
 
     /* ─── FOOTER ─── */
     footer {
-      flex-shrink: 0;
       padding: 40px 48px;
       border-top: 1px solid var(--border);
     }
@@ -730,6 +718,9 @@
 
       <!-- Input bar -->
       <div class="chat-input-bar">
+        <div class="chat-input-meta">
+          <button class="clear-chat-btn" id="clearChatBtn">Clear Chat</button>
+        </div>
         <div class="chat-input-inner">
           <input
             type="text"
@@ -741,10 +732,7 @@
           />
           <button class="chat-send-btn" id="chatSendBtn" aria-label="Send">&#10148;</button>
         </div>
-        <div class="chat-input-meta">
-          <button class="clear-chat-btn" id="clearChatBtn">Clear Chat</button>
-          <p class="char-hint" id="charHint">10 free questions per day &mdash; career intelligence, unfiltered</p>
-        </div>
+        <p class="char-hint" id="charHint">10 free questions per day &mdash; career intelligence, unfiltered</p>
       </div>
     </div>
 
