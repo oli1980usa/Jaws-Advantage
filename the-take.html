@@ -12,15 +12,15 @@
     gtag('config', 'G-5RC382BRZF');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Playbook | The JAWS Advantage</title>
-  <meta name="description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
-  <meta property="og:title" content="The Playbook | The JAWS Advantage">
-  <meta property="og:description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
-  <meta property="og:url" content="https://jawsadvantage.com/playbook.html">
+  <title>The Take | The JAWS Advantage</title>
+  <meta name="description" content="Raw career intelligence. No spin. Unfiltered insight from someone who has lived it — twelve roles, seventeen years, one multi-billion dollar company.">
+  <meta property="og:title" content="The Take | The JAWS Advantage">
+  <meta property="og:description" content="Raw career intelligence. No spin. Unfiltered insight from someone who has lived it.">
+  <meta property="og:url" content="https://jawsadvantage.com/the-take.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Playbook | The JAWS Advantage">
-  <meta name="twitter:description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
+  <meta name="twitter:title" content="The Take | The JAWS Advantage">
+  <meta name="twitter:description" content="Raw career intelligence. No spin. Unfiltered insight from someone who has lived it.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
@@ -119,6 +119,10 @@
       color: var(--red);
     }
 
+    .nav-links a.nav-active {
+      color: var(--red);
+    }
+
     .nav-cta {
       font-size: 13px;
       font-weight: 600;
@@ -144,7 +148,6 @@
       padding: 100px 48px 80px;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid var(--border);
     }
 
     .hero::before {
@@ -168,12 +171,17 @@
 
     .hero-headline {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 8vw, 110px);
+      font-size: clamp(56px, 7vw, 100px);
       line-height: 0.95;
       letter-spacing: 0.02em;
       color: var(--off-white);
       max-width: 16ch;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--red);
     }
 
     .hero-sub {
@@ -185,7 +193,7 @@
     }
 
     /* ─── SECTION LAYOUT ─── */
-    .pillars-section {
+    section {
       padding: 80px 48px 120px;
     }
 
@@ -211,118 +219,101 @@
 
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
+      font-size: clamp(40px, 5vw, 64px);
       letter-spacing: 0.04em;
       color: var(--off-white);
-      margin-bottom: 0;
-      line-height: 1.05;
+      line-height: 1;
     }
 
-    /* ─── PILLARS GRID ─── */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      margin-top: 56px;
+    /* ─── ARTICLES ─── */
+    .articles-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
     }
 
-    .pillar {
-      padding: 48px 36px;
-      border-right: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
+    .articles-list {
       display: flex;
       flex-direction: column;
+      border-top: 1px solid var(--border);
     }
 
-    .pillar:last-child {
-      border-right: none;
+    .article-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 36px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
     }
 
-    .pillar:hover {
-      background: var(--black-3);
+    .article-row:hover {
+      padding-left: 16px;
+      padding-right: 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      background: var(--black-2);
     }
 
-    .pillar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
+    .article-row:hover .article-title {
+      color: var(--red);
     }
 
-    .pillar:hover::before {
-      transform: scaleX(1);
+    .article-row:hover .article-arrow {
+      transform: translateX(6px);
+      color: var(--red);
     }
 
-    .pillar-number {
+    .article-tag {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 5px 10px;
+      text-align: center;
+      width: 160px;
+      flex-shrink: 0;
+    }
+
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .article-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 56px;
-      line-height: 1;
-      color: var(--border);
-      margin-bottom: 20px;
-      transition: color 0.3s;
-    }
-
-    .pillar:hover .pillar-number {
-      color: rgba(165, 42, 26, 0.2);
-    }
-
-    .pillar-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 0.04em;
+      font-size: 26px;
+      letter-spacing: 0.03em;
       color: var(--off-white);
-      margin-bottom: 16px;
+      transition: color 0.2s;
       line-height: 1.1;
     }
 
-    .pillar-desc {
+    .article-excerpt {
       font-size: 14px;
       font-weight: 300;
-      line-height: 1.7;
       color: var(--off-white-dim);
-      flex: 1;
-      margin-bottom: 28px;
+      line-height: 1.6;
     }
 
-    .pillar-btn {
-      display: inline-block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 10px 18px;
-      text-decoration: none;
-      align-self: flex-start;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    .article-meta {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.5);
+      letter-spacing: 0.06em;
     }
 
-    .pillar-btn-live {
-      background: var(--red);
-      color: var(--off-white);
-      border: 1px solid var(--red);
-    }
-
-    .pillar-btn-live:hover {
-      background: #bf3120;
-      border-color: #bf3120;
-    }
-
-    .pillar-btn-soon {
-      background: transparent;
-      color: rgba(184, 181, 176, 0.2);
-      border: 1px solid rgba(245, 243, 239, 0.07);
-      cursor: default;
-      pointer-events: none;
+    .article-arrow {
+      font-size: 20px;
+      color: var(--off-white-dim);
+      transition: transform 0.2s, color 0.2s;
     }
 
     /* ─── CONTACT BAR ─── */
@@ -382,6 +373,18 @@
       color: rgba(184, 181, 176, 0.3);
     }
 
+    .footer-disclaimer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(184, 181, 176, 0.25);
+      text-align: center;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+    }
+
     /* ─── ANIMATIONS ─── */
     .fade-in {
       opacity: 0;
@@ -395,21 +398,6 @@
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .pillar:nth-child(2) {
-        border-right: none;
-      }
-
-      .pillar:nth-child(1),
-      .pillar:nth-child(2) {
-        border-bottom: 1px solid var(--border);
-      }
-    }
-
     @media (max-width: 768px) {
       nav {
         padding: 0 24px;
@@ -419,35 +407,32 @@
         display: none;
       }
 
-      .hero {
-        padding: 100px 24px 64px;
-      }
-
-      .pillars-section {
-        padding: 64px 24px 80px;
-      }
-
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pillar {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-
+      .hero,
+      section,
       footer {
-        padding: 48px 24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero {
+        padding-bottom: 64px;
+      }
+
+      .article-row {
+        grid-template-columns: auto 1fr auto;
+        gap: 20px;
+      }
+
+      .articles-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
       }
 
       .footer-inner {
         flex-direction: column;
         gap: 20px;
         text-align: center;
-      }
-
-      .contact-bar {
-        padding: 24px;
       }
     }
 
@@ -660,50 +645,90 @@
     </a>
     <ul class="nav-links">
       <li><a href="playbook.html">The Playbook</a></li>
-      <li><a href="the-take.html">The Take</a></li>
+      <li><a href="the-take.html" class="nav-active">The Take</a></li>
       <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
     </ul>
   </nav>
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <p class="hero-eyebrow fade-in">The Playbook</p>
-    <h1 class="hero-headline fade-in">The game has rules.<br>Here they are.</h1>
-    <p class="hero-sub fade-in">Four pillars. Seventeen years. One multi-billion dollar company. This is the unfiltered playbook on how careers actually move — what nobody hands you on day one, and what separates the people who climb from the people who plateau.</p>
+    <p class="hero-eyebrow fade-in">The Take</p>
+    <h1 class="hero-headline fade-in">Raw intelligence.<br>No <em>spin.</em></h1>
+    <p class="hero-sub fade-in">
+      Unfiltered career intelligence from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No fluff. No theory. Just what actually works.
+    </p>
   </section>
 
-  <!-- ─── PILLAR GRID ─── -->
-  <section class="pillars-section">
-    <p class="section-label">The Four Pillars</p>
-    <div class="pillars-grid">
-
-      <div class="pillar fade-in">
-        <div class="pillar-number">01</div>
-        <h3 class="pillar-title">Engineer Your Presence</h3>
-        <p class="pillar-desc">Visibility is not vanity. Networking is not luck — it's architecture. The right people, the right rooms, the right moment. Being known by the people who matter before you need them is the single biggest lever in your career.</p>
-        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
+  <!-- ─── ARTICLES ─── -->
+  <section>
+    <div class="articles-header">
+      <div>
+        <p class="section-label">All Articles</p>
+        <h2 class="section-title fade-in">Six issues.<br>Zero filler.</h2>
       </div>
+    </div>
 
-      <div class="pillar fade-in">
-        <div class="pillar-number">02</div>
-        <h3 class="pillar-title">Be Courageous and Curious</h3>
-        <p class="pillar-desc">Make the call. Own it. Nobody respects a leader who delegates decisions upwards. Stay curious enough to ask better questions than everyone else — and decisive enough to act on the answers, even with imperfect information.</p>
-        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
-      </div>
+    <div class="articles-list">
 
-      <div class="pillar fade-in">
-        <div class="pillar-number">03</div>
-        <h3 class="pillar-title">Lead With and Through Others</h3>
-        <p class="pillar-desc">You cannot do it alone. The shift from individual contributor to leader happens when you stop asking what you can deliver and start asking what your team can deliver. Empower them. Their success is your success.</p>
-        <span class="pillar-btn pillar-btn-soon">Coming Soon</span>
-      </div>
+      <a href="nobody-tells-you-this-on-your-first-day.html" class="article-row fade-in">
+        <span class="article-tag">Networking</span>
+        <div class="article-content">
+          <h3 class="article-title">Nobody tells you this on your first day. They should.</h3>
+          <p class="article-excerpt">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations.</p>
+          <span class="article-meta">6 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
 
-      <div class="pillar fade-in">
-        <div class="pillar-number">04</div>
-        <h3 class="pillar-title">Manage and Influence Upwards</h3>
-        <p class="pillar-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
-        <a href="manage-and-influence-upwards.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
-      </div>
+      <a href="youre-not-stuck-youre-on-the-wrong-ladder.html" class="article-row fade-in">
+        <span class="article-tag">Career Strategy</span>
+        <div class="article-content">
+          <h3 class="article-title">You're not stuck. You're on the wrong ladder.</h3>
+          <p class="article-excerpt">Most people climb the first ladder they find. The ones who move fast know which ladder to be on — and when to jump.</p>
+          <span class="article-meta">7 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="the-difference-between-a-manager-and-a-leader.html" class="article-row fade-in">
+        <span class="article-tag">Leadership</span>
+        <div class="article-content">
+          <h3 class="article-title">The difference between a manager and a leader.</h3>
+          <p class="article-excerpt">Every organisation has managers. Far fewer have leaders. Here's what actually separates them.</p>
+          <span class="article-meta">7 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="the-half-of-management-nobody-teaches-you.html" class="article-row fade-in">
+        <span class="article-tag">Leadership</span>
+        <div class="article-content">
+          <h3 class="article-title">The half of management nobody teaches you.</h3>
+          <p class="article-excerpt">Managing down is only half the job. The other half is what actually moves your career.</p>
+          <span class="article-meta">8 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="you-will-get-3-in-10-wrong-make-the-call-anyway.html" class="article-row fade-in">
+        <span class="article-tag">Decision Making</span>
+        <div class="article-content">
+          <h3 class="article-title">You will get 3 in 10 wrong. Make the call anyway.</h3>
+          <p class="article-excerpt">The fear of deciding wrong stops more careers than wrong decisions ever has. Here's why.</p>
+          <span class="article-meta">9 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="you-are-busy-but-are-you-thinking.html" class="article-row fade-in">
+        <span class="article-tag">Leadership Strategy</span>
+        <div class="article-content">
+          <h3 class="article-title">You're busy. But are you thinking?</h3>
+          <p class="article-excerpt">Most managers are flat out. Every single day. But hard at what? If every hour is consumed by what's urgent right now, nobody is building what matters next.</p>
+          <span class="article-meta">6 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
 
     </div>
   </section>
@@ -720,13 +745,15 @@
       <div class="footer-tagline">Career intelligence without the noise</div>
       <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
     </div>
+    <p class="footer-disclaimer">The ideas, concepts and experience behind this content are real and lived. AI was used to assist in the writing and development of this site.</p>
   </footer>
 
   <!-- ─── FLOATING CHAT BAR ─── -->
   <div class="float-chat" id="floatChat">
     <span class="float-chat-label">Ask JAWS</span>
     <div class="float-chat-input-wrap" id="floatChatInputWrap">
-      <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      <input type="text" style="display:none;" aria-hidden="true" tabindex="-1" />
+      <input type="search" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
       <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
     </div>
   </div>
@@ -741,26 +768,32 @@
   </div>
 
   <script>
-    const ARTICLE_CONTEXT = "the JAWS Advantage Playbook page which outlines the four pillars of career dominance";
-
     // ─── SCROLL ANIMATIONS ───
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
+          const siblings = entry.target.parentElement.querySelectorAll('.fade-in:not(.visible)');
+          siblings.forEach((el, idx) => {
+            if (el === entry.target || entry.target.parentElement.contains(el)) {
+              setTimeout(() => el.classList.add('visible'), idx * 80);
+            }
+          });
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // ─── NAV BACKGROUND ON SCROLL ───
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
-      nav.style.borderBottomColor = window.scrollY > 20
-        ? 'rgba(245, 243, 239, 0.12)'
-        : 'var(--border)';
+      if (window.scrollY > 20) {
+        nav.style.borderBottomColor = 'rgba(245, 243, 239, 0.12)';
+      } else {
+        nav.style.borderBottomColor = 'var(--border)';
+      }
     }, { passive: true });
 
     // ─── COOKIE CONSENT ───
@@ -786,8 +819,9 @@
 
     // ─── FLOATING CHAT BAR ───
     (function () {
-      var widget = document.getElementById('floatChat');
-      var input = document.getElementById('floatChatInput');
+      var ARTICLE_CONTEXT = 'the JAWS Advantage Take page — a collection of raw career intelligence articles';
+      var widget   = document.getElementById('floatChat');
+      var input    = document.getElementById('floatChatInput');
       var submitBtn = document.getElementById('floatChatSubmit');
 
       function openWidget() {
@@ -854,7 +888,15 @@
       }
 
       setTimeout(function () { glow(headline); }, 300);
+
+      var navLogo = document.querySelector('.nav-logo');
+      if (navLogo) {
+        navLogo.addEventListener('click', function () {
+          glow(headline);
+        });
+      }
     })();
+
   </script>
 
 </body>
