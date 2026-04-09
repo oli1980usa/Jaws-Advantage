@@ -739,9 +739,111 @@
         display: flex;
       }
     }
+
+    /* ─── READING PROGRESS BAR ─── */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(165, 42, 26, 0.8);
+      z-index: 999;
+      transition: width 0.05s linear;
+    }
+
+    /* ─── READ TIME ─── */
+    .article-read-time {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    /* ─── SHARE BAR ─── */
+    .article-share {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .share-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      opacity: 0.5;
+      margin-right: 4px;
+    }
+
+    .share-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      background: transparent;
+      border: 1px solid rgba(165, 42, 26, 0.4);
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .share-btn:hover {
+      background: rgba(165, 42, 26, 0.12);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(165, 42, 26, 0.5);
+      line-height: 1;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: #bf3120;
+    }
   </style>
 </head>
 <body>
+
+  <div id="readingProgress" class="reading-progress"></div>
 
   <!-- ─── NAV ─── -->
   <nav>
@@ -1050,6 +1152,8 @@
       });
     })();
   </script>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
 
 </body>
 </html>
