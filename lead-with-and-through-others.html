@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead With and Through Others | The JAWS Advantage</title>
+  <meta name="description" content="The best managers don't do the work. They build the team that does. And then they get out of the way.">
+  <meta property="og:title" content="Lead With and Through Others | The JAWS Advantage">
+  <meta property="og:description" content="The best managers don't do the work. They build the team that does. And then they get out of the way.">
+  <meta property="og:url" content="https://jawsadvantage.com/lead-with-and-through-others.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lead With and Through Others | The JAWS Advantage">
+  <meta name="twitter:description" content="The best managers don't do the work. They build the team that does. And then they get out of the way.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="shark-logo.png">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-logo:hover {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white) !important;
+      border: 1px solid var(--red);
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--off-white) !important;
+    }
+
+    /* ─── ARTICLE LAYOUT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 48px 120px;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 8px 18px;
+    }
+
+    .article-issue {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+
+    .article-standfirst {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--off-white-dim);
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin: 56px 0 20px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-pull-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      margin: 56px 0;
+      padding: 40px 0 40px 28px;
+      border-left: 4px solid var(--red);
+      position: relative;
+    }
+
+    .article-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 28px;
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.25;
+    }
+
+    /* ─── EXAMPLE BOX ─── */
+    .article-example {
+      margin: 48px 0;
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 24px 28px 28px;
+      background: rgba(165, 42, 26, 0.04);
+    }
+
+    .article-example-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.12);
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 4px 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .article-example p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--off-white-dim);
+      margin-bottom: 0 !important;
+    }
+
+    .article-closing {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+    }
+
+    .article-closing strong {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ─── BACK LINK ─── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      margin-bottom: 56px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--red);
+    }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(184, 181, 176, 0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-bar a {
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-bar a:hover {
+      color: var(--red);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+    }
+
+    .footer-logo span {
+      color: var(--red);
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(184, 181, 176, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.3);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .article-wrap {
+        padding: 120px 24px 80px;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+
+    /* ─── FLOATING CHAT BAR ─── */
+    .float-chat {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 44px;
+      z-index: 300;
+      border-radius: 999px;
+      background: #a52a1a;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 30px rgba(165, 42, 26, 0.5), 0 4px 20px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+    }
+
+    .float-chat.is-open {
+      width: 500px;
+      height: 52px;
+      cursor: default;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.9), 0 0 40px rgba(165, 42, 26, 0.7), 0 0 80px rgba(165, 42, 26, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
+    }
+
+    .float-chat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .float-chat.is-open .float-chat-label {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .float-chat-input-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 6px 0 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease 0.15s;
+      pointer-events: none;
+    }
+
+    .float-chat.is-open .float-chat-input-wrap {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .float-chat-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      min-width: 0;
+    }
+
+    .float-chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .float-chat-submit {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      border: none;
+      color: #ffffff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .float-chat-submit:hover {
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    /* ─── COOKIE BANNER ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      background: #111111;
+      border-top: 1px solid rgba(245, 243, 239, 0.1);
+      padding: 14px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .cookie-banner.visible {
+      transform: translateY(0);
+    }
+
+    .cookie-banner.hidden {
+      display: none;
+    }
+
+    .cookie-text {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cookie-accept {
+      background: var(--red);
+      color: var(--off-white);
+      border: 1px solid var(--red);
+    }
+
+    .cookie-accept:hover {
+      background: var(--red-dark);
+      border-color: var(--red-dark);
+    }
+
+    .cookie-decline {
+      background: transparent;
+      color: var(--off-white-dim);
+      border: 1px solid rgba(245, 243, 239, 0.2);
+    }
+
+    .cookie-decline:hover {
+      border-color: var(--off-white-dim);
+      color: var(--off-white);
+    }
+
+    @media (max-width: 768px) {
+      .float-chat.is-open {
+        width: calc(100vw - 48px);
+        height: 52px;
+      }
+
+      .cookie-banner {
+        padding: 14px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    @keyframes textGlow {
+      0%   { text-shadow: none; }
+      30%  { text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(165, 42, 26, 0.8), 0 0 120px rgba(165, 42, 26, 0.4); }
+      60%  { text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 30px rgba(165, 42, 26, 0.5); }
+      100% { text-shadow: none; }
+    }
+
+    .hero-glow {
+      animation: textGlow 1.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Playbook</a></li>
+      <li><a href="the-take.html">The Take</a></li>
+      <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── ARTICLE ─── -->
+  <main class="article-wrap">
+
+    <a href="playbook.html" class="back-link fade-in">&larr; Back to The Playbook</a>
+
+    <header class="article-header fade-in">
+      <div class="article-eyebrow">
+        <span class="article-tag">Leadership</span>
+      </div>
+      <h1 class="article-title">Lead with and through others.</h1>
+      <p class="article-standfirst">The best managers don't do the work. They build the team that does. And then they get out of the way. Here's what that actually looks like — and what it costs you when you get it wrong.</p>
+    </header>
+
+    <div class="article-body fade-in">
+
+      <p>Most first-time managers make the same mistake. They work harder than anyone else on the team. They're first in, last out. They're across every detail, every decision, every deliverable. They are visibly, exhaustingly committed — to their team, to their boss, to proving they deserve the role they just got.</p>
+
+      <p>And it works. For a while.</p>
+
+      <p>The problem is that being a great individual contributor disguised as a manager has a ceiling. You become known as reliable. Dependable. Safe. But not someone who leads. Not someone who's ready for the next level. You're so deep in the work that nobody — including you — can see what you're actually capable of.</p>
+
+      <p>The harder you try to prove yourself, the more you trap yourself.</p>
+
+      <blockquote class="article-pull-quote">Performance is the floor. Not the ceiling. The managers who move don't just deliver — they build something that delivers without them.</blockquote>
+
+      <h2 class="article-section-heading">The 30-day rule</h2>
+
+      <p>When you take over a team for the first time, do nothing for 30 days except listen, observe and ask questions. Resist every instinct to prove yourself. Resist the urge to change things. Resist the temptation to show everyone how good you are.</p>
+
+      <p>Your only job in the first 30 days is to understand. What is this team actually capable of? Are they performing, exceeding, or struggling? What do they need that they're not getting? What's working that you shouldn't touch? What's broken that nobody has had the courage to fix?</p>
+
+      <p>You cannot lead people you don't understand. And you cannot understand people you haven't listened to.</p>
+
+      <p>After 30 days, you start planning. After 30 days, you start testing. After 30 days, you earn the right to lead.</p>
+
+      <p>For more senior roles — larger teams, new organisations, significant complexity — extend that to 90 days. The principle is the same. The stakes are higher. The cost of getting it wrong is bigger. Take the time.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The New Manager</span>
+        <p>Priya got her first team of six at 27. She'd been the top performer in her function for two years and knew the work better than anyone. In week one she restructured the team's reporting process, changed the weekly meeting format and set new targets. By week three two of her strongest people were quietly looking for other roles. She'd walked in and told people who'd been doing the job for years that they'd been doing it wrong — without ever asking why they'd been doing it that way. Six months later she was still firefighting the trust she'd broken in the first month. The 30 days she saved cost her six months.</p>
+      </div>
+
+      <h2 class="article-section-heading">Right people. Right roles.</h2>
+
+      <p>Once you've observed, the most important decision you'll make as a manager is who sits in which seat. Not what process to run. Not what targets to set. Who does what.</p>
+
+      <p>A team with the right people in the right roles is almost self-managing. A team with the wrong people in the wrong roles will consume every hour you have — and still underperform.</p>
+
+      <p>Be honest about what you see. Some people are exceeding in roles that don't stretch them — move them up. Some are struggling in roles that don't suit them — move them sideways. And some need investment: training, coaching, time. Before you conclude someone isn't working, ask whether the organisation — whether you — has actually given them what they need to succeed.</p>
+
+      <p>Most performance problems are fit problems. Most fit problems are hiring or placement problems. Own that before you own the person.</p>
+
+      <blockquote class="article-pull-quote">Before you decide someone isn't good enough, ask whether you put them in a position to be good enough.</blockquote>
+
+      <div class="article-example">
+        <span class="article-example-label">The Wrong Role</span>
+        <p>Marcus had been in the same position for three years. Technically strong, never caused problems, but consistently missed his targets. His manager had been managing the underperformance for eighteen months — difficult conversations, performance plans, growing frustration on both sides. A new manager came in, spent 30 days observing, and noticed something: Marcus came alive in client conversations. He was technically brilliant at explaining complex things simply. He was in an operational delivery role that required almost no client contact. Six weeks later Marcus moved into a solutions consulting role. Within a quarter he was exceeding his targets. Nobody had put him in the wrong role on purpose. Nobody had looked closely enough to notice.</p>
+      </div>
+
+      <h2 class="article-section-heading">The courage to act</h2>
+
+      <p>Knowing what needs to change and actually changing it are two very different things. Most managers know. Very few act — at least not quickly enough.</p>
+
+      <p>The reasons are always understandable. You don't want people to leave. You don't want to break something that's working well enough. You don't want to be the one who walked in and immediately turned everything upside down. And underneath all of it, often unspoken: you want to be liked.</p>
+
+      <p>None of those are bad instincts. But all of them, left unchecked, become excuses.</p>
+
+      <p>The changes you've been putting off rarely get easier with time. The person who isn't performing doesn't suddenly turn around because you waited another quarter. The process that's slowing the team down doesn't fix itself. The structural problem you spotted in week two is still there in month six — except now it's your problem, not the last manager's.</p>
+
+      <p>Act. Humanely, thoughtfully, with the full picture — but act.</p>
+
+      <blockquote class="article-pull-quote">The changes you avoid making in month one become the problems you own in month twelve.</blockquote>
+
+      <h2 class="article-section-heading">The internal promotion trap</h2>
+
+      <p>This is where courage matters most — and where it's hardest to find.</p>
+
+      <p>When you're promoted from within your own team, everyone has an expectation: that you won't change anything. You're one of them. You know how things work. You were part of building what's there. The unspoken assumption is continuity.</p>
+
+      <p>That assumption is a trap.</p>
+
+      <p>You were promoted because someone above you believed you could take this team further than it's currently going. Further means different. Different means change. And change — even necessary, well-planned, well-communicated change — will make some people uncomfortable.</p>
+
+      <p>Do it anyway.</p>
+
+      <p>The team that liked you as a peer will respect you as a leader only if you lead. That means making decisions they might not always agree with. It means changing things that feel comfortable. It means being willing to be slightly less liked in the short term in exchange for being genuinely respected in the long term.</p>
+
+      <p>You cannot lead from the middle of the group. At some point you have to step forward.</p>
+
+      <h2 class="article-section-heading">Trust unlocks time</h2>
+
+      <p>Here's what nobody tells you about building a great team: when you get it right, your calendar clears.</p>
+
+      <p>Not because you're doing less. Because you're doing different. When you have the right people in the right roles and you truly trust them — not in theory, not as a management principle, but genuinely, completely trust them — your meeting frequency drops. Your check-ins get shorter. Your involvement in the day-to-day shrinks.</p>
+
+      <p>And that time goes somewhere else. It goes to strategy. To relationships. To thinking about where the team is going, not just what it's doing today. To your own career.</p>
+
+      <p>Your team's performance literally buys back your time. That's not a happy accident. That's the point.</p>
+
+      <h2 class="article-section-heading">The shield and the spotlight</h2>
+
+      <p>The most powerful thing a leader can do for their team is also the most counterintuitive — especially early in your career when your instinct is to be seen, to be credited, to prove your own value.</p>
+
+      <p>Give the credit away. Take the blame.</p>
+
+      <p>When something goes wrong — own it. Publicly, cleanly, without throwing anyone under the bus. Your team is watching how you behave when it costs you something. That moment defines whether they trust you.</p>
+
+      <p>When something goes well — elevate the people who made it happen. Put them in front of senior leadership. Let them present the results. Give them the visibility that moves their careers. You don't lose anything by doing this. You gain a team that would run through walls for you.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Shield</span>
+        <p>The project missed its deadline. The director was furious. In the debrief, Jamie — the team lead — stood up and took full responsibility. He didn't mention the resourcing constraints his team had flagged three weeks earlier. He didn't mention the scope change that had come in late. He said: we didn't deliver on time. That's on me. Here's what we're doing to fix it. Afterwards, his team knew exactly what had happened. They'd watched him absorb something that wasn't entirely his fault without flinching. Three months later, when Jamie needed his team to go beyond what was asked of them on a critical deadline, they didn't hesitate.</p>
+      </div>
+
+      <h2 class="article-section-heading">When it's not working</h2>
+
+      <p>Sometimes, despite everything, it doesn't work out. You've invested, you've repositioned, you've coached — and the honest answer is that this person and this role are not a match.</p>
+
+      <p>That conversation is one of the hardest things a manager does. Do it humanely. Do it honestly. And do it sooner than feels comfortable — because the longer you wait, the harder it gets, and the more it costs the people around them.</p>
+
+      <p>Here's what most managers don't say out loud: letting someone go is often the kindest thing for everyone, including them. A person in the wrong role, struggling every day, knows they're struggling. The relief of being released — honestly, respectfully, with support — is real. And for the team watching it happen, decisive and humane action is leadership. Inaction is not kindness. It's avoidance.</p>
+
+      <div class="article-closing">
+        <strong>Look at your team honestly.</strong> Is everyone in the right role? Is there someone who's struggling that you've been managing around rather than addressing? Is there someone who's ready for more visibility that you haven't given it to yet? Pick one. Do something about it.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING CHAT BAR ─── -->
+  <div class="float-chat" id="floatChat">
+    <span class="float-chat-label">Ask JAWS</span>
+    <div class="float-chat-input-wrap" id="floatChatInputWrap">
+      <input type="text" style="display:none;" aria-hidden="true" tabindex="-1" />
+      <input type="search" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
+    </div>
+  </div>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-text">We use cookies to remember your preferences and limit free questions fairly. No tracking or advertising cookies.</p>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-accept" id="cookieAccept">Accept</button>
+      <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
+    </div>
+  </div>
+
+  <script>
+    const ARTICLE_CONTEXT = "the playbook page about leading with and through others, the 30-day rule for new managers, right people in right roles, the internal promotion trap, trust unlocking time, and taking blame while giving credit";
+
+    // ─── SCROLL ANIMATIONS ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20
+        ? 'rgba(245, 243, 239, 0.12)'
+        : 'var(--border)';
+    }, { passive: true });
+
+    // ─── COOKIE CONSENT ───
+    (function () {
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('jaws_cookie_consent');
+      if (consent) {
+        banner.classList.add('hidden');
+      } else {
+        setTimeout(function () { banner.classList.add('visible'); }, 800);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        localStorage.setItem('jaws_cookie_consent', 'accepted');
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      });
+      document.getElementById('cookieDecline').addEventListener('click', function () {
+        localStorage.setItem('jaws_cookie_consent', 'declined');
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      });
+    })();
+
+    // ─── FLOATING CHAT BAR ───
+    (function () {
+      var widget = document.getElementById('floatChat');
+      var input = document.getElementById('floatChatInput');
+      var submitBtn = document.getElementById('floatChatSubmit');
+
+      function openWidget() {
+        widget.classList.add('is-open');
+        setTimeout(function () { input.focus(); }, 300);
+      }
+
+      function closeWidget() {
+        widget.classList.remove('is-open');
+        input.value = '';
+      }
+
+      widget.addEventListener('click', function () {
+        if (!widget.classList.contains('is-open')) {
+          openWidget();
+        }
+      });
+
+      input.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== submitBtn) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      submitBtn.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== input) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      function submitFloat() {
+        var q = input.value.trim();
+        var query = q
+          ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q
+          : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
+      }
+
+      submitBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        submitFloat();
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitFloat();
+        if (e.key === 'Escape') closeWidget();
+      });
+    })();
+
+    // ─── GLOW ANIMATION ───
+    (function () {
+      var headline = document.querySelector('.article-title');
+
+      function glow(el) {
+        if (!el) return;
+        el.classList.remove('hero-glow');
+        void el.offsetWidth;
+        el.classList.add('hero-glow');
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
+      }
+
+      setTimeout(function () { glow(headline); }, 300);
+    })();
+  </script>
+
+</body>
+</html>
