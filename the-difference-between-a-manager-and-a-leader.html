@@ -676,22 +676,12 @@
       padding: 4px 8px;
       line-height: 1;
       transition: color 0.2s;
-      align-items: center;
-      gap: 6px;
     }
 
     .nav-hamburger:hover {
       opacity: 0.8;
     }
 
-    .nav-hamburger-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
 
     .nav-mobile-menu {
       display: none;
@@ -723,6 +713,7 @@
       padding: 16px 24px;
       border-bottom: 1px solid var(--border);
       transition: color 0.2s, background 0.2s;
+      text-align: right;
     }
 
     .nav-mobile-menu a:last-child {
@@ -768,7 +759,7 @@
         </button>
       </li>
     </ul>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span class="nav-hamburger-label">Menu</span>&#9776;</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
   </nav>
   <div class="nav-mobile-menu" id="navMobileMenu">
     <a href="playbook.html">The Playbook</a>
@@ -1034,14 +1025,14 @@
         e.stopPropagation();
         var open = menu.classList.toggle('is-open');
         hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        hamburger.innerHTML = open ? '&#10005;' : '<span class="nav-hamburger-label">Menu</span>&#9776;';
+        hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
       });
 
       menu.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           menu.classList.remove('is-open');
           hamburger.setAttribute('aria-label', 'Open menu');
-          hamburger.innerHTML = '<span class="nav-hamburger-label">Menu</span>&#9776;';
+          hamburger.innerHTML = '&#9776;';
         });
       });
 
@@ -1049,7 +1040,7 @@
         if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
           menu.classList.remove('is-open');
           hamburger.setAttribute('aria-label', 'Open menu');
-          hamburger.innerHTML = '<span class="nav-hamburger-label">Menu</span>&#9776;';
+          hamburger.innerHTML = '&#9776;';
         }
       });
     })();
