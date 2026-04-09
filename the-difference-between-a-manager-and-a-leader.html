@@ -24,7 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="shark-logo.png">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -133,6 +134,63 @@
     .nav-cta:hover {
       background: var(--red) !important;
       color: var(--off-white) !important;
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 2px;
+      color: var(--off-white-dim);
+      line-height: 1;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      color: var(--red);
+    }
+
+    .theme-toggle svg {
+      display: block;
+    }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef;
+      --black-2: #e8e6e2;
+      --black-3: #dedad4;
+      --off-white: #0a0a0a;
+      --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+
+    body.light-mode nav {
+      background: rgba(245, 243, 239, 0.92);
+    }
+
+    body.light-mode .nav-cta {
+      color: var(--red) !important;
+    }
+
+    body.light-mode .nav-cta:hover {
+      color: #f5f3ef !important;
+    }
+
+    body.light-mode .cookie-banner {
+      background: var(--black-2);
+      border-top-color: var(--border);
+    }
+
+    body.light-mode ::-webkit-scrollbar-thumb {
+      background: var(--red);
+    }
+
+    body.light-mode .nav-logo img {
+      mix-blend-mode: multiply;
     }
 
     /* ─── ARTICLE LAYOUT ─── */
@@ -581,6 +639,11 @@
       <li><a href="playbook.html">The Playbook</a></li>
       <li><a href="the-take.html">The Take</a></li>
       <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -704,8 +767,8 @@
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
       nav.style.borderBottomColor = window.scrollY > 20
-        ? 'rgba(245, 243, 239, 0.12)'
-        : 'var(--border)';
+        ? (document.body.classList.contains('light-mode') ? 'rgba(10, 10, 10, 0.2)' : 'rgba(245, 243, 239, 0.12)')
+        : '';
     }, { passive: true });
 
     // ─── COOKIE CONSENT ───
@@ -797,6 +860,39 @@
       }
 
       setTimeout(function () { flicker(headline); }, 300);
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function () {
+      var btn = document.getElementById('themeToggle');
+
+      var MOON_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN_SVG  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+
+      function applyTheme(dark) {
+        if (dark) {
+          document.body.classList.remove('light-mode');
+          btn.innerHTML = MOON_SVG;
+          btn.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.add('light-mode');
+          btn.innerHTML = SUN_SVG;
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+        }
+      }
+
+      var saved = localStorage.getItem('jaws_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = saved ? (saved === 'dark') : (prefersDark !== false);
+
+      applyTheme(isDark);
+
+      btn.addEventListener('click', function () {
+        var currentlyDark = !document.body.classList.contains('light-mode');
+        var newDark = !currentlyDark;
+        localStorage.setItem('jaws_theme', newDark ? 'dark' : 'light');
+        applyTheme(newDark);
+      });
     })();
   </script>
 
