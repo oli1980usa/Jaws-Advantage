@@ -880,6 +880,7 @@
         <span class="article-tag">Networking</span>
         <span class="article-issue">Issue 01</span>
       </div>
+      <span class="article-read-time">6 min read</span>
       <h1 class="article-title">Nobody tells you this on your first day. They should.</h1>
       <p class="article-standfirst">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations — and why the sooner you understand it, the better.</p>
     </header>
@@ -928,6 +929,13 @@
         <strong>This is what JAWS Advantage is here for</strong> — the playbook nobody hands you on day one. More where this came from.
       </div>
 
+    </div>
+
+    <div class="article-share">
+      <span class="share-label">Share:</span>
+      <button class="share-btn" id="shareTwitter">Share on X</button>
+      <button class="share-btn" id="shareLinkedIn">Share on LinkedIn</button>
+      <button class="share-btn" id="shareCopy">Copy Link</button>
     </div>
   </main>
 
@@ -1137,6 +1145,52 @@
           hamburger.setAttribute('aria-label', 'Open menu');
           hamburger.innerHTML = '&#9776;';
         }
+      });
+    })();
+    // ─── READING PROGRESS ───
+    (function () {
+      var bar = document.getElementById('readingProgress');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
+      }, { passive: true });
+    })();
+
+    // ─── BACK TO TOP ───
+    (function () {
+      var btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    // ─── SHARE BUTTONS ───
+    (function () {
+      var url = encodeURIComponent(window.location.href);
+      var title = encodeURIComponent(document.title);
+
+      var tw = document.getElementById('shareTwitter');
+      var li = document.getElementById('shareLinkedIn');
+      var cp = document.getElementById('shareCopy');
+
+      if (tw) tw.addEventListener('click', function () {
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+      });
+
+      if (li) li.addEventListener('click', function () {
+        window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + title, '_blank');
+      });
+
+      if (cp) cp.addEventListener('click', function () {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+          var orig = cp.textContent;
+          cp.textContent = 'Copied!';
+          setTimeout(function () { cp.textContent = orig; }, 2000);
+        });
       });
     })();
   </script>
