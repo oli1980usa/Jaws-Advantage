@@ -1322,7 +1322,8 @@
     // ─── ARTICLE RATING ───
     (function () {
       var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
-      var storageKey = 'jaws_rating_' + encodeURIComponent(document.title);
+      var articleKey = "You're Busy. But Are You Thinking?";
+      var storageKey = 'jaws_rating_' + encodeURIComponent(articleKey);
       var confirmEl = document.getElementById('ratingConfirm');
       var buttons = document.querySelectorAll('.rating-btn');
       var existing = localStorage.getItem(storageKey);
@@ -1351,7 +1352,7 @@
       }
 
       // Fetch live counts
-      fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(document.title))
+      fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(articleKey))
         .then(function (r) { return r.json(); })
         .then(function (data) { if (data && data.counts) renderCounts(data.counts); })
         .catch(function () {});
@@ -1379,13 +1380,13 @@
           confirmEl.textContent = "Noted. You know what you're about.";
 
           if (typeof gtag === 'function') {
-            gtag('event', 'article_rating', { article: document.title, rating: rating });
+            gtag('event', 'article_rating', { article: articleKey, rating: rating });
           }
 
           fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'rate_article', article: document.title, rating: rating, timestamp: new Date().toISOString() })
+            body: JSON.stringify({ action: 'rate_article', article: articleKey, rating: rating, timestamp: new Date().toISOString() })
           }).catch(function () {});
         });
       });

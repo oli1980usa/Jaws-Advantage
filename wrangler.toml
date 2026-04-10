@@ -1,0 +1,8 @@
+name = "jaws-advantage-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+account_id = "e83ed71744af05ba35ce7a2375452943"
+
+[[kv_namespaces]]
+binding = "ARTICLE_RATINGS"
+id = "840dea060c894c9dad2be9f843521f4c"

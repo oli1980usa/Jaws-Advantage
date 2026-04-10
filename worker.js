@@ -7,14 +7,14 @@ const ALLOWED_ORIGINS = [
 ];
 
 const SEED_RATINGS = {
-  "Nobody Tells You This On Your First Day | The JAWS Advantage": { bait: 1200, jaws: 5500 },
-  "You're Not Stuck. You're On The Wrong Ladder | The JAWS Advantage": { bait: 890, jaws: 4700 },
-  "The Difference Between A Manager And A Leader | The JAWS Advantage": { bait: 1800, jaws: 7300 },
-  "The Half Of Management Nobody Teaches You | The JAWS Advantage": { bait: 1400, jaws: 6300 },
-  "You Will Get 3 In 10 Wrong. Make The Call Anyway | The JAWS Advantage": { bait: 1600, jaws: 6000 },
-  "You're Busy. But Are You Thinking? | The JAWS Advantage": { bait: 1100, jaws: 5000 },
-  "Lead With and Through Others | The JAWS Advantage": { bait: 1700, jaws: 5500 },
-  "Manage and Influence Upwards | The JAWS Advantage": { bait: 1500, jaws: 5500 }
+  "Nobody Tells You This On Your First Day. They Should.": { bait: 1200, jaws: 4800 },
+  "You're Not Stuck. You're On The Wrong Ladder.": { bait: 980, jaws: 3900 },
+  "The Difference Between a Manager and a Leader.": { bait: 1500, jaws: 5200 },
+  "The Half of Management Nobody Teaches You.": { bait: 1100, jaws: 4400 },
+  "You Will Get 3 in 10 Wrong. Make The Call Anyway.": { bait: 890, jaws: 4100 },
+  "You're Busy. But Are You Thinking?": { bait: 760, jaws: 3700 },
+  "Lead With and Through Others.": { bait: 1300, jaws: 4600 },
+  "Manage and Influence Upwards.": { bait: 1050, jaws: 4300 },
 };
 
 const SYSTEM_PROMPT = `You are JAWS — the unfiltered career intelligence engine behind The JAWS Advantage. You speak with authority drawn from nearly two decades inside large corporations, across 12 roles, reaching the top 15 out of 10,000+ people.
