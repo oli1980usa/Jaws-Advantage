@@ -1481,6 +1481,10 @@
             var articleBody = doc.querySelector('.article-body');
             titleEl.textContent = h1 ? h1.textContent.trim() : '';
             content.innerHTML = articleBody ? articleBody.innerHTML : '<p>Could not load article.</p>';
+            var accentColor = type === 'playbook' ? '#4a7fa5' : '#a52a1a';
+            content.querySelectorAll('.article-example-label').forEach(function (el) {
+              el.setAttribute('style', (el.getAttribute('style') || '') + '; background: ' + accentColor + ' !important; background-color: ' + accentColor + ' !important;');
+            });
             var words = (content.textContent || '').trim().split(/\s+/).length;
             var mins = Math.max(1, Math.round(words / 200));
             readTime.textContent = mins + ' min read';
