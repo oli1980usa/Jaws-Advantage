@@ -322,6 +322,31 @@
       text-align: left;
     }
 
+    /* ─── FEEDBACK BUTTONS ─── */
+    .msg-feedback {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .msg-feedback-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 3px 7px;
+      border-radius: 6px;
+      opacity: 0.35;
+      transition: opacity 0.15s, background 0.15s;
+      line-height: 1;
+    }
+    .msg-feedback-btn:hover:not(:disabled) { opacity: 0.7; }
+    .msg-feedback-btn.selected-up {
+      opacity: 1;
+      background: rgba(165,42,26,0.18);
+    }
+    .msg-feedback-btn.selected-down { opacity: 0.55; }
+    .msg-feedback-btn.faded { opacity: 0.15; cursor: default; }
+
     /* ─── TYPING INDICATOR ─── */
     .typing-indicator {
       display: none;
@@ -1097,7 +1122,6 @@
         .replace(/ACTION:\s*(.+)/g, '<div style="margin-top:16px;padding:14px 18px;background:rgba(165,42,26,0.12);border-left:3px solid #a52a1a;border-radius:2px;"><span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#a52a1a;display:block;margin-bottom:6px;">Action this week</span><span style="font-size:15px;font-weight:400;color:#f5f3ef;">$1</span></div>');
       row.appendChild(label);
       row.appendChild(bubble);
-      messagesEl.appendChild(row);
 
       // Intercept jawsadvantage.com article links — open in slide-in panel
       bubble.querySelectorAll('a[href*="jawsadvantage.com"]').forEach(function (a) {
@@ -1110,6 +1134,34 @@
         });
       });
 
+      // Thumbs feedback buttons
+      var feedback = document.createElement('div');
+      feedback.className = 'msg-feedback';
+      var upBtn = document.createElement('button');
+      upBtn.className = 'msg-feedback-btn';
+      upBtn.setAttribute('aria-label', 'Helpful');
+      upBtn.innerHTML = '👍';
+      var downBtn = document.createElement('button');
+      downBtn.className = 'msg-feedback-btn';
+      downBtn.setAttribute('aria-label', 'Not helpful');
+      downBtn.innerHTML = '👎';
+      upBtn.addEventListener('click', function () {
+        upBtn.classList.add('selected-up');
+        downBtn.classList.add('faded');
+        upBtn.disabled = true;
+        downBtn.disabled = true;
+      });
+      downBtn.addEventListener('click', function () {
+        downBtn.classList.add('selected-down');
+        upBtn.classList.add('faded');
+        upBtn.disabled = true;
+        downBtn.disabled = true;
+      });
+      feedback.appendChild(upBtn);
+      feedback.appendChild(downBtn);
+      row.appendChild(feedback);
+
+      messagesEl.appendChild(row);
       scrollToBottom();
       saveChatHtml();
     }
