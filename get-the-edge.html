@@ -1561,23 +1561,30 @@
 
             // Fetch and display ratings in panel footer
             var quizEl = document.getElementById('articleQuiz');
+            quizEl.innerHTML = '';
+            quizEl.style.padding = '0';
             if (quizEl) {
-              var docTitle = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : '';
-              fetch('https://jaws-advantage-api.oliverfrancis.workers.dev?action=get_ratings&article=' + encodeURIComponent(docTitle))
-                .then(function (r) { return r.json(); })
-                .then(function (data) {
-                  if (!data || !data.counts) return;
-                  var counts = data.counts;
-                  var labels = { bait: 'Bait', jaws: 'JAWS' };
-                  var parts = Object.keys(counts).map(function (k) {
-                    var n = counts[k];
-                    var fmt = n >= 1000 ? (n/1000).toFixed(1) + 'k' : String(n);
-                    return '<span style="margin-right:16px;font-size:12px;color:#b8b5b0;">' + fmt + ' ' + labels[k] + '</span>';
-                  });
-                  quizEl.style.padding = '12px 28px';
-                  quizEl.innerHTML = parts.join('');
-                })
-                .catch(function () {});
+              var keyMatch = html.match(/var articleKey\s*=\s*["']([^"']+)["']/);
+              var articleKey = keyMatch ? keyMatch[1] : '';
+              if (articleKey) {
+                fetch('https://jaws-advantage-api.oliverfrancis.workers.dev?action=get_ratings&article=' + encodeURIComponent(articleKey))
+                  .then(function (r) { return r.json(); })
+                  .then(function (data) {
+                    if (!data || !data.counts) return;
+                    var counts = data.counts;
+                    if (!counts.jaws && !counts.bait) return;
+                    var fmt = function (n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n || 0); };
+                    var svgUp = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+                    var svgDown = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 2l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
+                    quizEl.style.padding = '12px 28px';
+                    quizEl.innerHTML =
+                      '<div style="display:flex;align-items:center;gap:12px;opacity:0.5;color:#f5f3ef;">' +
+                        '<span style="display:flex;align-items:center;gap:5px;font-size:11px;font-family:\'DM Sans\',sans-serif;">' + svgUp + fmt(counts.jaws) + '</span>' +
+                        '<span style="display:flex;align-items:center;gap:5px;font-size:11px;font-family:\'DM Sans\',sans-serif;">' + svgDown + fmt(counts.bait) + '</span>' +
+                      '</div>';
+                  })
+                  .catch(function () {});
+              }
             }
           })
           .catch(function () {
