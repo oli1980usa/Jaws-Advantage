@@ -748,6 +748,83 @@
       }
     }
 
+    /* ─── ARTICLE SLIDE-IN PANEL ─── */
+    .article-panel-overlay {
+      position: fixed; inset: 0; z-index: 499;
+      background: rgba(0,0,0,0.6);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .article-panel-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .article-panel {
+      position: fixed; top: 0; right: -620px; width: 600px; height: 100vh;
+      z-index: 500;
+      background: #111111;
+      border-left: 3px solid var(--red);
+      display: flex; flex-direction: column;
+      transition: right 0.4s ease;
+      overflow: hidden;
+    }
+    .article-panel.open { right: 0; }
+    .article-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(245,243,239,0.08);
+      flex-shrink: 0;
+    }
+    .article-panel-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 0.08em;
+      color: var(--off-white); line-height: 1.2;
+      padding-right: 16px;
+    }
+    .article-panel-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--red); font-size: 22px; line-height: 1;
+      flex-shrink: 0; padding: 4px; opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .article-panel-close:hover { opacity: 1; }
+    .article-panel-body {
+      flex: 1; overflow-y: auto; padding: 28px 28px 24px;
+      scrollbar-width: thin; scrollbar-color: var(--red) #111111;
+    }
+    .article-panel-body::-webkit-scrollbar { width: 4px; }
+    .article-panel-body::-webkit-scrollbar-thumb { background: var(--red); }
+    .article-panel-loading {
+      display: flex; align-items: center; justify-content: center;
+      height: 120px;
+    }
+    .article-panel-spinner {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid rgba(165,42,26,0.2);
+      border-top-color: var(--red);
+      animation: panel-spin 0.75s linear infinite;
+    }
+    @keyframes panel-spin { to { transform: rotate(360deg); } }
+    .article-panel-content { color: var(--off-white); }
+    .article-panel-content p {
+      font-size: 15px; font-weight: 300; line-height: 1.75;
+      color: var(--off-white-dim); margin-bottom: 18px;
+    }
+    .article-panel-content h2, .article-panel-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.06em; color: var(--off-white);
+      margin: 28px 0 12px;
+    }
+    .article-panel-content h2 { font-size: 22px; }
+    .article-panel-content h3 { font-size: 18px; }
+    .article-panel-content strong { font-weight: 600; color: var(--off-white); }
+    .article-panel-content a { color: var(--red); }
+    .article-panel-footer {
+      flex-shrink: 0; border-top: 1px solid rgba(245,243,239,0.08);
+    }
+    @media (max-width: 768px) {
+      .article-panel { width: 100vw; right: -100vw; }
+      .article-panel.open { right: 0; }
+    }
 
   </style>
 </head>
@@ -953,6 +1030,18 @@
       row.appendChild(label);
       row.appendChild(bubble);
       messagesEl.appendChild(row);
+
+      // Intercept jawsadvantage.com article links — open in slide-in panel
+      bubble.querySelectorAll('a[href*="jawsadvantage.com"]').forEach(function (a) {
+        var href = a.getAttribute('href');
+        if (!href || !href.match(/\.(html?)$/)) return;
+        a.setAttribute('target', '');
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (window._jawsOpenArticlePanel) window._jawsOpenArticlePanel(href);
+        });
+      });
+
       scrollToBottom();
       saveChatHtml();
     }
@@ -1234,7 +1323,72 @@
     })();
   </script>
 
+  <!-- ─── ARTICLE SLIDE-IN PANEL ─── -->
+  <div class="article-panel-overlay" id="articlePanelOverlay"></div>
+  <div class="article-panel" id="articlePanel">
+    <div class="article-panel-header">
+      <span class="article-panel-title" id="articlePanelTitle"></span>
+      <button class="article-panel-close" id="articlePanelClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="article-panel-body" id="articlePanelBody">
+      <div class="article-panel-loading" id="articlePanelLoading">
+        <div class="article-panel-spinner"></div>
+      </div>
+      <div class="article-panel-content" id="articlePanelContent" style="display:none;"></div>
+    </div>
+    <div class="article-panel-footer" id="articleQuiz"></div>
+  </div>
 
+  <script>
+    // ─── ARTICLE PANEL ───
+    (function () {
+      var overlay  = document.getElementById('articlePanelOverlay');
+      var panel    = document.getElementById('articlePanel');
+      var closeBtn = document.getElementById('articlePanelClose');
+      var titleEl  = document.getElementById('articlePanelTitle');
+      var loading  = document.getElementById('articlePanelLoading');
+      var content  = document.getElementById('articlePanelContent');
+      var body     = document.getElementById('articlePanelBody');
+
+      function openPanel(url) {
+        titleEl.textContent = '';
+        loading.style.display = 'flex';
+        content.style.display = 'none';
+        content.innerHTML = '';
+        body.scrollTop = 0;
+        panel.classList.add('open');
+        overlay.classList.add('open');
+
+        fetch(url)
+          .then(function (r) { return r.text(); })
+          .then(function (html) {
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var h1 = doc.querySelector('h1');
+            var articleBody = doc.querySelector('.article-body');
+            titleEl.textContent = h1 ? h1.textContent.trim() : '';
+            content.innerHTML = articleBody ? articleBody.innerHTML : '<p>Could not load article.</p>';
+            loading.style.display = 'none';
+            content.style.display = 'block';
+          })
+          .catch(function () {
+            loading.style.display = 'none';
+            content.innerHTML = '<p>Could not load article. <a href="' + url + '" target="_blank" rel="noopener" style="color:#a52a1a;">Open in new tab &rarr;</a></p>';
+            content.style.display = 'block';
+          });
+      }
+
+      function closePanel() {
+        panel.classList.remove('open');
+        overlay.classList.remove('open');
+      }
+
+      closeBtn.addEventListener('click', closePanel);
+      overlay.addEventListener('click', closePanel);
+
+      // Expose so appendJAWSMessage can wire up links after innerHTML injection
+      window._jawsOpenArticlePanel = openPanel;
+    })();
+  </script>
 
 </body>
 </html>
