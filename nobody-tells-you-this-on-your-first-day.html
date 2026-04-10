@@ -844,6 +844,67 @@
     }
 
 
+    /* ─── ARTICLE RATING ─── */
+    .article-rating {
+      background: var(--black-2);
+      border-top: 3px solid var(--red);
+      padding: 40px 0 32px;
+      margin: 48px 0 0;
+      text-align: center;
+    }
+    .article-rating-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: 0.08em;
+      color: var(--off-white);
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .article-rating-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 24px;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      min-width: 120px;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .rating-btn:hover:not(:disabled) {
+      background: rgba(165,42,26,0.15);
+    }
+    .rating-btn.selected {
+      background: var(--red);
+      color: #ffffff;
+    }
+    .rating-btn.faded {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .article-rating-confirm {
+      margin-top: 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--off-white-dim);
+      letter-spacing: 0.04em;
+      min-height: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -936,6 +997,26 @@
         <strong>This is what JAWS Advantage is here for</strong> — the playbook nobody hands you on day one. More where this came from.
       </div>
 
+    </div>
+
+    <!-- ─── ARTICLE RATING ─── -->
+    <div class="article-rating" id="articleRating">
+      <h3 class="article-rating-heading">Was this worth your time?</h3>
+      <div class="article-rating-buttons">
+        <button class="rating-btn" data-rating="solid" aria-label="Solid">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Solid</span>
+        </button>
+        <button class="rating-btn" data-rating="sharp" aria-label="Sharp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>Sharp</span>
+        </button>
+        <button class="rating-btn" data-rating="changed_thinking" aria-label="This changed how I think">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>This changed how I think</span>
+        </button>
+      </div>
+      <p class="article-rating-confirm" id="ratingConfirm"></p>
     </div>
 
     <div class="article-share">
@@ -1225,7 +1306,56 @@
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
 
+  <script>
+    // ─── ARTICLE RATING ───
+    (function () {
+      var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+      var storageKey = 'jaws_rating_' + encodeURIComponent(document.title);
+      var confirm = document.getElementById('ratingConfirm');
+      var buttons = document.querySelectorAll('.rating-btn');
+      var existing = localStorage.getItem(storageKey);
 
+      if (existing) {
+        confirm.textContent = 'You already rated this.';
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.getAttribute('data-rating') === existing) b.classList.add('selected');
+          else b.classList.add('faded');
+        });
+        return;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var rating = btn.getAttribute('data-rating');
+          localStorage.setItem(storageKey, rating);
+          buttons.forEach(function (b) {
+            b.disabled = true;
+            if (b === btn) b.classList.add('selected');
+            else b.classList.add('faded');
+          });
+          confirm.textContent = 'Noted. Come back tomorrow.';
+
+          // Google Analytics
+          if (typeof gtag === 'function') {
+            gtag('event', 'article_rating', { article: document.title, rating: rating });
+          }
+
+          // Cloudflare Worker
+          fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'rate_article',
+              article: document.title,
+              rating: rating,
+              timestamp: new Date().toISOString()
+            })
+          }).catch(function () {});
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>

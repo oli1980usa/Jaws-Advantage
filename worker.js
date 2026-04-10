@@ -58,6 +58,22 @@ export default {
 
     try {
       const body = await request.json();
+
+      if (body.action === 'rate_article') {
+        const article = (body.article || '').slice(0, 200);
+        const rating = body.rating;
+        const validRatings = ['solid', 'sharp', 'changed_thinking'];
+        if (!article || !validRatings.includes(rating)) {
+          return new Response(JSON.stringify({ ok: false, error: 'invalid' }), { status: 400, headers: corsHeaders(origin) });
+        }
+        const kvKey = 'ratings:' + article;
+        const existing = await env.ARTICLE_RATINGS.get(kvKey);
+        const counts = existing ? JSON.parse(existing) : { solid: 0, sharp: 0, changed_thinking: 0 };
+        counts[rating] = (counts[rating] || 0) + 1;
+        await env.ARTICLE_RATINGS.put(kvKey, JSON.stringify(counts));
+        return new Response(JSON.stringify({ ok: true, counts }), { status: 200, headers: corsHeaders(origin) });
+      }
+
       const messages = body.messages || [];
 
       if (!messages.length) {
