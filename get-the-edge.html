@@ -792,8 +792,8 @@
       background: #a52a1a; color: #ffffff; display: inline-block;
     }
     .article-panel-badge.playbook {
-      background: #a52a1a; color: #ffffff;
-      border: 1px solid #a52a1a; opacity: 0.75; display: inline-block;
+      background: #4a7fa5; color: #ffffff;
+      border: 1px solid #4a7fa5; display: inline-block;
     }
     .article-panel-close {
       background: none; border: none; cursor: pointer;
@@ -1441,9 +1441,13 @@
         if (type === 'take') {
           badgeEl.textContent = 'The Take';
           badgeEl.classList.add('take');
+          badgeEl.style.background = '#a52a1a';
+          badgeEl.style.borderColor = '#a52a1a';
         } else if (type === 'playbook') {
           badgeEl.textContent = 'The Playbook';
           badgeEl.classList.add('playbook');
+          badgeEl.style.background = '#4a7fa5';
+          badgeEl.style.borderColor = '#4a7fa5';
         }
       }
 
@@ -1462,6 +1466,7 @@
         var type = getContentType(url);
         panel.classList.toggle('playbook', type === 'playbook');
         applyBadge(type);
+        progress.style.background = type === 'playbook' ? '#4a7fa5' : '#a52a1a';
         loading.style.display = 'flex';
         content.style.display = 'none';
         content.innerHTML = '';
@@ -1477,6 +1482,13 @@
             var articleBody = doc.querySelector('.article-body');
             titleEl.textContent = h1 ? h1.textContent.trim() : '';
             content.innerHTML = articleBody ? articleBody.innerHTML : '<p>Could not load article.</p>';
+            var accentColour = type === 'playbook' ? '#4a7fa5' : '#a52a1a';
+            content.querySelectorAll('blockquote, .article-pull-quote').forEach(function (el) {
+              el.style.borderLeftColor = accentColour;
+            });
+            content.querySelectorAll('.article-example-label').forEach(function (el) {
+              el.style.background = accentColour;
+            });
             var words = (content.textContent || '').trim().split(/\s+/).length;
             var mins = Math.max(1, Math.round(words / 200));
             readTime.textContent = mins + ' min read';
