@@ -827,13 +827,25 @@
     }
 
 
-    .article-rating-badge {
-      display: block;
+    .pillar-rating {
+      position: absolute;
+      bottom: 16px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.4;
+      color: var(--off-white);
+    }
+
+    .pillar-rating-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
       font-size: 11px;
-      color: var(--off-white-dim);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
-      opacity: 0.7;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1;
     }
 
   </style>
@@ -1126,12 +1138,13 @@
     // ─── LISTING RATINGS ───
     (function () {
       var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
-      var RATING_LABELS = { bait: 'readers called bait', jaws: 'readers called JAWS' };
-
       var TITLE_MAP = {
         'lead-with-and-through-others.html': 'Lead With and Through Others.',
         'manage-and-influence-upwards.html': 'Manage and Influence Upwards.'
       };
+
+      var SVG_UP = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+      var SVG_DOWN = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 2l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
 
       function formatCount(n) {
         if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
@@ -1145,8 +1158,6 @@
         var filename = href.split('/').pop();
         var title = TITLE_MAP[filename];
         if (!title) return;
-        var descEl = pillar.querySelector('.pillar-desc');
-        if (!descEl) return;
 
         console.log('[JAWS ratings] fetching for:', title);
 
@@ -1156,12 +1167,22 @@
             console.log('[JAWS ratings] response for', title, ':', data);
             if (!data || !data.counts) return;
             var counts = data.counts;
-            var top = Object.keys(counts).reduce(function (a, b) { return counts[a] > counts[b] ? a : b; });
-            if (!counts[top] || counts[top] === 0) return;
-            var badge = document.createElement('span');
-            badge.className = 'article-rating-badge';
-            badge.textContent = formatCount(counts[top]) + ' ' + RATING_LABELS[top];
-            descEl.parentNode.insertBefore(badge, linkEl);
+            if (!counts.jaws && !counts.bait) return;
+
+            var container = document.createElement('div');
+            container.className = 'pillar-rating';
+
+            var upItem = document.createElement('span');
+            upItem.className = 'pillar-rating-item';
+            upItem.innerHTML = SVG_UP + formatCount(counts.jaws || 0);
+
+            var downItem = document.createElement('span');
+            downItem.className = 'pillar-rating-item';
+            downItem.innerHTML = SVG_DOWN + formatCount(counts.bait || 0);
+
+            container.appendChild(upItem);
+            container.appendChild(downItem);
+            pillar.appendChild(container);
           })
           .catch(function (err) { console.log('[JAWS ratings] fetch error for', title, ':', err); });
       });
