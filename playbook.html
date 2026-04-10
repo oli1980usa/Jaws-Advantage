@@ -1126,11 +1126,11 @@
     // ─── LISTING RATINGS ───
     (function () {
       var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
-      var RATING_LABELS = { bait: 'called bait', jaws: 'called JAWS' };
+      var RATING_LABELS = { bait: 'readers called bait', jaws: 'readers called JAWS' };
 
       var TITLE_MAP = {
-        'lead-with-and-through-others.html': 'Lead With and Through Others | The JAWS Advantage',
-        'manage-and-influence-upwards.html': 'Manage and Influence Upwards | The JAWS Advantage'
+        'lead-with-and-through-others.html': 'Lead With and Through Others.',
+        'manage-and-influence-upwards.html': 'Manage and Influence Upwards.'
       };
 
       function formatCount(n) {
@@ -1148,18 +1148,22 @@
         var descEl = pillar.querySelector('.pillar-desc');
         if (!descEl) return;
 
+        console.log('[JAWS ratings] fetching for:', title);
+
         fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
           .then(function (r) { return r.json(); })
           .then(function (data) {
+            console.log('[JAWS ratings] response for', title, ':', data);
             if (!data || !data.counts) return;
             var counts = data.counts;
             var top = Object.keys(counts).reduce(function (a, b) { return counts[a] > counts[b] ? a : b; });
+            if (!counts[top] || counts[top] === 0) return;
             var badge = document.createElement('span');
             badge.className = 'article-rating-badge';
             badge.textContent = formatCount(counts[top]) + ' ' + RATING_LABELS[top];
             descEl.parentNode.insertBefore(badge, linkEl);
           })
-          .catch(function () {});
+          .catch(function (err) { console.log('[JAWS ratings] fetch error for', title, ':', err); });
       });
     })();
   </script>
