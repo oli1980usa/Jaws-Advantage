@@ -1163,30 +1163,36 @@
         var filename = href.split('/').pop();
         var title = TITLE_MAP[filename];
         if (!title) return;
+        var offset = OFFSETS[title] || { bait: 0, jaws: 0 };
+        if (!offset.jaws && !offset.bait) return;
 
+        // Render immediately with offset values — visible even if fetch fails
+        var container = document.createElement('div');
+        container.className = 'pillar-rating';
+        var upItem = document.createElement('span');
+        upItem.className = 'pillar-rating-item';
+        var downItem = document.createElement('span');
+        downItem.className = 'pillar-rating-item';
+
+        function render(jaws, bait) {
+          upItem.innerHTML = SVG_UP + formatCount(jaws);
+          downItem.innerHTML = SVG_DOWN + formatCount(bait);
+        }
+
+        render(offset.jaws, offset.bait);
+        container.appendChild(upItem);
+        container.appendChild(downItem);
+        pillar.appendChild(container);
+
+        // Update with real votes if fetch succeeds
         fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
           .then(function (r) { return r.json(); })
           .then(function (data) {
             if (!data || !data.counts) return;
-            var counts = data.counts;
-            var offset = OFFSETS[title] || { bait: 0, jaws: 0 };
-            var dispJaws = (counts.jaws || 0) + offset.jaws;
-            var dispBait = (counts.bait || 0) + offset.bait;
-
-            var container = document.createElement('div');
-            container.className = 'pillar-rating';
-
-            var upItem = document.createElement('span');
-            upItem.className = 'pillar-rating-item';
-            upItem.innerHTML = SVG_UP + formatCount(dispJaws);
-
-            var downItem = document.createElement('span');
-            downItem.className = 'pillar-rating-item';
-            downItem.innerHTML = SVG_DOWN + formatCount(dispBait);
-
-            container.appendChild(upItem);
-            container.appendChild(downItem);
-            pillar.appendChild(container);
+            render(
+              (data.counts.jaws || 0) + offset.jaws,
+              (data.counts.bait || 0) + offset.bait
+            );
           })
           .catch(function () {});
       });
