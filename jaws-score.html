@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
   <style>
@@ -314,16 +315,32 @@
       color: var(--off-white-dim); margin-bottom: 44px;
       max-width: 460px; margin-left: auto; margin-right: auto;
     }
-    .result-share-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #fff;
-      background: #000; border: 1px solid rgba(255,255,255,0.15);
-      padding: 12px 28px; cursor: pointer;
-      transition: background 0.2s, border-color 0.2s; margin-bottom: 36px;
-      display: inline-flex; align-items: center; gap: 10px;
+    /* ─── SHARE BAR ─── */
+    .result-share-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
     }
-    .result-share-btn:hover { background: #1a1a1a; border-color: rgba(255,255,255,0.3); }
+    .share-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.5; margin-right: 6px;
+    }
+    .share-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #181818; border: 1px solid var(--red);
+      color: var(--red); font-size: 15px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
+      flex-shrink: 0; padding: 0;
+    }
+    .share-btn:hover {
+      background: rgba(165, 42, 26, 0.15);
+      box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
+    }
     .result-ctas {
       display: flex; gap: 16px; flex-wrap: wrap;
       justify-content: center; margin-bottom: 32px;
@@ -518,12 +535,14 @@
       </div>
       <h2 class="result-label" id="resultLabel"></h2>
       <p class="result-desc" id="resultDesc"></p>
-      <button class="result-share-btn" id="resultShareBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        Share Your Score
-      </button>
+      <div class="result-share-bar">
+        <span class="share-label">Share</span>
+        <button class="share-btn" id="shareTwitter" aria-label="Share on X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
+        <button class="share-btn" id="shareLinkedIn" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
+        <button class="share-btn" id="shareReddit" aria-label="Share on Reddit"><i class="fa-brands fa-reddit-alien"></i></button>
+        <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+        <button class="share-btn" id="shareCopy" aria-label="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
+      </div>
       <div class="result-ctas">
         <a href="playbook.html" class="result-cta-primary">Read the Playbook</a>
         <a href="jaws-score-full.html" class="result-cta-outline">Take the Full 30-Question Test</a>
@@ -824,12 +843,50 @@
     document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
     document.getElementById('quizNextBtn').addEventListener('click', nextQuestion);
     document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
-    document.getElementById('resultShareBtn').addEventListener('click', function () {
-      var score = window._jawsScore || 0;
-      var rating = window._jawsRating || '';
-      var text = 'I scored ' + score + '/100 on the JAWS Score. ' + rating + '. Are you Bait or an Apex Predator? Find out: jawsadvantage.com/jaws-score';
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
-    });
+    // ─── SHARE BUTTONS ───
+    (function () {
+      var PAGE_URL = 'https://jawsadvantage.com/jaws-score';
+
+      function getShareText() {
+        var score = window._jawsScore || 0;
+        var rating = window._jawsRating || '';
+        return 'I scored ' + score + '/100 on the JAWS Score. ' + rating + '. Are you Bait or an Apex Predator? Find out: ' + PAGE_URL;
+      }
+
+      var tw = document.getElementById('shareTwitter');
+      var li = document.getElementById('shareLinkedIn');
+      var rd = document.getElementById('shareReddit');
+      var wa = document.getElementById('shareWhatsApp');
+      var cp = document.getElementById('shareCopy');
+
+      if (tw) tw.addEventListener('click', function () {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(getShareText()), '_blank');
+      });
+
+      if (li) li.addEventListener('click', function () {
+        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + encodeURIComponent(PAGE_URL), '_blank');
+      });
+
+      if (rd) rd.addEventListener('click', function () {
+        var score = window._jawsScore || 0;
+        var title = 'I scored ' + score + '/100 on the JAWS Score \u2014 are you Bait or an Apex Predator?';
+        window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(PAGE_URL) + '&title=' + encodeURIComponent(title), '_blank');
+      });
+
+      if (wa) wa.addEventListener('click', function () {
+        window.open('https://wa.me/?text=' + encodeURIComponent(getShareText()), '_blank');
+      });
+
+      if (cp) cp.addEventListener('click', function () {
+        navigator.clipboard.writeText(PAGE_URL).then(function () {
+          var icon = document.getElementById('copyIcon');
+          if (icon) {
+            icon.className = 'fa-solid fa-check';
+            setTimeout(function () { icon.className = 'fa-solid fa-link'; }, 2000);
+          }
+        });
+      });
+    })();
 
     // ─── SCROLL ANIMATIONS ───
     var fadeObserver = new IntersectionObserver(function (entries) {
