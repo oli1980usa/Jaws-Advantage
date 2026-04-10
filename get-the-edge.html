@@ -805,19 +805,49 @@
     }
     @keyframes panel-spin { to { transform: rotate(360deg); } }
     .article-panel-content { color: var(--off-white); }
-    .article-panel-content p {
-      font-size: 15px; font-weight: 300; line-height: 1.75;
-      color: var(--off-white-dim); margin-bottom: 18px;
+    #articlePanelContent p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 300; line-height: 1.7;
+      color: #f5f3ef; margin-bottom: 16px;
     }
-    .article-panel-content h2, .article-panel-content h3 {
+    #articlePanelContent h2,
+    #articlePanelContent .article-section-heading {
       font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 0.06em; color: var(--off-white);
-      margin: 28px 0 12px;
+      font-size: clamp(18px, 2.5vw, 24px);
+      letter-spacing: 0.06em; color: #f5f3ef;
+      margin: 32px 0 12px; text-transform: uppercase;
     }
-    .article-panel-content h2 { font-size: 22px; }
-    .article-panel-content h3 { font-size: 18px; }
-    .article-panel-content strong { font-weight: 600; color: var(--off-white); }
-    .article-panel-content a { color: var(--red); }
+    #articlePanelContent h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 0.05em; color: #f5f3ef;
+      margin: 24px 0 10px;
+    }
+    #articlePanelContent strong { font-weight: 600; }
+    #articlePanelContent em { font-style: italic; }
+    #articlePanelContent a { color: #a52a1a; }
+    #articlePanelContent blockquote,
+    #articlePanelContent .article-pull-quote {
+      border-left: 3px solid #a52a1a;
+      padding: 16px 24px; margin: 24px 0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(20px, 3vw, 28px);
+      color: #f5f3ef; line-height: 1.2; letter-spacing: 0.02em;
+    }
+    #articlePanelContent .article-closing {
+      border-top: 1px solid rgba(245,243,239,0.08);
+      padding-top: 24px; margin-top: 32px;
+      font-size: 15px; color: #b8b5b0;
+    }
+    #articlePanelContent .example-box {
+      border: 1px solid rgba(165,42,26,0.4);
+      background: rgba(165,42,26,0.06);
+      padding: 20px 24px; margin: 24px 0; position: relative;
+    }
+    #articlePanelContent .example-label {
+      display: inline-block; background: #a52a1a; color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px; margin-bottom: 12px;
+    }
     .article-panel-footer {
       flex-shrink: 0; border-top: 1px solid rgba(245,243,239,0.08);
     }
