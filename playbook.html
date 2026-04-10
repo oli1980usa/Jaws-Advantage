@@ -825,6 +825,48 @@
         display: flex;
       }
     }
+
+    /* ─── JAWS SCORE BADGE ─── */
+    .jaws-score-badge {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 52px;
+      padding: 14px 8px;
+      background: var(--red);
+      border-radius: 0 6px 6px 0;
+      text-decoration: none;
+      box-shadow: 2px 0 16px rgba(165, 42, 26, 0.5), 4px 0 32px rgba(165, 42, 26, 0.2);
+      transition: width 0.2s ease, box-shadow 0.2s ease;
+    }
+    .jaws-score-badge:hover {
+      width: 58px;
+      box-shadow: 2px 0 24px rgba(165, 42, 26, 0.8), 4px 0 48px rgba(165, 42, 26, 0.4);
+    }
+    .jaws-score-badge-icon {
+      font-size: 22px;
+      line-height: 1;
+      display: block;
+    }
+    .jaws-score-badge-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      line-height: 1.2;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .jaws-score-badge { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1108,6 +1150,12 @@
       });
     })();
   </script>
+
+  <!-- ─── JAWS SCORE BADGE ─── -->
+  <a href="jaws-score.html" class="jaws-score-badge" aria-label="Take the JAWS Score">
+    <span class="jaws-score-badge-icon">&#x1F988;</span>
+    <span class="jaws-score-badge-label">JAWS<br>SCORE</span>
+  </a>
 
 </body>
 </html>
