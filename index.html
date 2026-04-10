@@ -495,6 +495,23 @@
       pointer-events: none;
     }
 
+    .pillar-rating {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      opacity: 0.4;
+      color: var(--off-white);
+    }
+    .pillar-rating-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
     /* ─── ARTICLES ─── */
     #the-take {
       background: var(--black);
@@ -1772,6 +1789,56 @@
           .then(function (data) {
             if (!data || !data.counts) return;
             render(
+              (data.counts.jaws || 0) + offset.jaws,
+              (data.counts.bait || 0) + offset.bait
+            );
+          })
+          .catch(function () {});
+      });
+
+      // ─── PLAYBOOK PILLAR RATINGS ───
+      var PILLAR_TITLE_MAP = {
+        'lead-with-and-through-others.html': 'Lead With and Through Others.',
+        'manage-and-influence-upwards.html': 'Manage and Influence Upwards.'
+      };
+
+      var PILLAR_OFFSETS = {
+        'Lead With and Through Others.': { bait: 1300, jaws: 4600 },
+        'Manage and Influence Upwards.': { bait: 1050, jaws: 4300 }
+      };
+
+      document.querySelectorAll('#playbook .pillar').forEach(function (pillar) {
+        var link = pillar.querySelector('a.pillar-btn-live');
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        var filename = href.split('/').pop();
+        var title = PILLAR_TITLE_MAP[filename];
+        if (!title) return;
+        var offset = PILLAR_OFFSETS[title] || { bait: 0, jaws: 0 };
+        if (!offset.jaws && !offset.bait) return;
+
+        var container = document.createElement('div');
+        container.className = 'pillar-rating';
+        var upItem = document.createElement('span');
+        upItem.className = 'pillar-rating-item';
+        var downItem = document.createElement('span');
+        downItem.className = 'pillar-rating-item';
+
+        function renderPillar(jaws, bait) {
+          upItem.innerHTML = SVG_UP + formatCount(jaws);
+          downItem.innerHTML = SVG_DOWN + formatCount(bait);
+        }
+
+        renderPillar(offset.jaws, offset.bait);
+        container.appendChild(upItem);
+        container.appendChild(downItem);
+        pillar.appendChild(container);
+
+        fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || !data.counts) return;
+            renderPillar(
               (data.counts.jaws || 0) + offset.jaws,
               (data.counts.bait || 0) + offset.bait
             );
