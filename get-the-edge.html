@@ -348,10 +348,10 @@
       align-items: center;
       line-height: 1;
     }
-    .msg-feedback-btn:hover:not(:disabled) { opacity: 1; }
-    .msg-feedback-btn.selected-up { opacity: 1; color: #ffffff; }
-    .msg-feedback-btn.selected-down { opacity: 0.4; color: #888888; }
-    .msg-feedback-btn.faded { opacity: 0.12; cursor: default; }
+    .msg-feedback-btn:hover:not([data-voted]) { opacity: 1; }
+    .msg-feedback-btn.selected-up   { opacity: 1;   color: #ffffff; pointer-events: none; }
+    .msg-feedback-btn.selected-down { opacity: 0.6; color: #888888; pointer-events: none; }
+    .msg-feedback-btn.faded         { opacity: 0.2; pointer-events: none; cursor: default; }
 
     /* ─── TYPING INDICATOR ─── */
     .typing-indicator {
@@ -1057,6 +1057,27 @@
     var sendBtn = document.getElementById('chatSendBtn');
     var charHint = document.getElementById('charHint');
 
+    // ─── FEEDBACK DELEGATION ───
+    // Single delegated listener survives innerHTML restores from sessionStorage
+    messagesEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.msg-feedback-btn');
+      if (!btn || btn.hasAttribute('data-voted')) return;
+      var feedbackEl = btn.closest('.msg-feedback');
+      if (!feedbackEl) return;
+      var allBtns = feedbackEl.querySelectorAll('.msg-feedback-btn');
+      var isUp = btn.getAttribute('aria-label') === 'Helpful';
+      allBtns.forEach(function (b) {
+        b.setAttribute('data-voted', '1');
+      });
+      if (isUp) {
+        btn.classList.add('selected-up');
+        allBtns.forEach(function (b) { if (b !== btn) b.classList.add('faded'); });
+      } else {
+        btn.classList.add('selected-down');
+        allBtns.forEach(function (b) { if (b !== btn) b.classList.add('faded'); });
+      }
+    });
+
     // ─── SESSION / LIMIT ───
     function getToday() {
       var d = new Date();
@@ -1149,18 +1170,6 @@
       downBtn.className = 'msg-feedback-btn';
       downBtn.setAttribute('aria-label', 'Not helpful');
       downBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 2l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
-      upBtn.addEventListener('click', function () {
-        upBtn.classList.add('selected-up');
-        downBtn.classList.add('faded');
-        upBtn.disabled = true;
-        downBtn.disabled = true;
-      });
-      downBtn.addEventListener('click', function () {
-        downBtn.classList.add('selected-down');
-        upBtn.classList.add('faded');
-        upBtn.disabled = true;
-        downBtn.disabled = true;
-      });
       feedback.appendChild(upBtn);
       feedback.appendChild(downBtn);
       bubble.appendChild(feedback);
