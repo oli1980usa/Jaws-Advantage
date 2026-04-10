@@ -209,6 +209,13 @@
     body.light-mode .char-hint {
       color: rgba(10, 10, 10, 0.4);
     }
+    body.light-mode .msg-row.user .msg-bubble {
+      background: #8B1A1A;
+    }
+    body.light-mode .jaws-action-box {
+      background: rgba(139, 26, 26, 0.1) !important;
+      border-left-color: #8B1A1A !important;
+    }
 
     /* ─── PAGE WRAPPER ─── */
     .chat-page {
@@ -1144,7 +1151,7 @@
         .replace(/You'?re busy but are you thinking/gi, '<a href="https://jawsadvantage.com/you-are-busy-but-are-you-thinking.html" target="_blank" rel="noopener" style="color:#a52a1a;text-decoration:underline;">You\'re busy. But are you thinking?</a>')
         .replace(/Manage and influence upwards/gi, '<a href="https://jawsadvantage.com/manage-and-influence-upwards.html" target="_blank" rel="noopener" style="color:#a52a1a;text-decoration:underline;">Manage and influence upwards</a>')
         .replace(/Lead with and through others/gi, '<a href="https://jawsadvantage.com/lead-with-and-through-others.html" target="_blank" rel="noopener" style="color:#a52a1a;text-decoration:underline;">Lead with and through others</a>')
-        .replace(/ACTION:\s*(.+)/g, '<div style="margin-top:16px;padding:14px 18px;background:rgba(165,42,26,0.12);border-left:3px solid #a52a1a;border-radius:2px;"><span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#a52a1a;display:block;margin-bottom:6px;">Action this week</span><span style="font-size:15px;font-weight:400;color:#f5f3ef;">$1</span></div>');
+        .replace(/ACTION:\s*(.+)/g, '<div class="jaws-action-box" style="margin-top:16px;padding:14px 18px;background:rgba(165,42,26,0.12);border-left:3px solid #a52a1a;border-radius:2px;"><span style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#a52a1a;display:block;margin-bottom:6px;">Action this week</span><span style="font-size:15px;font-weight:400;color:var(--off-white);">$1</span></div>');
       row.appendChild(label);
       row.appendChild(bubble);
 
