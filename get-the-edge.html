@@ -769,16 +769,31 @@
     }
     .article-panel.open { right: 0; }
     .article-panel-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 20px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px;
       border-bottom: 1px solid rgba(245,243,239,0.08);
       flex-shrink: 0;
     }
     .article-panel-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px; letter-spacing: 0.08em;
+      font-size: 17px; letter-spacing: 0.08em;
       color: var(--off-white); line-height: 1.2;
-      padding-right: 16px;
+      flex: 1; min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .article-panel-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; white-space: nowrap;
+      flex-shrink: 0; padding: 3px 7px;
+      display: none;
+    }
+    .article-panel-badge.take {
+      background: #a52a1a; color: #fff; display: inline-block;
+    }
+    .article-panel-badge.playbook {
+      background: transparent; color: #a52a1a;
+      border: 1px solid rgba(165,42,26,0.6); display: inline-block;
     }
     .article-panel-close {
       background: none; border: none; cursor: pointer;
@@ -794,7 +809,7 @@
     .article-panel-read-time {
       font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
       color: #b8b5b0; opacity: 0.7; white-space: nowrap;
-      margin-left: 10px; flex-shrink: 0;
+      flex-shrink: 0;
     }
     .article-panel-body {
       flex: 1; overflow-y: auto; padding: 28px 28px 24px;
@@ -1368,6 +1383,7 @@
   <div class="article-panel" id="articlePanel">
     <div class="article-panel-header">
       <span class="article-panel-title" id="articlePanelTitle"></span>
+      <span class="article-panel-badge" id="articlePanelBadge"></span>
       <span class="article-panel-read-time" id="articlePanelReadTime"></span>
       <button class="article-panel-close" id="articlePanelClose" aria-label="Close">&times;</button>
     </div>
@@ -1388,11 +1404,43 @@
       var panel     = document.getElementById('articlePanel');
       var closeBtn  = document.getElementById('articlePanelClose');
       var titleEl   = document.getElementById('articlePanelTitle');
+      var badgeEl   = document.getElementById('articlePanelBadge');
       var readTime  = document.getElementById('articlePanelReadTime');
       var progress  = document.getElementById('articlePanelProgress');
       var loading   = document.getElementById('articlePanelLoading');
       var content   = document.getElementById('articlePanelContent');
       var body      = document.getElementById('articlePanelBody');
+
+      var TAKE_PATTERNS = [
+        'nobody-tells-you', 'youre-not-stuck', 'the-difference-between',
+        'the-half-of-management', 'you-will-get-3', 'you-are-busy'
+      ];
+      var PLAYBOOK_PATTERNS = [
+        'manage-and-influence', 'lead-with-and-through',
+        'engineer-your-presence', 'be-courageous'
+      ];
+
+      function getContentType(url) {
+        var u = url.toLowerCase();
+        for (var i = 0; i < TAKE_PATTERNS.length; i++) {
+          if (u.indexOf(TAKE_PATTERNS[i]) !== -1) return 'take';
+        }
+        for (var j = 0; j < PLAYBOOK_PATTERNS.length; j++) {
+          if (u.indexOf(PLAYBOOK_PATTERNS[j]) !== -1) return 'playbook';
+        }
+        return '';
+      }
+
+      function applyBadge(type) {
+        badgeEl.className = 'article-panel-badge';
+        if (type === 'take') {
+          badgeEl.textContent = 'The Take';
+          badgeEl.classList.add('take');
+        } else if (type === 'playbook') {
+          badgeEl.textContent = 'The Playbook';
+          badgeEl.classList.add('playbook');
+        }
+      }
 
       body.addEventListener('scroll', function () {
         var scrollable = body.scrollHeight - body.clientHeight;
@@ -1402,8 +1450,11 @@
 
       function openPanel(url) {
         titleEl.textContent = '';
+        badgeEl.className = 'article-panel-badge';
+        badgeEl.textContent = '';
         readTime.textContent = '';
         progress.style.width = '0%';
+        applyBadge(getContentType(url));
         loading.style.display = 'flex';
         content.style.display = 'none';
         content.innerHTML = '';
