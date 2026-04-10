@@ -904,6 +904,11 @@
       letter-spacing: 0.04em;
       min-height: 20px;
     }
+    .rating-count {
+      font-size: 11px;
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+    }
 
   </style>
 </head>
@@ -1010,14 +1015,17 @@
         <button class="rating-btn" data-rating="solid" aria-label="Solid">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           <span>Solid</span>
+          <span class="rating-count"></span>
         </button>
         <button class="rating-btn" data-rating="sharp" aria-label="Sharp">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           <span>Sharp</span>
+          <span class="rating-count"></span>
         </button>
         <button class="rating-btn" data-rating="changed_thinking" aria-label="This changed how I think">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <span>This changed how I think</span>
+          <span class="rating-count"></span>
         </button>
       </div>
       <p class="article-rating-confirm" id="ratingConfirm"></p>
@@ -1315,17 +1323,42 @@
     (function () {
       var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
       var storageKey = 'jaws_rating_' + encodeURIComponent(document.title);
-      var confirm = document.getElementById('ratingConfirm');
+      var confirmEl = document.getElementById('ratingConfirm');
       var buttons = document.querySelectorAll('.rating-btn');
       var existing = localStorage.getItem(storageKey);
 
-      if (existing) {
-        confirm.textContent = 'You already rated this.';
+      function formatCount(n) {
+        if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+        return String(n);
+      }
+
+      function applyStateFromStorage(rating) {
         buttons.forEach(function (b) {
           b.disabled = true;
-          if (b.getAttribute('data-rating') === existing) b.classList.add('selected');
+          if (b.getAttribute('data-rating') === rating) b.classList.add('selected');
           else b.classList.add('faded');
         });
+      }
+
+      function renderCounts(counts) {
+        buttons.forEach(function (b) {
+          var rating = b.getAttribute('data-rating');
+          var countEl = b.querySelector('.rating-count');
+          if (countEl && counts[rating] !== undefined) {
+            countEl.textContent = formatCount(counts[rating]);
+          }
+        });
+      }
+
+      // Fetch live counts
+      fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(document.title))
+        .then(function (r) { return r.json(); })
+        .then(function (data) { if (data && data.counts) renderCounts(data.counts); })
+        .catch(function () {});
+
+      if (existing) {
+        confirmEl.textContent = 'You already rated this.';
+        applyStateFromStorage(existing);
         return;
       }
 
@@ -1333,28 +1366,26 @@
         btn.addEventListener('click', function () {
           var rating = btn.getAttribute('data-rating');
           localStorage.setItem(storageKey, rating);
-          buttons.forEach(function (b) {
-            b.disabled = true;
-            if (b === btn) b.classList.add('selected');
-            else b.classList.add('faded');
-          });
-          confirm.textContent = 'Noted. Come back tomorrow.';
 
-          // Google Analytics
+          // Optimistic increment
+          var countEl = btn.querySelector('.rating-count');
+          if (countEl) {
+            var current = parseFloat(countEl.textContent) || 0;
+            if (countEl.textContent.indexOf('k') !== -1) current = current * 1000;
+            countEl.textContent = formatCount(Math.round(current) + 1);
+          }
+
+          applyStateFromStorage(rating);
+          confirmEl.textContent = 'Noted. Come back tomorrow.';
+
           if (typeof gtag === 'function') {
             gtag('event', 'article_rating', { article: document.title, rating: rating });
           }
 
-          // Cloudflare Worker
           fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'rate_article',
-              article: document.title,
-              rating: rating,
-              timestamp: new Date().toISOString()
-            })
+            body: JSON.stringify({ action: 'rate_article', article: document.title, rating: rating, timestamp: new Date().toISOString() })
           }).catch(function () {});
         });
       });

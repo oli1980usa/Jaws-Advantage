@@ -816,6 +816,15 @@
     }
 
 
+    .article-rating-badge {
+      display: block;
+      font-size: 11px;
+      color: var(--off-white-dim);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+    }
+
   </style>
 </head>
 <body>
@@ -1159,7 +1168,50 @@
     })();
   </script>
 
+  <script>
+    // ─── LISTING RATINGS ───
+    (function () {
+      var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+      var RATING_LABELS = { solid: 'found this solid', sharp: 'found this sharp', changed_thinking: 'changed their thinking' };
 
+      // Map from article href to exact document.title (used as KV key)
+      var TITLE_MAP = {
+        'nobody-tells-you-this-on-your-first-day.html': 'Nobody Tells You This On Your First Day | The JAWS Advantage',
+        'youre-not-stuck-youre-on-the-wrong-ladder.html': 'You\'re Not Stuck. You\'re On The Wrong Ladder | The JAWS Advantage',
+        'the-difference-between-a-manager-and-a-leader.html': 'The Difference Between A Manager And A Leader | The JAWS Advantage',
+        'the-half-of-management-nobody-teaches-you.html': 'The Half Of Management Nobody Teaches You | The JAWS Advantage',
+        'you-will-get-3-in-10-wrong-make-the-call-anyway.html': 'You Will Get 3 In 10 Wrong. Make The Call Anyway | The JAWS Advantage',
+        'you-are-busy-but-are-you-thinking.html': 'You\'re Busy. But Are You Thinking? | The JAWS Advantage'
+      };
+
+      function formatCount(n) {
+        if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+        return String(n);
+      }
+
+      document.querySelectorAll('.article-row').forEach(function (row) {
+        var href = row.getAttribute('href') || '';
+        var filename = href.split('/').pop();
+        var title = TITLE_MAP[filename];
+        if (!title) return;
+        var metaEl = row.querySelector('.article-meta');
+        if (!metaEl) return;
+
+        fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || !data.counts) return;
+            var counts = data.counts;
+            var top = Object.keys(counts).reduce(function (a, b) { return counts[a] > counts[b] ? a : b; });
+            var badge = document.createElement('span');
+            badge.className = 'article-rating-badge';
+            badge.textContent = formatCount(counts[top]) + ' ' + RATING_LABELS[top];
+            metaEl.parentNode.insertBefore(badge, metaEl.nextSibling);
+          })
+          .catch(function () {});
+      });
+    })();
+  </script>
 
 </body>
 </html>

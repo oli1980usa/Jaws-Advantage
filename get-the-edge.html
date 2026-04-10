@@ -1558,6 +1558,27 @@
             readTime.textContent = mins + ' min read';
             loading.style.display = 'none';
             content.style.display = 'block';
+
+            // Fetch and display ratings in panel footer
+            var quizEl = document.getElementById('articleQuiz');
+            if (quizEl) {
+              var docTitle = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : '';
+              fetch('https://jaws-advantage-api.oliverfrancis.workers.dev?action=get_ratings&article=' + encodeURIComponent(docTitle))
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                  if (!data || !data.counts) return;
+                  var counts = data.counts;
+                  var labels = { solid: 'Solid', sharp: 'Sharp', changed_thinking: 'Changed thinking' };
+                  var parts = Object.keys(counts).map(function (k) {
+                    var n = counts[k];
+                    var fmt = n >= 1000 ? (n/1000).toFixed(1) + 'k' : String(n);
+                    return '<span style="margin-right:16px;font-size:12px;color:#b8b5b0;">' + fmt + ' ' + labels[k] + '</span>';
+                  });
+                  quizEl.style.padding = '12px 28px';
+                  quizEl.innerHTML = parts.join('');
+                })
+                .catch(function () {});
+            }
           })
           .catch(function () {
             loading.style.display = 'none';

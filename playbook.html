@@ -827,6 +827,15 @@
     }
 
 
+    .article-rating-badge {
+      display: block;
+      font-size: 11px;
+      color: var(--off-white-dim);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+    }
+
   </style>
 </head>
 <body>
@@ -1113,7 +1122,47 @@
     })();
   </script>
 
+  <script>
+    // ─── LISTING RATINGS ───
+    (function () {
+      var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+      var RATING_LABELS = { solid: 'found this solid', sharp: 'found this sharp', changed_thinking: 'changed their thinking' };
 
+      var TITLE_MAP = {
+        'lead-with-and-through-others.html': 'Lead With and Through Others | The JAWS Advantage',
+        'manage-and-influence-upwards.html': 'Manage and Influence Upwards | The JAWS Advantage'
+      };
+
+      function formatCount(n) {
+        if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+        return String(n);
+      }
+
+      document.querySelectorAll('.pillar').forEach(function (pillar) {
+        var linkEl = pillar.querySelector('.pillar-btn-live');
+        if (!linkEl) return;
+        var href = linkEl.getAttribute('href') || '';
+        var filename = href.split('/').pop();
+        var title = TITLE_MAP[filename];
+        if (!title) return;
+        var descEl = pillar.querySelector('.pillar-desc');
+        if (!descEl) return;
+
+        fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || !data.counts) return;
+            var counts = data.counts;
+            var top = Object.keys(counts).reduce(function (a, b) { return counts[a] > counts[b] ? a : b; });
+            var badge = document.createElement('span');
+            badge.className = 'article-rating-badge';
+            badge.textContent = formatCount(counts[top]) + ' ' + RATING_LABELS[top];
+            descEl.parentNode.insertBefore(badge, linkEl);
+          })
+          .catch(function () {});
+      });
+    })();
+  </script>
 
 </body>
 </html>

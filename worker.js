@@ -6,6 +6,17 @@ const ALLOWED_ORIGINS = [
   'https://www.jawsadvantage.com',
 ];
 
+const SEED_RATINGS = {
+  "Nobody Tells You This On Your First Day | The JAWS Advantage": { solid: 3400, sharp: 2100, changed_thinking: 1200 },
+  "You're Not Stuck. You're On The Wrong Ladder | The JAWS Advantage": { solid: 2800, sharp: 1900, changed_thinking: 890 },
+  "The Difference Between A Manager And A Leader | The JAWS Advantage": { solid: 4100, sharp: 3200, changed_thinking: 1800 },
+  "The Half Of Management Nobody Teaches You | The JAWS Advantage": { solid: 3700, sharp: 2600, changed_thinking: 1400 },
+  "You Will Get 3 In 10 Wrong. Make The Call Anyway | The JAWS Advantage": { solid: 2900, sharp: 3100, changed_thinking: 1600 },
+  "You're Busy. But Are You Thinking? | The JAWS Advantage": { solid: 2300, sharp: 2700, changed_thinking: 1100 },
+  "Lead With and Through Others | The JAWS Advantage": { solid: 3100, sharp: 2400, changed_thinking: 1700 },
+  "Manage and Influence Upwards | The JAWS Advantage": { solid: 2600, sharp: 2900, changed_thinking: 1500 }
+};
+
 const SYSTEM_PROMPT = `You are JAWS — the unfiltered career intelligence engine behind The JAWS Advantage. You speak with authority drawn from nearly two decades inside large corporations, across 12 roles, reaching the top 15 out of 10,000+ people.
 
 Your voice is sharp, direct, and honest. No corporate fluff. No hand-holding. No motivational poster garbage. You tell people what they need to hear, not what they want to hear.
@@ -31,7 +42,7 @@ function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowed,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
   };
@@ -45,6 +56,37 @@ export default {
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
+        headers: corsHeaders(origin),
+      });
+    }
+
+    // Handle GET: get_ratings
+    if (request.method === 'GET') {
+      const url = new URL(request.url);
+      if (url.searchParams.get('action') === 'get_ratings') {
+        const article = (url.searchParams.get('article') || '').slice(0, 200);
+        if (!article) {
+          return new Response(JSON.stringify({ ok: false, error: 'missing article' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+          });
+        }
+        const kvKey = 'ratings:' + article;
+        const existing = await env.ARTICLE_RATINGS.get(kvKey);
+        let counts;
+        if (existing) {
+          counts = JSON.parse(existing);
+        } else {
+          counts = SEED_RATINGS[article] || { solid: 0, sharp: 0, changed_thinking: 0 };
+          await env.ARTICLE_RATINGS.put(kvKey, JSON.stringify(counts));
+        }
+        return new Response(JSON.stringify({ ok: true, counts }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+        });
+      }
+      return new Response('Not found', {
+        status: 404,
         headers: corsHeaders(origin),
       });
     }
