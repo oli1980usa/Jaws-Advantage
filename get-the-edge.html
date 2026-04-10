@@ -1475,6 +1475,7 @@
         fetch(url)
           .then(function (r) { return r.text(); })
           .then(function (html) {
+            html = html.replace(/<style[\s\S]*?<\/style>/gi, '');
             var doc = new DOMParser().parseFromString(html, 'text/html');
             var h1 = doc.querySelector('h1');
             var articleBody = doc.querySelector('.article-body');
