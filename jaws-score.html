@@ -629,98 +629,290 @@
 
   <script>
     // ─── QUIZ DATA ───
-    var QUESTIONS = [
+    var QUESTION_BANK = [
       {
-        q: "You\u2019re in your first week. Your manager asks what you think of the team.",
+        q: "You\u2019ve just joined a new team. What\u2019s your instinct on day one?",
         options: [
-          { text: '\u201cStill forming views \u2014 ask me in a month\u201d', points: 4 },
-          { text: '\u201cI\u2019ve got some early observations, happy to share if useful\u201d', points: 7 },
-          { text: '\u201cEveryone seems talented \u2014 I\u2019m focused on learning right now\u201d', points: 0 },
-          { text: '\u201cI\u2019d rather earn the right to have an opinion first\u201d', points: 10 }
+          { text: "Get your head down and deliver quickly to prove yourself", points: 3 },
+          { text: "Spend time meeting people across the business, not just your team", points: 10 },
+          { text: "Ask your manager what the priorities are and focus on those", points: 7 },
+          { text: "Observe quietly before doing anything", points: 3 }
         ]
       },
       {
-        q: "The CEO walks past you in the corridor. Asks how things are going. You have 30 seconds.",
+        q: "Your skip-level manager walks into the kitchen. You\u2019ve never spoken. You:",
         options: [
-          { text: '\u201cReally well \u2014 lots to get stuck into\u201d', points: 0 },
-          { text: '\u201cGood thanks \u2014 I\u2019ve actually been thinking about something relevant to what you announced last week\u201d', points: 10 },
-          { text: '\u201cBusy but good \u2014 learning a lot\u201d', points: 4 },
-          { text: '\u201cReally enjoying it, the team is great\u201d', points: 7 }
+          { text: "Smile and say nothing \u2014 you don\u2019t want to seem eager", points: 0 },
+          { text: "Introduce yourself briefly and ask one genuine question", points: 10 },
+          { text: "Wait for them to speak first", points: 3 },
+          { text: "Use it as a chance to pitch your latest project", points: 3 }
         ]
       },
       {
-        q: "You\u2019ve been in a meeting for 45 minutes. Nothing useful has been said. You have somewhere to be.",
+        q: "You\u2019ve been at the company six months. How many people outside your direct team know your name and what you do?",
         options: [
-          { text: 'Stay until the end \u2014 leaving would be noticed', points: 0 },
-          { text: 'Ask \u201cWhat\u2019s the actual decision we need to make here?\u201d', points: 10 },
-          { text: 'Diplomatically say you have a hard stop and ask to agree next steps', points: 7 },
-          { text: 'Follow up with a summary email and your recommendations', points: 4 }
+          { text: "A handful \u2014 my close colleagues", points: 3 },
+          { text: "Most of my floor", points: 7 },
+          { text: "People across multiple functions", points: 10 },
+          { text: "Honestly, probably just my team", points: 0 }
         ]
       },
       {
-        q: "Your biggest rival just got promoted. You didn\u2019t. What do you do that evening?",
+        q: "A cross-functional project comes up that isn\u2019t in your job description. You:",
         options: [
-          { text: 'Book a meeting with your manager to understand why', points: 7 },
-          { text: 'Update your CV and start looking', points: 4 },
-          { text: 'Sit with it, write down honestly what they did differently', points: 10 },
-          { text: 'Nothing \u2014 one data point doesn\u2019t mean anything', points: 0 }
+          { text: "Flag it to your manager and wait to be asked", points: 3 },
+          { text: "Volunteer immediately \u2014 visibility is visibility", points: 10 },
+          { text: "Ask who else is involved before deciding", points: 7 },
+          { text: "Pass \u2014 you have enough on your plate", points: 0 }
         ]
       },
       {
-        q: "You\u2019re presenting to senior leaders. You spot a small error in your data. Nobody else knows.",
+        q: "Someone senior compliments your work in a meeting. You:",
         options: [
-          { text: 'Acknowledge it upfront \u2014 \u201cone number to verify, but the direction holds\u201d', points: 10 },
-          { text: 'Correct it quietly mid-flow', points: 7 },
-          { text: 'Press on \u2014 it\u2019s minor', points: 4 },
-          { text: 'Stop and reschedule \u2014 you can\u2019t present with bad data', points: 0 }
+          { text: "Say thank you and move on", points: 3 },
+          { text: "Briefly explain your thinking so they understand the approach", points: 10 },
+          { text: "Deflect \u2014 you don\u2019t want to seem arrogant", points: 0 },
+          { text: "Thank the team publicly", points: 7 }
         ]
       },
       {
-        q: "A senior leader you\u2019ve never met is alone at a company event.",
+        q: "Your boss makes a decision you think is wrong. You:",
         options: [
-          { text: 'Introduce yourself and ask what they\u2019re working on', points: 7 },
-          { text: 'Leave them be \u2014 they probably want a break from work talk', points: 4 },
-          { text: 'Introduce yourself with a specific hook \u2014 something you know about their work', points: 10 },
-          { text: 'Ask a mutual colleague to introduce you first', points: 0 }
+          { text: "Say nothing \u2014 it\u2019s their call", points: 0 },
+          { text: "Raise it privately with one clear point, then let it go", points: 10 },
+          { text: "Push back hard in the meeting", points: 3 },
+          { text: "Complain to a colleague instead", points: 0 }
         ]
       },
       {
-        q: "Your team delivers something brilliant. Your manager presents it without crediting anyone.",
+        q: "You\u2019re in a meeting with senior leadership. Nobody is asking questions. You:",
         options: [
-          { text: 'Raise it with your manager privately', points: 7 },
-          { text: 'Make sure the right people know who delivered it through other channels', points: 10 },
-          { text: 'Let it go \u2014 visibility isn\u2019t everything', points: 0 },
-          { text: 'Mention it casually to a senior stakeholder \u2014 \u201cglad the team\u2019s work landed well\u201d', points: 4 }
+          { text: "Stay quiet \u2014 you don\u2019t want to look like you\u2019re showing off", points: 0 },
+          { text: "Ask the question you\u2019ve been thinking about", points: 10 },
+          { text: "Wait to see if someone else asks first", points: 3 },
+          { text: "Save it for a follow-up email", points: 7 }
         ]
       },
       {
-        q: "You made a call that went wrong. Your team is watching.",
+        q: "You\u2019ve been given a deadline you genuinely can\u2019t hit. You:",
         options: [
-          { text: 'Own it immediately \u2014 say what you\u2019re doing differently', points: 10 },
-          { text: 'Explain the context \u2014 you made the best call with what you had', points: 7 },
-          { text: 'Acknowledge it, invite the team\u2019s input on the fix', points: 4 },
-          { text: 'Move straight to solutions without dwelling on it', points: 0 }
+          { text: "Stay quiet and try to make it work", points: 0 },
+          { text: "Flag it immediately with a proposed alternative", points: 10 },
+          { text: "Do what you can and explain later", points: 3 },
+          { text: "Ask a colleague to help without telling your manager", points: 3 }
         ]
       },
       {
-        q: "It\u2019s Friday afternoon. Your list is clear for once.",
+        q: "A new initiative is announced that you think will fail. You:",
         options: [
-          { text: 'Think about where you want to be in 12 months and what\u2019s in the way', points: 10 },
-          { text: 'Get ahead on next week', points: 4 },
-          { text: 'Reach out to two people you\u2019ve been meaning to connect with', points: 7 },
-          { text: 'Leave early \u2014 you\u2019ve earned it', points: 0 }
+          { text: "Keep your head down and execute", points: 0 },
+          { text: "Raise your concern once, clearly, with a suggested alternative", points: 10 },
+          { text: "Wait to see if others push back first", points: 3 },
+          { text: "Quietly do it your way regardless", points: 3 }
         ]
       },
       {
-        q: "Someone junior asks for your best career advice. One sentence.",
+        q: "You don\u2019t know the answer to a question in a senior meeting. You:",
         options: [
-          { text: '\u201cWork harder than everyone else in the room\u201d', points: 0 },
-          { text: '\u201cFind someone worth learning from and stay close to them\u201d', points: 7 },
-          { text: '\u201cMake sure the people who make decisions know your name before you need them to\u201d', points: 10 },
-          { text: '\u201cBe brilliant at your job \u2014 everything else follows\u201d', points: 4 }
+          { text: "Bluff \u2014 you can\u2019t look unprepared", points: 0 },
+          { text: "Say you don\u2019t know and commit to finding out", points: 10 },
+          { text: "Deflect to someone else in the room", points: 3 },
+          { text: "Give a vague answer to buy time", points: 3 }
+        ]
+      },
+      {
+        q: "You\u2019ve just taken over a new team. First thing you do:",
+        options: [
+          { text: "Set expectations clearly so people know where they stand", points: 7 },
+          { text: "Listen and observe for 30 days before changing anything", points: 10 },
+          { text: "Identify the weakest link and address it immediately", points: 3 },
+          { text: "Restructure the team around your vision", points: 0 }
+        ]
+      },
+      {
+        q: "One of your team is underperforming. You:",
+        options: [
+          { text: "Manage around them and pick up the slack", points: 0 },
+          { text: "Have a direct, honest conversation about what\u2019s not working", points: 10 },
+          { text: "Quietly start documenting for HR", points: 3 },
+          { text: "Hope they improve on their own", points: 0 }
+        ]
+      },
+      {
+        q: "Your team keeps coming to you to make decisions they should own. You:",
+        options: [
+          { text: "Make the decisions \u2014 that\u2019s your job", points: 0 },
+          { text: "Start asking \u2018what would you do?\u2019 before giving your view", points: 10 },
+          { text: "Tell them to figure it out themselves", points: 3 },
+          { text: "Set up a weekly meeting to handle all the questions at once", points: 3 }
+        ]
+      },
+      {
+        q: "One of your best people is ready for more responsibility. You:",
+        options: [
+          { text: "Wait for a formal opportunity to come up", points: 3 },
+          { text: "Create visibility for them now \u2014 put them in rooms, give them projects", points: 10 },
+          { text: "Recommend them in their next review", points: 7 },
+          { text: "Tell them to be patient", points: 0 }
+        ]
+      },
+      {
+        q: "Your team missed a target. In the debrief with leadership, you:",
+        options: [
+          { text: "Explain what went wrong and who was responsible", points: 0 },
+          { text: "Own it fully and present what you\u2019re changing", points: 10 },
+          { text: "Share the context so people understand the challenge", points: 3 },
+          { text: "Focus on what went well before addressing the miss", points: 3 }
+        ]
+      },
+      {
+        q: "How often do you proactively update your manager without being asked?",
+        options: [
+          { text: "Rarely \u2014 I wait for our 1:1", points: 0 },
+          { text: "When something goes wrong", points: 3 },
+          { text: "Regularly \u2014 I give them what they need before they ask", points: 10 },
+          { text: "Only when I need something from them", points: 3 }
+        ]
+      },
+      {
+        q: "Your manager is about to present your team\u2019s work to the board. You:",
+        options: [
+          { text: "Wait to see how it goes", points: 0 },
+          { text: "Brief them in advance with the key points and likely questions", points: 10 },
+          { text: "Send a summary deck and hope for the best", points: 3 },
+          { text: "Ask to present it yourself", points: 7 }
+        ]
+      },
+      {
+        q: "You disagree with your manager\u2019s decision in a 1:1. You:",
+        options: [
+          { text: "Say nothing \u2014 they\u2019re the boss", points: 0 },
+          { text: "State your view once clearly, then commit to the decision", points: 10 },
+          { text: "Push back repeatedly until they change their mind", points: 3 },
+          { text: "Agree in the meeting then do it differently", points: 0 }
+        ]
+      },
+      {
+        q: "Your manager seems stressed and distracted lately. You:",
+        options: [
+          { text: "Give them space", points: 3 },
+          { text: "Ask if there\u2019s anything you can take off their plate", points: 10 },
+          { text: "Use it as an opportunity to get decisions made quickly", points: 3 },
+          { text: "Wait for things to settle down", points: 0 }
+        ]
+      },
+      {
+        q: "You want a promotion. You:",
+        options: [
+          { text: "Work harder and hope it gets noticed", points: 0 },
+          { text: "Have a direct conversation about what you need to demonstrate", points: 10 },
+          { text: "Ask your manager to advocate for you", points: 7 },
+          { text: "Wait for the annual review cycle", points: 3 }
+        ]
+      },
+      {
+        q: "You\u2019ve been in the same role for two years and feel stuck. You:",
+        options: [
+          { text: "Start looking externally", points: 3 },
+          { text: "Map the ladders around you and pick a deliberate next move", points: 10 },
+          { text: "Ask your manager for more interesting work", points: 7 },
+          { text: "Assume it\u2019ll get better", points: 0 }
+        ]
+      },
+      {
+        q: "A senior leader you respect is leaving the company. You:",
+        options: [
+          { text: "Connect with them on LinkedIn and move on", points: 3 },
+          { text: "Have a proper conversation about their next move and stay in touch", points: 10 },
+          { text: "Send a farewell message on Slack", points: 3 },
+          { text: "Nothing \u2014 you didn\u2019t work directly with them", points: 0 }
+        ]
+      },
+      {
+        q: "You have three urgent things and one strategic thing on your to-do list. You:",
+        options: [
+          { text: "Do the urgent things first \u2014 they have deadlines", points: 0 },
+          { text: "Block time for the strategic thing first, then handle urgent", points: 10 },
+          { text: "Delegate the urgent things if you can", points: 7 },
+          { text: "Do all four badly", points: 0 }
+        ]
+      },
+      {
+        q: "Your calendar is back-to-back meetings all week. You:",
+        options: [
+          { text: "Accept it \u2014 that\u2019s the job", points: 0 },
+          { text: "Audit every meeting and decline or shorten at least two", points: 10 },
+          { text: "Try to multitask during the less important ones", points: 3 },
+          { text: "Ask your manager to reduce your meeting load", points: 3 }
+        ]
+      },
+      {
+        q: "You\u2019ve just made a decision that turned out to be wrong. You:",
+        options: [
+          { text: "Quietly fix it and hope nobody noticed", points: 0 },
+          { text: "Own it, explain what you\u2019ve learned, and move forward", points: 10 },
+          { text: "Find out whose fault it really was", points: 0 },
+          { text: "Avoid similar decisions in future", points: 3 }
+        ]
+      },
+      {
+        q: "Someone less experienced than you gets a promotion you wanted. You:",
+        options: [
+          { text: "Start looking for other jobs", points: 3 },
+          { text: "Have a direct conversation about what you need to do differently", points: 10 },
+          { text: "Complain to trusted colleagues", points: 0 },
+          { text: "Double down and work harder without changing anything", points: 3 }
+        ]
+      },
+      {
+        q: "You\u2019re asked to present to an audience two levels above you. You:",
+        options: [
+          { text: "Present exactly as you would to your own team", points: 0 },
+          { text: "Adjust your level \u2014 lead with so what, not how", points: 10 },
+          { text: "Over-prepare every detail so you can\u2019t be caught out", points: 3 },
+          { text: "Ask your manager to present instead", points: 0 }
+        ]
+      },
+      {
+        q: "A peer is taking credit for work your team did. You:",
+        options: [
+          { text: "Let it go \u2014 it\u2019s not worth the conflict", points: 0 },
+          { text: "Address it directly and calmly with the peer", points: 10 },
+          { text: "Make sure your manager knows the real story", points: 7 },
+          { text: "Bring it up in the next team meeting", points: 3 }
+        ]
+      },
+      {
+        q: "How often do you think about where you want to be in three years?",
+        options: [
+          { text: "Rarely \u2014 I focus on the present", points: 0 },
+          { text: "Regularly \u2014 I have a clear direction and I\u2019m building toward it", points: 10 },
+          { text: "Sometimes \u2014 when I\u2019m frustrated or when reviews come up", points: 3 },
+          { text: "I have a vague idea but no real plan", points: 3 }
+        ]
+      },
+      {
+        q: "You get critical feedback from your manager that stings. You:",
+        options: [
+          { text: "Defend yourself \u2014 they don\u2019t have the full picture", points: 0 },
+          { text: "Listen, thank them, process it later, then act on what\u2019s valid", points: 10 },
+          { text: "Agree in the moment but don\u2019t really change anything", points: 3 },
+          { text: "Ask a trusted colleague if the feedback is fair", points: 7 }
         ]
       }
     ];
+
+    // Fisher-Yates shuffle — pick 10 random questions each load
+    function shuffleAndPick(arr, n) {
+      var copy = arr.slice();
+      for (var i = copy.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = copy[i]; copy[i] = copy[j]; copy[j] = tmp;
+      }
+      return copy.slice(0, n);
+    }
+
+    var QUESTIONS = shuffleAndPick(QUESTION_BANK, 10);
 
     var RATINGS = [
       { max: 30,  label: 'BAIT',             desc: 'You\u2019re in the water. You don\u2019t know what\u2019s swimming beneath you.' },
