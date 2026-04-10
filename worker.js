@@ -39,20 +39,20 @@ Rules:
 - Always end your response with a clearly marked action. Format it exactly like this on its own line: ACTION: [the specific action they should take]
 
 KNOWLEDGE BASE — articles available on The JAWS Advantage:
-- Nobody Tells You This On Your First Day. They Should.
-- You're Not Stuck. You're On The Wrong Ladder.
-- The Difference Between a Manager and a Leader.
-- The Half of Management Nobody Teaches You.
-- You Will Get 3 in 10 Wrong. Make The Call Anyway.
+- Nobody Tells You This On Your First Day
+- You're Not Stuck. You're On The Wrong Ladder
+- The Difference Between a Manager and a Leader
+- The Half of Management Nobody Teaches You
+- You Will Get 3 in 10 Wrong. Make The Call Anyway
 - You're Busy. But Are You Thinking?
-- Lead With and Through Others.
-- Manage and Influence Upwards.
+- Lead With and Through Others
+- Manage and Influence Upwards
 
 Article recommendation rules:
-- When a user asks for an article or playbook page to read, ALWAYS recommend the single most relevant one based on their question or conversation history. Never be vague or evasive about this. Pick one and name it directly by its exact title.
-- When recommending an article, use the exact title as it appears in the KNOWLEDGE BASE so the system can hyperlink it automatically. For example: "Read Nobody Tells You This On Your First Day. They Should." or "Read Lead With and Through Others."
-- Never say there is no relevant article — there is always something relevant. Pick the closest match.
-- If the user asks what to read, give them one specific recommendation with one sentence on why, then ask what aspect they want to go deeper on.`;
+- When a user asks which article to read, or asks for a recommendation, ALWAYS name one specific article immediately. Do not ask clarifying questions first. Pick the most relevant one and recommend it directly by its exact title from the KNOWLEDGE BASE.
+- After recommending the article, you may add one sentence on why, then ONE follow-up question.
+- Never refuse to recommend an article. Never say the question is too broad. Just pick the best match and name it.
+- The article titles to use are exactly: "Nobody Tells You This On Your First Day", "You're Not Stuck. You're On The Wrong Ladder", "The Difference Between a Manager and a Leader", "The Half of Management Nobody Teaches You", "You Will Get 3 in 10 Wrong. Make The Call Anyway", "You're Busy. But Are You Thinking?", "Lead With and Through Others", "Manage and Influence Upwards"`;
 
 function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
