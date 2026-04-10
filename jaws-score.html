@@ -255,20 +255,38 @@
       color: var(--off-white); padding-top: 3px;
     }
 
-    /* Next button */
-    .quiz-next-btn {
+    /* Confirmed option state (auto-advance highlight) */
+    .quiz-option.confirmed {
+      border-color: var(--red);
+      background: var(--red);
+      pointer-events: none;
+    }
+    .quiz-option.confirmed .quiz-option-letter {
+      background: rgba(255,255,255,0.18); color: #fff;
+      border-color: rgba(255,255,255,0.25);
+    }
+    .quiz-option.confirmed .quiz-option-text { color: #fff; }
+    /* Lock all options while advancing */
+    .quiz-options.locked .quiz-option { pointer-events: none; }
+    /* Back button */
+    .quiz-back-btn {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #fff;
-      background: var(--red); border: none;
-      padding: 14px 40px; cursor: pointer;
-      transition: background 0.2s, opacity 0.3s ease, transform 0.3s ease;
-      opacity: 0; pointer-events: none; transform: translateY(8px);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      background: none; border: none; cursor: pointer;
+      opacity: 0.4; padding: 0; margin-bottom: 28px;
+      display: block; transition: opacity 0.2s;
     }
-    .quiz-next-btn.visible {
-      opacity: 1; pointer-events: all; transform: translateY(0);
+    .quiz-back-btn:hover { opacity: 0.75; }
+    .quiz-back-btn.hidden { visibility: hidden; pointer-events: none; }
+    /* Keyboard hint */
+    .quiz-kbd-hint {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--off-white-dim); opacity: 0.4;
+      text-align: center; margin-top: 14px;
+      transition: opacity 0.35s ease;
     }
-    .quiz-next-btn:hover { background: var(--red-dark); }
+    .quiz-kbd-hint.hidden { opacity: 0; pointer-events: none; }
 
     /* ─── RESULTS SECTION ─── */
     .results-section {
@@ -546,10 +564,11 @@
         <span class="quiz-progress-text" id="quizProgressText">1 / 10</span>
       </div>
       <div class="quiz-question-wrap" id="quizQuestionWrap">
+        <button class="quiz-back-btn hidden" id="quizBackBtn">&#8592; Back</button>
         <span class="quiz-number" id="quizNumber">01</span>
         <h2 class="quiz-question" id="quizQuestion"></h2>
         <div class="quiz-options" id="quizOptions"></div>
-        <button class="quiz-next-btn" id="quizNextBtn">Next &rarr;</button>
+        <p class="quiz-kbd-hint" id="quizKbdHint">Press A, B, C or D to answer</p>
       </div>
     </div>
   </section>
@@ -739,8 +758,10 @@
     // ─── STATE ───
     var currentQ = 0;
     var totalScore = 0;
-    var selectedPoints = null;
     var questionScores = [];
+    var questionAnswers = []; // { optIdx, points } per committed question
+    var keyboardUsed = false;
+    var advancing = false;
 
     // ─── ELEMENTS ───
     var heroSection    = document.getElementById('heroSection');
@@ -754,7 +775,8 @@
     var questionNum    = document.getElementById('quizNumber');
     var questionText   = document.getElementById('quizQuestion');
     var optionsEl      = document.getElementById('quizOptions');
-    var nextBtn        = document.getElementById('quizNextBtn');
+    var backBtn        = document.getElementById('quizBackBtn');
+    var kbdHint        = document.getElementById('quizKbdHint');
 
     function fadeOut(el, cb) {
       el.style.transition = 'opacity 0.35s ease';
@@ -772,8 +794,10 @@
     function startQuiz() {
       currentQ = 0;
       totalScore = 0;
-      selectedPoints = null;
       questionScores = [];
+      questionAnswers = [];
+      keyboardUsed = false;
+      advancing = false;
 
       fadeOut(heroSection, function () {
         heroSection.style.display = 'none';
@@ -786,22 +810,39 @@
       });
     }
 
-    function loadQuestion(index) {
+    function loadQuestion(index, preSelectedIdx) {
       var q = QUESTIONS[index];
       var num = index + 1;
 
+      advancing = false;
       progressFill.style.width = ((index / QUESTIONS.length) * 100) + '%';
       progressText.textContent = num + ' / ' + QUESTIONS.length;
       questionNum.textContent = (num < 10 ? '0' : '') + num;
       questionText.textContent = q.q;
 
+      // Back button: hide on Q1, show otherwise
+      if (index > 0) {
+        backBtn.classList.remove('hidden');
+      } else {
+        backBtn.classList.add('hidden');
+      }
+
+      // Keyboard hint: hide once keyboard has been used
+      if (keyboardUsed) {
+        kbdHint.classList.add('hidden');
+      } else {
+        kbdHint.classList.remove('hidden');
+      }
+
+      optionsEl.classList.remove('locked');
       optionsEl.innerHTML = '';
-      selectedPoints = null;
-      nextBtn.classList.remove('visible');
 
       q.options.forEach(function (opt, i) {
         var btn = document.createElement('button');
         btn.className = 'quiz-option';
+        if (preSelectedIdx !== undefined && preSelectedIdx === i) {
+          btn.classList.add('selected');
+        }
 
         var letter = document.createElement('span');
         letter.className = 'quiz-option-letter';
@@ -814,24 +855,32 @@
         btn.appendChild(letter);
         btn.appendChild(text);
         btn.dataset.points = opt.points;
+        btn.dataset.idx = i;
 
         btn.addEventListener('click', function () {
-          document.querySelectorAll('.quiz-option').forEach(function (el) {
-            el.classList.remove('selected');
-          });
-          btn.classList.add('selected');
-          selectedPoints = parseInt(btn.dataset.points, 10);
-          nextBtn.classList.add('visible');
+          selectAndAdvance(i, parseInt(btn.dataset.points, 10));
         });
 
         optionsEl.appendChild(btn);
       });
     }
 
-    function nextQuestion() {
-      if (selectedPoints === null) return;
-      totalScore += selectedPoints;
-      questionScores.push(selectedPoints);
+    function selectAndAdvance(optIdx, points) {
+      if (advancing) return;
+      advancing = true;
+      optionsEl.classList.add('locked');
+
+      var allOpts = optionsEl.querySelectorAll('.quiz-option');
+      allOpts.forEach(function (b) { b.classList.remove('selected'); });
+      allOpts[optIdx].classList.add('confirmed');
+
+      setTimeout(function () { doAdvance(optIdx, points); }, 600);
+    }
+
+    function doAdvance(optIdx, points) {
+      totalScore += points;
+      questionScores.push(points);
+      questionAnswers.push({ optIdx: optIdx, points: points });
 
       questionWrap.classList.add('transitioning');
 
@@ -843,6 +892,20 @@
           loadQuestion(currentQ);
           questionWrap.classList.remove('transitioning');
         }
+      }, 250);
+    }
+
+    function goBack() {
+      if (currentQ === 0 || advancing) return;
+      var prev = questionAnswers.pop();
+      totalScore -= prev.points;
+      questionScores.pop();
+      currentQ--;
+      advancing = false;
+      questionWrap.classList.add('transitioning');
+      setTimeout(function () {
+        loadQuestion(currentQ, prev.optIdx);
+        questionWrap.classList.remove('transitioning');
       }, 250);
     }
 
@@ -880,6 +943,9 @@
     }
 
     function retakeQuiz() {
+      questionAnswers = [];
+      keyboardUsed = false;
+      advancing = false;
       fadeOut(resultsSection, function () {
         resultsSection.style.display = 'none';
         heroSection.style.display = 'flex';
@@ -892,8 +958,23 @@
 
     // ─── EVENT LISTENERS ───
     document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-    document.getElementById('quizNextBtn').addEventListener('click', nextQuestion);
+    document.getElementById('quizBackBtn').addEventListener('click', goBack);
     document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
+
+    // ─── KEYBOARD SHORTCUTS (A / B / C / D) ───
+    document.addEventListener('keydown', function (e) {
+      if (quizSection.style.display !== 'flex') return;
+      var key = e.key.toUpperCase();
+      var idx = ['A', 'B', 'C', 'D'].indexOf(key);
+      if (idx === -1 || advancing) return;
+      var allOpts = optionsEl.querySelectorAll('.quiz-option');
+      if (!allOpts[idx]) return;
+      if (!keyboardUsed) {
+        keyboardUsed = true;
+        kbdHint.classList.add('hidden');
+      }
+      selectAndAdvance(idx, parseInt(allOpts[idx].dataset.points, 10));
+    });
     // ─── SHARE BUTTONS ───
     (function () {
       var PAGE_URL = 'https://jawsadvantage.com/jaws-score';
