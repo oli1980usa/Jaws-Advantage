@@ -1489,7 +1489,7 @@
               el.style.borderLeftColor = accentColor;
             });
             content.querySelectorAll('.article-example').forEach(function(el) {
-              el.style.borderColor = accentColor;
+              el.style.cssText = el.style.cssText + '; border-color: ' + accentColor + ' !important; border-left-color: ' + accentColor + ' !important;';
             });
             var words = (content.textContent || '').trim().split(/\s+/).length;
             var mins = Math.max(1, Math.round(words / 200));
