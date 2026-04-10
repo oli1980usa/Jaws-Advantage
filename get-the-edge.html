@@ -857,10 +857,12 @@
       font-size: clamp(20px, 3vw, 28px);
       color: #f5f3ef; line-height: 1.2; letter-spacing: 0.02em;
     }
-    .article-panel.playbook #articlePanelContent blockquote,
-    .article-panel.playbook #articlePanelContent .article-pull-quote {
-      border-left-color: #4a7fa5;
-    }
+    .panel-playbook .article-panel-badge { background: #4a7fa5 !important; border-color: #4a7fa5 !important; }
+    .panel-playbook .article-panel-progress { background: #4a7fa5 !important; }
+    .panel-playbook #articlePanelContent blockquote { border-left-color: #4a7fa5 !important; }
+    .panel-playbook #articlePanelContent .article-pull-quote { border-left-color: #4a7fa5 !important; }
+    .panel-playbook #articlePanelContent .article-example-label { background: #4a7fa5 !important; }
+    .panel-take .article-panel-badge { background: #a52a1a !important; border-color: #a52a1a !important; }
     #articlePanelContent .article-closing {
       border-top: 1px solid rgba(245,243,239,0.08);
       padding-top: 24px; margin-top: 32px;
@@ -1441,13 +1443,9 @@
         if (type === 'take') {
           badgeEl.textContent = 'The Take';
           badgeEl.classList.add('take');
-          badgeEl.style.background = '#a52a1a';
-          badgeEl.style.borderColor = '#a52a1a';
         } else if (type === 'playbook') {
           badgeEl.textContent = 'The Playbook';
           badgeEl.classList.add('playbook');
-          badgeEl.style.background = '#4a7fa5';
-          badgeEl.style.borderColor = '#4a7fa5';
         }
       }
 
@@ -1464,9 +1462,9 @@
         readTime.textContent = '';
         progress.style.width = '0%';
         var type = getContentType(url);
-        panel.classList.toggle('playbook', type === 'playbook');
+        panel.classList.remove('panel-playbook', 'panel-take');
+        panel.classList.add(type === 'playbook' ? 'panel-playbook' : 'panel-take');
         applyBadge(type);
-        progress.style.background = type === 'playbook' ? '#4a7fa5' : '#a52a1a';
         loading.style.display = 'flex';
         content.style.display = 'none';
         content.innerHTML = '';
@@ -1482,13 +1480,6 @@
             var articleBody = doc.querySelector('.article-body');
             titleEl.textContent = h1 ? h1.textContent.trim() : '';
             content.innerHTML = articleBody ? articleBody.innerHTML : '<p>Could not load article.</p>';
-            var accentColour = type === 'playbook' ? '#4a7fa5' : '#a52a1a';
-            content.querySelectorAll('blockquote, .article-pull-quote').forEach(function (el) {
-              el.style.borderLeftColor = accentColour;
-            });
-            content.querySelectorAll('.article-example-label').forEach(function (el) {
-              el.style.background = accentColour;
-            });
             var words = (content.textContent || '').trim().split(/\s+/).length;
             var mins = Math.max(1, Math.round(words / 200));
             readTime.textContent = mins + ' min read';
