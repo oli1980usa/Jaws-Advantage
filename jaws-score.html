@@ -341,6 +341,35 @@
       background: rgba(165, 42, 26, 0.15);
       box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
     }
+    /* ─── IMPROVE SECTION ─── */
+    .result-improve {
+      margin-top: 0;
+      margin-bottom: 36px;
+      padding: 24px;
+      border: 1px solid rgba(165, 42, 26, 0.35);
+      background: rgba(165, 42, 26, 0.06);
+      text-align: center;
+    }
+    .result-improve-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 0.1em;
+      color: var(--off-white); margin-bottom: 16px;
+    }
+    .result-improve-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #fff;
+      background: var(--red); border: none; cursor: pointer;
+      padding: 14px 28px; text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .result-improve-btn:hover { background: #bf3120; }
+    .result-improve-note {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.65; margin-top: 12px; margin-bottom: 0;
+    }
     .result-ctas {
       display: flex; gap: 16px; flex-wrap: wrap;
       justify-content: center; margin-bottom: 32px;
@@ -543,6 +572,11 @@
         <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
         <button class="share-btn" id="shareCopy" aria-label="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
       </div>
+      <div class="result-improve">
+        <p class="result-improve-heading">Want to know how to improve?</p>
+        <button class="result-improve-btn" id="askJawsBtn">Ask JAWS About Your Results</button>
+        <p class="result-improve-note">JAWS will give you a personalised improvement plan based on your results.</p>
+      </div>
       <div class="result-ctas">
         <a href="playbook.html" class="result-cta-primary">Read the Playbook</a>
         <a href="jaws-score-full.html" class="result-cta-outline">Take the Full 30-Question Test</a>
@@ -688,10 +722,25 @@
       return RATINGS[RATINGS.length - 1];
     }
 
+    // ─── TOPIC MAP ───
+    var TOPIC_MAP = [
+      'first impressions and earning the right to have an opinion',
+      'making the most of senior leader interactions',
+      'managing meetings and being decisive',
+      'learning from peers who get promoted ahead of you',
+      'integrity and owning mistakes in front of senior leaders',
+      'engineering your presence and networking with senior leaders',
+      'making sure your team gets visibility for their work',
+      'owning decisions that go wrong',
+      'strategic thinking and protecting time for big picture work',
+      'building visibility with decision makers early in your career'
+    ];
+
     // ─── STATE ───
     var currentQ = 0;
     var totalScore = 0;
     var selectedPoints = null;
+    var questionScores = [];
 
     // ─── ELEMENTS ───
     var heroSection    = document.getElementById('heroSection');
@@ -724,6 +773,7 @@
       currentQ = 0;
       totalScore = 0;
       selectedPoints = null;
+      questionScores = [];
 
       fadeOut(heroSection, function () {
         heroSection.style.display = 'none';
@@ -781,6 +831,7 @@
     function nextQuestion() {
       if (selectedPoints === null) return;
       totalScore += selectedPoints;
+      questionScores.push(selectedPoints);
 
       questionWrap.classList.add('transitioning');
 
@@ -887,6 +938,31 @@
         });
       });
     })();
+
+    // ─── ASK JAWS BUTTON ───
+    document.getElementById('askJawsBtn').addEventListener('click', function () {
+      var score = window._jawsScore || 0;
+      var rating = window._jawsRating || '';
+
+      var weakTopics = [];
+      for (var i = 0; i < questionScores.length; i++) {
+        if (questionScores[i] === 0 || questionScores[i] === 4) {
+          weakTopics.push(TOPIC_MAP[i]);
+        }
+      }
+
+      var msg;
+      if (weakTopics.length === 0) {
+        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. What should I focus on to keep improving, and which articles or playbook pages would you recommend?';
+      } else if (weakTopics.length === 1) {
+        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. My weakest area was ' + weakTopics[0] + '. What should I focus on to improve, and which articles or playbook pages should I read?';
+      } else {
+        var listed = weakTopics.slice(0, -1).join(', ') + ' and ' + weakTopics[weakTopics.length - 1];
+        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. My weakest areas were ' + listed + '. What should I focus on to improve, and which articles or playbook pages should I read?';
+      }
+
+      window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(msg);
+    });
 
     // ─── SCROLL ANIMATIONS ───
     var fadeObserver = new IntersectionObserver(function (entries) {
