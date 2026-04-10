@@ -1488,6 +1488,9 @@
             content.querySelectorAll('blockquote, .article-pull-quote').forEach(function(el) {
               el.style.borderLeftColor = accentColor;
             });
+            content.querySelectorAll('.article-example').forEach(function(el) {
+              el.style.borderColor = accentColor;
+            });
             var words = (content.textContent || '').trim().split(/\s+/).length;
             var mins = Math.max(1, Math.round(words / 200));
             readTime.textContent = mins + ' min read';
