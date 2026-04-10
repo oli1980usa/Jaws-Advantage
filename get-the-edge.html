@@ -787,6 +787,15 @@
       transition: opacity 0.2s;
     }
     .article-panel-close:hover { opacity: 1; }
+    .article-panel-progress {
+      height: 3px; width: 0%; background: #a52a1a;
+      flex-shrink: 0; transition: width 0.1s linear; z-index: 10;
+    }
+    .article-panel-read-time {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+      color: #b8b5b0; opacity: 0.7; white-space: nowrap;
+      margin-left: 10px; flex-shrink: 0;
+    }
     .article-panel-body {
       flex: 1; overflow-y: auto; padding: 28px 28px 24px;
       scrollbar-width: thin; scrollbar-color: var(--red) #111111;
@@ -1358,8 +1367,10 @@
   <div class="article-panel" id="articlePanel">
     <div class="article-panel-header">
       <span class="article-panel-title" id="articlePanelTitle"></span>
+      <span class="article-panel-read-time" id="articlePanelReadTime"></span>
       <button class="article-panel-close" id="articlePanelClose" aria-label="Close">&times;</button>
     </div>
+    <div class="article-panel-progress" id="articlePanelProgress"></div>
     <div class="article-panel-body" id="articlePanelBody">
       <div class="article-panel-loading" id="articlePanelLoading">
         <div class="article-panel-spinner"></div>
@@ -1372,16 +1383,26 @@
   <script>
     // ─── ARTICLE PANEL ───
     (function () {
-      var overlay  = document.getElementById('articlePanelOverlay');
-      var panel    = document.getElementById('articlePanel');
-      var closeBtn = document.getElementById('articlePanelClose');
-      var titleEl  = document.getElementById('articlePanelTitle');
-      var loading  = document.getElementById('articlePanelLoading');
-      var content  = document.getElementById('articlePanelContent');
-      var body     = document.getElementById('articlePanelBody');
+      var overlay   = document.getElementById('articlePanelOverlay');
+      var panel     = document.getElementById('articlePanel');
+      var closeBtn  = document.getElementById('articlePanelClose');
+      var titleEl   = document.getElementById('articlePanelTitle');
+      var readTime  = document.getElementById('articlePanelReadTime');
+      var progress  = document.getElementById('articlePanelProgress');
+      var loading   = document.getElementById('articlePanelLoading');
+      var content   = document.getElementById('articlePanelContent');
+      var body      = document.getElementById('articlePanelBody');
+
+      body.addEventListener('scroll', function () {
+        var scrollable = body.scrollHeight - body.clientHeight;
+        var pct = scrollable > 0 ? Math.min(100, Math.round((body.scrollTop / scrollable) * 100)) : 0;
+        progress.style.width = pct + '%';
+      }, { passive: true });
 
       function openPanel(url) {
         titleEl.textContent = '';
+        readTime.textContent = '';
+        progress.style.width = '0%';
         loading.style.display = 'flex';
         content.style.display = 'none';
         content.innerHTML = '';
@@ -1397,6 +1418,9 @@
             var articleBody = doc.querySelector('.article-body');
             titleEl.textContent = h1 ? h1.textContent.trim() : '';
             content.innerHTML = articleBody ? articleBody.innerHTML : '<p>Could not load article.</p>';
+            var words = (content.textContent || '').trim().split(/\s+/).length;
+            var mins = Math.max(1, Math.round(words / 200));
+            readTime.textContent = mins + ' min read';
             loading.style.display = 'none';
             content.style.display = 'block';
           })
