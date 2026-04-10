@@ -857,6 +857,10 @@
       font-size: clamp(20px, 3vw, 28px);
       color: #f5f3ef; line-height: 1.2; letter-spacing: 0.02em;
     }
+    .article-panel.playbook #articlePanelContent blockquote,
+    .article-panel.playbook #articlePanelContent .article-pull-quote {
+      border-left-color: #4a7fa5;
+    }
     #articlePanelContent .article-closing {
       border-top: 1px solid rgba(245,243,239,0.08);
       padding-top: 24px; margin-top: 32px;
@@ -1455,7 +1459,9 @@
         badgeEl.textContent = '';
         readTime.textContent = '';
         progress.style.width = '0%';
-        applyBadge(getContentType(url));
+        var type = getContentType(url);
+        panel.classList.toggle('playbook', type === 'playbook');
+        applyBadge(type);
         loading.style.display = 'flex';
         content.style.display = 'none';
         content.innerHTML = '';
