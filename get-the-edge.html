@@ -1066,6 +1066,7 @@
       bubble.className = 'msg-bubble';
       // Render newlines as paragraph breaks
       bubble.innerHTML = text
+        .replace(/\s+on\s+jawsadvantage\.com\/[^\s<)"']*/gi, '')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/\n\n/g, '<br><br>')
