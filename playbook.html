@@ -827,86 +827,32 @@
     }
 
     /* ─── JAWS SCORE NAV TAB ─── */
-    .jaws-nav-tab {
-      position: fixed;
-      top: 64px;
-      left: 260px;
-      z-index: 99;
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .js-score-tab {
+      display: flex; align-items: center;
+      background: var(--red); overflow: hidden;
+      width: 32px; height: 32px;
+      transition: width 0.3s ease;
+      text-decoration: none; flex-shrink: 0;
     }
-    .jaws-nav-tab-handle {
-      width: 32px;
-      background: var(--red);
-      padding: 14px 7px 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 50% 100%, 0 calc(100% - 12px));
-      transition: filter 0.2s ease;
-    }
-    .jaws-nav-tab:hover .jaws-nav-tab-handle {
-      filter: drop-shadow(2px 4px 8px rgba(165, 42, 26, 0.5));
-    }
-    .jaws-nav-tab-text {
+    .js-score-tab:hover { width: 160px; }
+    .js-score-tab-abbr {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: #ffffff;
-      text-transform: uppercase;
-      white-space: nowrap;
-      writing-mode: vertical-lr;
-      display: block;
+      font-size: 13px; letter-spacing: 0.05em;
+      color: #fff; flex-shrink: 0;
+      width: 32px; text-align: center;
     }
-    .jaws-nav-tab-panel {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 204px;
-      background: #111111;
-      border: 1px solid rgba(165, 42, 26, 0.65);
-      box-shadow: 0 8px 28px rgba(165, 42, 26, 0.28), 0 0 40px rgba(165, 42, 26, 0.08);
-      padding: 16px;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-      transition: opacity 0.22s ease, transform 0.22s ease;
-    }
-    .jaws-nav-tab:hover .jaws-nav-tab-panel {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    }
-    .jaws-nav-tab-heading {
+    .js-score-tab-label {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 0.08em;
-      color: var(--red);
-      margin-bottom: 6px;
-      line-height: 1;
+      font-size: 12px; letter-spacing: 0.1em;
+      color: #fff; white-space: nowrap;
+      opacity: 0; transition: opacity 0.15s ease;
     }
-    .jaws-nav-tab-sub {
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--off-white-dim);
-      line-height: 1.5;
-      margin-bottom: 14px;
+    .js-score-tab:hover .js-score-tab-label {
+      opacity: 1; transition: opacity 0.2s ease 0.15s;
     }
-    .jaws-nav-tab-cta {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #fff;
-      background: var(--red);
-      text-decoration: none;
-      padding: 7px 12px;
-      display: inline-block;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-    .jaws-nav-tab-cta:hover { background: #bf3120; }
     @media (max-width: 768px) {
-      .jaws-nav-tab { display: none; }
+      .js-score-tab { display: none; }
     }
   </style>
 </head>
@@ -914,10 +860,16 @@
 
   <!-- ─── NAV ─── -->
   <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
-      THE <span>JAWS</span> ADVANTAGE
-    </a>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+        THE <span>JAWS</span> ADVANTAGE
+      </a>
+      <a href="jaws-score.html" class="js-score-tab" aria-label="JAWS Score">
+        <span class="js-score-tab-abbr">JS</span>
+        <span class="js-score-tab-label">JAWS SCORE &rarr;</span>
+      </a>
+    </div>
     <ul class="nav-links">
       <li><a href="playbook.html">The Playbook</a></li>
       <li><a href="the-take.html">The Take</a></li>
@@ -1192,17 +1144,7 @@
     })();
   </script>
 
-  <!-- ─── JAWS SCORE NAV TAB ─── -->
-  <div class="jaws-nav-tab">
-    <div class="jaws-nav-tab-handle">
-      <span class="jaws-nav-tab-text">JAWS SCORE</span>
-    </div>
-    <div class="jaws-nav-tab-panel">
-      <p class="jaws-nav-tab-heading">THE JAWS SCORE</p>
-      <p class="jaws-nav-tab-sub">How well are you playing the game?</p>
-      <a href="jaws-score.html" class="jaws-nav-tab-cta">Take the Test &rarr;</a>
-    </div>
-  </div>
+
 
 </body>
 </html>
