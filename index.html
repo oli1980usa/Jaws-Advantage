@@ -1076,34 +1076,7 @@
       }
     }
 
-    /* ─── JAWS SCORE NAV TAB ─── */
-    .nav-left { display: flex; align-items: center; gap: 12px; }
-    .js-score-tab {
-      display: flex; align-items: center;
-      background: var(--red); overflow: hidden;
-      width: 32px; height: 32px;
-      transition: width 0.3s ease;
-      text-decoration: none; flex-shrink: 0;
-    }
-    .js-score-tab:hover { width: 160px; }
-    .js-score-tab-abbr {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px; letter-spacing: 0.05em;
-      color: #fff; flex-shrink: 0;
-      width: 32px; text-align: center;
-    }
-    .js-score-tab-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12px; letter-spacing: 0.1em;
-      color: #fff; white-space: nowrap;
-      opacity: 0; transition: opacity 0.15s ease;
-    }
-    .js-score-tab:hover .js-score-tab-label {
-      opacity: 1; transition: opacity 0.2s ease 0.15s;
-    }
-    @media (max-width: 768px) {
-      .js-score-tab { display: none; }
-    }
+
 
     /* ─── JAWS SCORE POPUP ─── */
     .score-popup-overlay {
@@ -1166,25 +1139,45 @@
     }
     .score-popup-dismiss:hover { color: var(--off-white); }
     body.light-mode .score-popup { background: #e8e6e2; }
+
+    /* ─── ANNOUNCEMENT BANNER ─── */
+    .announce-banner {
+      position: fixed; top: 64px; left: 0; right: 0;
+      height: 36px; background: var(--red); z-index: 99;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .announce-banner.hidden {
+      opacity: 0; pointer-events: none; transform: translateY(-36px);
+    }
+    .announce-banner-text {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400;
+      color: #fff; letter-spacing: 0.05em; white-space: nowrap; user-select: none;
+    }
+    .announce-banner-text strong { font-weight: 700; }
+    .announce-dismiss {
+      position: absolute; right: 16px; background: none; border: none;
+      color: #fff; font-size: 18px; cursor: pointer; opacity: 0.7;
+      line-height: 1; padding: 4px; display: flex; align-items: center;
+    }
+    .announce-dismiss:hover { opacity: 1; }
+    body.banner-active .hero { padding-top: 136px; }
+    @media (max-width: 768px) { .announce-banner { display: none !important; } }
   </style>
 </head>
 <body>
 
   <!-- ─── NAV ─── -->
   <nav>
-    <div class="nav-left">
-      <a href="#" class="nav-logo">
-        <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
-        THE <span>JAWS</span> ADVANTAGE
-      </a>
-      <a href="jaws-score.html" class="js-score-tab" aria-label="JAWS Score">
-        <span class="js-score-tab-abbr">JS</span>
-        <span class="js-score-tab-label">JAWS SCORE &rarr;</span>
-      </a>
-    </div>
+    <a href="#" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
     <ul class="nav-links">
       <li><a href="playbook.html">The Playbook</a></li>
       <li><a href="the-take.html">The Take</a></li>
+      <li><a href="jaws-score.html">Jaws Score</a></li>
       <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
       <li>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -1198,7 +1191,14 @@
     <a href="index.html">Home</a>
     <a href="playbook.html">The Playbook</a>
     <a href="the-take.html">The Take</a>
+    <a href="jaws-score.html">Jaws Score</a>
     <a href="get-the-edge.html" class="mobile-cta">Get the Edge</a>
+  </div>
+
+  <!-- ─── ANNOUNCEMENT BANNER ─── -->
+  <div class="announce-banner" id="announceBanner">
+    <span class="announce-banner-text">FIND OUT WHERE YOU STAND &mdash; TAKE THE <strong>JAWS SCORE</strong> <strong>&rarr;</strong></span>
+    <button class="announce-dismiss" id="announceDismiss" aria-label="Dismiss">&#215;</button>
   </div>
 
   <!-- ─── HERO ─── -->
