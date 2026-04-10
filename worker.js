@@ -7,14 +7,14 @@ const ALLOWED_ORIGINS = [
 ];
 
 const SEED_RATINGS = {
-  "Nobody Tells You This On Your First Day | The JAWS Advantage": { solid: 3400, sharp: 2100, changed_thinking: 1200 },
-  "You're Not Stuck. You're On The Wrong Ladder | The JAWS Advantage": { solid: 2800, sharp: 1900, changed_thinking: 890 },
-  "The Difference Between A Manager And A Leader | The JAWS Advantage": { solid: 4100, sharp: 3200, changed_thinking: 1800 },
-  "The Half Of Management Nobody Teaches You | The JAWS Advantage": { solid: 3700, sharp: 2600, changed_thinking: 1400 },
-  "You Will Get 3 In 10 Wrong. Make The Call Anyway | The JAWS Advantage": { solid: 2900, sharp: 3100, changed_thinking: 1600 },
-  "You're Busy. But Are You Thinking? | The JAWS Advantage": { solid: 2300, sharp: 2700, changed_thinking: 1100 },
-  "Lead With and Through Others | The JAWS Advantage": { solid: 3100, sharp: 2400, changed_thinking: 1700 },
-  "Manage and Influence Upwards | The JAWS Advantage": { solid: 2600, sharp: 2900, changed_thinking: 1500 }
+  "Nobody Tells You This On Your First Day | The JAWS Advantage": { bait: 1200, jaws: 5500 },
+  "You're Not Stuck. You're On The Wrong Ladder | The JAWS Advantage": { bait: 890, jaws: 4700 },
+  "The Difference Between A Manager And A Leader | The JAWS Advantage": { bait: 1800, jaws: 7300 },
+  "The Half Of Management Nobody Teaches You | The JAWS Advantage": { bait: 1400, jaws: 6300 },
+  "You Will Get 3 In 10 Wrong. Make The Call Anyway | The JAWS Advantage": { bait: 1600, jaws: 6000 },
+  "You're Busy. But Are You Thinking? | The JAWS Advantage": { bait: 1100, jaws: 5000 },
+  "Lead With and Through Others | The JAWS Advantage": { bait: 1700, jaws: 5500 },
+  "Manage and Influence Upwards | The JAWS Advantage": { bait: 1500, jaws: 5500 }
 };
 
 const SYSTEM_PROMPT = `You are JAWS — the unfiltered career intelligence engine behind The JAWS Advantage. You speak with authority drawn from nearly two decades inside large corporations, across 12 roles, reaching the top 15 out of 10,000+ people.
@@ -77,7 +77,7 @@ export default {
         if (existing) {
           counts = JSON.parse(existing);
         } else {
-          counts = SEED_RATINGS[article] || { solid: 0, sharp: 0, changed_thinking: 0 };
+          counts = SEED_RATINGS[article] || { bait: 0, jaws: 0 };
           await env.ARTICLE_RATINGS.put(kvKey, JSON.stringify(counts));
         }
         return new Response(JSON.stringify({ ok: true, counts }), {
@@ -104,13 +104,13 @@ export default {
       if (body.action === 'rate_article') {
         const article = (body.article || '').slice(0, 200);
         const rating = body.rating;
-        const validRatings = ['solid', 'sharp', 'changed_thinking'];
+        const validRatings = ['bait', 'jaws'];
         if (!article || !validRatings.includes(rating)) {
           return new Response(JSON.stringify({ ok: false, error: 'invalid' }), { status: 400, headers: corsHeaders(origin) });
         }
         const kvKey = 'ratings:' + article;
         const existing = await env.ARTICLE_RATINGS.get(kvKey);
-        const counts = existing ? JSON.parse(existing) : { solid: 0, sharp: 0, changed_thinking: 0 };
+        const counts = existing ? JSON.parse(existing) : { bait: 0, jaws: 0 };
         counts[rating] = (counts[rating] || 0) + 1;
         await env.ARTICLE_RATINGS.put(kvKey, JSON.stringify(counts));
         return new Response(JSON.stringify({ ok: true, counts }), { status: 200, headers: corsHeaders(origin) });
