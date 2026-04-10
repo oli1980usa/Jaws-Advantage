@@ -1349,12 +1349,14 @@
         });
       }
 
+      var OFFSETS = { bait: 1500, jaws: 5200 };
+
       function renderCounts(counts) {
         buttons.forEach(function (b) {
           var rating = b.getAttribute('data-rating');
           var countEl = b.querySelector('.rating-count');
-          if (countEl && counts[rating] !== undefined) {
-            countEl.textContent = formatCount(counts[rating]);
+          if (countEl) {
+            countEl.textContent = formatCount((counts[rating] || 0) + (OFFSETS[rating] || 0));
           }
         });
       }
