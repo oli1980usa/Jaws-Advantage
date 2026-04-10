@@ -280,11 +280,11 @@
     }
 
     .msg-row.user {
-      align-items: stretch;
+      align-items: flex-end;
     }
 
     .msg-row.jaws {
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     .msg-label {
@@ -303,22 +303,22 @@
       line-height: 1.7;
       border-radius: 12px;
       word-break: break-word;
-      width: 100%;
+      max-width: 75%;
       box-sizing: border-box;
     }
 
     .msg-row.user .msg-bubble {
       background: var(--red);
       color: #ffffff;
-      border-radius: 12px;
-      text-align: right;
+      border-radius: 12px 12px 0 12px;
+      text-align: left;
     }
 
     .msg-row.jaws .msg-bubble {
       background: var(--black-3);
       color: var(--off-white);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 0 12px 12px 12px;
       text-align: left;
     }
 
@@ -651,6 +651,10 @@
 
       .chat-messages {
         padding: 20px 24px;
+      }
+
+      .msg-bubble {
+        max-width: 90%;
       }
 
       .chat-input-bar {
