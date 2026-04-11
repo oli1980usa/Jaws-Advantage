@@ -593,6 +593,16 @@
     <a href="get-the-edge.html" class="mobile-cta">Get the Edge</a>
   </div>
 
+  <!-- ─── RESUME PROMPT ─── -->
+  <div id="rybResumePrompt" style="display:none; flex-direction:column; align-items:center; gap:16px; padding: 60px 24px; text-align:center; min-height:60vh; justify-content:center;">
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:2px; color:var(--off-white); margin:0;">YOU HAVE AN UNFINISHED RATING.</p>
+    <p style="font-size:14px; color:var(--off-white-dim); margin:0;">Pick up where you left off, or start fresh.</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+      <button class="ryb-start-btn" onclick="rybResumeQuiz()">RESUME</button>
+      <button class="ryb-start-btn" style="background:transparent; border:1px solid var(--red); color:var(--red);" onclick="rybRestartFromPrompt()">START FRESH</button>
+    </div>
+  </div>
+
   <!-- ─── START SCREEN ─── -->
   <section id="startSection" class="ryb-hero">
     <span class="ryb-eyebrow fade-in">Know Your World</span>
@@ -914,6 +924,24 @@
     var currentCategory = null;
     var finalScore = 0;
 
+    // ─── SESSION SAVE ───
+    function rybSaveState(screen) {
+      try {
+        var state = {
+          screen: screen,
+          answers: quiz.answers || [],
+          scores: quiz.scores || [],
+          currentIdx: quiz.idx || 0,
+          shuffledOptions: quiz.shuffledOptions || [],
+          finalScore: window._rybScore || null,
+          finalCategory: window._rybCategory || null,
+          finalTagline: window._rybTagline || null,
+          savedAt: Date.now()
+        };
+        sessionStorage.setItem('jawsBossQuiz', JSON.stringify(state));
+      } catch(e) {}
+    }
+
     // ─── ELEMENT REFS ───
     var startSection   = document.getElementById('startSection');
     var quizSection    = document.getElementById('quizSection');
@@ -926,6 +954,40 @@
     var kbdHint        = document.getElementById('kbdHint');
     var progressFill   = document.getElementById('progressFill');
     var progressText   = document.getElementById('progressText');
+
+    // ─── SESSION RESTORE ───
+    (function() {
+      try {
+        var saved = sessionStorage.getItem('jawsBossQuiz');
+        if (!saved) return;
+        var state = JSON.parse(saved);
+        if (!state || !state.screen) return;
+        var age = Date.now() - (state.savedAt || 0);
+        if (age > 7200000) { sessionStorage.removeItem('jawsBossQuiz'); return; }
+
+        if (state.screen === 'results') {
+          quiz.answers = state.answers || [];
+          quiz.scores = state.scores || [];
+          quiz.shuffledOptions = state.shuffledOptions || [];
+          window._rybScore = state.finalScore;
+          window._rybCategory = state.finalCategory;
+          window._rybTagline = state.finalTagline;
+          startSection.style.display = 'none';
+          quizSection.style.display = 'none';
+          showResults();
+          return;
+        }
+
+        if (state.screen === 'mid-quiz') {
+          startSection.style.display = 'none';
+          var resumeEl = document.getElementById('rybResumePrompt');
+          if (resumeEl) {
+            resumeEl._savedState = state;
+            resumeEl.style.display = 'flex';
+          }
+        }
+      } catch(e) {}
+    })();
 
     // ─── FADE HELPERS ───
     function fadeOut(el, cb) {
@@ -988,6 +1050,7 @@
         quiz.scores.push(points);
         quiz.answers.push({ optIdx: optIdx, points: points });
         quiz.idx++;
+        rybSaveState('mid-quiz');
         advance();
       }, 600);
     }
@@ -998,6 +1061,7 @@
       quiz.scores.push(5);
       quiz.answers.push(null);
       quiz.idx++;
+      rybSaveState('mid-quiz');
       advance();
     });
 
@@ -1035,6 +1099,7 @@
 
     // ─── RESULTS ───
     function showResults() {
+      rybSaveState('results');
       var total = 0;
       quiz.scores.forEach(function(s) { total += (s || 0); });
       total = Math.min(100, Math.round(total));
@@ -1126,8 +1191,35 @@
       };
     }
 
+    // ─── RESUME / RESTART ───
+    function rybResumeQuiz() {
+      var resumeEl = document.getElementById('rybResumePrompt');
+      if (!resumeEl || !resumeEl._savedState) return;
+      var state = resumeEl._savedState;
+      quiz.answers = state.answers || [];
+      quiz.scores = state.scores || [];
+      quiz.idx = state.currentIdx || 0;
+      quiz.shuffledOptions = state.shuffledOptions || [];
+      resumeEl.style.display = 'none';
+      startSection.style.display = 'none';
+      quizSection.style.display = 'flex';
+      quizSection.style.opacity = '1';
+      updateProgress(quiz.idx);
+      loadQuestion(quiz.idx);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function rybRestartFromPrompt() {
+      sessionStorage.removeItem('jawsBossQuiz');
+      var resumeEl = document.getElementById('rybResumePrompt');
+      if (resumeEl) resumeEl.style.display = 'none';
+      startSection.style.display = 'flex';
+      startSection.style.opacity = '1';
+    }
+
     // ─── RETAKE ───
     function rybRetake() {
+      sessionStorage.removeItem('jawsBossQuiz');
       quiz.idx = 0; quiz.scores = []; quiz.answers = [];
       quiz.advancing = false; keyboardUsed = false;
       fadeOut(resultsSection, function() {
