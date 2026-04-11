@@ -999,10 +999,10 @@
     }
 
     function decodeShareX() {
-      var verdict = currentDecodeResult ? currentDecodeResult.verdict || '' : '';
-      var preview = verdict.length > 100 ? verdict.substring(0, 100) + '...' : verdict;
-      var txt = encodeURIComponent('JAWS just decoded some corporate speak for me.\n\n"' + preview + '"\n\nDecode yours: www.jawsadvantage.com/jaws-decode.html');
-      window.open('https://twitter.com/intent/tweet?text=' + txt, '_blank');
+      var shareMsg = currentDecodeMode === 'chum'
+        ? 'I ran this through JAWS Decode in CHUM MODE. The verdict is savage. www.jawsadvantage.com/jaws-decode.html'
+        : 'I decoded some corporate speak with JAWS. The verdict is brutal. www.jawsadvantage.com/jaws-decode.html';
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareMsg), '_blank');
     }
 
     function decodeShareLinkedIn() {
@@ -1017,17 +1017,18 @@
     }
 
     function decodeShareWhatsApp() {
-      var verdict = currentDecodeResult ? currentDecodeResult.verdict || '' : '';
-      var preview = verdict.length > 100 ? verdict.substring(0, 100) + '...' : verdict;
-      var txt = encodeURIComponent('JAWS just decoded some corporate speak: "' + preview + '"\n\nDecode yours: www.jawsadvantage.com/jaws-decode.html');
-      window.open('https://wa.me/?text=' + txt, '_blank');
+      var shareMsg = currentDecodeMode === 'chum'
+        ? 'I ran this through JAWS Decode in CHUM MODE. The verdict is savage. www.jawsadvantage.com/jaws-decode.html'
+        : 'I decoded some corporate speak with JAWS. The verdict is brutal. www.jawsadvantage.com/jaws-decode.html';
+      window.open('https://wa.me/?text=' + encodeURIComponent(shareMsg), '_blank');
     }
 
     function decodeShareEmail() {
       var subject = encodeURIComponent('You need to see this — JAWS Decode');
-      var verdict = currentDecodeResult ? currentDecodeResult.verdict || '' : '';
-      var body = encodeURIComponent('I just decoded some corporate speak with JAWS.\n\nThe verdict: ' + verdict + '\n\nDecode your own: www.jawsadvantage.com/jaws-decode.html');
-      window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+      var shareMsg = currentDecodeMode === 'chum'
+        ? 'I ran this through JAWS Decode in CHUM MODE. The verdict is savage. www.jawsadvantage.com/jaws-decode.html'
+        : 'I decoded some corporate speak with JAWS. The verdict is brutal. www.jawsadvantage.com/jaws-decode.html';
+      window.location.href = 'mailto:?subject=' + subject + '&body=' + encodeURIComponent(shareMsg);
     }
 
     // ─── NAV BACKGROUND ON SCROLL ───
