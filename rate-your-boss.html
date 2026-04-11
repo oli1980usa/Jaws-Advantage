@@ -18,14 +18,14 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rate Your Boss | The JAWS Advantage</title>
-  <meta name="description" content="10 questions. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.">
+  <meta name="description" content="10 questions. Find out if your boss is an Apex Predator or Dead Bait — and exactly what to do about it.">
   <meta property="og:title" content="Rate Your Boss | The JAWS Advantage">
-  <meta property="og:description" content="10 questions. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.">
+  <meta property="og:description" content="10 questions. Find out if your boss is an Apex Predator or Dead Bait — and exactly what to do about it.">
   <meta property="og:url" content="https://jawsadvantage.com/rate-your-boss.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rate Your Boss | The JAWS Advantage">
-  <meta name="twitter:description" content="10 questions. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.">
+  <meta name="twitter:description" content="10 questions. Find out if your boss is an Apex Predator or Dead Bait — and exactly what to do about it.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
@@ -41,7 +41,6 @@
       --black-3: #181818;
       --red: #a52a1a;
       --red-dark: #a93226;
-      --red-accent: #a52a1a;
       --off-white: #f5f3ef;
       --off-white-dim: #b8b5b0;
       --border: rgba(245, 243, 239, 0.08);
@@ -105,6 +104,33 @@
     .theme-toggle:hover { color: var(--red); }
     .theme-toggle svg { display: block; }
 
+    /* ─── HAMBURGER / MOBILE NAV ─── */
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      color: var(--red); font-size: 22px; cursor: pointer;
+      padding: 4px 8px; line-height: 1; transition: color 0.2s;
+    }
+    .nav-hamburger:hover { opacity: 0.8; }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 8px 0 16px;
+    }
+    .nav-mobile-menu.is-open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      text-decoration: none; padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s; text-align: right;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
+    .nav-mobile-menu .mobile-cta { color: var(--red); font-weight: 600; }
+
     /* ─── LIGHT MODE ─── */
     body.light-mode {
       --black: #f5f3ef; --black-2: #e8e6e2; --black-3: #dedad4;
@@ -114,43 +140,24 @@
     body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
     body.light-mode .nav-cta { color: var(--red) !important; }
     body.light-mode .nav-cta:hover { color: #f5f3ef !important; }
-    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
+    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
     body.light-mode .nav-logo img { mix-blend-mode: multiply; }
+    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
     body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
     body.light-mode .footer-tagline { color: rgba(10, 10, 10, 0.5); }
-    body.light-mode .quiz-option { background: var(--black-3); }
-    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
+    body.light-mode .contact-bar { color: rgba(10, 10, 10, 0.4); border-color: rgba(10, 10, 10, 0.08); }
+    body.light-mode .contact-bar a { color: var(--red); }
     body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
     body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
     body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
+    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
+    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
+    body.light-mode .quiz-option { background: var(--black-3); }
+    body.light-mode .share-btn { background: transparent; color: #0a0a0a; border-color: #0a0a0a; }
+    body.light-mode .share-btn:hover { background: rgba(10,10,10,0.08); box-shadow: none; }
 
-    /* ─── HAMBURGER / MOBILE MENU ─── */
-    .nav-hamburger {
-      display: none;
-      background: none; border: none; cursor: pointer;
-      color: var(--off-white-dim); font-size: 20px; padding: 4px;
-    }
-    .nav-hamburger:hover { opacity: 0.8; }
-    .nav-mobile-menu {
-      display: none; flex-direction: column;
-      position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
-      background: rgba(10,10,10,0.97);
-      border-bottom: 1px solid var(--border);
-      padding: 8px 0;
-    }
-    .nav-mobile-menu.is-open { display: flex; }
-    .nav-mobile-menu a {
-      display: block; padding: 14px 28px;
-      font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--off-white-dim);
-      text-decoration: none; border-bottom: 1px solid var(--border);
-      transition: color 0.15s, background 0.15s;
-    }
-    .nav-mobile-menu a:last-child { border-bottom: none; }
-    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
-    .nav-mobile-menu .mobile-cta { color: var(--red); font-weight: 600; }
-
-    /* ─── HERO ─── */
+    /* ─── HERO / START SCREEN ─── */
     .ryb-hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -165,66 +172,50 @@
       background: radial-gradient(ellipse at 50% 55%, rgba(165, 42, 26, 0.1) 0%, transparent 65%);
       pointer-events: none;
     }
-    .score-eyebrow {
+    .ryb-eyebrow {
       font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
       text-transform: uppercase; color: var(--red);
       margin-bottom: 24px; display: block;
     }
-    .score-headline {
+    .ryb-headline {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 8vw, 96px);
-      line-height: 0.95; letter-spacing: 0.02em;
+      font-size: clamp(64px, 12vw, 120px);
+      line-height: 0.9; letter-spacing: 0.02em;
       color: var(--off-white); margin-bottom: 28px;
-      max-width: 820px;
     }
-    .score-subheading {
+    .ryb-subheading {
       font-size: 18px; font-weight: 300; line-height: 1.7;
-      color: var(--off-white-dim); margin-bottom: 44px;
-      max-width: 480px;
-    }
-    .ryb-pills {
-      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 44px;
+      color: var(--off-white-dim); margin-bottom: 36px;
+      max-width: 500px;
     }
     .ryb-pill {
+      display: inline-flex; align-items: center; gap: 8px;
       font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--off-white-dim);
-      opacity: 0.6; padding: 3px 10px;
+      opacity: 0.6; padding: 3px 10px; margin-bottom: 40px;
       border: 1px solid rgba(245,243,239,0.12);
     }
     body.light-mode .ryb-pill { border-color: rgba(10,10,10,0.15); }
-    .score-btn-primary {
+    .ryb-start-btn {
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 700; letter-spacing: 0.12em;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: #fff;
       background: var(--red); border: 2px solid var(--red);
-      padding: 16px 44px; cursor: pointer;
+      padding: 18px 52px; cursor: pointer; margin-bottom: 20px;
       transition: background 0.2s, box-shadow 0.2s;
-      text-decoration: none; display: inline-block;
     }
-    .score-btn-primary:hover {
+    .ryb-start-btn:hover {
       background: var(--red-dark);
-      box-shadow: 0 0 18px rgba(165, 42, 26, 0.5);
+      box-shadow: 0 0 24px rgba(165, 42, 26, 0.5);
     }
-    .score-btn-outline {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--off-white-dim);
-      background: transparent; border: 1px solid rgba(245, 243, 239, 0.2);
-      padding: 14px 28px; cursor: pointer; text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .score-btn-outline:hover { border-color: var(--red); color: var(--off-white); }
-    .dd-trust-line {
-      font-size: 12px; font-weight: 300; letter-spacing: 0.06em;
-      color: var(--off-white-dim); opacity: 0.35;
-      text-transform: uppercase; margin-top: 20px; line-height: 1.8;
+    .ryb-trust {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
+      color: var(--off-white-dim); opacity: 0.35; text-transform: uppercase;
     }
 
     /* ─── QUIZ SECTION ─── */
     .quiz-section {
-      min-height: calc(100vh - 64px);
-      padding-top: 64px;
+      min-height: calc(100vh - 64px); padding-top: 64px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
     }
@@ -233,9 +224,8 @@
     /* Progress */
     .quiz-progress { margin-bottom: 52px; }
     .quiz-progress-track {
-      width: 100%; height: 2px;
-      background: var(--border); position: relative; margin-bottom: 14px;
-      border-radius: 2px;
+      width: 100%; height: 2px; background: var(--border);
+      position: relative; margin-bottom: 14px; border-radius: 2px;
     }
     .quiz-progress-fill {
       position: absolute; top: 0; left: 0; height: 100%;
@@ -250,39 +240,29 @@
     }
 
     /* Question */
-    .quiz-question-wrap {
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .quiz-question-wrap.transitioning {
-      opacity: 0; transform: translateY(14px);
-    }
+    .quiz-question-wrap { transition: opacity 0.25s ease, transform 0.25s ease; }
+    .quiz-question-wrap.transitioning { opacity: 0; transform: translateY(14px); }
     .quiz-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px; letter-spacing: 0.22em;
-      color: var(--red); margin-bottom: 18px; display: block;
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+      letter-spacing: 0.22em; color: var(--red); margin-bottom: 18px; display: block;
     }
     .quiz-question {
       font-size: clamp(20px, 3vw, 28px); font-weight: 400;
-      line-height: 1.45; color: var(--off-white);
-      margin-bottom: 40px;
+      line-height: 1.45; color: var(--off-white); margin-bottom: 40px;
     }
 
     /* Options */
     .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
     .quiz-option {
       display: flex; align-items: flex-start; gap: 16px;
-      padding: 16px 20px;
-      background: var(--black-2);
+      padding: 16px 20px; background: var(--black-2);
       border: 1px solid var(--border);
       cursor: pointer; width: 100%; text-align: left;
       transition: border-color 0.15s ease, background 0.15s ease;
       font-family: 'DM Sans', sans-serif;
     }
     .quiz-option:hover { border-color: rgba(165, 42, 26, 0.5); }
-    .quiz-option.selected {
-      border-color: var(--red);
-      background: rgba(165, 42, 26, 0.08);
-    }
+    .quiz-option.selected { border-color: var(--red); background: rgba(165, 42, 26, 0.08); }
     .quiz-option-letter {
       flex-shrink: 0; width: 28px; height: 28px;
       border: 1px solid rgba(165, 42, 26, 0.35);
@@ -292,38 +272,23 @@
       background: rgba(165, 42, 26, 0.06);
       transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
-    .quiz-option.selected .quiz-option-letter {
-      background: var(--red); color: #fff; border-color: var(--red);
-    }
-    .quiz-option-text {
-      font-size: 16px; font-weight: 300; line-height: 1.55;
-      color: var(--off-white); padding-top: 3px;
-    }
-    .quiz-option.confirmed {
-      border-color: var(--red);
-      background: var(--red);
-      pointer-events: none;
-    }
-    .quiz-option.confirmed .quiz-option-letter {
-      background: rgba(255,255,255,0.18); color: #fff;
-      border-color: rgba(255,255,255,0.25);
-    }
+    .quiz-option.selected .quiz-option-letter { background: var(--red); color: #fff; border-color: var(--red); }
+    .quiz-option-text { font-size: 16px; font-weight: 300; line-height: 1.55; color: var(--off-white); padding-top: 3px; }
+    .quiz-option.confirmed { border-color: var(--red); background: var(--red); pointer-events: none; }
+    .quiz-option.confirmed .quiz-option-letter { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.25); }
     .quiz-option.confirmed .quiz-option-text { color: #fff; }
     .quiz-options.locked .quiz-option { pointer-events: none; }
 
-    /* Back btn */
+    /* Back + skip */
     .quiz-back-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white-dim);
       background: none; border: none; cursor: pointer;
       opacity: 0.4; padding: 0; margin-bottom: 28px;
       display: block; transition: opacity 0.2s;
     }
     .quiz-back-btn:hover { opacity: 0.75; }
     .quiz-back-btn.hidden { visibility: hidden; pointer-events: none; }
-
-    /* Keyboard hint */
     .quiz-kbd-hint {
       font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
       color: var(--off-white-dim); opacity: 0.4;
@@ -331,26 +296,31 @@
       transition: opacity 0.35s ease;
     }
     .quiz-kbd-hint.hidden { opacity: 0; pointer-events: none; }
+    .ryb-skip-link {
+      display: block; text-align: center; margin-top: 12px;
+      font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--off-white-dim); opacity: 0.35;
+      cursor: pointer; transition: opacity 0.2s; text-transform: uppercase;
+      background: none; border: none; width: 100%;
+    }
+    .ryb-skip-link:hover { opacity: 0.65; }
 
-    /* ─── RESULTS ─── */
+    /* ─── RESULTS SECTION ─── */
     .results-section {
-      min-height: calc(100vh - 64px);
       padding-top: 64px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: flex-start; justify-content: center;
+      min-height: calc(100vh - 64px);
     }
     .results-wrap {
-      max-width: 680px; width: 100%; padding: 60px 48px 80px;
-      text-align: center;
+      max-width: 680px; width: 100%; padding: 80px 48px 100px; text-align: center;
     }
     .results-eyebrow {
       font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--red);
-      margin-bottom: 12px; display: block;
+      text-transform: uppercase; color: var(--red); margin-bottom: 12px; display: block;
     }
     .result-score-line {
-      display: flex; align-items: baseline;
-      justify-content: center; gap: 6px;
-      margin-bottom: 4px;
+      display: flex; align-items: baseline; justify-content: center;
+      gap: 6px; margin-bottom: 4px;
     }
     .result-score {
       font-family: 'Bebas Neue', sans-serif;
@@ -362,50 +332,88 @@
     .result-score-denom {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(36px, 6vw, 56px);
-      color: rgba(165, 42, 26, 0.35);
-      letter-spacing: 0.04em;
+      color: rgba(165, 42, 26, 0.35); letter-spacing: 0.04em;
     }
-    .result-label {
+    .result-category {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(32px, 6vw, 60px);
+      font-size: clamp(36px, 7vw, 64px);
       letter-spacing: 0.06em; color: var(--off-white);
-      margin-bottom: 16px; line-height: 1;
-      margin-top: 8px;
+      line-height: 1; margin-top: 8px; margin-bottom: 10px;
     }
-    .result-desc {
-      font-size: 18px; font-weight: 300; line-height: 1.7;
-      color: var(--off-white-dim); margin-bottom: 44px;
-      max-width: 460px; margin-left: auto; margin-right: auto;
+    .result-tagline {
+      font-size: 15px; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--red); margin-bottom: 28px; font-style: italic;
     }
-    .result-action {
-      background: rgba(165, 42, 26, 0.08);
-      border: 1px solid rgba(165, 42, 26, 0.3);
-      padding: 24px 28px;
-      margin-bottom: 36px;
+    .result-para {
+      font-size: 17px; font-weight: 300; line-height: 1.75;
+      color: var(--off-white-dim); margin-bottom: 36px;
       text-align: left;
     }
-    .result-action-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px; letter-spacing: 0.18em;
-      color: var(--red); margin-bottom: 10px;
-      text-transform: uppercase;
+    .result-tactics {
+      list-style: none; text-align: left; margin-bottom: 44px;
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      background: rgba(165, 42, 26, 0.04);
+      padding: 28px 32px;
     }
-    .result-action-text {
-      font-size: 14px; font-weight: 300; line-height: 1.7;
-      color: var(--off-white-dim); margin: 0;
+    .result-tactics-heading {
+      font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+      letter-spacing: 0.18em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 18px; display: block;
     }
-    .result-ctas {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      justify-content: center; margin-bottom: 32px;
+    .result-tactics li {
+      font-size: 15px; font-weight: 300; line-height: 1.65;
+      color: var(--off-white-dim); padding: 10px 0;
+      padding-left: 20px; position: relative;
+      border-bottom: 1px solid var(--border);
     }
-    .result-retake-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    .result-tactics li:last-child { border-bottom: none; }
+    .result-tactics li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--red); font-size: 13px; top: 13px;
+    }
+
+    /* Share */
+    .result-share-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--off-white-dim);
-      background: none; border: none; cursor: pointer;
-      padding: 8px; transition: color 0.2s;
+      opacity: 0.5; display: block; margin-bottom: 14px;
     }
-    .result-retake-btn:hover { color: var(--red); }
+    .result-share-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .share-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #181818; border: 1px solid var(--red);
+      color: var(--red); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
+      flex-shrink: 0; padding: 0;
+    }
+    .share-btn:hover {
+      background: rgba(165, 42, 26, 0.15);
+      box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
+    }
+
+    /* Bottom CTAs */
+    .result-bottom {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .result-jaws-link {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white);
+      background: transparent; border: 1px solid rgba(245,243,239,0.2);
+      padding: 14px 32px; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .result-jaws-link:hover { border-color: var(--red); color: var(--red); }
+    .result-retake-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--off-white-dim);
+      background: none; border: none; cursor: pointer;
+      padding: 8px; transition: color 0.2s; opacity: 0.5;
+    }
+    .result-retake-btn:hover { color: var(--red); opacity: 1; }
 
     /* ─── CONTACT BAR ─── */
     .contact-bar {
@@ -414,17 +422,12 @@
       font-size: 13px; font-weight: 300;
       color: rgba(184, 181, 176, 0.4); letter-spacing: 0.04em;
     }
-    .contact-bar a {
-      color: var(--off-white-dim); text-decoration: none; transition: color 0.2s;
-    }
+    .contact-bar a { color: var(--off-white-dim); text-decoration: none; transition: color 0.2s; }
     .contact-bar a:hover { color: var(--red); }
-    body.light-mode .contact-bar { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.08); }
-    body.light-mode .contact-bar a { color: var(--red); }
 
     /* ─── FOOTER ─── */
     footer {
-      padding: 48px 48px;
-      border-top: 1px solid var(--border);
+      padding: 48px 48px; border-top: 1px solid var(--border);
     }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; }
     .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.12em; color: var(--off-white); }
@@ -432,67 +435,99 @@
     .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
     .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
 
-    /* ─── COOKIE ─── */
+    /* ─── FLOATING CHAT BAR ─── */
+    .float-chat {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 44px; z-index: 300;
+      border-radius: 999px; background: #a52a1a;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 30px rgba(165, 42, 26, 0.5), 0 4px 20px rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.4,0,0.2,1), height 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
+    }
+    .float-chat.is-open {
+      width: 500px; height: 52px; cursor: default;
+      box-shadow: 0 0 0 2px rgba(165,42,26,0.9), 0 0 40px rgba(165,42,26,0.7), 0 0 80px rgba(165,42,26,0.3), 0 8px 32px rgba(0,0,0,0.8);
+    }
+    .float-chat-label {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+      color: #fff; letter-spacing: 0.04em; white-space: nowrap;
+      opacity: 1; transition: opacity 0.15s ease;
+      pointer-events: none; user-select: none;
+    }
+    .float-chat.is-open .float-chat-label { opacity: 0; pointer-events: none; }
+    .float-chat-input-wrap {
+      position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+      display: flex; align-items: center; padding: 0 6px 0 20px;
+      opacity: 0; transition: opacity 0.2s ease 0.15s; pointer-events: none;
+    }
+    .float-chat.is-open .float-chat-input-wrap { opacity: 1; pointer-events: all; }
+    .float-chat-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; min-width: 0;
+    }
+    .float-chat-input::placeholder { color: rgba(255,255,255,0.6); }
+    .float-chat-submit {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(0,0,0,0.25); border: none; color: #fff;
+      font-size: 15px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .float-chat-submit:hover { background: rgba(0,0,0,0.45); }
+
+    /* ─── COOKIE CONSENT ─── */
     .cookie-banner {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-      background: var(--black-2);
-      border-top: 1px solid var(--border);
-      padding: 0;
-      transform: translateY(100%);
-      transition: transform 0.4s ease;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+      background: #111111; border-top: 1px solid rgba(245, 243, 239, 0.1);
+      transform: translateY(100%); transition: transform 0.4s ease;
+      max-height: 80vh; overflow-y: auto;
     }
     .cookie-banner.visible { transform: translateY(0); }
     .cookie-banner.hidden { display: none; }
-    .cookie-inner { max-width: 860px; margin: 0 auto; padding: 18px 28px 20px; }
-    .cookie-main { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .cookie-text { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
+    .cookie-inner { padding: 18px 48px 20px; }
+    .cookie-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .cookie-text { font-size: 12px; font-weight: 300; color: var(--off-white-dim); line-height: 1.5; flex: 1; min-width: 200px; }
     .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
     .cookie-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 10px 20px;
-      cursor: pointer; border: none; transition: background 0.2s, box-shadow 0.2s;
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px;
+      border-radius: 0; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-    .cookie-accept { background: var(--red); color: #fff; }
-    .cookie-accept:hover { background: var(--red-dark); }
-    .cookie-essential { background: transparent; color: var(--off-white-dim); border: 1px solid rgba(245,243,239,0.2) !important; }
-    .cookie-essential:hover { border-color: rgba(245,243,239,0.6) !important; color: var(--off-white); }
+    .cookie-accept { background: var(--red); color: #fff; border: 1px solid var(--red); }
+    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .cookie-essential { background: transparent; color: var(--off-white-dim); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
     .cookie-details-toggle {
-      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400;
-      color: var(--off-white-dim); opacity: 0.5; background: none;
-      border: none; cursor: pointer; margin-top: 8px; padding: 0;
+      background: none; border: none; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      padding: 6px 0 0; opacity: 0.6; transition: opacity 0.2s, color 0.2s; display: block;
     }
-    .cookie-details-toggle:hover { opacity: 0.8; }
+    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
     .cookie-details {
       display: none; margin-top: 16px; padding-top: 16px;
-      border-top: 1px solid rgba(245,243,239,0.06);
-      columns: 2; column-gap: 32px;
+      border-top: 1px solid rgba(245,243,239,0.08);
+      columns: 3; column-gap: 40px;
     }
-    .cookie-details.open { display: block; }
-    .cookie-detail-section { break-inside: avoid; margin-bottom: 14px; }
+    .cookie-details.is-open { display: block; }
+    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
     .cookie-detail-heading {
-      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white-dim);
-      margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+      letter-spacing: 0.1em; color: var(--red);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
     }
-    .cookie-tag {
-      font-size: 10px; letter-spacing: 0.08em; padding: 2px 6px;
-      border-radius: 2px; font-weight: 500;
-    }
-    .cookie-tag-always { color: rgba(245,243,239,0.3); border: 1px solid rgba(245,243,239,0.15); }
-    .cookie-tag-consent { background: rgba(165,42,26,0.15); color: var(--red); }
-    .cookie-detail-list { list-style: none; }
-    .cookie-detail-list li {
-      font-size: 12px; font-weight: 300; color: var(--off-white-dim);
-      padding: 3px 0; padding-left: 14px; position: relative; line-height: 1.5;
-    }
-    .cookie-detail-list li::before {
-      content: '—'; position: absolute; left: 0;
-      color: rgba(245,243,239,0.2); font-size: 11px;
-    }
+    .cookie-tag { font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 1px 5px; vertical-align: middle; }
+    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
+    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
+    .cookie-detail-list li { font-size: 11px; font-weight: 300; color: var(--off-white-dim); line-height: 1.5; padding: 3px 0 3px 14px; position: relative; }
+    .cookie-detail-list li::before { content: '–'; position: absolute; left: 0; color: rgba(245,243,239,0.25); }
+    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
 
     /* ─── ANIMATIONS ─── */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
@@ -505,6 +540,12 @@
       footer { padding: 48px 24px; }
       .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
       .contact-bar { padding: 24px; }
+      .cookie-inner { padding: 14px 20px 16px; }
+      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cookie-details { columns: 1; }
+      .float-chat { bottom: 20px; width: auto; padding: 0 24px; height: 40px; }
+      .float-chat-label { font-size: 12px; }
+      .float-chat.is-open { width: calc(100vw - 32px); height: 52px; padding: 0; }
     }
   </style>
 </head>
@@ -536,72 +577,88 @@
     <a href="get-the-edge.html" class="mobile-cta">Get the Edge</a>
   </div>
 
-  <!-- ─── HERO ─── -->
-  <section id="heroSection" class="ryb-hero">
-    <span class="score-eyebrow fade-in">Know Your World</span>
-    <h1 class="score-headline fade-in">Rate Your Boss</h1>
-    <p class="score-subheading fade-in">10 questions. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.</p>
-    <div class="ryb-pills fade-in">
-      <span class="ryb-pill">10 Multiple Choice</span>
-      <span class="ryb-pill">~5 mins</span>
-    </div>
-    <button class="score-btn-primary fade-in" id="startQuizBtn">START THE QUIZ</button>
-    <p class="dd-trust-line fade-in">No email. No phone number. No catch.</p>
+  <!-- ─── START SCREEN ─── -->
+  <section id="startSection" class="ryb-hero">
+    <span class="ryb-eyebrow fade-in">Know Your World</span>
+    <h1 class="ryb-headline fade-in">Rate Your Boss</h1>
+    <p class="ryb-subheading fade-in">10 questions. No HR filter. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.</p>
+    <span class="ryb-pill fade-in">10 Multiple Choice</span>
+    <button class="ryb-start-btn fade-in" id="startBtn">RATE MY BOSS →</button>
+    <p class="ryb-trust fade-in">No email. No phone number. No catch.</p>
   </section>
 
   <!-- ─── QUIZ ─── -->
-  <section id="quizSection" class="quiz-section" style="display:none; opacity:0;">
+  <section id="quizSection" style="display:none; opacity:0;" class="quiz-section">
     <div class="quiz-wrap">
       <div class="quiz-progress">
         <div class="quiz-progress-track">
-          <div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div>
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%"></div>
         </div>
-        <p class="quiz-progress-text" id="quizProgressText">1 / 10</p>
+        <p class="quiz-progress-text" id="progressText">1 / 10</p>
       </div>
-      <div class="quiz-question-wrap" id="quizQuestionWrap">
-        <button class="quiz-back-btn hidden" id="quizBackBtn">← Back</button>
-        <span class="quiz-number" id="quizNumber">01</span>
-        <h2 class="quiz-question" id="quizQuestion"></h2>
-        <div class="quiz-options" id="quizOptions"></div>
-        <p class="quiz-kbd-hint" id="quizKbdHint">Press A, B, C or D to answer</p>
+      <div class="quiz-question-wrap" id="questionWrap">
+        <button class="quiz-back-btn hidden" id="backBtn">← Back</button>
+        <span class="quiz-number" id="questionNum">01</span>
+        <h2 class="quiz-question" id="questionText"></h2>
+        <div class="quiz-options" id="optionsEl"></div>
+        <p class="quiz-kbd-hint" id="kbdHint">Press A, B, C or D to answer</p>
+        <button class="ryb-skip-link" id="skipBtn">Skip this question</button>
       </div>
     </div>
   </section>
 
   <!-- ─── RESULTS ─── -->
-  <section id="resultsSection" class="results-section" style="display:none; opacity:0;">
+  <section id="resultsSection" style="display:none; opacity:0;" class="results-section">
     <div class="results-wrap">
-      <span class="results-eyebrow" id="resultsEyebrow">Rate Your Boss</span>
+      <span class="results-eyebrow">Rate Your Boss</span>
       <div class="result-score-line">
         <span class="result-score" id="resultScore">0</span>
         <span class="result-score-denom">/100</span>
       </div>
-      <h2 class="result-label" id="resultLabel"></h2>
-      <p class="result-desc" id="resultDesc"></p>
-      <div class="result-action" id="resultAction">
-        <p class="result-action-heading">What to do about it</p>
-        <p class="result-action-text" id="resultActionText"></p>
+      <h2 class="result-category" id="resultCategory"></h2>
+      <p class="result-tagline" id="resultTagline"></p>
+      <p class="result-para" id="resultPara"></p>
+      <ul class="result-tactics" id="resultTacticsList">
+        <span class="result-tactics-heading">Three tactics. Use them.</span>
+      </ul>
+      <span class="result-share-label">Share your result</span>
+      <div class="result-share-bar">
+        <button class="share-btn" id="shareX" title="Share on X"><i class="fa-brands fa-x-twitter"></i></button>
+        <button class="share-btn" id="shareLinkedIn" title="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
+        <button class="share-btn" id="shareReddit" title="Share on Reddit"><i class="fa-brands fa-reddit-alien"></i></button>
+        <button class="share-btn" id="shareWhatsApp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+        <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
+        <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
       </div>
-      <div class="result-ctas">
-        <a href="jaws-score.html" class="score-btn-primary" style="text-decoration:none;">← Back to All Quizzes</a>
+      <div class="result-bottom">
+        <a href="jaws-score.html" class="result-jaws-link">How do YOU score? Take the JAWS Score →</a>
+        <button class="result-retake-btn" id="retakeBtn">Retake the quiz</button>
       </div>
-      <button class="result-retake-btn" id="resultRetakeBtn">Retake this quiz</button>
     </div>
   </section>
 
   <!-- ─── CONTACT BAR ─── -->
-  <div class="contact-bar" id="contactBar" style="display:none;">
-    Questions? <a href="mailto:hello@jawsadvantage.com">hello@jawsadvantage.com</a>
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
   </div>
 
   <!-- ─── FOOTER ─── -->
-  <footer id="pageFooter" style="display:none;">
+  <footer>
     <div class="footer-inner">
       <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
       <div class="footer-tagline">Career intelligence without the noise</div>
       <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
     </div>
   </footer>
+
+  <!-- ─── FLOATING CHAT BAR ─── -->
+  <div class="float-chat" id="floatChat">
+    <span class="float-chat-label">Ask JAWS</span>
+    <div class="float-chat-input-wrap" id="floatChatInputWrap">
+      <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" />
+      <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
+    </div>
+  </div>
 
   <!-- ─── COOKIE CONSENT ─── -->
   <div class="cookie-banner" id="cookieBanner">
@@ -619,13 +676,26 @@
           <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
           <ul class="cookie-detail-list">
             <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
-            <li><strong>Cookie consent preference</strong> — saved locally so we don't ask again</li>
+            <li><strong>Daily chat question limit</strong> — saved locally so the chatbot tracks your daily usage</li>
+            <li><strong>Article ratings</strong> — saved locally so the site remembers if you've already rated an article</li>
+            <li><strong>Chat session history</strong> — stored temporarily in your browser only, never on our servers</li>
           </ul>
         </div>
         <div class="cookie-detail-section">
           <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
           <ul class="cookie-detail-list">
-            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns.</li>
+            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
+            <li><strong>Quiz score events</strong> — your score tier (e.g. Tiger Shark) sent to Google Analytics anonymously. Exact score not stored by us.</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">We Don't</h4>
+          <ul class="cookie-detail-list">
+            <li>Sell your data</li>
+            <li>Use advertising cookies</li>
+            <li>Collect your name, email, or any personally identifiable information</li>
+            <li>Track you across other websites</li>
+            <li>Store your chat conversations on our servers</li>
           </ul>
         </div>
       </div>
@@ -636,202 +706,232 @@
     // ─── QUIZ DATA ───
     var QUESTIONS = [
       {
-        q: "When you go to your boss with a problem, what usually happens?",
+        q: "When you make a mistake, your boss:",
         options: [
-          { text: "They listen, ask sharp questions, and help you think it through", points: 10 },
-          { text: "They give you a quick answer and move on", points: 7 },
-          { text: "They escalate it without giving you much to work with", points: 3 },
-          { text: "They're too busy, distracted, or unavailable to engage", points: 0 }
+          { text: "Addresses it privately, focuses on the fix and moves on", points: 10 },
+          { text: "Uses it as a learning moment — with you, not at you", points: 7 },
+          { text: "Mentions it in front of others \"as a learning\"", points: 3 },
+          { text: "Makes sure everyone knows it was yours", points: 0 }
         ]
       },
       {
-        q: "Does your boss know what's really happening in the business — beyond their own lane?",
+        q: "When your work gets praised by senior leadership, your boss:",
         options: [
-          { text: "Yes — they have genuine cross-business visibility and use it", points: 10 },
-          { text: "Mostly — they're plugged in but sometimes caught off guard", points: 7 },
-          { text: "Patchy — they know their area but not much else", points: 3 },
-          { text: "No — they're often the last to know", points: 0 }
+          { text: "Makes sure you get the credit directly and publicly", points: 10 },
+          { text: "Mentions you specifically when it comes up", points: 7 },
+          { text: "Says \"the team did great\" — you're somewhere in the team", points: 3 },
+          { text: "Accepts the praise. You hear about it later, maybe", points: 0 }
         ]
       },
       {
-        q: "When your boss presents your team's work upwards, what happens?",
+        q: "When you ask for development or a progression conversation, your boss:",
         options: [
-          { text: "It lands well and the team gets appropriate recognition", points: 10 },
-          { text: "It lands well but credit is a bit vague", points: 7 },
-          { text: "They often absorb the credit or the team disappears from the narrative", points: 3 },
-          { text: "They either avoid presenting it or make it worse", points: 0 }
+          { text: "Has a concrete plan and actively advocates for you", points: 10 },
+          { text: "Engages genuinely but follow-through is inconsistent", points: 7 },
+          { text: "Says \"let's revisit this\" and the conversation disappears", points: 3 },
+          { text: "Changes the subject or makes you feel ungrateful", points: 0 }
         ]
       },
       {
-        q: "How does your boss handle pressure from above?",
+        q: "In meetings with their own boss, your manager:",
         options: [
-          { text: "They absorb it and protect the team from the noise", points: 10 },
-          { text: "They pass some pressure on but explain the context", points: 7 },
-          { text: "Most of the pressure flows straight down to the team", points: 3 },
-          { text: "They amplify it or throw people under the bus", points: 0 }
+          { text: "Represents the team's work accurately and gives credit where it's due", points: 10 },
+          { text: "Talks about the team fairly but leads most of the conversation", points: 7 },
+          { text: "Does most of the talking — the team exists as backdrop", points: 3 },
+          { text: "Takes the glory and deflects the hard questions downward", points: 0 }
         ]
       },
       {
-        q: "Does your boss give you clear, honest feedback?",
+        q: "When you bring a problem to your boss, they:",
         options: [
-          { text: "Yes — direct, specific, and delivered when it matters", points: 10 },
-          { text: "Sometimes — useful when it comes, but inconsistent", points: 7 },
-          { text: "Rarely — it's vague, delayed, or only ever negative", points: 3 },
-          { text: "Never — or the feedback is entirely about them, not you", points: 0 }
+          { text: "Help you think it through, remove blockers, and follow up", points: 10 },
+          { text: "Engage with it and point you in the right direction", points: 7 },
+          { text: "Tell you to handle it and check back in eventually", points: 3 },
+          { text: "Make you feel like you shouldn't have raised it", points: 0 }
         ]
       },
       {
-        q: "Does your boss sponsor or advocate for you in rooms you're not in?",
+        q: "Your boss gives you feedback:",
         options: [
-          { text: "Regularly — they actively put your name forward", points: 10 },
-          { text: "Occasionally — when they remember or it suits them", points: 7 },
-          { text: "Rarely — you have to push for any visibility beyond your role", points: 3 },
-          { text: "Never — they may actively keep your profile small", points: 0 }
+          { text: "Regularly, specifically, and with enough context to act on it", points: 10 },
+          { text: "Occasionally — it's useful when it happens", points: 7 },
+          { text: "Only at review time, and it's usually vague", points: 3 },
+          { text: "Rarely — and only when something goes wrong", points: 0 }
         ]
       },
       {
-        q: "When your boss makes a call, what's it based on?",
+        q: "When your boss disagrees with a decision from above, they:",
         options: [
-          { text: "Clear thinking, good information, and sound judgement", points: 10 },
-          { text: "Mostly good reasoning, with occasional gaps", points: 7 },
-          { text: "Often reactive, political, or based on incomplete information", points: 3 },
-          { text: "Gut feel, mood, or whoever last spoke to them", points: 0 }
+          { text: "Challenge it through the right channels and keep the team informed", points: 10 },
+          { text: "Ask questions upwards and represent the team's concerns", points: 7 },
+          { text: "Grumble privately but comply and say nothing publicly", points: 3 },
+          { text: "Pretend they agreed with it all along", points: 0 }
         ]
       },
       {
-        q: "Does your boss actively develop the people under them?",
+        q: "Your boss's relationship with their own boss is:",
         options: [
-          { text: "Yes — real conversations about growth, stretch, and the future", points: 10 },
-          { text: "Somewhat — if you push for it, they engage", points: 7 },
-          { text: "Rarely — your development is largely your own problem", points: 3 },
-          { text: "Never — some people actually seem to shrink under them", points: 0 }
+          { text: "Solid — they have real influence and use it for the team", points: 10 },
+          { text: "Functional — they hold their own and occasionally push back", points: 7 },
+          { text: "Distant — they survive but don't shape much", points: 3 },
+          { text: "Difficult or non-existent — which flows straight down to you", points: 0 }
         ]
       },
       {
-        q: "How does your boss handle difficult peer relationships or organisational conflict?",
+        q: "When you are recognised, promoted, or given opportunity:",
         options: [
-          { text: "They address it directly and work to resolve it", points: 10 },
-          { text: "They manage it, though they avoid open confrontation", points: 7 },
-          { text: "They ignore it or play political games to protect themselves", points: 3 },
-          { text: "They escalate it, hide from it, or make things significantly worse", points: 0 }
+          { text: "They fought for it and you know because they told you", points: 10 },
+          { text: "They supported it when it mattered", points: 7 },
+          { text: "They went along with it when asked", points: 3 },
+          { text: "You found out through someone else", points: 0 }
         ]
       },
       {
-        q: "Overall, does your boss make you better at your job?",
+        q: "Honestly — does your boss make you better?",
         options: [
-          { text: "Yes — sharper, more visible, and more effective because of them", points: 10 },
-          { text: "Somewhat — I'm growing but largely through my own initiative", points: 7 },
-          { text: "Not really — it's neutral at best", points: 3 },
-          { text: "No — they actively slow me down or hold me back", points: 0 }
+          { text: "Yes — I'm sharper, more confident, and more capable because of them", points: 10 },
+          { text: "Mostly — they create the conditions and mostly stay out of the way", points: 7 },
+          { text: "They don't hold me back but they don't push me either", points: 3 },
+          { text: "I'm growing despite them, not because of them", points: 0 }
         ]
       }
     ];
 
-    var RATINGS = [
+    var CATEGORIES = [
       {
-        min: 80,
-        label: 'Apex Predator',
-        desc: 'This is a rare boss. Sharp, political, protective. They know the game and they want you to win it too.',
-        action: 'Learn everything you can from this person — how they navigate upwards, how they build visibility, how they make decisions under pressure. Bosses like this don\'t come around often. Make the most of the access.'
+        min: 90,
+        name: 'THE APEX',
+        tagline: 'Rare. Learn everything you can. Don\'t let go.',
+        para: 'You\'ve found something most people never get — a boss who actually makes you better. This isn\'t just good luck. It\'s a signal. Study how they operate, how they handle pressure, how they manage upwards. This is your best MBA and it\'s free. The risk isn\'t that they\'re bad for you — it\'s that you get comfortable. Keep performing. Don\'t assume proximity to a great leader makes you one.',
+        tactics: [
+          'Tell them what you\'re learning from them — leaders respect self-awareness',
+          'Ask them who shaped them and how — the answer will be gold',
+          'Make sure you\'re visible to their network, not just to them'
+        ]
       },
       {
-        min: 55,
-        label: 'Hunting',
-        desc: 'More strengths than weaknesses. Capable, broadly trusted, and mostly on your side.',
-        action: 'Identify the gaps — because they\'ll matter eventually. Where does your boss lack visibility or political capital? That\'s where you\'re exposed. Build your own relationships in those areas now, before you need them.'
+        min: 75,
+        name: 'TIGER SHARK',
+        tagline: 'Has teeth. Will back you — if you perform.',
+        para: 'Solid. Has real teeth and knows how to use them. They\'ll back you when it counts — but only if you\'re performing. This isn\'t unconditional support, it\'s a transaction, and that\'s fine. Most people never get this. The risk is assuming warmth that isn\'t there. They like results, not relationships.',
+        tactics: [
+          'Bring them solutions not problems — they respect self-sufficiency',
+          'Make your wins visible and quantifiable — they speak that language',
+          'Don\'t confuse professional respect for personal loyalty'
+        ]
+      },
+      {
+        min: 60,
+        name: 'REEF SHARK',
+        tagline: 'Won\'t make you. Won\'t break you. You\'re on your own.',
+        para: 'Decent. Won\'t derail you, won\'t define you. You\'re largely on your own — which means your progression depends entirely on how visible you make yourself beyond them. They\'re not the problem. Invisibility is. If you\'re waiting for them to champion you, you\'ll be waiting a long time.',
+        tactics: [
+          'Build relationships one level above your boss independently',
+          'Document your impact and make sure it\'s on record',
+          'Find a mentor outside your direct line'
+        ]
+      },
+      {
+        min: 45,
+        name: 'THE REMORA',
+        tagline: 'Feeds off others. Takes credit, gives none.',
+        para: 'Feeds off the work of others. Attaches to the host, takes what it needs, contributes little. Your output is their currency — and they spend it without acknowledgement. This isn\'t always malicious. Sometimes it\'s just how they survive. But the effect on you is the same.',
+        tactics: [
+          'Copy relevant stakeholders on key pieces of work — visibility by design',
+          'In meetings, present your own work directly wherever possible',
+          'Build a paper trail. Quietly, professionally, consistently'
+        ]
       },
       {
         min: 30,
-        label: 'Treading Water',
-        desc: 'Average boss. Not actively harmful, but not actively developing you either. You\'re on your own more than you should be.',
-        action: 'Stop waiting for sponsorship or career guidance that isn\'t coming. Build your own visibility directly — identify one senior stakeholder outside your immediate team and find a genuine reason to be in front of them this quarter.'
+        name: 'BLOWFISH',
+        tagline: 'All puff. Looks dangerous. Mostly hot air.',
+        para: 'All puff. Looks bigger and more dangerous than they are. Full of noise, short on substance. The problem isn\'t that they\'re malicious — it\'s that they\'re ineffective, and ineffective bosses create chaos without consequences. You\'re navigating their mess while they\'re managing their image.',
+        tactics: [
+          'Don\'t rely on them to unblock things — go around where you can',
+          'Make decisions at your level confidently — don\'t wait for direction that won\'t come',
+          'Manage upwards yourself — build relationships with their peers and bosses'
+        ]
+      },
+      {
+        min: 15,
+        name: 'DEAD BAIT',
+        tagline: 'Checked out. You\'re on your own. Start moving.',
+        para: 'Checked out. Going through motions. Whatever ambition or capability they had has calcified into pure self-preservation. They\'re not developing you because they stopped developing themselves years ago. You\'re not on their radar unless something goes wrong.',
+        tactics: [
+          'Treat this as a masterclass in what not to become',
+          'Your development is entirely self-directed from here — own it',
+          'Start thinking about your next move. Seriously'
+        ]
       },
       {
         min: 0,
-        label: 'Dead Bait',
-        desc: 'This boss is a liability. Either politically weak, self-serving, or both. Your career won\'t move forward under them — it may actively go backwards.',
-        action: 'You have two options: manage around them aggressively, or find a way out. If you stay, build your network beyond them immediately. Make sure the people who matter know your work, not just theirs. Do not wait for this to improve on its own.'
+        name: 'THE SHARK CAGE',
+        tagline: 'Actively trapping you. Get out.',
+        para: 'This isn\'t just a bad boss. This is someone who is actively limiting your growth, taking credit for your work, or making the environment unsafe. The cage looks like structure but it\'s containment. Most people stay too long because they convince themselves it will change. It won\'t.',
+        tactics: [
+          'Document everything — protect yourself professionally',
+          'Activate your network now, not when you\'re desperate',
+          'Start looking. Not eventually. Now'
+        ]
       }
     ];
 
     var LETTERS = ['A', 'B', 'C', 'D'];
 
     // ─── STATE ───
-    var quiz = {
-      questions: [],
-      idx: 0,
-      scores: [],
-      answers: [],
-      advancing: false
-    };
+    var quiz = { idx: 0, scores: [], answers: [], advancing: false };
     var keyboardUsed = false;
-    var totalScore = 0;
+    var currentCategory = null;
+    var finalScore = 0;
 
     // ─── ELEMENT REFS ───
-    var heroSection   = document.getElementById('heroSection');
-    var quizSection   = document.getElementById('quizSection');
+    var startSection   = document.getElementById('startSection');
+    var quizSection    = document.getElementById('quizSection');
     var resultsSection = document.getElementById('resultsSection');
-    var contactBar    = document.getElementById('contactBar');
-    var pageFooter    = document.getElementById('pageFooter');
-    var questionWrap  = document.getElementById('quizQuestionWrap');
-    var questionNum   = document.getElementById('quizNumber');
-    var questionText  = document.getElementById('quizQuestion');
-    var optionsEl     = document.getElementById('quizOptions');
-    var backBtn       = document.getElementById('quizBackBtn');
-    var kbdHint       = document.getElementById('quizKbdHint');
-    var progressFill  = document.getElementById('quizProgressFill');
-    var progressText  = document.getElementById('quizProgressText');
+    var questionWrap   = document.getElementById('questionWrap');
+    var questionNumEl  = document.getElementById('questionNum');
+    var questionTextEl = document.getElementById('questionText');
+    var optionsEl      = document.getElementById('optionsEl');
+    var backBtn        = document.getElementById('backBtn');
+    var kbdHint        = document.getElementById('kbdHint');
+    var progressFill   = document.getElementById('progressFill');
+    var progressText   = document.getElementById('progressText');
 
-    // ─── ANIMATION HELPERS ───
+    // ─── FADE HELPERS ───
     function fadeOut(el, cb) {
       el.style.transition = 'opacity 0.35s ease';
       el.style.opacity = '0';
       setTimeout(cb, 350);
     }
-
     function fadeIn(el) {
       el.style.transition = 'opacity 0.4s ease';
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() { el.style.opacity = '1'; });
-      });
+      requestAnimationFrame(function() { requestAnimationFrame(function() { el.style.opacity = '1'; }); });
     }
 
-    // ─── BUILD QUIZ ───
-    function buildQuiz() {
-      // Use questions in fixed order (all 10)
-      quiz.questions = QUESTIONS.slice();
-    }
-
-    // ─── START QUIZ ───
-    function startQuiz() {
-      buildQuiz();
+    // ─── START ───
+    document.getElementById('startBtn').addEventListener('click', function() {
       quiz.idx = 0; quiz.scores = []; quiz.answers = [];
       quiz.advancing = false; keyboardUsed = false;
-
-      fadeOut(heroSection, function() {
-        heroSection.style.display = 'none';
-        contactBar.style.display = 'none';
-        pageFooter.style.display = 'none';
+      fadeOut(startSection, function() {
+        startSection.style.display = 'none';
         quizSection.style.display = 'flex';
         fadeIn(quizSection);
         updateProgress(0);
         loadQuestion(0);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-    }
+    });
 
     // ─── LOAD QUESTION ───
     function loadQuestion(idx, preselect) {
-      var q = quiz.questions[idx];
+      var q = QUESTIONS[idx];
       quiz.advancing = false;
       updateProgress(idx);
-
-      questionNum.textContent = (idx < 9 ? '0' : '') + (idx + 1);
-      questionText.textContent = q.q;
-
+      questionNumEl.textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      questionTextEl.textContent = q.q;
       if (idx > 0) { backBtn.classList.remove('hidden'); } else { backBtn.classList.add('hidden'); }
       if (keyboardUsed) { kbdHint.classList.add('hidden'); } else { kbdHint.classList.remove('hidden'); }
-
       optionsEl.classList.remove('locked');
       optionsEl.innerHTML = '';
       q.options.forEach(function(opt, i) {
@@ -840,13 +940,12 @@
         var letter = document.createElement('span'); letter.className = 'quiz-option-letter'; letter.textContent = LETTERS[i];
         var text = document.createElement('span');   text.className = 'quiz-option-text';   text.textContent = opt.text;
         btn.appendChild(letter); btn.appendChild(text);
-        btn.dataset.points = opt.points; btn.dataset.idx = i;
         btn.addEventListener('click', function() { selectOption(i, opt.points); });
         optionsEl.appendChild(btn);
       });
     }
 
-    // ─── SELECT OPTION ───
+    // ─── SELECT ───
     function selectOption(optIdx, points) {
       if (quiz.advancing) return;
       quiz.advancing = true;
@@ -858,20 +957,33 @@
         quiz.scores.push(points);
         quiz.answers.push({ optIdx: optIdx, points: points });
         quiz.idx++;
-        questionWrap.classList.add('transitioning');
-        setTimeout(function() {
-          questionWrap.classList.remove('transitioning');
-          if (quiz.idx >= quiz.questions.length) {
-            showResults();
-          } else {
-            loadQuestion(quiz.idx);
-          }
-        }, 250);
+        advance();
       }, 600);
     }
 
+    // ─── SKIP ───
+    document.getElementById('skipBtn').addEventListener('click', function() {
+      if (quiz.advancing) return;
+      quiz.scores.push(5);
+      quiz.answers.push(null);
+      quiz.idx++;
+      advance();
+    });
+
+    function advance() {
+      questionWrap.classList.add('transitioning');
+      setTimeout(function() {
+        questionWrap.classList.remove('transitioning');
+        if (quiz.idx >= QUESTIONS.length) {
+          showResults();
+        } else {
+          loadQuestion(quiz.idx);
+        }
+      }, 250);
+    }
+
     // ─── BACK ───
-    function goBack() {
+    backBtn.addEventListener('click', function() {
       if (quiz.idx === 0 || quiz.advancing) return;
       var prev = quiz.answers.pop();
       quiz.scores.pop();
@@ -882,35 +994,47 @@
         loadQuestion(quiz.idx, prev ? prev.optIdx : undefined);
         questionWrap.classList.remove('transitioning');
       }, 250);
-    }
+    });
 
-    // ─── UPDATE PROGRESS ───
+    // ─── PROGRESS ───
     function updateProgress(idx) {
       progressFill.style.width = (idx / 10 * 100) + '%';
       progressText.textContent = (idx + 1) + ' / 10';
     }
 
-    // ─── SHOW RESULTS ───
+    // ─── RESULTS ───
     function showResults() {
       var total = 0;
       quiz.scores.forEach(function(s) { total += (s || 0); });
       total = Math.min(100, Math.round(total));
-      totalScore = total;
+      finalScore = total;
 
-      var rating = null;
-      for (var i = 0; i < RATINGS.length; i++) {
-        if (total >= RATINGS[i].min) { rating = RATINGS[i]; break; }
+      var cat = CATEGORIES[CATEGORIES.length - 1];
+      for (var i = 0; i < CATEGORIES.length; i++) {
+        if (total >= CATEGORIES[i].min) { cat = CATEGORIES[i]; break; }
       }
-      if (!rating) rating = RATINGS[RATINGS.length - 1];
+      currentCategory = cat;
 
-      document.getElementById('resultLabel').textContent = rating.label;
-      document.getElementById('resultDesc').textContent  = rating.desc;
-      document.getElementById('resultActionText').textContent = rating.action;
+      document.getElementById('resultCategory').textContent = cat.name;
+      document.getElementById('resultTagline').textContent   = cat.tagline;
+      document.getElementById('resultPara').textContent      = cat.para;
+
+      var tacticsList = document.getElementById('resultTacticsList');
+      tacticsList.innerHTML = '<span class="result-tactics-heading">Three tactics. Use them.</span>';
+      cat.tactics.forEach(function(t) {
+        var li = document.createElement('li');
+        li.textContent = t;
+        tacticsList.appendChild(li);
+      });
+
+      setupShareButtons(total, cat.name);
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'boss_quiz_complete', { score: total, category: cat.name });
+      }
 
       fadeOut(quizSection, function() {
         quizSection.style.display = 'none';
-        contactBar.style.display = '';
-        pageFooter.style.display = '';
         resultsSection.style.display = 'flex';
         fadeIn(resultsSection);
         animateScore(total);
@@ -923,81 +1047,147 @@
       var el = document.getElementById('resultScore');
       var duration = 1500;
       var start = null;
-      function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+      function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
       function step(ts) {
         if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        el.textContent = Math.floor(ease(progress) * target);
-        if (progress < 1) { requestAnimationFrame(step); } else { el.textContent = target; }
+        var p = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.floor(ease(p) * target);
+        if (p < 1) { requestAnimationFrame(step); } else { el.textContent = target; }
       }
       requestAnimationFrame(step);
     }
 
-    // ─── RETAKE ───
-    function retakeQuiz() {
-      quiz.answers = []; quiz.scores = [];
-      quiz.idx = 0; quiz.advancing = false;
-      keyboardUsed = false;
-      fadeOut(resultsSection, function() {
-        resultsSection.style.display = 'none';
-        heroSection.style.display = 'flex';
-        fadeIn(heroSection);
-        contactBar.style.display = '';
-        pageFooter.style.display = '';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+    // ─── SHARE ───
+    function setupShareButtons(score, catName) {
+      var pageUrl = 'https://jawsadvantage.com/rate-your-boss.html';
+      var xText   = encodeURIComponent('I just rated my boss on The JAWS Advantage — ' + score + '/100 and landed ' + catName + '. What\'s yours?');
+      var xUrl    = encodeURIComponent(pageUrl);
+      var liUrl   = encodeURIComponent(pageUrl);
+      var rdTitle = encodeURIComponent('I rated my boss on The JAWS Advantage — ' + score + '/100 (' + catName + ')');
+      var waText  = encodeURIComponent('Just rated my boss on The JAWS Advantage — ' + score + '/100 (' + catName + '). Try it: ' + pageUrl);
+      var emlSub  = encodeURIComponent('Have you rated your boss lately?');
+      var emlBody = encodeURIComponent('I just rated my boss on The JAWS Advantage — ' + score + '/100, ' + catName + '.\n\nIt\'s 10 questions and worth it: ' + pageUrl);
+
+      document.getElementById('shareX').onclick = function() {
+        window.open('https://twitter.com/intent/tweet?text=' + xText + '&url=' + xUrl, '_blank');
+      };
+      document.getElementById('shareLinkedIn').onclick = function() {
+        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + liUrl, '_blank');
+      };
+      document.getElementById('shareReddit').onclick = function() {
+        window.open('https://www.reddit.com/submit?url=' + xUrl + '&title=' + rdTitle, '_blank');
+      };
+      document.getElementById('shareWhatsApp').onclick = function() {
+        window.open('https://wa.me/?text=' + waText, '_blank');
+      };
+      document.getElementById('shareEmail').onclick = function() {
+        window.location.href = 'mailto:?subject=' + emlSub + '&body=' + emlBody;
+      };
+      document.getElementById('shareCopy').onclick = function() {
+        navigator.clipboard.writeText(pageUrl).then(function() {
+          var icon = document.getElementById('copyIcon');
+          if (icon) { icon.className = 'fa-solid fa-check'; setTimeout(function() { icon.className = 'fa-solid fa-link'; }, 2000); }
+        });
+      };
     }
 
-    // ─── EVENT LISTENERS ───
-    document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-    document.getElementById('quizBackBtn').addEventListener('click', goBack);
-    document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
+    // ─── RETAKE ───
+    document.getElementById('retakeBtn').addEventListener('click', function() {
+      quiz.idx = 0; quiz.scores = []; quiz.answers = [];
+      quiz.advancing = false; keyboardUsed = false;
+      fadeOut(resultsSection, function() {
+        resultsSection.style.display = 'none';
+        startSection.style.display = 'flex';
+        fadeIn(startSection);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
 
     // ─── KEYBOARD SHORTCUTS ───
     document.addEventListener('keydown', function(e) {
       if (quizSection.style.display === 'none') return;
       var map = { 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
-      if (map[e.key] !== undefined) {
+      if (map[e.key] !== undefined && !quiz.advancing) {
         keyboardUsed = true;
         kbdHint.classList.add('hidden');
         var opts = optionsEl.querySelectorAll('.quiz-option');
-        if (opts[map[e.key]] && !quiz.advancing) {
-          opts[map[e.key]].click();
-        }
+        if (opts[map[e.key]]) opts[map[e.key]].click();
       }
     });
 
-    // ─── FADE IN OBSERVER ───
+    // ─── SCROLL ANIMATIONS ───
     (function() {
-      var els = document.querySelectorAll('.fade-in');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(function(el) { el.classList.add('visible'); });
-        return;
-      }
       var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
-        });
-      }, { threshold: 0.15 });
-      els.forEach(function(el) { obs.observe(el); });
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+    })();
+
+    // ─── NAV SCROLL ───
+    (function() {
+      var nav = document.querySelector('nav');
+      window.addEventListener('scroll', function() {
+        nav.style.borderBottomColor = window.scrollY > 20
+          ? (document.body.classList.contains('light-mode') ? 'rgba(10,10,10,0.2)' : 'rgba(245,243,239,0.12)')
+          : '';
+      }, { passive: true });
+    })();
+
+    // ─── COOKIE CONSENT ───
+    (function() {
+      var GA_ID = 'G-5RC382BRZF';
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('cookieConsent');
+      function disableGA() { window['ga-disable-' + GA_ID] = true; }
+      function hideBanner() { banner.classList.remove('visible'); setTimeout(function() { banner.classList.add('hidden'); }, 400); }
+      if (consent) { banner.classList.add('hidden'); if (consent === 'essential') disableGA(); return; }
+      setTimeout(function() { banner.classList.add('visible'); }, 800);
+      document.getElementById('cookieAccept').addEventListener('click', function() { localStorage.setItem('cookieConsent', 'all'); hideBanner(); });
+      document.getElementById('cookieEssential').addEventListener('click', function() { localStorage.setItem('cookieConsent', 'essential'); disableGA(); hideBanner(); });
+      var toggle = document.getElementById('cookieDetailsToggle');
+      var details = document.getElementById('cookieDetails');
+      toggle.addEventListener('click', function() {
+        var open = details.classList.toggle('is-open');
+        toggle.textContent = open ? 'Hide details ▴' : 'Show details ▾';
+      });
+    })();
+
+    // ─── FLOATING CHAT BAR ───
+    (function() {
+      var ARTICLE_CONTEXT = 'the Rate Your Boss quiz on The JAWS Advantage';
+      var widget = document.getElementById('floatChat');
+      var input  = document.getElementById('floatChatInput');
+      var submit = document.getElementById('floatChatSubmit');
+      function openWidget() { widget.classList.add('is-open'); setTimeout(function() { input.focus(); }, 300); }
+      function closeWidget() { widget.classList.remove('is-open'); input.value = ''; }
+      widget.addEventListener('click', function() { if (!widget.classList.contains('is-open')) openWidget(); });
+      input.addEventListener('blur', function() { setTimeout(function() { if (document.activeElement !== submit) closeWidget(); }, 150); });
+      submit.addEventListener('blur', function() { setTimeout(function() { if (document.activeElement !== input) closeWidget(); }, 150); });
+      function submitFloat() {
+        var q = input.value.trim();
+        var query = q ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
+      }
+      submit.addEventListener('click', function(e) { e.stopPropagation(); submitFloat(); });
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitFloat(); if (e.key === 'Escape') closeWidget(); });
     })();
 
     // ─── THEME TOGGLE ───
     (function() {
       var btn = document.getElementById('themeToggle');
-      var MOON_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-      var SUN_SVG  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
       function applyTheme(dark) {
-        if (dark) { document.body.classList.remove('light-mode'); btn.innerHTML = MOON_SVG; btn.setAttribute('aria-label', 'Switch to light mode'); }
-        else { document.body.classList.add('light-mode'); btn.innerHTML = SUN_SVG; btn.setAttribute('aria-label', 'Switch to dark mode'); }
+        if (dark) { document.body.classList.remove('light-mode'); btn.innerHTML = MOON; btn.setAttribute('aria-label', 'Switch to light mode'); }
+        else { document.body.classList.add('light-mode'); btn.innerHTML = SUN; btn.setAttribute('aria-label', 'Switch to dark mode'); }
       }
       var saved = localStorage.getItem('jaws_theme');
       var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       applyTheme(saved ? (saved === 'dark') : (prefersDark !== false));
       btn.addEventListener('click', function() {
-        var nowDark = !document.body.classList.contains('light-mode');
-        localStorage.setItem('jaws_theme', nowDark ? 'light' : 'dark');
-        applyTheme(!nowDark);
+        var dark = !document.body.classList.contains('light-mode');
+        localStorage.setItem('jaws_theme', dark ? 'light' : 'dark');
+        applyTheme(!dark);
       });
     })();
 
@@ -1013,43 +1203,14 @@
         hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
       });
       menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          menu.classList.remove('is-open');
-          hamburger.setAttribute('aria-label', 'Open menu');
-          hamburger.innerHTML = '&#9776;';
-        });
+        link.addEventListener('click', function() { menu.classList.remove('is-open'); hamburger.setAttribute('aria-label', 'Open menu'); hamburger.innerHTML = '&#9776;'; });
       });
       document.addEventListener('click', function(e) {
         if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
-          menu.classList.remove('is-open');
-          hamburger.setAttribute('aria-label', 'Open menu');
-          hamburger.innerHTML = '&#9776;';
+          menu.classList.remove('is-open'); hamburger.setAttribute('aria-label', 'Open menu'); hamburger.innerHTML = '&#9776;';
         }
       });
     })();
-
-    // ─── COOKIE CONSENT ───
-    (function() {
-      var banner = document.getElementById('cookieBanner');
-      var consent = localStorage.getItem('cookieConsent');
-      if (!consent) { setTimeout(function() { banner.classList.add('visible'); }, 1200); }
-      else { banner.classList.add('hidden'); }
-      document.getElementById('cookieAccept').addEventListener('click', function() {
-        localStorage.setItem('cookieConsent', 'all');
-        banner.classList.remove('visible'); banner.classList.add('hidden');
-      });
-      document.getElementById('cookieEssential').addEventListener('click', function() {
-        localStorage.setItem('cookieConsent', 'essential');
-        window['ga-disable-G-5RC382BRZF'] = true;
-        banner.classList.remove('visible'); banner.classList.add('hidden');
-      });
-      document.getElementById('cookieDetailsToggle').addEventListener('click', function() {
-        var d = document.getElementById('cookieDetails');
-        var open = d.classList.toggle('open');
-        this.innerHTML = open ? 'Hide details &#9652;' : 'Show details &#9662;';
-      });
-    })();
-
   </script>
 </body>
 </html>
