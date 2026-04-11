@@ -1005,6 +1005,16 @@
     <a href="get-the-edge.html" class="mobile-cta">Get the Edge</a>
   </div>
 
+  <!-- ─── DEEP DIVE RESUME PROMPT ─── -->
+  <div id="ddResumePrompt" style="display:none; flex-direction:column; align-items:center; gap:16px; padding: 40px 24px; text-align:center; min-height:100vh; justify-content:center;">
+    <p class="dd-ai-feedback-heading">You have an unfinished JAWS Deep Dive.</p>
+    <p style="font-size:14px; color:var(--off-white-dim); margin:0;">Pick up where you left off, or start fresh.</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <button class="dd-discuss-full-btn" style="margin:0;" onclick="ddResumeQuiz()">RESUME</button>
+      <button class="dd-discuss-full-btn" style="margin:0; background:transparent; border:1px solid var(--red); color:var(--red);" onclick="ddRestartFromPrompt()">START FRESH</button>
+    </div>
+  </div>
+
   <!-- ─── HERO ─── -->
   <section id="heroSection" class="score-hero">
     <span class="score-eyebrow fade-in">The JAWS Score</span>
@@ -2193,6 +2203,31 @@
       pillarScores: [0, 0, 0, 0],
       advancing: false
     };
+    function ddSaveState(screen) {
+      try {
+        var state = {
+          screen: screen,
+          mcAnswers: dd.mcAnswers,
+          mcScores: dd.mcScores,
+          rankOrders: dd.rankOrders,
+          rankScores: dd.rankScores,
+          forcedScores: dd.forcedScores,
+          openAnswers: dd.openAnswers,
+          openScores: dd.openScores,
+          openFeedbacks: dd.openFeedbacks,
+          mcIdx: dd.mcIdx,
+          rankIdx: dd.rankIdx,
+          forcedIdx: dd.forcedIdx,
+          openIdx: dd.openIdx,
+          pillarScores: dd.pillarScores,
+          finalScore: window._ddScore || null,
+          finalRating: window._ddRating || null,
+          savedAt: Date.now()
+        };
+        sessionStorage.setItem('jawsDeepDive', JSON.stringify(state));
+      } catch(e) {}
+    }
+
     var ddRankOrder = [];
     var ddMobileRanks = [];
     var ddDragSrcPos = null;
@@ -2263,7 +2298,7 @@
     function ddStartMC() {
       dd.mcIdx = 0; dd.mcScores = []; dd.mcAnswers = [];
       dd.advancing = false;
-      ddShowIntro(0, function() { ddShowSubscreen(ddMCWrap); ddLoadMCQuestion(0); });
+      ddShowIntro(0, function() { ddShowSubscreen(ddMCWrap); ddLoadMCQuestion(0); ddSaveState('mid-quiz'); });
     }
 
     function ddLoadMCQuestion(idx, preselect) {
@@ -2342,6 +2377,7 @@
         dd.advancing = false;
         ddShowSubscreen(ddMCWrap);
         ddLoadMCQuestion(dd.mcIdx, prev ? prev.optIdx : undefined);
+        ddSaveState('mid-quiz');
       } else {
         dd.rankScores.pop();
         dd.rankOrders.pop();
@@ -2358,6 +2394,7 @@
         dd.rankOrders.pop();
         ddShowSubscreen(ddRankWrap);
         ddLoadRankQuestion(dd.rankIdx);
+        ddSaveState('mid-quiz');
       } else {
         dd.forcedScores.pop();
         dd.forcedIdx--;
@@ -2372,6 +2409,7 @@
         dd.forcedScores.pop();
         ddShowSubscreen(ddForcedWrap);
         ddLoadForcedQuestion(dd.forcedIdx);
+        ddSaveState('mid-quiz');
       } else {
         dd.openAnswers.pop();
         dd.openIdx--;
@@ -2382,7 +2420,7 @@
     // ─── SECTION 2: RANKING ───
     function ddStartRanking() {
       dd.rankIdx = 0; dd.rankScores = []; dd.rankOrders = [];
-      ddShowIntro(1, function() { ddShowSubscreen(ddRankWrap); ddLoadRankQuestion(0); });
+      ddShowIntro(1, function() { ddShowSubscreen(ddRankWrap); ddLoadRankQuestion(0); ddSaveState('mid-quiz'); });
     }
 
     function ddLoadRankQuestion(idx) {
@@ -2572,7 +2610,7 @@
     // ─── SECTION 3: FORCED CHOICE ───
     function ddStartForced() {
       dd.forcedIdx = 0; dd.forcedScores = [];
-      ddShowIntro(2, function() { ddShowSubscreen(ddForcedWrap); ddLoadForcedQuestion(0); });
+      ddShowIntro(2, function() { ddShowSubscreen(ddForcedWrap); ddLoadForcedQuestion(0); ddSaveState('mid-quiz'); });
     }
 
     function ddLoadForcedQuestion(idx) {
@@ -2616,7 +2654,7 @@
     // ─── SECTION 4: OPEN TEXT ───
     function ddStartOpen() {
       dd.openIdx = 0; dd.openAnswers = [];
-      ddShowIntro(3, function() { ddShowSubscreen(ddOpenWrap); ddLoadOpenQuestion(0); });
+      ddShowIntro(3, function() { ddShowSubscreen(ddOpenWrap); ddLoadOpenQuestion(0); ddSaveState('mid-quiz'); });
     }
 
     function ddLoadOpenQuestion(idx) {
@@ -2707,6 +2745,55 @@
       }
     }
 
+    function ddResumeQuiz() {
+      var resumeEl = document.getElementById('ddResumePrompt');
+      if (!resumeEl || !resumeEl._savedState) return;
+      var state = resumeEl._savedState;
+      dd.mcAnswers    = state.mcAnswers    || [];
+      dd.mcScores     = state.mcScores     || [];
+      dd.rankOrders   = state.rankOrders   || [];
+      dd.rankScores   = state.rankScores   || [];
+      dd.forcedScores = state.forcedScores || [];
+      dd.openAnswers  = state.openAnswers  || [];
+      dd.openScores   = state.openScores   || [];
+      dd.openFeedbacks= state.openFeedbacks|| [];
+      dd.mcIdx        = typeof state.mcIdx     === 'number' ? state.mcIdx     : 0;
+      dd.rankIdx      = typeof state.rankIdx   === 'number' ? state.rankIdx   : 0;
+      dd.forcedIdx    = typeof state.forcedIdx === 'number' ? state.forcedIdx : 0;
+      dd.openIdx      = typeof state.openIdx   === 'number' ? state.openIdx   : 0;
+      dd.advancing    = false;
+
+      resumeEl.style.display = 'none';
+      heroSection.style.display = 'none';
+      contactBar.style.display = 'none';
+      pageFooter.style.display = 'none';
+      ddSection.style.display = 'flex';
+      fadeIn(ddSection);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (dd.mcIdx < DD_MC_INDICES.length) {
+        ddShowSubscreen(ddMCWrap);
+        ddLoadMCQuestion(dd.mcIdx);
+      } else if (dd.rankIdx < DD_RANKING.length) {
+        ddShowSubscreen(ddRankWrap);
+        ddLoadRankQuestion(dd.rankIdx);
+      } else if (dd.forcedIdx < DD_FORCED.length) {
+        ddShowSubscreen(ddForcedWrap);
+        ddLoadForcedQuestion(dd.forcedIdx);
+      } else {
+        ddShowSubscreen(ddOpenWrap);
+        ddLoadOpenQuestion(dd.openIdx);
+      }
+    }
+
+    function ddRestartFromPrompt() {
+      sessionStorage.removeItem('jawsDeepDive');
+      var resumeEl = document.getElementById('ddResumePrompt');
+      if (resumeEl) resumeEl.style.display = 'none';
+      heroSection.style.display = 'flex';
+      fadeIn(heroSection);
+    }
+
     function ddDiscussQuestion(idx) {
       var question = DD_OPEN[idx] || '';
       var answer = dd.openAnswers[idx] || '';
@@ -2771,6 +2858,7 @@
 
       window._ddScore  = finalScore;
       window._ddRating = rating.label;
+      ddSaveState('results');
 
       document.getElementById('ddResultLabel').textContent = rating.label;
       document.getElementById('ddResultDesc').textContent  = rating.desc;
@@ -2894,6 +2982,7 @@
 
     // ─── RETAKE DEEP DIVE ───
     document.getElementById('ddRetakeBtn').addEventListener('click', function() {
+      sessionStorage.removeItem('jawsDeepDive');
       fadeOut(ddResultsSection, function() {
         ddResultsSection.style.display = 'none';
         heroSection.style.display = 'flex';
@@ -2999,6 +3088,46 @@
         var open = details.classList.toggle('is-open');
         toggle.textContent = open ? 'Hide details \u25b4' : 'Show details \u25be';
       });
+    })();
+
+    // ─── DEEP DIVE SESSION RESTORE ───
+    (function() {
+      try {
+        var saved = sessionStorage.getItem('jawsDeepDive');
+        if (!saved) return;
+        var state = JSON.parse(saved);
+        if (!state || !state.screen) return;
+
+        var age = Date.now() - (state.savedAt || 0);
+        if (age > 7200000) { sessionStorage.removeItem('jawsDeepDive'); return; }
+
+        if (state.screen === 'results') {
+          dd.mcAnswers     = state.mcAnswers     || [];
+          dd.mcScores      = state.mcScores      || [];
+          dd.rankOrders    = state.rankOrders    || [];
+          dd.rankScores    = state.rankScores    || [];
+          dd.forcedScores  = state.forcedScores  || [];
+          dd.openAnswers   = state.openAnswers   || [];
+          dd.openScores    = state.openScores    || [];
+          dd.openFeedbacks = state.openFeedbacks || [];
+          dd.pillarScores  = state.pillarScores  || [0,0,0,0];
+          heroSection.style.display = 'none';
+          contactBar.style.display = 'none';
+          pageFooter.style.display = 'none';
+          ddSection.style.display = 'none';
+          ddShowDeepDiveResults();
+          return;
+        }
+
+        if (state.screen === 'mid-quiz') {
+          var resumeEl = document.getElementById('ddResumePrompt');
+          if (resumeEl) {
+            resumeEl._savedState = state;
+            heroSection.style.display = 'none';
+            resumeEl.style.display = 'flex';
+          }
+        }
+      } catch(e) {}
     })();
 
     // ─── THEME TOGGLE ───
