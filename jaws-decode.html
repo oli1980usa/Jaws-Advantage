@@ -245,6 +245,32 @@
       margin-bottom: 12px;
       opacity: 0.8;
     }
+    .dd-share-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,243,239,0.25);
+      background: transparent;
+      color: var(--off-white-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+    .dd-share-btn:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    body.light-mode .dd-share-btn {
+      border-color: rgba(10,10,10,0.2);
+      color: rgba(10,10,10,0.5);
+    }
+    body.light-mode .dd-share-btn:hover {
+      border-color: #0a0a0a;
+      color: #0a0a0a;
+    }
     .decode-tool-share {
       display: flex;
       flex-direction: column;
