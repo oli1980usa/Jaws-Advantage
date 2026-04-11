@@ -3610,6 +3610,13 @@
         var age = Date.now() - (state.savedAt || 0);
         if (age > 7200000) { sessionStorage.removeItem('jawsDeepDive'); return; }
 
+        // Helper: hide the entire start screen unconditionally
+        function hideStartScreen() {
+          heroSection.style.display  = 'none';
+          contactBar.style.display   = 'none';
+          pageFooter.style.display   = 'none';
+        }
+
         if (state.screen === 'results') {
           dd.mcAnswers     = state.mcAnswers     || [];
           dd.mcScores      = state.mcScores      || [];
@@ -3620,19 +3627,17 @@
           dd.openScores    = state.openScores    || [];
           dd.openFeedbacks = state.openFeedbacks || [];
           dd.pillarScores  = state.pillarScores  || [0,0,0,0];
-          heroSection.style.display = 'none';
-          contactBar.style.display = 'none';
-          pageFooter.style.display = 'none';
+          hideStartScreen();
           ddSection.style.display = 'none';
           ddShowDeepDiveResults();
           return;
         }
 
         if (state.screen === 'mid-quiz') {
+          hideStartScreen();
           var resumeEl = document.getElementById('ddResumePrompt');
           if (resumeEl) {
             resumeEl._savedState = state;
-            heroSection.style.display = 'none';
             resumeEl.style.display = 'flex';
           }
         }
