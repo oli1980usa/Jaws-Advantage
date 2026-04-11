@@ -1336,6 +1336,20 @@
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
+          <div class="sq-menu-card" id="sqCardToxic">
+            <div class="sq-menu-card-top">
+              <span class="sq-menu-card-tag">New</span>
+              <span class="sq-menu-card-time">~5 mins</span>
+            </div>
+            <h2 class="sq-menu-card-title">IS YOUR COMPANY TOXIC?</h2>
+            <p class="sq-menu-card-desc">10 questions. No HR filter. Find out if you're swimming in clear water or a dead zone.</p>
+            <ul class="sq-menu-card-pills">
+              <li>10 Multiple Choice</li>
+            </ul>
+            <a href="is-your-company-toxic.html" class="score-btn-primary sq-menu-btn" style="display:block; text-align:center; text-decoration:none;">FIND OUT NOW →</a>
+            <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
+          </div>
+
           <div class="sq-menu-card sq-menu-card--coming">
             <div class="sq-menu-card-top">
               <span class="sq-menu-card-tag sq-menu-card-tag--soon">Coming Soon</span>
@@ -3911,9 +3925,10 @@
     // ─── SAVED RESULT INDICATORS ───
     function sqShowSavedResults() {
       var keys = [
-        { key: 'jawsShortQuiz', cardId: 'sqCardShort', ratingFn: getRating },
-        { key: 'jawsDeepDive',  cardId: 'sqCardDeep',  ratingFn: getRating },
-        { key: 'jawsBossQuiz',  cardId: 'sqCardBoss',  ratingFn: null }
+        { key: 'jawsShortQuiz',  cardId: 'sqCardShort', ratingFn: getRating },
+        { key: 'jawsDeepDive',   cardId: 'sqCardDeep',  ratingFn: getRating },
+        { key: 'jawsBossQuiz',   cardId: 'sqCardBoss',  ratingFn: null },
+        { key: 'jawsToxicQuiz',  cardId: 'sqCardToxic', ratingFn: null }
       ];
 
       keys.forEach(function(item) {
@@ -3948,6 +3963,10 @@
           if (item.cardId === 'sqCardBoss') {
             viewBtn.onclick = function() {
               window.location.href = 'rate-your-boss.html';
+            };
+          } else if (item.cardId === 'sqCardToxic') {
+            viewBtn.onclick = function() {
+              window.location.href = 'is-your-company-toxic.html';
             };
           } else {
             viewBtn.onclick = function() {

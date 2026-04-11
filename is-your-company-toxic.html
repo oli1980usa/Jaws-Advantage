@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics -->
+  <script>
+    if (localStorage.getItem('cookieConsent') === 'essential') {
+      window['ga-disable-G-5RC382BRZF'] = true;
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is Your Company Toxic? | The JAWS Advantage</title>
+  <meta name="description" content="10 questions. No HR filter. Find out if you're swimming in clear water or a dead zone — and what to do about it.">
+  <meta property="og:title" content="Is Your Company Toxic? | The JAWS Advantage">
+  <meta property="og:description" content="10 questions. No HR filter. Find out if you're swimming in clear water or a dead zone — and what to do about it.">
+  <meta property="og:url" content="https://jawsadvantage.com/is-your-company-toxic.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Is Your Company Toxic? | The JAWS Advantage">
+  <meta name="twitter:description" content="10 questions. No HR filter. Find out if you're swimming in clear water or a dead zone — and what to do about it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+      letter-spacing: 0.12em; color: var(--off-white);
+      text-decoration: none; transition: color 0.2s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white) !important;
+      border: 1px solid var(--red); padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--red) !important; color: var(--off-white) !important; }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none; border: none; cursor: pointer;
+      padding: 4px 2px; color: var(--off-white-dim);
+      line-height: 1; transition: color 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .theme-toggle:hover { color: var(--red); }
+    .theme-toggle svg { display: block; }
+
+    /* ─── HAMBURGER / MOBILE NAV ─── */
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      color: var(--red); font-size: 22px; cursor: pointer;
+      padding: 4px 8px; line-height: 1; transition: color 0.2s;
+    }
+    .nav-hamburger:hover { opacity: 0.8; }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 8px 0 16px;
+    }
+    .nav-mobile-menu.is-open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      text-decoration: none; padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s; text-align: right;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
+    .nav-mobile-menu .mobile-cta { color: var(--red); font-weight: 600; }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef; --black-2: #e8e6e2; --black-3: #dedad4;
+      --off-white: #0a0a0a; --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+    body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
+    body.light-mode .nav-cta { color: var(--red) !important; }
+    body.light-mode .nav-cta:hover { color: #f5f3ef !important; }
+    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
+    body.light-mode .nav-logo img { mix-blend-mode: multiply; }
+    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
+    body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
+    body.light-mode .footer-tagline { color: rgba(10, 10, 10, 0.5); }
+    body.light-mode .contact-bar { color: rgba(10, 10, 10, 0.4); border-color: rgba(10, 10, 10, 0.08); }
+    body.light-mode .contact-bar a { color: var(--red); }
+    body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
+    body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
+    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
+    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
+    body.light-mode .quiz-option { background: var(--black-3); }
+    body.light-mode .share-btn { background: transparent; color: #0a0a0a; border-color: #0a0a0a; }
+    body.light-mode .share-btn:hover { background: rgba(10,10,10,0.08); box-shadow: none; }
+
+    /* ─── HERO / START SCREEN ─── */
+    .ryb-hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 48px 100px;
+      position: relative; overflow: hidden;
+    }
+    .ryb-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 55%, rgba(165, 42, 26, 0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .ryb-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 24px; display: block;
+    }
+    .ryb-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(54px, 10vw, 110px);
+      line-height: 0.9; letter-spacing: 0.02em;
+      color: var(--off-white); margin-bottom: 28px;
+    }
+    .ryb-subheading {
+      font-size: 18px; font-weight: 300; line-height: 1.7;
+      color: var(--off-white-dim); margin-bottom: 36px;
+      max-width: 500px;
+    }
+    .ryb-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.6; padding: 3px 10px; margin-bottom: 40px;
+      border: 1px solid rgba(245,243,239,0.12);
+    }
+    body.light-mode .ryb-pill { border-color: rgba(10,10,10,0.15); }
+    .ryb-start-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #fff;
+      background: var(--red); border: 2px solid var(--red);
+      padding: 18px 52px; cursor: pointer; margin-bottom: 20px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .ryb-start-btn:hover {
+      background: var(--red-dark);
+      box-shadow: 0 0 24px rgba(165, 42, 26, 0.5);
+    }
+    .ryb-trust {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
+      color: var(--off-white-dim); opacity: 0.35; text-transform: uppercase;
+    }
+
+    /* ─── QUIZ SECTION ─── */
+    .quiz-section {
+      min-height: calc(100vh - 64px); padding-top: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .quiz-wrap { width: 100%; max-width: 680px; padding: 60px 48px 80px; }
+
+    /* Progress */
+    .quiz-progress { margin-bottom: 52px; }
+    .quiz-progress-track {
+      width: 100%; height: 2px; background: var(--border);
+      position: relative; margin-bottom: 14px; border-radius: 2px;
+    }
+    .quiz-progress-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(165, 42, 26, 0.7);
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2px;
+    }
+    .quiz-progress-text {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--off-white-dim); opacity: 0.6;
+    }
+
+    /* Question */
+    .quiz-question-wrap { transition: opacity 0.25s ease, transform 0.25s ease; }
+    .quiz-question-wrap.transitioning { opacity: 0; transform: translateY(14px); }
+    .quiz-number {
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+      letter-spacing: 0.22em; color: var(--red); margin-bottom: 18px; display: block;
+    }
+    .quiz-question {
+      font-size: clamp(20px, 3vw, 28px); font-weight: 400;
+      line-height: 1.45; color: var(--off-white); margin-bottom: 40px;
+    }
+
+    /* Options */
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .quiz-option {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 20px; background: var(--black-2);
+      border: 1px solid var(--border);
+      cursor: pointer; width: 100%; text-align: left;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .quiz-option:hover { border-color: rgba(165, 42, 26, 0.5); }
+    .quiz-option.selected { border-color: var(--red); background: rgba(165, 42, 26, 0.08); }
+    .quiz-option-letter {
+      flex-shrink: 0; width: 28px; height: 28px;
+      border: 1px solid rgba(165, 42, 26, 0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+      color: var(--red); letter-spacing: 0.05em;
+      background: rgba(165, 42, 26, 0.06);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .quiz-option.selected .quiz-option-letter { background: var(--red); color: #fff; border-color: var(--red); }
+    .quiz-option-text { font-size: 16px; font-weight: 300; line-height: 1.55; color: var(--off-white); padding-top: 3px; }
+    .quiz-option.confirmed { border-color: var(--red); background: var(--red); pointer-events: none; }
+    .quiz-option.confirmed .quiz-option-letter { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.25); }
+    .quiz-option.confirmed .quiz-option-text { color: #fff; }
+    .quiz-options.locked .quiz-option { pointer-events: none; }
+
+    /* Back + skip */
+    .quiz-back-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white-dim);
+      background: none; border: none; cursor: pointer;
+      opacity: 0.4; padding: 0; margin-bottom: 28px;
+      display: block; transition: opacity 0.2s;
+    }
+    .quiz-back-btn:hover { opacity: 0.75; }
+    .quiz-back-btn.hidden { visibility: hidden; pointer-events: none; }
+    .quiz-kbd-hint {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--off-white-dim); opacity: 0.4;
+      text-align: center; margin-top: 14px;
+      transition: opacity 0.35s ease;
+    }
+    .quiz-kbd-hint.hidden { opacity: 0; pointer-events: none; }
+    .ryb-skip-link {
+      display: block; text-align: center; margin-top: 12px;
+      font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--off-white-dim); opacity: 0.35;
+      cursor: pointer; transition: opacity 0.2s; text-transform: uppercase;
+      background: none; border: none; width: 100%;
+    }
+    .ryb-skip-link:hover { opacity: 0.65; }
+
+    /* ─── RESULTS SECTION ─── */
+    .results-section {
+      padding-top: 64px;
+      display: flex; align-items: flex-start; justify-content: center;
+      min-height: calc(100vh - 64px);
+    }
+    .results-wrap {
+      max-width: 680px; width: 100%; padding: 80px 48px 100px; text-align: center;
+    }
+    .results-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 12px; display: block;
+    }
+    .result-score-line {
+      display: flex; align-items: baseline; justify-content: center;
+      gap: 6px; margin-bottom: 4px;
+    }
+    .result-score {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(96px, 20vw, 160px);
+      line-height: 0.9; color: var(--red);
+      text-shadow: 0 0 40px rgba(165, 42, 26, 0.5), 0 0 80px rgba(165, 42, 26, 0.2);
+      letter-spacing: 0.02em;
+    }
+    .result-score-denom {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 56px);
+      color: rgba(165, 42, 26, 0.35); letter-spacing: 0.04em;
+    }
+    .result-category {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 7vw, 64px);
+      letter-spacing: 0.06em; color: var(--off-white);
+      line-height: 1; margin-top: 8px; margin-bottom: 10px;
+    }
+    .result-tagline {
+      font-size: 15px; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--red); margin-bottom: 28px; font-style: italic;
+    }
+    .result-para {
+      font-size: 17px; font-weight: 300; line-height: 1.75;
+      color: var(--off-white-dim); margin-bottom: 36px;
+      text-align: left;
+    }
+    .result-tactics {
+      list-style: none; text-align: left; margin-bottom: 44px;
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      background: rgba(165, 42, 26, 0.04);
+      padding: 28px 32px;
+    }
+    .result-tactics-heading {
+      font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+      letter-spacing: 0.18em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 18px; display: block;
+    }
+    .result-tactics li {
+      font-size: 15px; font-weight: 300; line-height: 1.65;
+      color: var(--off-white-dim); padding: 10px 0;
+      padding-left: 20px; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-tactics li:last-child { border-bottom: none; }
+    .result-tactics li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--red); font-size: 13px; top: 13px;
+    }
+
+    /* Share */
+    .result-share-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.5; display: block; margin-bottom: 14px;
+    }
+    .result-share-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .share-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #181818; border: 1px solid var(--red);
+      color: var(--red); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
+      flex-shrink: 0; padding: 0;
+    }
+    .share-btn:hover {
+      background: rgba(165, 42, 26, 0.15);
+      box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
+    }
+
+    /* Bottom CTAs */
+    .result-bottom {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .result-retake-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--off-white-dim);
+      background: none; border: none; cursor: pointer;
+      padding: 8px; transition: color 0.2s; opacity: 0.5;
+    }
+    .result-retake-btn:hover { color: var(--red); opacity: 1; }
+    .ict-discuss-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 24px auto 0 auto;
+      background: var(--red);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .ict-discuss-btn:hover { opacity: 0.85; }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px; font-weight: 300;
+      color: rgba(184, 181, 176, 0.4); letter-spacing: 0.04em;
+    }
+    .contact-bar a { color: var(--off-white-dim); text-decoration: none; transition: color 0.2s; }
+    .contact-bar a:hover { color: var(--red); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 48px 48px; border-top: 1px solid var(--border);
+    }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.12em; color: var(--off-white); }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
+    .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
+
+    /* ─── FLOATING CHAT BAR ─── */
+    .float-chat {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 44px; z-index: 300;
+      border-radius: 999px; background: #a52a1a;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 30px rgba(165, 42, 26, 0.5), 0 4px 20px rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.4,0,0.2,1), height 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
+    }
+    .float-chat.is-open {
+      width: 500px; height: 52px; cursor: default;
+      box-shadow: 0 0 0 2px rgba(165,42,26,0.9), 0 0 40px rgba(165,42,26,0.7), 0 0 80px rgba(165,42,26,0.3), 0 8px 32px rgba(0,0,0,0.8);
+    }
+    .float-chat-label {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+      color: #fff; letter-spacing: 0.04em; white-space: nowrap;
+      opacity: 1; transition: opacity 0.15s ease;
+      pointer-events: none; user-select: none;
+    }
+    .float-chat.is-open .float-chat-label { opacity: 0; pointer-events: none; }
+    .float-chat-input-wrap {
+      position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+      display: flex; align-items: center; padding: 0 6px 0 20px;
+      opacity: 0; transition: opacity 0.2s ease 0.15s; pointer-events: none;
+    }
+    .float-chat.is-open .float-chat-input-wrap { opacity: 1; pointer-events: all; }
+    .float-chat-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; min-width: 0;
+    }
+    .float-chat-input::placeholder { color: rgba(255,255,255,0.6); }
+    .float-chat-submit {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(0,0,0,0.25); border: none; color: #fff;
+      font-size: 15px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .float-chat-submit:hover { background: rgba(0,0,0,0.45); }
+
+    /* ─── COOKIE CONSENT ─── */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+      background: #111111; border-top: 1px solid rgba(245, 243, 239, 0.1);
+      transform: translateY(100%); transition: transform 0.4s ease;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner.hidden { display: none; }
+    .cookie-inner { padding: 18px 48px 20px; }
+    .cookie-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .cookie-text { font-size: 12px; font-weight: 300; color: var(--off-white-dim); line-height: 1.5; flex: 1; min-width: 200px; }
+    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px;
+      border-radius: 0; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .cookie-accept { background: var(--red); color: #fff; border: 1px solid var(--red); }
+    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .cookie-essential { background: transparent; color: var(--off-white-dim); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
+    .cookie-details-toggle {
+      background: none; border: none; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      padding: 6px 0 0; opacity: 0.6; transition: opacity 0.2s, color 0.2s; display: block;
+    }
+    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
+    .cookie-details {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(245,243,243,0.08);
+      columns: 3; column-gap: 40px;
+    }
+    .cookie-details.is-open { display: block; }
+    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
+    .cookie-detail-heading {
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+      letter-spacing: 0.1em; color: var(--red);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .cookie-tag { font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 1px 5px; vertical-align: middle; }
+    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
+    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
+    .cookie-detail-list li { font-size: 11px; font-weight: 300; color: var(--off-white-dim); line-height: 1.5; padding: 3px 0 3px 14px; position: relative; }
+    .cookie-detail-list li::before { content: '–'; position: absolute; left: 0; color: rgba(245,243,239,0.25); }
+    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .ryb-hero { padding: 120px 24px 80px; }
+      .quiz-wrap, .results-wrap { padding: 40px 24px 60px; }
+      footer { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .contact-bar { padding: 24px; }
+      .cookie-inner { padding: 14px 20px 16px; }
+      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cookie-details { columns: 1; }
+      .float-chat { bottom: 20px; width: auto; padding: 0 24px; height: 40px; }
+      .float-chat-label { font-size: 12px; }
+      .float-chat.is-open { width: calc(100vw - 32px); height: 52px; padding: 0; }
+    }
+    #floatChat { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Playbook</a></li>
+      <li><a href="the-take.html">The Take</a></li>
+      <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
+      <li><a href="get-the-edge.html" class="nav-cta">Get the Edge</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">The Playbook</a>
+    <a href="the-take.html">The Take</a>
+    <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
+    <a href="get-the-edge.html" class="mobile-cta">Get the Edge</a>
+  </div>
+
+  <!-- ─── RESUME PROMPT ─── -->
+  <div id="ictResumePrompt" style="display:none; flex-direction:column; align-items:center; gap:16px; padding: 60px 24px; text-align:center; min-height:60vh; justify-content:center;">
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:2px; color:var(--off-white); margin:0;">YOU HAVE AN UNFINISHED ASSESSMENT.</p>
+    <p style="font-size:14px; color:var(--off-white-dim); margin:0;">Pick up where you left off, or start fresh.</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+      <button class="ryb-start-btn" onclick="ictResumeQuiz()">RESUME</button>
+      <button class="ryb-start-btn" style="background:transparent; border:1px solid var(--red); color:var(--red);" onclick="ictRestartFromPrompt()">START FRESH</button>
+    </div>
+  </div>
+
+  <!-- ─── START SCREEN ─── -->
+  <section id="startSection" class="ryb-hero">
+    <span class="ryb-eyebrow fade-in">Know Your World</span>
+    <h1 class="ryb-headline fade-in">Is Your Company Toxic?</h1>
+    <p class="ryb-subheading fade-in">10 questions. No HR filter. Find out if you're swimming in clear water — or a dead zone.</p>
+    <span class="ryb-pill fade-in">10 Multiple Choice</span>
+    <button class="ryb-start-btn fade-in" id="startBtn">FIND OUT NOW &rarr;</button>
+    <p class="ryb-trust fade-in">No email. No phone number. No catch.</p>
+  </section>
+
+  <!-- ─── QUIZ ─── -->
+  <section id="quizSection" style="display:none; opacity:0;" class="quiz-section">
+    <div class="quiz-wrap">
+      <div class="quiz-progress">
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <p class="quiz-progress-text" id="progressText">1 / 10</p>
+      </div>
+      <div class="quiz-question-wrap" id="questionWrap">
+        <button class="quiz-back-btn hidden" id="backBtn">← Back</button>
+        <span class="quiz-number" id="questionNum">01</span>
+        <h2 class="quiz-question" id="questionText"></h2>
+        <div class="quiz-options" id="optionsEl"></div>
+        <p class="quiz-kbd-hint" id="kbdHint">Press A, B, C or D to answer</p>
+        <button class="ryb-skip-link" id="skipBtn">Skip this question</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESULTS ─── -->
+  <section id="resultsSection" style="display:none; opacity:0;" class="results-section">
+    <div class="results-wrap">
+      <span class="results-eyebrow">Is Your Company Toxic?</span>
+      <div class="result-score-line">
+        <span class="result-score" id="resultScore">0</span>
+        <span class="result-score-denom">/100</span>
+      </div>
+      <h2 class="result-category" id="resultCategory"></h2>
+      <p class="result-tagline" id="resultTagline"></p>
+      <p class="result-para" id="resultPara"></p>
+      <ul class="result-tactics" id="resultTacticsList">
+        <span class="result-tactics-heading">Three tactics. Use them.</span>
+      </ul>
+      <span class="result-share-label">Share your result</span>
+      <div class="result-share-bar">
+        <button class="share-btn" id="shareX" title="Share on X"><i class="fa-brands fa-x-twitter"></i></button>
+        <button class="share-btn" id="shareLinkedIn" title="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
+        <button class="share-btn" id="shareReddit" title="Share on Reddit"><i class="fa-brands fa-reddit-alien"></i></button>
+        <button class="share-btn" id="shareWhatsApp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+        <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
+        <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
+      </div>
+      <button class="ict-discuss-btn" onclick="ictDiscussWithJaws()">DISCUSS MY COMPANY WITH JAWS &rarr;</button>
+      <div class="result-bottom">
+        <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
+          <button class="result-retake-btn" onclick="ictRetake()">&#8634; Retake the Quiz</button>
+          <button class="result-retake-btn" onclick="ictGoToMenu()">&#8592; All Quizzes</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING CHAT BAR ─── -->
+  <div class="float-chat" id="floatChat">
+    <span class="float-chat-label">Ask JAWS</span>
+    <div class="float-chat-input-wrap" id="floatChatInputWrap">
+      <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" />
+      <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
+    </div>
+  </div>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div class="cookie-main">
+        <p class="cookie-text">We use cookies and local storage to make this site work and to understand how it's used. No ads. No selling your data.</p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
+          <button class="cookie-btn cookie-essential" id="cookieEssential">Essentials Only</button>
+        </div>
+      </div>
+      <button class="cookie-details-toggle" id="cookieDetailsToggle">Show details &#9662;</button>
+      <div class="cookie-details" id="cookieDetails">
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
+            <li><strong>Daily chat question limit</strong> — saved locally so the chatbot tracks your daily usage</li>
+            <li><strong>Article ratings</strong> — saved locally so the site remembers if you've already rated an article</li>
+            <li><strong>Chat session history</strong> — stored temporarily in your browser only, never on our servers</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
+            <li><strong>Quiz score events</strong> — your score tier sent to Google Analytics anonymously. Exact score not stored by us.</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">We Don't</h4>
+          <ul class="cookie-detail-list">
+            <li>Sell your data</li>
+            <li>Use advertising cookies</li>
+            <li>Collect your name, email, or any personally identifiable information</li>
+            <li>Track you across other websites</li>
+            <li>Store your chat conversations on our servers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── QUIZ DATA ───
+    var QUESTIONS = [
+      {
+        q: "When someone leaves the company, the official reason is:",
+        options: [
+          { text: "Nobody talks about it. They just disappear", points: 0 },
+          { text: "Always positive, always suspiciously timed", points: 3 },
+          { text: "Usually honest — people move on, get better offers, or managed out fairly", points: 10 },
+          { text: "Vague but plausible — 'pursuing other opportunities' covers a lot", points: 7 }
+        ]
+      },
+      {
+        q: "When something goes wrong, the organisation's response is:",
+        options: [
+          { text: "Find someone to blame, publicly or quietly", points: 3 },
+          { text: "Find the root cause, fix the system, move on", points: 10 },
+          { text: "Deny it happened, or reframe it as a success", points: 0 },
+          { text: "Review what happened, lessons learned, mostly forgotten", points: 7 }
+        ]
+      },
+      {
+        q: "How are promotions decided?",
+        options: [
+          { text: "Mostly merit, some politics, generally fair", points: 7 },
+          { text: "Nobody really knows. They just happen to certain people", points: 0 },
+          { text: "Clear criteria, transparent process, merit based", points: 10 },
+          { text: "Who you know matters more than what you do", points: 3 }
+        ]
+      },
+      {
+        q: "When a senior leader makes a bad decision, people:",
+        options: [
+          { text: "Grumble privately but comply publicly", points: 3 },
+          { text: "Challenge it through proper channels and get heard", points: 10 },
+          { text: "Pretend it was a great idea and compete to say so first", points: 0 },
+          { text: "Raise concerns quietly, sometimes it changes things", points: 7 }
+        ]
+      },
+      {
+        q: "How does your company handle mental health and burnout?",
+        options: [
+          { text: "Actively — flexible working, real support, managers who notice", points: 10 },
+          { text: "Weakness isn't tolerated. Nobody admits to struggling", points: 0 },
+          { text: "Lip service — mental health day once a year, back to 60hr weeks", points: 3 },
+          { text: "Policies exist, culture is improving, still patchy", points: 7 }
+        ]
+      },
+      {
+        q: "When you share a new idea, the typical response is:",
+        options: [
+          { text: "Subtle discouragement — 'that's not how we do things here'", points: 3 },
+          { text: "The idea surfaces later with someone else's name on it", points: 0 },
+          { text: "Polite interest, occasional follow-through", points: 7 },
+          { text: "Genuine curiosity and engagement, even if it doesn't go anywhere", points: 10 }
+        ]
+      },
+      {
+        q: "How does leadership communicate during difficult periods?",
+        options: [
+          { text: "Directly and honestly, even when the news is bad", points: 10 },
+          { text: "Spin. Always spin", points: 0 },
+          { text: "More communication than usual, mostly reassuring", points: 7 },
+          { text: "Radio silence until forced to say something", points: 3 }
+        ]
+      },
+      {
+        q: "When you hit your targets, your reward is:",
+        options: [
+          { text: "Recognised publicly and rewarded fairly", points: 10 },
+          { text: "More work and someone else's problem", points: 0 },
+          { text: "Acknowledged by your manager, noted for review time", points: 7 },
+          { text: "A 'well done' email and back to business", points: 3 }
+        ]
+      },
+      {
+        q: "When high performers leave, leadership:",
+        options: [
+          { text: "Acts like it didn't happen or finds reasons to discredit them", points: 0 },
+          { text: "Does exit interviews, reflects honestly, tries to change", points: 10 },
+          { text: "Says they 'weren't the right culture fit' after they're gone", points: 3 },
+          { text: "Acknowledges the loss and looks at what they could do better", points: 7 }
+        ]
+      },
+      {
+        q: "Honestly — do you trust your leadership team?",
+        options: [
+          { text: "Not really — I assume there's always an agenda", points: 3 },
+          { text: "No. And most people feel the same way", points: 0 },
+          { text: "Mostly — some more than others, cautiously optimistic", points: 7 },
+          { text: "Yes — they're imperfect but I believe they mean well and tell the truth", points: 10 }
+        ]
+      }
+    ];
+
+    var CATEGORIES = [
+      {
+        min: 75,
+        name: 'CLEAR WATERS',
+        tagline: 'Rare. Genuinely rare. Don\'t take it for granted.',
+        para: 'You\'re in something most people never find — an organisation that operates with some degree of integrity. It\'s not perfect, nothing is. But the fundamentals are there: accountability, honest communication, and enough psychological safety to do real work. The risk isn\'t your company. It\'s you getting complacent. Stay sharp. Keep developing. And know that the skills you build here will travel.',
+        tactics: [
+          'Use the safety to take risks you couldn\'t elsewhere — this is where careers accelerate',
+          'Build relationships across the organisation while the culture supports it',
+          'Don\'t assume it stays this way — cultures shift when leadership changes'
+        ]
+      },
+      {
+        min: 50,
+        name: 'MURKY WATERS',
+        tagline: 'Some red flags. Manageable — if you\'re paying attention.',
+        para: 'There\'s enough good here to work with, but you\'re not swimming in clean water. Pockets of politics, inconsistent leadership, the odd thing that doesn\'t quite add up. This is the most common corporate environment — not toxic enough to leave immediately, not healthy enough to fully relax. The danger is drift. You adapt to the murk and stop noticing it.',
+        tactics: [
+          'Map the politics deliberately — know who has real power and who has the title',
+          'Protect your visibility — in murky water, out of sight really is out of mind',
+          'Set a personal deadline: if X hasn\'t improved in 12 months, start looking'
+        ]
+      },
+      {
+        min: 25,
+        name: 'SHARK TANK',
+        tagline: 'You can survive here. But it will cost you something.',
+        para: 'This place runs on fear, politics, and self-preservation. People are careful about what they say and who they say it to. Credit travels upward, blame travels downward, and the rules apply differently depending on who you are. You can build a career here — sharks do well in shark tanks — but it requires constant vigilance and a clear-eyed understanding of what you\'re operating in. Don\'t mistake survival for success.',
+        tactics: [
+          'Document everything — protect yourself professionally at all times',
+          'Build your external network now, not when you need it',
+          'Decide consciously whether the trade-off is worth it — don\'t drift into acceptance'
+        ]
+      },
+      {
+        min: 0,
+        name: 'DEAD ZONE',
+        tagline: 'No oxygen. Get out before you become part of it.',
+        para: 'This isn\'t just a difficult environment — it\'s an actively harmful one. The kind of place that changes people over time, and not for the better. Cynicism becomes your default. You stop believing good organisations exist. You internalise behaviours you\'d have found unacceptable three years ago. The longer you stay in a dead zone, the harder it is to leave — not because opportunities disappear, but because your sense of what\'s normal shifts completely.',
+        tactics: [
+          'Start your job search today — not when you\'re desperate, now',
+          'Talk to people outside your industry about what normal looks like',
+          'Whatever you do, don\'t become the thing you hate'
+        ]
+      }
+    ];
+
+    var LETTERS = ['A', 'B', 'C', 'D'];
+
+    // ─── SHUFFLE ───
+    function shuffleArray(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+
+    // ─── STATE ───
+    var quiz = { idx: 0, scores: [], answers: [], shuffledOptions: [], advancing: false };
+    var keyboardUsed = false;
+    var currentCategory = null;
+    var finalScore = 0;
+
+    // ─── SESSION SAVE ───
+    function ictSaveState(screen) {
+      try {
+        var state = {
+          screen: screen,
+          answers: quiz.answers || [],
+          scores: quiz.scores || [],
+          currentIdx: quiz.idx || 0,
+          shuffledOptions: quiz.shuffledOptions || [],
+          finalScore: window._ictScore || null,
+          finalCategory: window._ictCategory || null,
+          finalTagline: window._ictTagline || null,
+          savedAt: Date.now()
+        };
+        sessionStorage.setItem('jawsToxicQuiz', JSON.stringify(state));
+      } catch(e) {}
+    }
+
+    // ─── ELEMENT REFS ───
+    var startSection   = document.getElementById('startSection');
+    var quizSection    = document.getElementById('quizSection');
+    var resultsSection = document.getElementById('resultsSection');
+    var questionWrap   = document.getElementById('questionWrap');
+    var questionNumEl  = document.getElementById('questionNum');
+    var questionTextEl = document.getElementById('questionText');
+    var optionsEl      = document.getElementById('optionsEl');
+    var backBtn        = document.getElementById('backBtn');
+    var kbdHint        = document.getElementById('kbdHint');
+    var progressFill   = document.getElementById('progressFill');
+    var progressText   = document.getElementById('progressText');
+
+    // ─── SESSION RESTORE ───
+    (function() {
+      try {
+        if (sessionStorage.getItem('jawsShowMenu') === 'true') {
+          sessionStorage.removeItem('jawsShowMenu');
+          return;
+        }
+        var saved = sessionStorage.getItem('jawsToxicQuiz');
+        if (!saved) return;
+        var state = JSON.parse(saved);
+        if (!state || !state.screen) return;
+        var age = Date.now() - (state.savedAt || 0);
+        if (age > 7200000) { sessionStorage.removeItem('jawsToxicQuiz'); return; }
+
+        if (state.screen === 'results') {
+          quiz.answers = state.answers || [];
+          quiz.scores = state.scores || [];
+          quiz.shuffledOptions = state.shuffledOptions || [];
+          window._ictScore = state.finalScore;
+          window._ictCategory = state.finalCategory;
+          window._ictTagline = state.finalTagline;
+          startSection.style.display = 'none';
+          quizSection.style.display = 'none';
+          showResults();
+          return;
+        }
+
+        if (state.screen === 'mid-quiz') {
+          startSection.style.display = 'none';
+          var resumeEl = document.getElementById('ictResumePrompt');
+          if (resumeEl) {
+            resumeEl._savedState = state;
+            resumeEl.style.display = 'flex';
+          }
+        }
+      } catch(e) {}
+    })();
+
+    // ─── FADE HELPERS ───
+    function fadeOut(el, cb) {
+      el.style.transition = 'opacity 0.35s ease';
+      el.style.opacity = '0';
+      setTimeout(cb, 350);
+    }
+    function fadeIn(el) {
+      el.style.transition = 'opacity 0.4s ease';
+      requestAnimationFrame(function() { requestAnimationFrame(function() { el.style.opacity = '1'; }); });
+    }
+
+    // ─── START ───
+    document.getElementById('startBtn').addEventListener('click', function() {
+      quiz.idx = 0; quiz.scores = []; quiz.answers = [];
+      quiz.advancing = false; keyboardUsed = false;
+      quiz.shuffledOptions = QUESTIONS.map(function(q) { return shuffleArray(q.options.slice()); });
+      fadeOut(startSection, function() {
+        startSection.style.display = 'none';
+        quizSection.style.display = 'flex';
+        fadeIn(quizSection);
+        updateProgress(0);
+        loadQuestion(0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── LOAD QUESTION ───
+    function loadQuestion(idx, preselect) {
+      var q = QUESTIONS[idx];
+      var opts = quiz.shuffledOptions[idx] || q.options;
+      quiz.advancing = false;
+      updateProgress(idx);
+      questionNumEl.textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      questionTextEl.textContent = q.q;
+      if (idx > 0) { backBtn.classList.remove('hidden'); } else { backBtn.classList.add('hidden'); }
+      if (keyboardUsed) { kbdHint.classList.add('hidden'); } else { kbdHint.classList.remove('hidden'); }
+      optionsEl.classList.remove('locked');
+      optionsEl.innerHTML = '';
+      opts.forEach(function(opt, i) {
+        var btn = document.createElement('button');
+        btn.className = 'quiz-option' + (preselect === i ? ' selected' : '');
+        var letter = document.createElement('span'); letter.className = 'quiz-option-letter'; letter.textContent = LETTERS[i];
+        var text = document.createElement('span');   text.className = 'quiz-option-text';   text.textContent = opt.text;
+        btn.appendChild(letter); btn.appendChild(text);
+        btn.addEventListener('click', function() { selectOption(i, opt.points); });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    // ─── SELECT ───
+    function selectOption(optIdx, points) {
+      if (quiz.advancing) return;
+      quiz.advancing = true;
+      optionsEl.classList.add('locked');
+      var allOpts = optionsEl.querySelectorAll('.quiz-option');
+      allOpts.forEach(function(b) { b.classList.remove('selected'); });
+      allOpts[optIdx].classList.add('confirmed');
+      setTimeout(function() {
+        quiz.scores.push(points);
+        quiz.answers.push({ optIdx: optIdx, points: points });
+        quiz.idx++;
+        ictSaveState('mid-quiz');
+        advance();
+      }, 600);
+    }
+
+    // ─── SKIP ───
+    document.getElementById('skipBtn').addEventListener('click', function() {
+      if (quiz.advancing) return;
+      quiz.scores.push(5);
+      quiz.answers.push(null);
+      quiz.idx++;
+      ictSaveState('mid-quiz');
+      advance();
+    });
+
+    function advance() {
+      questionWrap.classList.add('transitioning');
+      setTimeout(function() {
+        questionWrap.classList.remove('transitioning');
+        if (quiz.idx >= QUESTIONS.length) {
+          showResults();
+        } else {
+          loadQuestion(quiz.idx);
+        }
+      }, 250);
+    }
+
+    // ─── BACK ───
+    backBtn.addEventListener('click', function() {
+      if (quiz.idx === 0 || quiz.advancing) return;
+      var prev = quiz.answers.pop();
+      quiz.scores.pop();
+      quiz.idx--;
+      quiz.advancing = false;
+      questionWrap.classList.add('transitioning');
+      setTimeout(function() {
+        loadQuestion(quiz.idx, prev ? prev.optIdx : undefined);
+        questionWrap.classList.remove('transitioning');
+      }, 250);
+    });
+
+    // ─── PROGRESS ───
+    function updateProgress(idx) {
+      progressFill.style.width = (idx / 10 * 100) + '%';
+      progressText.textContent = (idx + 1) + ' / 10';
+    }
+
+    // ─── RESULTS ───
+    function showResults() {
+      var total = 0;
+      quiz.scores.forEach(function(s) { total += (s || 0); });
+      total = Math.min(100, Math.round(total));
+      finalScore = total;
+
+      var cat = CATEGORIES[CATEGORIES.length - 1];
+      for (var i = 0; i < CATEGORIES.length; i++) {
+        if (total >= CATEGORIES[i].min) { cat = CATEGORIES[i]; break; }
+      }
+      currentCategory = cat;
+
+      window._ictScore    = total;
+      window._ictCategory = cat.name;
+      window._ictTagline  = cat.tagline;
+      ictSaveState('results');
+
+      document.getElementById('resultCategory').textContent = cat.name;
+      document.getElementById('resultTagline').textContent   = cat.tagline;
+      document.getElementById('resultPara').textContent      = cat.para;
+
+      var tacticsList = document.getElementById('resultTacticsList');
+      tacticsList.innerHTML = '<span class="result-tactics-heading">Three tactics. Use them.</span>';
+      cat.tactics.forEach(function(t) {
+        var li = document.createElement('li');
+        li.textContent = t;
+        tacticsList.appendChild(li);
+      });
+
+      setupShareButtons(total, cat.name);
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'toxic_quiz_complete', { score: total, category: cat.name });
+      }
+
+      fadeOut(quizSection, function() {
+        quizSection.style.display = 'none';
+        resultsSection.style.display = 'flex';
+        fadeIn(resultsSection);
+        animateScore(total);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ─── ANIMATE SCORE ───
+    function animateScore(target) {
+      var el = document.getElementById('resultScore');
+      var duration = 1500;
+      var start = null;
+      function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.floor(ease(p) * target);
+        if (p < 1) { requestAnimationFrame(step); } else { el.textContent = target; }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ─── SHARE ───
+    function setupShareButtons(score, catName) {
+      var pageUrl = 'https://jawsadvantage.com/is-your-company-toxic.html';
+      var xText   = encodeURIComponent('I just tested my company on The JAWS Advantage — ' + score + '/100, ' + catName + '. Is yours clear water or a dead zone?');
+      var xUrl    = encodeURIComponent(pageUrl);
+      var liUrl   = encodeURIComponent(pageUrl);
+      var rdTitle = encodeURIComponent('I tested my company culture on The JAWS Advantage — ' + score + '/100 (' + catName + ')');
+      var waText  = encodeURIComponent('Just tested my company culture on The JAWS Advantage — ' + score + '/100, ' + catName + '. Try it: ' + pageUrl);
+      var emlSub  = encodeURIComponent('Is your company toxic?');
+      var emlBody = encodeURIComponent('I just tested my company culture on The JAWS Advantage — ' + score + '/100, ' + catName + '.\n\nIt\'s 10 questions and takes 5 minutes: ' + pageUrl);
+
+      document.getElementById('shareX').onclick = function() {
+        window.open('https://twitter.com/intent/tweet?text=' + xText + '&url=' + xUrl, '_blank');
+      };
+      document.getElementById('shareLinkedIn').onclick = function() {
+        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + liUrl, '_blank');
+      };
+      document.getElementById('shareReddit').onclick = function() {
+        window.open('https://www.reddit.com/submit?url=' + xUrl + '&title=' + rdTitle, '_blank');
+      };
+      document.getElementById('shareWhatsApp').onclick = function() {
+        window.open('https://wa.me/?text=' + waText, '_blank');
+      };
+      document.getElementById('shareEmail').onclick = function() {
+        window.location.href = 'mailto:?subject=' + emlSub + '&body=' + emlBody;
+      };
+      document.getElementById('shareCopy').onclick = function() {
+        navigator.clipboard.writeText(pageUrl).then(function() {
+          var icon = document.getElementById('copyIcon');
+          if (icon) { icon.className = 'fa-solid fa-check'; setTimeout(function() { icon.className = 'fa-solid fa-link'; }, 2000); }
+        });
+      };
+    }
+
+    // ─── RESUME / RESTART ───
+    function ictResumeQuiz() {
+      var resumeEl = document.getElementById('ictResumePrompt');
+      if (!resumeEl || !resumeEl._savedState) return;
+      var state = resumeEl._savedState;
+      quiz.answers = state.answers || [];
+      quiz.scores = state.scores || [];
+      quiz.idx = state.currentIdx || 0;
+      quiz.shuffledOptions = state.shuffledOptions || [];
+      resumeEl.style.display = 'none';
+      startSection.style.display = 'none';
+      quizSection.style.display = 'flex';
+      quizSection.style.opacity = '1';
+      updateProgress(quiz.idx);
+      loadQuestion(quiz.idx);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function ictRestartFromPrompt() {
+      sessionStorage.removeItem('jawsToxicQuiz');
+      var resumeEl = document.getElementById('ictResumePrompt');
+      if (resumeEl) resumeEl.style.display = 'none';
+      startSection.style.display = 'flex';
+      startSection.style.opacity = '1';
+    }
+
+    function ictGoToMenu() {
+      sessionStorage.setItem('jawsShowMenu', 'true');
+      window.location.href = 'jaws-score.html';
+    }
+
+    // ─── RETAKE ───
+    function ictRetake() {
+      sessionStorage.removeItem('jawsToxicQuiz');
+      quiz.idx = 0; quiz.scores = []; quiz.answers = [];
+      quiz.advancing = false; keyboardUsed = false;
+      fadeOut(resultsSection, function() {
+        resultsSection.style.display = 'none';
+        startSection.style.display = 'flex';
+        fadeIn(startSection);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ─── DISCUSS WITH JAWS ───
+    function ictDiscussWithJaws() {
+      var score    = window._ictScore    || 0;
+      var category = window._ictCategory || '';
+      var tagline  = window._ictTagline  || '';
+
+      var context = 'The user has just completed the JAWS Is Your Company Toxic quiz. Here are their results:\n\n' +
+        'COMPANY RATING: ' + score + '/100\n' +
+        'CATEGORY: ' + category + '\n' +
+        'SUMMARY: ' + tagline + '\n\n' +
+        'The user wants to discuss their company situation in more detail. Do not repeat back the category description they have already read. Instead ask one sharp, specific question that helps them think about what to do next — whether to stay, how to navigate, or when to leave. Be direct. Be useful.';
+      var encoded = encodeURIComponent(context);
+      window.location.href = 'get-the-edge.html?ddContext=' + encoded;
+    }
+
+    // ─── KEYBOARD SHORTCUTS ───
+    document.addEventListener('keydown', function(e) {
+      if (quizSection.style.display === 'none') return;
+      var map = { 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+      if (map[e.key] !== undefined && !quiz.advancing) {
+        keyboardUsed = true;
+        kbdHint.classList.add('hidden');
+        var opts = optionsEl.querySelectorAll('.quiz-option');
+        if (opts[map[e.key]]) opts[map[e.key]].click();
+      }
+    });
+
+    // ─── SCROLL ANIMATIONS ───
+    (function() {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+    })();
+
+    // ─── NAV SCROLL ───
+    (function() {
+      var nav = document.querySelector('nav');
+      window.addEventListener('scroll', function() {
+        nav.style.borderBottomColor = window.scrollY > 20
+          ? (document.body.classList.contains('light-mode') ? 'rgba(10,10,10,0.2)' : 'rgba(245,243,239,0.12)')
+          : '';
+      }, { passive: true });
+    })();
+
+    // ─── COOKIE CONSENT ───
+    (function() {
+      var GA_ID = 'G-5RC382BRZF';
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('cookieConsent');
+      function disableGA() { window['ga-disable-' + GA_ID] = true; }
+      function hideBanner() { banner.classList.remove('visible'); setTimeout(function() { banner.classList.add('hidden'); }, 400); }
+      if (consent) { banner.classList.add('hidden'); if (consent === 'essential') disableGA(); return; }
+      setTimeout(function() { banner.classList.add('visible'); }, 800);
+      document.getElementById('cookieAccept').addEventListener('click', function() { localStorage.setItem('cookieConsent', 'all'); hideBanner(); });
+      document.getElementById('cookieEssential').addEventListener('click', function() { localStorage.setItem('cookieConsent', 'essential'); disableGA(); hideBanner(); });
+      var toggle = document.getElementById('cookieDetailsToggle');
+      var details = document.getElementById('cookieDetails');
+      toggle.addEventListener('click', function() {
+        var open = details.classList.toggle('is-open');
+        toggle.textContent = open ? 'Hide details \u25b4' : 'Show details \u25be';
+      });
+    })();
+
+    // ─── FLOATING CHAT BAR ───
+    (function() {
+      var ARTICLE_CONTEXT = 'the Is Your Company Toxic quiz on The JAWS Advantage';
+      var widget = document.getElementById('floatChat');
+      var input  = document.getElementById('floatChatInput');
+      var submit = document.getElementById('floatChatSubmit');
+      function openWidget() { widget.classList.add('is-open'); setTimeout(function() { input.focus(); }, 300); }
+      function closeWidget() { widget.classList.remove('is-open'); input.value = ''; }
+      widget.addEventListener('click', function() { if (!widget.classList.contains('is-open')) openWidget(); });
+      input.addEventListener('blur', function() { setTimeout(function() { if (document.activeElement !== submit) closeWidget(); }, 150); });
+      submit.addEventListener('blur', function() { setTimeout(function() { if (document.activeElement !== input) closeWidget(); }, 150); });
+      function submitFloat() {
+        var q = input.value.trim();
+        var query = q ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
+      }
+      submit.addEventListener('click', function(e) { e.stopPropagation(); submitFloat(); });
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitFloat(); if (e.key === 'Escape') closeWidget(); });
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function() {
+      var btn = document.getElementById('themeToggle');
+      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+      function applyTheme(dark) {
+        if (dark) { document.body.classList.remove('light-mode'); btn.innerHTML = MOON; btn.setAttribute('aria-label', 'Switch to light mode'); }
+        else { document.body.classList.add('light-mode'); btn.innerHTML = SUN; btn.setAttribute('aria-label', 'Switch to dark mode'); }
+      }
+      var saved = localStorage.getItem('jaws_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved ? (saved === 'dark') : (prefersDark !== false));
+      btn.addEventListener('click', function() {
+        var dark = !document.body.classList.contains('light-mode');
+        localStorage.setItem('jaws_theme', dark ? 'light' : 'dark');
+        applyTheme(!dark);
+      });
+    })();
+
+    // ─── HAMBURGER MENU ───
+    (function() {
+      var hamburger = document.getElementById('navHamburger');
+      var menu = document.getElementById('navMobileMenu');
+      if (!hamburger || !menu) return;
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('is-open');
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
+      });
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() { menu.classList.remove('is-open'); hamburger.setAttribute('aria-label', 'Open menu'); hamburger.innerHTML = '&#9776;'; });
+      });
+      document.addEventListener('click', function(e) {
+        if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
+          menu.classList.remove('is-open'); hamburger.setAttribute('aria-label', 'Open menu'); hamburger.innerHTML = '&#9776;';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
