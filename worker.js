@@ -191,6 +191,36 @@ export default {
         return new Response(JSON.stringify({ ok: true, counts }), { status: 200, headers: corsHeaders(origin) });
       }
 
+      if (body.action === 'store_consent') {
+        const email = body.email || '';
+        const tool = body.tool || '';
+        const version = body.version || '1.0';
+        const agreedAt = body.agreedAt || new Date().toISOString();
+
+        if (!email || !tool) {
+          return new Response(JSON.stringify({ ok: false }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) }
+          });
+        }
+
+        const key = 'consent_' + tool.replace(/\s/g, '_') + '_' + email + '_' + Date.now();
+        const record = JSON.stringify({
+          email,
+          tool,
+          version,
+          agreedAt,
+          checks: body.checks || {}
+        });
+
+        await env.ARTICLE_RATINGS.put(key, record);
+
+        return new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) }
+        });
+      }
+
       if (body.action === 'report_output') {
         const tool = body.tool || 'Unknown tool';
         const mode = body.mode || 'unknown';

@@ -704,6 +704,125 @@
     .nav-mobile-menu a:last-child { border-bottom: none; }
     .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
 
+    /* ─── CONSENT GATE ─── */
+    .consent-gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+    }
+    .consent-gate-inner {
+      max-width: 560px;
+      width: 100%;
+    }
+    .consent-gate-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--red-accent);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 12px;
+    }
+    .consent-gate-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 2px;
+      color: var(--off-white);
+      margin: 0 0 16px;
+      line-height: 1;
+    }
+    .consent-gate-desc {
+      font-size: 15px;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+    .consent-gate-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .consent-email-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 14px 16px;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+    .consent-email-input:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .consent-email-note {
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      font-family: 'DM Sans', sans-serif;
+      margin: -8px 0 0;
+      line-height: 1.6;
+    }
+    .consent-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+    .consent-checkbox {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: var(--red-accent);
+      cursor: pointer;
+    }
+    .consent-agree-btn {
+      background: var(--red-accent);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 8px;
+    }
+    .consent-agree-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .consent-agree-btn:not(:disabled):hover {
+      opacity: 0.85;
+    }
+    .consent-terms-note {
+      font-size: 12px;
+      color: rgba(245,243,239,0.3);
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .consent-terms-note a {
+      color: rgba(245,243,239,0.4);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .consent-terms-note a:hover {
+      color: rgba(245,243,239,0.7);
+    }
+    body.light-mode .consent-email-input {
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.12);
+      color: #0a0a0a;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 24px; }
@@ -752,8 +871,40 @@
   <div class="decode-page">
     <div class="decode-wrap">
 
+      <!-- CONSENT GATE -->
+      <div id="consentGate" class="consent-gate" style="display:none;">
+        <div class="consent-gate-inner">
+          <p class="consent-gate-eyebrow">BEFORE YOU CONTINUE</p>
+          <h2 class="consent-gate-heading">A FEW THINGS FIRST</h2>
+          <p class="consent-gate-desc">This tool contains AI-generated satirical content that may include strong language. Please read and agree before continuing.</p>
+
+          <div class="consent-gate-form">
+            <input type="email" id="consentEmail" class="consent-email-input" placeholder="Your email address" autocomplete="email" />
+            <p class="consent-email-note">Your email is stored only as a record of your agreement. We will never contact you or share it.</p>
+
+            <label class="consent-checkbox-label">
+              <input type="checkbox" id="consentCheck1" class="consent-checkbox">
+              <span>I understand this output is satirical opinion — not factual statements about any employer, company, or individual</span>
+            </label>
+
+            <label class="consent-checkbox-label">
+              <input type="checkbox" id="consentCheck2" class="consent-checkbox">
+              <span>I will not share, screenshot, or distribute any output from this tool in any form</span>
+            </label>
+
+            <label class="consent-checkbox-label">
+              <input type="checkbox" id="consentCheck3" class="consent-checkbox">
+              <span>I confirm I am 18 years of age or older</span>
+            </label>
+
+            <button class="consent-agree-btn" id="consentAgreeBtn" disabled onclick="submitConsent()">AGREE AND CONTINUE →</button>
+            <p class="consent-terms-note">By continuing you agree to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
+          </div>
+        </div>
+      </div>
+
       <!-- INPUT SCREEN -->
-      <div id="decodeInputScreen">
+      <div id="decodeInputScreen" style="display:none;">
         <p class="decode-eyebrow">SHARPEN YOUR EDGE</p>
         <h1 class="decode-headline">JAWS DECODE</h1>
         <p class="decode-subheading">Paste any corporate email, memo, or message. We'll tell you what it actually means.</p>
@@ -1194,6 +1345,81 @@
         setTimeout(function() { btn.innerHTML = original; }, 2000);
       }).catch(function() {});
     }
+
+    // ─── CONSENT GATE ───
+    var TOOL_NAME = 'JAWS Decode';
+    var CONSENT_VERSION = '1.0';
+
+    function initConsentGate() {
+      var agreed = sessionStorage.getItem('jawsToolConsent_' + TOOL_NAME);
+      if (agreed) {
+        showTool();
+        return;
+      }
+      document.getElementById('consentGate').style.display = 'flex';
+
+      var email = document.getElementById('consentEmail');
+      var check1 = document.getElementById('consentCheck1');
+      var check2 = document.getElementById('consentCheck2');
+      var check3 = document.getElementById('consentCheck3');
+      var btn = document.getElementById('consentAgreeBtn');
+
+      function validateForm() {
+        var emailValid = email.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+        var allChecked = check1.checked && check2.checked && check3.checked;
+        btn.disabled = !(emailValid && allChecked);
+      }
+
+      email.addEventListener('input', validateForm);
+      check1.addEventListener('change', validateForm);
+      check2.addEventListener('change', validateForm);
+      check3.addEventListener('change', validateForm);
+    }
+
+    function submitConsent() {
+      var email = document.getElementById('consentEmail').value.trim();
+      if (!email) return;
+
+      var btn = document.getElementById('consentAgreeBtn');
+      btn.disabled = true;
+      btn.textContent = 'LOADING...';
+
+      var consentRecord = {
+        action: 'store_consent',
+        email: email,
+        tool: TOOL_NAME,
+        version: CONSENT_VERSION,
+        agreedAt: new Date().toISOString(),
+        checks: {
+          satiricalOpinion: true,
+          noSharing: true,
+          ageConfirmed: true
+        }
+      };
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(consentRecord)
+      })
+      .then(function() {
+        sessionStorage.setItem('jawsToolConsent_' + TOOL_NAME, '1');
+        showTool();
+      })
+      .catch(function() {
+        sessionStorage.setItem('jawsToolConsent_' + TOOL_NAME, '1');
+        showTool();
+      });
+    }
+
+    function showTool() {
+      var gate = document.getElementById('consentGate');
+      if (gate) gate.style.display = 'none';
+      var inputScreen = document.getElementById('decodeInputScreen');
+      if (inputScreen) inputScreen.style.display = 'block';
+    }
+
+    initConsentGate();
 
     function reportOutput() {
       var btn = document.getElementById('decodeReportBtn');
