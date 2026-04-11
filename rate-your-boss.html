@@ -414,6 +414,22 @@
       padding: 8px; transition: color 0.2s; opacity: 0.5;
     }
     .result-retake-btn:hover { color: var(--red); opacity: 1; }
+    .ryb-discuss-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 24px auto 0 auto;
+      background: var(--red-accent, #a52a1a);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .ryb-discuss-btn:hover { opacity: 0.85; }
 
     /* ─── CONTACT BAR ─── */
     .contact-bar {
@@ -630,9 +646,13 @@
         <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
         <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
       </div>
+      <button class="ryb-discuss-btn" onclick="rybDiscussWithJaws()">DISCUSS MY BOSS WITH JAWS →</button>
       <div class="result-bottom">
         <a href="jaws-score.html" class="result-jaws-link">How do YOU score? Take the JAWS Score →</a>
-        <button class="result-retake-btn" id="retakeBtn">Retake the quiz</button>
+        <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
+          <button class="result-retake-btn" onclick="rybRetake()">↺ Retake the Quiz</button>
+          <a href="jaws-score.html" class="result-retake-btn" style="text-decoration:none;">← All Quizzes</a>
+        </div>
       </div>
     </div>
   </section>
@@ -879,8 +899,17 @@
 
     var LETTERS = ['A', 'B', 'C', 'D'];
 
+    // ─── SHUFFLE ───
+    function shuffleArray(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+
     // ─── STATE ───
-    var quiz = { idx: 0, scores: [], answers: [], advancing: false };
+    var quiz = { idx: 0, scores: [], answers: [], shuffledOptions: [], advancing: false };
     var keyboardUsed = false;
     var currentCategory = null;
     var finalScore = 0;
@@ -913,6 +942,7 @@
     document.getElementById('startBtn').addEventListener('click', function() {
       quiz.idx = 0; quiz.scores = []; quiz.answers = [];
       quiz.advancing = false; keyboardUsed = false;
+      quiz.shuffledOptions = QUESTIONS.map(function(q) { return shuffleArray(q.options.slice()); });
       fadeOut(startSection, function() {
         startSection.style.display = 'none';
         quizSection.style.display = 'flex';
@@ -926,6 +956,7 @@
     // ─── LOAD QUESTION ───
     function loadQuestion(idx, preselect) {
       var q = QUESTIONS[idx];
+      var opts = quiz.shuffledOptions[idx] || q.options;
       quiz.advancing = false;
       updateProgress(idx);
       questionNumEl.textContent = (idx < 9 ? '0' : '') + (idx + 1);
@@ -934,7 +965,7 @@
       if (keyboardUsed) { kbdHint.classList.add('hidden'); } else { kbdHint.classList.remove('hidden'); }
       optionsEl.classList.remove('locked');
       optionsEl.innerHTML = '';
-      q.options.forEach(function(opt, i) {
+      opts.forEach(function(opt, i) {
         var btn = document.createElement('button');
         btn.className = 'quiz-option' + (preselect === i ? ' selected' : '');
         var letter = document.createElement('span'); letter.className = 'quiz-option-letter'; letter.textContent = LETTERS[i];
@@ -1015,6 +1046,10 @@
       }
       currentCategory = cat;
 
+      window._rybScore    = total;
+      window._rybCategory = cat.name;
+      window._rybTagline  = cat.tagline;
+
       document.getElementById('resultCategory').textContent = cat.name;
       document.getElementById('resultTagline').textContent   = cat.tagline;
       document.getElementById('resultPara').textContent      = cat.para;
@@ -1092,7 +1127,7 @@
     }
 
     // ─── RETAKE ───
-    document.getElementById('retakeBtn').addEventListener('click', function() {
+    function rybRetake() {
       quiz.idx = 0; quiz.scores = []; quiz.answers = [];
       quiz.advancing = false; keyboardUsed = false;
       fadeOut(resultsSection, function() {
@@ -1101,7 +1136,22 @@
         fadeIn(startSection);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-    });
+    }
+
+    // ─── DISCUSS WITH JAWS ───
+    function rybDiscussWithJaws() {
+      var score    = window._rybScore    || 0;
+      var category = window._rybCategory || '';
+      var tagline  = window._rybTagline  || '';
+
+      var context = 'The user has just completed the JAWS Rate Your Boss quiz. Here are their results:\n\n' +
+        'BOSS RATING: ' + score + '/100\n' +
+        'CATEGORY: ' + category + '\n' +
+        'SUMMARY: ' + tagline + '\n\n' +
+        'The user wants to discuss their boss situation in more detail. Do not repeat back the category description they have already read. Instead ask one sharp, specific question that helps them think more deeply about their situation — what they should do next, what the real risk is, or what they might be missing. Be direct. Be useful.';
+      var encoded = encodeURIComponent(context);
+      window.location.href = 'get-the-edge.html?ddContext=' + encoded;
+    }
 
     // ─── KEYBOARD SHORTCUTS ───
     document.addEventListener('keydown', function(e) {
