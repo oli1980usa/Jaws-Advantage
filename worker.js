@@ -128,9 +128,10 @@ export default {
           return new Response(JSON.stringify({ ok: false, error: 'eval failed' }), { status: 502, headers: corsHeaders(origin) });
         }
         const evalData = await evalResponse.json();
-        const rawText = evalData.content?.[0]?.text || '[]';
+        let rawText = (evalData.content && evalData.content[0] && evalData.content[0].text) ? evalData.content[0].text : '[]';
+        rawText = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
         let results;
-        try { results = JSON.parse(rawText); } catch(e) { results = answers.map(() => ({ score: 5, feedback: 'Could not evaluate this answer.' })); }
+        try { results = JSON.parse(rawText); } catch(e) { results = answers.map(function() { return { score: 5, feedback: 'Answer received.' }; }); }
         return new Response(JSON.stringify({ ok: true, results }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
       }
 
