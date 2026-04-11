@@ -1084,6 +1084,16 @@
     </div>
   </div>
 
+  <!-- ─── SHORT QUIZ RESUME PROMPT ─── -->
+  <div id="sqResumePrompt" style="display:none; flex-direction:column; align-items:center; gap:16px; padding: 60px 24px; text-align:center; min-height:60vh; justify-content:center;">
+    <p class="dd-ai-feedback-heading">You have an unfinished JAWS Score.</p>
+    <p style="font-size:14px; color:var(--off-white-dim); margin:0;">Pick up where you left off, or start fresh.</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:8px;">
+      <button class="score-btn-primary" onclick="sqResumeQuiz()">RESUME</button>
+      <button class="score-btn-outline" onclick="sqRestartFromPrompt()">START FRESH</button>
+    </div>
+  </div>
+
   <!-- ─── HERO ─── -->
   <section id="heroSection" class="score-hero">
     <span class="score-eyebrow fade-in">The JAWS Score</span>
@@ -1802,11 +1812,34 @@
       mcQuestions: [], mcPillars: [],
       forcedQuestions: [], forcedPillars: [],
       mcIdx: 0, mcScores: [], mcAnswers: [],
-      forcedIdx: 0, forcedScores: [],
+      forcedIdx: 0, forcedScores: [], forcedAnswers: [],
       pillarScores: [0, 0, 0, 0],
       phase: 0,
       advancing: false
     };
+
+    function sqSaveState(screen) {
+      try {
+        var state = {
+          screen: screen,
+          mcAnswers: sq.mcAnswers,
+          mcScores: sq.mcScores,
+          mcIdx: sq.mcIdx,
+          mcQuestions: sq.mcQuestions,
+          mcPillars: sq.mcPillars,
+          forcedAnswers: sq.forcedAnswers,
+          forcedScores: sq.forcedScores,
+          forcedIdx: sq.forcedIdx,
+          forcedQuestions: sq.forcedQuestions,
+          forcedPillars: sq.forcedPillars,
+          pillarScores: sq.pillarScores,
+          finalScore: window._jawsScore || null,
+          finalRating: window._jawsRating || null,
+          savedAt: Date.now()
+        };
+        sessionStorage.setItem('jawsShortQuiz', JSON.stringify(state));
+      } catch(e) {}
+    }
 
     var sqCurrentPanel = null;
 
@@ -1973,6 +2006,7 @@
       sq.advancing = false;
       sqShowPanel('quizQuestionWrap');
       sqLoadMCQuestion(0);
+      sqSaveState('mid-quiz');
     }
 
     function sqLoadMCQuestion(idx, preselect) {
@@ -2015,8 +2049,10 @@
           questionWrap.classList.remove('transitioning');
           if (sq.mcIdx >= sq.mcQuestions.length) {
             sqShowPanel('sqTransForced');
+            sqSaveState('mid-quiz');
           } else {
             sqLoadMCQuestion(sq.mcIdx);
+            sqSaveState('mid-quiz');
           }
         }, 250);
       }, 600);
@@ -2034,8 +2070,10 @@
         sq.advancing = false;
         if (sq.mcIdx >= sq.mcQuestions.length) {
           sqShowPanel('sqTransForced');
+          sqSaveState('mid-quiz');
         } else {
           sqLoadMCQuestion(sq.mcIdx);
+          sqSaveState('mid-quiz');
         }
       }, 250);
     }
@@ -2045,6 +2083,7 @@
       sq.forcedIdx = 0;
       sqShowPanel('sqForcedWrap');
       sqLoadForcedQuestion(0);
+      sqSaveState('mid-quiz');
     }
 
     function sqLoadForcedQuestion(idx) {
@@ -2071,6 +2110,7 @@
           showResults();
         } else {
           sqLoadForcedQuestion(sq.forcedIdx);
+          sqSaveState('mid-quiz');
         }
       }, 500);
     }
@@ -2082,6 +2122,7 @@
         showResults();
       } else {
         sqLoadForcedQuestion(sq.forcedIdx);
+        sqSaveState('mid-quiz');
       }
     }
 
@@ -2095,10 +2136,12 @@
       setTimeout(function() {
         sqLoadMCQuestion(sq.mcIdx, prev ? prev.optIdx : undefined);
         questionWrap.classList.remove('transitioning');
+        sqSaveState('mid-quiz');
       }, 250);
     }
 
     function showResults() {
+      sqSaveState('results');
       fadeOut(quizSection, function() {
         quizSection.style.display = 'none';
         contactBar.style.display = '';
@@ -2168,7 +2211,45 @@
       requestAnimationFrame(step);
     }
 
+    function sqResumeQuiz() {
+      var resumeEl = document.getElementById('sqResumePrompt');
+      if (!resumeEl || !resumeEl._savedState) return;
+      var state = resumeEl._savedState;
+      sq.mcAnswers = state.mcAnswers || [];
+      sq.mcScores = state.mcScores || [];
+      sq.mcIdx = state.mcIdx || 0;
+      sq.mcQuestions = state.mcQuestions || [];
+      sq.mcPillars = state.mcPillars || [];
+      sq.forcedAnswers = state.forcedAnswers || [];
+      sq.forcedScores = state.forcedScores || [];
+      sq.forcedIdx = state.forcedIdx || 0;
+      sq.forcedQuestions = state.forcedQuestions || [];
+      sq.forcedPillars = state.forcedPillars || [];
+      resumeEl.style.display = 'none';
+      heroSection.style.display = 'none';
+      contactBar.style.display = 'none';
+      pageFooter.style.display = 'none';
+      quizSection.style.display = 'flex';
+      fadeIn(quizSection);
+      if (sq.forcedIdx > 0 || sq.mcIdx >= sq.mcQuestions.length) {
+        sqShowPanel('sqForcedWrap');
+        sqLoadForcedQuestion(sq.forcedIdx);
+      } else {
+        sqShowPanel('quizQuestionWrap');
+        sqLoadMCQuestion(sq.mcIdx);
+      }
+    }
+
+    function sqRestartFromPrompt() {
+      sessionStorage.removeItem('jawsShortQuiz');
+      var resumeEl = document.getElementById('sqResumePrompt');
+      if (resumeEl) resumeEl.style.display = 'none';
+      heroSection.style.display = 'flex';
+      fadeIn(heroSection);
+    }
+
     function retakeQuiz() {
+      sessionStorage.removeItem('jawsShortQuiz');
       sq.mcAnswers = []; sq.mcScores = [];
       sq.forcedScores = [];
       sq.mcIdx = 0; sq.forcedIdx = 0;
@@ -2198,10 +2279,12 @@
         sq.advancing = false;
         sqShowPanel('quizQuestionWrap');
         sqLoadMCQuestion(sq.mcIdx, prev ? prev.optIdx : undefined);
+        sqSaveState('mid-quiz');
       } else {
         sq.forcedScores.pop();
         sq.forcedIdx--;
         sqLoadForcedQuestion(sq.forcedIdx);
+        sqSaveState('mid-quiz');
       }
     });
 
@@ -3406,6 +3489,7 @@
           heroSection.style.display  = 'none';
           contactBar.style.display   = 'none';
           pageFooter.style.display   = 'none';
+          document.getElementById('sqResumePrompt') && (document.getElementById('sqResumePrompt').style.display = 'none');
         }
 
         if (state.screen === 'results') {
@@ -3427,6 +3511,48 @@
         if (state.screen === 'mid-quiz') {
           hideStartScreen();
           var resumeEl = document.getElementById('ddResumePrompt');
+          if (resumeEl) {
+            resumeEl._savedState = state;
+            resumeEl.style.display = 'flex';
+          }
+        }
+      } catch(e) {}
+    })();
+
+    // ─── SHORT QUIZ SESSION RESTORE ───
+    (function() {
+      try {
+        var saved = sessionStorage.getItem('jawsShortQuiz');
+        if (!saved) return;
+        var state = JSON.parse(saved);
+        if (!state || !state.screen) return;
+        var age = Date.now() - (state.savedAt || 0);
+        if (age > 7200000) { sessionStorage.removeItem('jawsShortQuiz'); return; }
+
+        if (state.screen === 'results') {
+          sq.mcAnswers = state.mcAnswers || [];
+          sq.mcScores = state.mcScores || [];
+          sq.mcQuestions = state.mcQuestions || [];
+          sq.mcPillars = state.mcPillars || [];
+          sq.forcedAnswers = state.forcedAnswers || [];
+          sq.forcedScores = state.forcedScores || [];
+          sq.forcedQuestions = state.forcedQuestions || [];
+          sq.forcedPillars = state.forcedPillars || [];
+          sq.pillarScores = state.pillarScores || [0,0,0,0];
+          window._jawsScore = state.finalScore;
+          window._jawsRating = state.finalRating;
+          heroSection.style.display = 'none';
+          contactBar.style.display = 'none';
+          pageFooter.style.display = 'none';
+          showResults();
+          return;
+        }
+
+        if (state.screen === 'mid-quiz') {
+          heroSection.style.display = 'none';
+          contactBar.style.display = 'none';
+          pageFooter.style.display = 'none';
+          var resumeEl = document.getElementById('sqResumePrompt');
           if (resumeEl) {
             resumeEl._savedState = state;
             resumeEl.style.display = 'flex';
