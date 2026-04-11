@@ -654,9 +654,35 @@
       font-size: 11px;
       color: rgba(245,243,239,0.25);
       text-align: center;
-      margin: 8px 0 24px;
+      margin: 8px 0 0;
       font-family: 'DM Sans', sans-serif;
       letter-spacing: 0.5px;
+    }
+    .decode-report-wrap {
+      text-align: center;
+      margin: 8px 0 24px;
+    }
+    .decode-report-btn {
+      background: transparent;
+      border: none;
+      color: rgba(245,243,239,0.2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .decode-report-btn:hover {
+      color: rgba(245,243,239,0.5);
+    }
+    .decode-report-confirm {
+      font-size: 11px;
+      color: rgba(245,243,239,0.4);
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 6px;
     }
 
     /* ─── RESPONSIVE ─── */
@@ -789,7 +815,11 @@
           <p class="decode-verdict-text" id="jpaVerdict"></p>
         </div>
 
-        <p class="decode-no-share-note">Results are for your personal use only. You may not share, reproduce, or distribute this output in any form.</p>
+        <p class="decode-no-share-note">Results are for your personal use only. You may not share, reproduce, screenshot, or distribute this output in any form. Sharing constitutes a violation of our Terms of Service.</p>
+        <div class="decode-report-wrap">
+          <button class="decode-report-btn" id="decodeReportBtn" onclick="reportOutput()">Report Inappropriate Output</button>
+          <p class="decode-report-confirm" id="decodeReportConfirm" style="display:none;">Report received. We will review this output.</p>
+        </div>
 
         <div class="quiz-rating" id="jpaRating">
           <p class="quiz-rating-label">Rate this tool</p>
@@ -1159,6 +1189,29 @@
         }
       });
     })();
+
+    function reportOutput() {
+      var btn = document.getElementById('decodeReportBtn');
+      var confirm = document.getElementById('decodeReportConfirm');
+      if (btn) btn.style.display = 'none';
+      if (confirm) confirm.style.display = 'block';
+
+      var reportData = {
+        action: 'report_output',
+        tool: 'Job Posting Analyzer',
+        mode: currentAnalyseMode || 'jaws',
+        input: jpaInput ? jpaInput.value.substring(0, 500) : '',
+        output: currentJpaResult ? JSON.stringify(currentJpaResult).substring(0, 1000) : '',
+        reportedAt: new Date().toISOString(),
+        userAgent: navigator.userAgent
+      };
+
+      fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reportData)
+      }).catch(function() {});
+    }
   </script>
 
 </body>
