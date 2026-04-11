@@ -661,7 +661,7 @@
       <div class="result-bottom">
         <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
           <button class="result-retake-btn" onclick="rybRetake()">↺ Retake the Quiz</button>
-          <a href="jaws-score.html" class="result-retake-btn" style="text-decoration:none;">← All Quizzes</a>
+          <button class="result-retake-btn" onclick="rybGoToMenu()">← All Quizzes</button>
         </div>
       </div>
     </div>
@@ -1219,6 +1219,11 @@
       if (resumeEl) resumeEl.style.display = 'none';
       startSection.style.display = 'flex';
       startSection.style.opacity = '1';
+    }
+
+    function rybGoToMenu() {
+      sessionStorage.setItem('jawsShowMenu', 'true');
+      window.location.href = 'jaws-score.html';
     }
 
     // ─── RETAKE ───
