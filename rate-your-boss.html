@@ -566,6 +566,63 @@
     }
     #floatChat { display: none !important; }
 
+    /* Quiz rating widget */
+    .quiz-rating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 32px auto;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      max-width: 400px;
+    }
+    .quiz-rating-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+    .quiz-rating-btns {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .quiz-rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px 16px;
+      transition: transform 0.15s ease;
+    }
+    .quiz-rating-btn:hover { transform: scale(1.1); }
+    .quiz-rating-btn.voted { opacity: 1; }
+    .quiz-rating-btn:not(.voted) { opacity: 0.6; }
+    .quiz-rating-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--off-white-dim);
+      transition: color 0.2s ease;
+    }
+    .quiz-rating-btn.voted-up .quiz-rating-icon { color: #a52a1a; }
+    .quiz-rating-btn.voted-down .quiz-rating-icon { color: rgba(245,243,239,0.4); }
+    .quiz-rating-count {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: var(--off-white);
+      letter-spacing: 1px;
+    }
+    .quiz-rating-thankyou {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      letter-spacing: 1px;
+      display: none;
+    }
     /* Download card button */
     .sq-download-card-btn {
       display: block; width: 100%; max-width: 400px; margin: 0 auto 20px;
@@ -670,6 +727,20 @@
         <button class="share-btn" id="shareWhatsApp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
         <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
         <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
+      </div>
+      <div class="quiz-rating" id="rybRating">
+        <p class="quiz-rating-label">Rate this quiz</p>
+        <div class="quiz-rating-btns">
+          <button class="quiz-rating-btn" id="rybRateUp" onclick="quizVote('rate-boss','up','rybRating')">
+            <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="quiz-rating-count" id="rybRateUpCount">—</span>
+          </button>
+          <button class="quiz-rating-btn" id="rybRateDown" onclick="quizVote('rate-boss','down','rybRating')">
+            <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="quiz-rating-count" id="rybRateDownCount">—</span>
+          </button>
+        </div>
+        <p class="quiz-rating-thankyou" id="rybRateThanks">Thanks for the feedback 🦈</p>
       </div>
       <button class="sq-download-card-btn" onclick="rybDownloadCard()">&#8659; DOWNLOAD RESULT CARD</button>
       <button class="ryb-discuss-btn" onclick="rybDiscussWithJaws()">DISCUSS MY BOSS WITH JAWS →</button>
@@ -1158,6 +1229,7 @@
         fadeIn(resultsSection);
         animateScore(total);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        quizLoadVotes('rate-boss', 'rybRateUpCount', 'rybRateDownCount');
       });
     }
 
@@ -1267,6 +1339,76 @@
         'The user wants to discuss their boss situation in more detail. Do not repeat back the category description they have already read. Instead ask one sharp, specific question that helps them think more deeply about their situation — what they should do next, what the real risk is, or what they might be missing. Be direct. Be useful.';
       var encoded = encodeURIComponent(context);
       window.location.href = 'get-the-edge.html?ddContext=' + encoded;
+    }
+
+    // ─── QUIZ RATING ───
+    var QUIZ_OFFSETS = {
+      'jaws-score':    { up: 3200, down: 480 },
+      'deep-dive':     { up: 2800, down: 390 },
+      'rate-boss':     { up: 1900, down: 210 },
+      'company-toxic': { up: 1400, down: 180 }
+    };
+
+    var QUIZ_VOTE_KEY_PREFIX = 'jawsQuizVote_';
+
+    function quizLoadVotes(quizId, upId, downId) {
+      fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_quiz_votes', quizId: quizId })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
+        var upEl = document.getElementById(upId);
+        var downEl = document.getElementById(downId);
+        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
+        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+      })
+      .catch(function() {
+        var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
+        var upEl = document.getElementById(upId);
+        var downEl = document.getElementById(downId);
+        if (upEl) upEl.textContent = offsets.up.toLocaleString();
+        if (downEl) downEl.textContent = offsets.down.toLocaleString();
+      });
+    }
+
+    function quizVote(quizId, direction, containerId) {
+      var voteKey = QUIZ_VOTE_KEY_PREFIX + quizId;
+      if (localStorage.getItem(voteKey)) return;
+      localStorage.setItem(voteKey, direction);
+
+      var container = document.getElementById(containerId);
+      if (!container) return;
+
+      var upBtn = container.querySelector('[id$="RateUp"]');
+      var downBtn = container.querySelector('[id$="RateDown"]');
+      var thanks = container.querySelector('.quiz-rating-thankyou');
+
+      if (direction === 'up') {
+        if (upBtn) upBtn.classList.add('voted', 'voted-up');
+        if (downBtn) downBtn.classList.add('voted');
+      } else {
+        if (downBtn) downBtn.classList.add('voted', 'voted-down');
+        if (upBtn) upBtn.classList.add('voted');
+      }
+      if (thanks) thanks.style.display = 'block';
+
+      fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'vote_quiz', quizId: quizId, direction: direction })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
+        var upEl = container.querySelector('[id$="RateUpCount"]');
+        var downEl = container.querySelector('[id$="RateDownCount"]');
+        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
+        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+      })
+      .catch(function() {});
     }
 
     // ─── DOWNLOAD CARD ───

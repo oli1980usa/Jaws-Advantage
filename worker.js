@@ -135,6 +135,47 @@ export default {
         return new Response(JSON.stringify({ ok: true, results }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
       }
 
+      if (body.action === 'get_quiz_votes') {
+        const quizId = body.quizId || '';
+        if (!quizId) return new Response(JSON.stringify({ up: 0, down: 0 }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+        const upKey = 'quiz-' + quizId + '-up';
+        const downKey = 'quiz-' + quizId + '-down';
+        const [upVal, downVal] = await Promise.all([
+          env.ARTICLE_RATINGS.get(upKey),
+          env.ARTICLE_RATINGS.get(downKey)
+        ]);
+        return new Response(JSON.stringify({
+          up: parseInt(upVal || '0'),
+          down: parseInt(downVal || '0')
+        }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+      }
+
+      if (body.action === 'vote_quiz') {
+        const quizId = body.quizId || '';
+        const direction = body.direction || '';
+        if (!quizId || !['up','down'].includes(direction)) {
+          return new Response(JSON.stringify({ ok: false }), { status: 400, headers: corsHeaders(origin) });
+        }
+        const upKey = 'quiz-' + quizId + '-up';
+        const downKey = 'quiz-' + quizId + '-down';
+        const [upVal, downVal] = await Promise.all([
+          env.ARTICLE_RATINGS.get(upKey),
+          env.ARTICLE_RATINGS.get(downKey)
+        ]);
+        var upCount = parseInt(upVal || '0');
+        var downCount = parseInt(downVal || '0');
+        if (direction === 'up') upCount++;
+        else downCount++;
+        await Promise.all([
+          env.ARTICLE_RATINGS.put(upKey, String(upCount)),
+          env.ARTICLE_RATINGS.put(downKey, String(downCount))
+        ]);
+        return new Response(JSON.stringify({ up: upCount, down: downCount }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) }
+        });
+      }
+
       if (body.action === 'rate_article') {
         const article = (body.article || '').slice(0, 200);
         const rating = body.rating;
