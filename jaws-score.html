@@ -1315,6 +1315,7 @@
           <button class="forced-btn" id="sqForcedA"></button>
           <button class="forced-btn" id="sqForcedB"></button>
         </div>
+        <p class="quiz-kbd-hint" id="sqForcedKbdHint">Press A or B to answer</p>
         <p class="dd-skip-link" onclick="sqSkipForced()">Skip this question</p>
       </div>
 
@@ -1410,6 +1411,7 @@
           <button class="forced-btn" id="ddForcedA"></button>
           <button class="forced-btn" id="ddForcedB"></button>
         </div>
+        <p class="quiz-kbd-hint" id="ddForcedKbdHint">Press A or B to answer</p>
         <p class="dd-skip-link" onclick="ddSkipForced()">Skip this question</p>
       </div>
 
@@ -2461,6 +2463,16 @@
       var idx = ['A', 'B', 'C', 'D'].indexOf(key);
       if (idx === -1) return;
 
+      // Short quiz forced choice (A or B only)
+      if (quizSection.style.display === 'flex' && sqCurrentPanel === 'sqForcedWrap') {
+        if (idx > 1) return;
+        var sqForcedKbdHint = document.getElementById('sqForcedKbdHint');
+        if (sqForcedKbdHint) sqForcedKbdHint.classList.add('hidden');
+        var btn = document.getElementById(idx === 0 ? 'sqForcedA' : 'sqForcedB');
+        if (btn && !btn.classList.contains('confirmed') && !btn.classList.contains('faded')) btn.click();
+        return;
+      }
+
       // Short quiz MC
       if (quizSection.style.display === 'flex' && sqCurrentPanel === 'quizQuestionWrap') {
         if (sq.advancing) return;
@@ -2468,6 +2480,16 @@
         if (!allOpts[idx]) return;
         if (!keyboardUsed) { keyboardUsed = true; kbdHint.classList.add('hidden'); }
         sqMCSelect(idx, parseInt(allOpts[idx].dataset.points, 10));
+        return;
+      }
+
+      // Deep dive forced choice (A or B only)
+      if (ddCurrentSection === 'forced') {
+        if (idx > 1) return;
+        var ddForcedKbdHint = document.getElementById('ddForcedKbdHint');
+        if (ddForcedKbdHint) ddForcedKbdHint.classList.add('hidden');
+        var ddBtn = document.getElementById(idx === 0 ? 'ddForcedA' : 'ddForcedB');
+        if (ddBtn && !ddBtn.classList.contains('confirmed') && !ddBtn.classList.contains('faded')) ddBtn.click();
         return;
       }
 
