@@ -9,6 +9,7 @@
       window['ga-disable-G-5RC382BRZF'] = true;
     }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -556,6 +557,19 @@
       .float-chat.is-open { width: calc(100vw - 32px); height: 52px; padding: 0; }
     }
     #floatChat { display: none !important; }
+
+    /* Download card button */
+    .sq-download-card-btn {
+      display: block; width: 100%; max-width: 400px; margin: 0 auto 20px;
+      padding: 14px 24px; background: transparent;
+      border: 1px solid var(--red); color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px;
+      cursor: pointer; transition: background 0.2s, box-shadow 0.2s;
+    }
+    .sq-download-card-btn:hover {
+      background: rgba(165,42,26,0.12);
+      box-shadow: 0 0 14px rgba(165,42,26,0.4);
+    }
   </style>
 </head>
 <body>
@@ -649,6 +663,7 @@
         <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
         <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
       </div>
+      <button class="sq-download-card-btn" onclick="ictDownloadCard()">&#8659; DOWNLOAD RESULT CARD</button>
       <button class="ict-discuss-btn" onclick="ictDiscussWithJaws()">DISCUSS MY COMPANY WITH JAWS &rarr;</button>
       <div class="result-bottom">
         <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
@@ -1213,6 +1228,72 @@
       window.location.href = 'get-the-edge.html?ddContext=' + encoded;
     }
 
+    // ─── DOWNLOAD CARD ───
+    function generateShareCard(config) {
+      var card = document.getElementById('jawsShareCard');
+      document.getElementById('scCardEyebrow').textContent  = config.eyebrow  || 'YOUR RESULT';
+      document.getElementById('scCardScore').textContent    = config.score    || '0';
+      document.getElementById('scCardCategory').textContent = config.category || '';
+      document.getElementById('scCardTagline').textContent  = config.tagline  || '';
+      document.getElementById('scCardQuizName').textContent = config.quizName || 'THE JAWS ADVANTAGE';
+
+      var pillarsEl    = document.getElementById('scCardPillars');
+      var pillarBarsEl = document.getElementById('scCardPillarBars');
+      if (config.pillars && config.pillars.length) {
+        pillarsEl.style.display = 'block';
+        pillarBarsEl.innerHTML = '';
+        config.pillars.forEach(function(p) {
+          var row = document.createElement('div');
+          row.style.cssText = 'margin-bottom:10px;';
+          row.innerHTML =
+            '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">' +
+              '<span style="font-size:10px;color:rgba(245,243,239,0.6);font-family:\'DM Sans\',sans-serif;letter-spacing:1px;">' + p.name.toUpperCase() + '</span>' +
+              '<span style="font-size:10px;color:#a52a1a;font-family:\'DM Sans\',sans-serif;">' + p.pct + '%</span>' +
+            '</div>' +
+            '<div style="height:3px;background:rgba(255,255,255,0.1);border-radius:0;">' +
+              '<div style="height:3px;width:' + p.pct + '%;background:#a52a1a;"></div>' +
+            '</div>';
+          pillarBarsEl.appendChild(row);
+        });
+      } else {
+        pillarsEl.style.display = 'none';
+      }
+
+      card.style.left = '-9999px';
+      card.style.display = 'flex';
+
+      setTimeout(function() {
+        html2canvas(card, {
+          width: 540,
+          height: 675,
+          scale: 2,
+          backgroundColor: '#0a0a0a',
+          useCORS: true,
+          logging: false
+        }).then(function(canvas) {
+          card.style.display = 'none';
+          var link = document.createElement('a');
+          link.download = 'jaws-toxic-score.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).catch(function() {
+          card.style.display = 'none';
+          alert('Could not generate card. Try screenshotting your results instead.');
+        });
+      }, 100);
+    }
+
+    function ictDownloadCard() {
+      generateShareCard({
+        eyebrow:  'COMPANY TOXICITY',
+        score:    window._ictScore    || 0,
+        category: window._ictCategory || '',
+        tagline:  window._ictTagline  || '',
+        quizName: 'IS YOUR COMPANY TOXIC?',
+        pillars:  null
+      });
+    }
+
     // ─── KEYBOARD SHORTCUTS ───
     document.addEventListener('keydown', function(e) {
       if (quizSection.style.display === 'none') return;
@@ -1322,5 +1403,38 @@
       });
     })();
   </script>
+
+  <!-- ─── SHARE CARD TEMPLATE ─── -->
+  <div id="jawsShareCard" style="position:fixed; left:-9999px; top:0; width:540px; height:675px; background:#0a0a0a; padding:48px; box-sizing:border-box; font-family:'Bebas Neue',sans-serif; display:none; flex-direction:column; justify-content:space-between;">
+
+    <div style="display:flex; align-items:center; gap:12px;">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 70 C20 40 40 20 70 15 C80 13 90 12 92 18 C94 24 88 32 75 42 C55 58 50 75 55 88 C58 96 50 98 42 92 C25 80 15 78 10 70Z" fill="#a52a1a"/>
+      </svg>
+      <div>
+        <div style="color:#f5f3ef; font-size:14px; letter-spacing:3px;">THE JAWS ADVANTAGE</div>
+        <div style="color:#a52a1a; font-size:10px; letter-spacing:2px; font-family:'DM Sans',sans-serif;">CAREER INTELLIGENCE — UNFILTERED</div>
+      </div>
+    </div>
+
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px 0;">
+      <div id="scCardEyebrow" style="color:#a52a1a; font-size:12px; letter-spacing:3px; margin-bottom:8px; font-family:'DM Sans',sans-serif;"></div>
+      <div id="scCardScore" style="color:#a52a1a; font-size:120px; line-height:1; margin-bottom:0;"></div>
+      <div style="color:rgba(245,243,239,0.4); font-size:24px; margin-bottom:16px; font-family:'DM Sans',sans-serif;">/100</div>
+      <div id="scCardCategory" style="color:#f5f3ef; font-size:52px; line-height:1; margin-bottom:12px; letter-spacing:2px;"></div>
+      <div id="scCardTagline" style="color:#a52a1a; font-size:14px; font-style:italic; font-family:'DM Sans',sans-serif; line-height:1.5; margin-bottom:24px;"></div>
+      <div id="scCardPillars" style="display:none; margin-top:8px;">
+        <div style="font-size:10px; letter-spacing:2px; color:rgba(245,243,239,0.4); font-family:'DM Sans',sans-serif; margin-bottom:12px;">PILLAR BREAKDOWN</div>
+        <div id="scCardPillarBars"></div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; display:flex; justify-content:space-between; align-items:center;">
+      <div style="color:rgba(245,243,239,0.4); font-size:11px; letter-spacing:1px; font-family:'DM Sans',sans-serif;">jawsadvantage.com</div>
+      <div id="scCardQuizName" style="color:rgba(245,243,239,0.4); font-size:11px; letter-spacing:1px; font-family:'DM Sans',sans-serif;"></div>
+    </div>
+
+  </div>
+
 </body>
 </html>
