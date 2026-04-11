@@ -564,6 +564,217 @@
     }
     .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
 
+    /* ─── DEEP DIVE QUIZ ─── */
+    .dd-section {
+      min-height: calc(100vh - 64px);
+      padding-top: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+    }
+    .dd-wrap { width: 100%; max-width: 720px; padding: 60px 48px 80px; }
+    .dd-progress { margin-bottom: 48px; }
+    .dd-progress-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--red); opacity: 0.85;
+      display: block; margin-bottom: 8px;
+    }
+    .dd-progress-track {
+      width: 100%; height: 2px; background: var(--border);
+      position: relative; border-radius: 2px; margin-bottom: 8px;
+    }
+    .dd-progress-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--red); box-shadow: 0 0 8px rgba(165,42,26,0.7);
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1); border-radius: 2px;
+    }
+    .dd-progress-meta {
+      display: flex; justify-content: space-between;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--off-white-dim); opacity: 0.5;
+    }
+    .dd-section-intro { text-align: center; padding: 60px 0; }
+    .dd-intro-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 100px;
+      line-height: 1; color: rgba(165,42,26,0.1); display: block; margin-bottom: -16px;
+    }
+    .dd-intro-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+      letter-spacing: 0.06em; color: var(--off-white); margin-bottom: 16px;
+    }
+    .dd-intro-desc {
+      font-size: 15px; font-weight: 300; color: var(--off-white-dim);
+      line-height: 1.7; margin-bottom: 36px;
+      max-width: 460px; margin-left: auto; margin-right: auto;
+    }
+    .dd-begin-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+      background: var(--red); border: 2px solid var(--red);
+      padding: 14px 40px; cursor: pointer; transition: background 0.2s;
+    }
+    .dd-begin-btn:hover { background: var(--red-dark); }
+    .rank-instruction {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--off-white-dim); opacity: 0.6;
+      display: block; margin-bottom: 12px;
+    }
+    .rank-list { display: flex; flex-direction: column; gap: 8px; }
+    .rank-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; background: var(--black-2);
+      border: 1px solid var(--border); cursor: grab; user-select: none;
+      transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+    }
+    .rank-item.dragging { opacity: 0.4; cursor: grabbing; }
+    .rank-item.drag-over { border-color: var(--red); background: rgba(165,42,26,0.1); }
+    .rank-handle {
+      color: rgba(245,243,239,0.2); flex-shrink: 0;
+      font-size: 16px; line-height: 1; cursor: grab;
+    }
+    .rank-pos {
+      flex-shrink: 0; width: 26px; height: 26px;
+      border: 1px solid rgba(165,42,26,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 14px;
+      color: var(--red); background: rgba(165,42,26,0.06);
+    }
+    .rank-text { font-size: 15px; font-weight: 300; color: var(--off-white); line-height: 1.5; flex: 1; }
+    .rank-next-btn, .open-next-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+      background: var(--red); border: 2px solid var(--red);
+      padding: 14px 36px; cursor: pointer; transition: background 0.2s, opacity 0.2s;
+      margin-top: 20px; display: inline-block;
+    }
+    .rank-next-btn:hover:not(:disabled), .open-next-btn:hover:not(:disabled) { background: var(--red-dark); }
+    .rank-next-btn:disabled, .open-next-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .rank-mobile-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 14px; background: var(--black-2);
+      border: 1px solid var(--border); margin-bottom: 8px;
+    }
+    .rank-mobile-text { font-size: 14px; font-weight: 300; color: var(--off-white); line-height: 1.5; flex: 1; }
+    .rank-mobile-btns { display: flex; gap: 5px; flex-shrink: 0; }
+    .rank-num-btn {
+      width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 15px;
+      background: var(--black-3); border: 1px solid var(--border);
+      color: var(--off-white-dim); cursor: pointer;
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
+    }
+    .rank-num-btn:hover { border-color: rgba(165,42,26,0.5); color: var(--off-white); }
+    .rank-num-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+    .forced-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+    }
+    .forced-btn {
+      padding: 28px 20px; background: var(--black-2);
+      border: 1px solid var(--border); cursor: pointer; text-align: center;
+      font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 300;
+      color: var(--off-white); line-height: 1.6;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .forced-btn:hover { border-color: rgba(165,42,26,0.5); }
+    .forced-btn.confirmed { border-color: var(--red); background: var(--red); color: #fff; pointer-events: none; }
+    .forced-btn.faded { opacity: 0.3; pointer-events: none; }
+    .dd-textarea {
+      width: 100%; min-height: 140px; background: var(--black-2);
+      border: 1px solid var(--border); color: var(--off-white);
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+      line-height: 1.7; padding: 16px 20px; resize: vertical;
+      transition: border-color 0.15s; display: block;
+    }
+    .dd-textarea:focus { outline: none; border-color: rgba(165,42,26,0.5); }
+    .dd-textarea-hint {
+      font-size: 11px; color: var(--off-white-dim); opacity: 0.5;
+      margin-top: 6px; display: block; letter-spacing: 0.04em;
+    }
+    .dd-loading-section {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; flex-direction: column; gap: 28px;
+      text-align: center; padding: 48px;
+    }
+    .dd-loading-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 5vw, 52px); letter-spacing: 0.05em;
+      color: var(--off-white); line-height: 1.1;
+    }
+    .dd-loading-subtext {
+      font-size: 12px; color: var(--off-white-dim);
+      letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.55;
+    }
+    .dd-loading-dots { display: flex; gap: 10px; justify-content: center; }
+    .dd-loading-dot {
+      width: 9px; height: 9px; background: var(--red);
+      border-radius: 50%; animation: ddDot 1.4s infinite ease-in-out both;
+    }
+    .dd-loading-dot:nth-child(1) { animation-delay: 0s; }
+    .dd-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .dd-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes ddDot {
+      0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+    .dd-results-section {
+      padding-top: 80px; display: flex;
+      align-items: flex-start; justify-content: center;
+    }
+    .dd-results-wrap { max-width: 760px; width: 100%; padding: 60px 48px 80px; }
+    .dd-pillar-bars { margin: 36px 0; }
+    .dd-pillar-row { margin-bottom: 22px; }
+    .dd-pillar-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+      letter-spacing: 0.1em; color: var(--off-white);
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .dd-pillar-pct { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--red); }
+    .dd-pillar-track { width: 100%; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .dd-pillar-fill {
+      height: 100%; background: var(--red); box-shadow: 0 0 8px rgba(165,42,26,0.6);
+      border-radius: 2px; width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .dd-insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+    .dd-insight-card { padding: 20px 24px; border: 1px solid rgba(165,42,26,0.3); background: rgba(165,42,26,0.05); }
+    .dd-insight-label {
+      font-family: 'Bebas Neue', sans-serif; font-size: 11px;
+      letter-spacing: 0.18em; color: var(--red); margin-bottom: 8px;
+      display: block; text-transform: uppercase; opacity: 0.8;
+    }
+    .dd-insight-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+      letter-spacing: 0.04em; color: var(--off-white); margin-bottom: 8px; line-height: 1.1;
+    }
+    .dd-insight-desc { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
+    .dd-ai-feedback { margin: 32px 0; }
+    .dd-ai-feedback-heading {
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+      letter-spacing: 0.08em; color: var(--off-white); margin-bottom: 16px;
+    }
+    .dd-feedback-item {
+      padding: 14px 18px; border-left: 2px solid rgba(165,42,26,0.4);
+      margin-bottom: 10px; background: rgba(165,42,26,0.04);
+    }
+    .dd-feedback-q {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); opacity: 0.75; margin-bottom: 4px;
+    }
+    .dd-feedback-text { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
+    .dd-reading {
+      padding: 24px; border: 1px solid rgba(165,42,26,0.3);
+      background: rgba(165,42,26,0.04); margin: 28px 0;
+    }
+    .dd-reading-heading {
+      font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+      letter-spacing: 0.08em; color: var(--off-white); margin-bottom: 14px;
+    }
+    .dd-reading-link {
+      display: block; font-size: 13px; font-weight: 400; color: var(--red);
+      text-decoration: none; padding: 7px 0; border-bottom: 1px solid var(--border); transition: color 0.2s;
+    }
+    .dd-reading-link:last-child { border-bottom: none; }
+    .dd-reading-link:hover { color: var(--off-white); }
+
     /* ─── HAMBURGER / MOBILE MENU ─── */
     .nav-hamburger {
       display: none; background: none; border: none;
@@ -642,7 +853,7 @@
     <p class="score-subheading fade-in">10 questions. No right answers on your CV.<br>Find out where you actually stand.</p>
     <div class="score-hero-btns fade-in">
       <button class="score-btn-primary" id="startQuizBtn">Take the Test</button>
-      <a href="jaws-score-full.html" class="score-btn-outline">I'm Serious &mdash; 30 Questions</a>
+      <button class="score-btn-outline" id="startDeepDiveBtn">I'm Serious &mdash; 30 Questions (~30 Mins)</button>
     </div>
   </section>
 
@@ -690,9 +901,149 @@
       </div>
       <div class="result-ctas">
         <a href="playbook.html" class="result-cta-primary">Read the Playbook</a>
-        <a href="jaws-score-full.html" class="result-cta-outline">Take the Full 30-Question Test</a>
+        <button class="result-cta-outline" id="fromResultsDeepDiveBtn">Take the Full 30-Question Test</button>
       </div>
       <button class="result-retake-btn" id="resultRetakeBtn">&#8635; Retake the Test</button>
+    </div>
+  </section>
+
+  <!-- ─── DEEP DIVE QUIZ ─── -->
+  <section id="deepDiveSection" class="dd-section" style="display:none; opacity:0;">
+    <div class="dd-wrap">
+      <div class="dd-progress" id="ddProgress">
+        <span class="dd-progress-label" id="ddProgressLabel">Section 1 of 4 &mdash; Multiple Choice</span>
+        <div class="dd-progress-track">
+          <div class="dd-progress-fill" id="ddProgressFill" style="width:0%"></div>
+        </div>
+        <div class="dd-progress-meta">
+          <span id="ddProgressQ"></span>
+          <span id="ddProgressTime">~5 mins</span>
+        </div>
+      </div>
+
+      <div class="dd-section-intro" id="ddSectionIntro" style="display:none;">
+        <span class="dd-intro-num" id="ddIntroNum"></span>
+        <h2 class="dd-intro-title" id="ddIntroTitle"></h2>
+        <p class="dd-intro-desc" id="ddIntroDesc"></p>
+        <button class="dd-begin-btn" id="ddBeginBtn">Begin This Section</button>
+      </div>
+
+      <div id="ddMCWrap" style="display:none;">
+        <div class="quiz-question-wrap" id="ddMCQuestionWrap">
+          <button class="quiz-back-btn hidden" id="ddMCBackBtn">&#8592; Back</button>
+          <span class="quiz-number" id="ddMCNumber">01</span>
+          <h2 class="quiz-question" id="ddMCQuestion"></h2>
+          <div class="quiz-options" id="ddMCOptions"></div>
+        </div>
+      </div>
+
+      <div id="ddRankWrap" style="display:none;">
+        <button class="quiz-back-btn" id="ddRankBackBtn" style="display:none;">&#8592; Back</button>
+        <span class="quiz-number" id="ddRankNumber">01</span>
+        <h2 class="quiz-question" id="ddRankQuestion"></h2>
+        <div id="ddRankDesktop">
+          <span class="rank-instruction">Drag to reorder &mdash; 1 is best</span>
+          <div class="rank-list" id="ddRankList"></div>
+        </div>
+        <div id="ddRankMobile" style="display:none;">
+          <span class="rank-instruction">Tap a number to assign rank &mdash; 1 is best</span>
+          <div id="ddRankMobileList"></div>
+        </div>
+        <button class="rank-next-btn" id="ddRankNextBtn" disabled>Next &rarr;</button>
+      </div>
+
+      <div id="ddForcedWrap" style="display:none;">
+        <span class="quiz-number" id="ddForcedNumber">01</span>
+        <h2 class="quiz-question" id="ddForcedQuestion"></h2>
+        <div class="forced-options" id="ddForcedOptions">
+          <button class="forced-btn" id="ddForcedA"></button>
+          <button class="forced-btn" id="ddForcedB"></button>
+        </div>
+      </div>
+
+      <div id="ddOpenWrap" style="display:none;">
+        <span class="quiz-number" id="ddOpenNumber">01</span>
+        <h2 class="quiz-question" id="ddOpenQuestion"></h2>
+        <textarea class="dd-textarea" id="ddOpenTextarea" placeholder="Write your answer here..." rows="6"></textarea>
+        <span class="dd-textarea-hint" id="ddOpenHint">Minimum 50 characters</span>
+        <button class="open-next-btn" id="ddOpenNextBtn" disabled>Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DEEP DIVE LOADING ─── -->
+  <section id="deepDiveLoadingSection" class="dd-loading-section" style="display:none; opacity:0;">
+    <div class="dd-loading-text">JAWS IS READING<br>YOUR ANSWERS&#8230;</div>
+    <div class="dd-loading-dots">
+      <div class="dd-loading-dot"></div>
+      <div class="dd-loading-dot"></div>
+      <div class="dd-loading-dot"></div>
+    </div>
+    <p class="dd-loading-subtext">AI evaluation in progress</p>
+  </section>
+
+  <!-- ─── DEEP DIVE RESULTS ─── -->
+  <section id="deepDiveResultsSection" class="dd-results-section" style="display:none; opacity:0;">
+    <div class="dd-results-wrap">
+      <span class="results-eyebrow">Your JAWS Deep Dive</span>
+      <div class="result-score-line">
+        <span class="result-score" id="ddResultScore">0</span>
+        <span class="result-score-denom">/100</span>
+      </div>
+      <h2 class="result-label" id="ddResultLabel"></h2>
+      <p class="result-desc" id="ddResultDesc"></p>
+      <div class="dd-pillar-bars">
+        <div class="dd-pillar-row">
+          <div class="dd-pillar-name">Engineer Your Presence <span class="dd-pillar-pct" id="ddP0Pct">0%</span></div>
+          <div class="dd-pillar-track"><div class="dd-pillar-fill" id="ddP0Fill"></div></div>
+        </div>
+        <div class="dd-pillar-row">
+          <div class="dd-pillar-name">Be Courageous and Curious <span class="dd-pillar-pct" id="ddP1Pct">0%</span></div>
+          <div class="dd-pillar-track"><div class="dd-pillar-fill" id="ddP1Fill"></div></div>
+        </div>
+        <div class="dd-pillar-row">
+          <div class="dd-pillar-name">Lead With and Through Others <span class="dd-pillar-pct" id="ddP2Pct">0%</span></div>
+          <div class="dd-pillar-track"><div class="dd-pillar-fill" id="ddP2Fill"></div></div>
+        </div>
+        <div class="dd-pillar-row">
+          <div class="dd-pillar-name">Manage and Influence Upwards <span class="dd-pillar-pct" id="ddP3Pct">0%</span></div>
+          <div class="dd-pillar-track"><div class="dd-pillar-fill" id="ddP3Fill"></div></div>
+        </div>
+      </div>
+      <div class="dd-insight-grid">
+        <div class="dd-insight-card">
+          <span class="dd-insight-label">Your Edge</span>
+          <div class="dd-insight-title" id="ddEdgeTitle"></div>
+          <p class="dd-insight-desc" id="ddEdgeDesc"></p>
+        </div>
+        <div class="dd-insight-card">
+          <span class="dd-insight-label">Your Blindspot</span>
+          <div class="dd-insight-title" id="ddBlindTitle"></div>
+          <p class="dd-insight-desc" id="ddBlindDesc"></p>
+        </div>
+      </div>
+      <div class="dd-ai-feedback" id="ddAiFeedback">
+        <p class="dd-ai-feedback-heading">What JAWS saw in your answers</p>
+        <div id="ddFeedbackItems"></div>
+      </div>
+      <div class="dd-reading" id="ddReading">
+        <p class="dd-reading-heading">Recommended Reading for Your Blindspot</p>
+        <div id="ddReadingLinks"></div>
+      </div>
+      <div class="result-share-bar">
+        <span class="share-label">Share</span>
+        <button class="share-btn" id="ddShareTw" aria-label="Share on X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
+        <button class="share-btn" id="ddShareLi" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
+        <button class="share-btn" id="ddShareCopy" aria-label="Copy link"><i class="fa-solid fa-link" id="ddCopyIcon"></i></button>
+      </div>
+      <div class="result-improve">
+        <p class="result-improve-heading">Get a personalised action plan</p>
+        <button class="result-improve-btn" id="ddAskJawsBtn">Ask JAWS About Your Results</button>
+        <p class="result-improve-note">JAWS will analyse your pillar scores and open answers to give you a targeted improvement plan.</p>
+      </div>
+      <div style="text-align:center; margin-top: 16px;">
+        <button class="result-retake-btn" id="ddRetakeBtn">&#8635; Retake the Deep Dive</button>
+      </div>
     </div>
   </section>
 
@@ -1452,6 +1803,714 @@
 
       window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(msg);
     });
+
+    // ─── DEEP DIVE DATA ───
+    var DD_MC_INDICES = [0, 1, 3, 5, 7, 10, 14, 16, 17, 24];
+
+    var DD_RANKING = [
+      {
+        q: "Your first 90 days in a new role. Rank these priorities (1=most important):",
+        options: [
+          "Build relationships with people above and around you before you need them",
+          "Deliver something visible quickly to establish credibility",
+          "Understand the team\u2019s current state before changing anything",
+          "Learn what your manager actually needs from you, not what the job description says"
+        ],
+        ideal: [3, 4, 2, 1]
+      },
+      {
+        q: "You have one hour of unexpected free time at work. Rank how you\u2019d spend it (1=best use):",
+        options: [
+          "Think about where the business is heading and what that means for your team",
+          "Get ahead on next week\u2019s deliverables",
+          "Reach out to someone you\u2019ve been meaning to connect with",
+          "Work on a project that could increase your visibility with senior leaders"
+        ],
+        ideal: [1, 4, 3, 2]
+      },
+      {
+        q: "Your team is underperforming. Rank your first moves (1=do first):",
+        options: [
+          "Have honest individual conversations to understand what\u2019s actually going wrong",
+          "Check whether people are in the right roles for their strengths",
+          "Set clearer expectations and non-negotiables",
+          "Assess whether you as the manager are part of the problem"
+        ],
+        ideal: [2, 3, 4, 1]
+      },
+      {
+        q: "You want a promotion. Rank these actions by impact (1=highest impact):",
+        options: [
+          "Have a direct conversation with your manager about what you need to demonstrate",
+          "Make sure the right senior people know what you and your team deliver",
+          "Consistently exceed your current role\u2019s expectations",
+          "Build a relationship with someone influential who can advocate for you"
+        ],
+        ideal: [1, 3, 4, 2]
+      },
+      {
+        q: "A senior leader asks your opinion on something outside your immediate area. Rank your responses (1=best):",
+        options: [
+          "Give a considered view based on what you know, flag your limitations",
+          "Ask a clarifying question before answering",
+          "Defer to someone with more expertise in that area",
+          "Use it as an opportunity to show you think beyond your function"
+        ],
+        ideal: [2, 3, 4, 1]
+      },
+      {
+        q: "Your manager gives you critical feedback you partially disagree with. Rank your next moves (1=do first):",
+        options: [
+          "Listen fully without defending, then reflect on what\u2019s valid before responding",
+          "Ask for specific examples so you understand exactly what they observed",
+          "Share your perspective once, clearly, after you\u2019ve processed it",
+          "Identify one concrete thing you\u2019ll change based on the feedback"
+        ],
+        ideal: [1, 2, 4, 3]
+      },
+      {
+        q: "You\u2019re building your network inside a large organisation. Rank these approaches (1=most effective):",
+        options: [
+          "Show up consistently curious \u2014 ask good questions and follow up on answers",
+          "Volunteer for cross-functional work that puts you in new rooms",
+          "Be deliberate about who you need to know and why, then pursue those relationships",
+          "Make yourself useful to people before you need anything from them"
+        ],
+        ideal: [3, 4, 2, 1]
+      },
+      {
+        q: "Your team delivers an important project successfully. Rank how you handle the aftermath (1=do first):",
+        options: [
+          "Make sure the people who delivered it get the credit publicly",
+          "Brief your manager on what went well and what you\u2019d do differently",
+          "Use it as a moment to raise the team\u2019s visibility with senior leaders",
+          "Reflect privately on what you as a leader did that made it work"
+        ],
+        ideal: [4, 2, 3, 1]
+      },
+      {
+        q: "You disagree with a strategic direction set by leadership. Rank your responses (1=best):",
+        options: [
+          "Raise your concern once, clearly, with a suggested alternative",
+          "Understand the full rationale before forming a view",
+          "Commit to executing it well once you\u2019ve had your say",
+          "Accept that some decisions are above your pay grade and move on"
+        ],
+        ideal: [2, 1, 3, 4]
+      },
+      {
+        q: "You\u2019re preparing for your annual performance review. Rank these activities by importance (1=most important):",
+        options: [
+          "Document specific examples of impact, not just effort",
+          "Make sure your manager already knows your highlights before the review happens",
+          "Understand what criteria you\u2019re actually being judged on",
+          "Know what you want from the conversation before you walk in"
+        ],
+        ideal: [3, 4, 1, 2]
+      }
+    ];
+
+    var DD_FORCED = [
+      {
+        q: "Right now, which matters more for your career progression?",
+        a: { text: "Being exceptional at your current job", score: 6 },
+        b: { text: "Being known by the people who make promotion decisions", score: 10 }
+      },
+      {
+        q: "When giving feedback to your team, which is more important?",
+        a: { text: "Being honest even if it\u2019s uncomfortable", score: 10 },
+        b: { text: "Preserving the relationship so they stay motivated", score: 6 }
+      },
+      {
+        q: "When challenging your manager, which approach serves you better?",
+        a: { text: "Raising it in the moment so it\u2019s on record", score: 6 },
+        b: { text: "Raising it privately so they can respond without an audience", score: 10 }
+      },
+      {
+        q: "In a large organisation, which is the bigger career risk?",
+        a: { text: "Being too visible before you\u2019ve proven yourself", score: 6 },
+        b: { text: "Being invisible while you\u2019re proving yourself", score: 10 }
+      },
+      {
+        q: "When you make a mistake that affects your team, which matters more?",
+        a: { text: "Fixing it as fast as possible with minimal disruption", score: 6 },
+        b: { text: "Owning it publicly so your team sees how you handle failure", score: 10 }
+      }
+    ];
+
+    var DD_OPEN = [
+      "Describe the last time you made a call that turned out to be wrong. What did you do in the 24 hours after you found out?",
+      "Your manager is about to walk into a meeting where your team\u2019s work will be discussed. What have you done to prepare them, and how did you do it?",
+      "Name three people two levels above you who know your name and have a positive impression of your work. How did that happen?",
+      "Describe a time you disagreed with a decision made above you. What did you do, and what happened?",
+      "What\u2019s the biggest people problem on your team right now, and what specifically are you doing about it?"
+    ];
+
+    // Pillar: 0=Engineer Your Presence, 1=Courageous+Curious, 2=Lead W+T Others, 3=Manage+Influence Up
+    var DD_MC_PILLARS    = [0, 0, 0, 1, 1, 2, 2, 3, 3, 1];
+    var DD_RANK_PILLARS  = [3, 1, 2, 3, 1, 3, 0, 2, 1, 3];
+    var DD_FORCED_PILLARS= [0, 2, 3, 0, 1];
+    var DD_OPEN_PILLARS  = [1, 3, 0, 1, 2];
+
+    var DD_PILLAR_MAX    = [70, 90, 60, 80]; // sum = 300
+    var DD_PILLAR_NAMES  = [
+      'Engineer Your Presence',
+      'Be Courageous and Curious',
+      'Lead With and Through Others',
+      'Manage and Influence Upwards'
+    ];
+    var DD_PILLAR_EDGE   = [
+      'You know how to build visibility and make the right people aware of your work before you need them.',
+      'You make calls, own them, and push back when it counts. You have the courage to lead.',
+      'You develop and protect your team. People want to work for you.',
+      'You understand the relationship above you is as important as the one below it. You manage in all directions.'
+    ];
+    var DD_PILLAR_BLIND  = [
+      'You\u2019re not building enough visibility with the people who control your trajectory.',
+      'You\u2019re playing it safe, avoiding hard calls, and not challenging things that need to be challenged.',
+      'You\u2019re managing tasks, not people. Your team\u2019s ceiling is becoming your own.',
+      'You\u2019re focused on managing down and delivering, but neglecting the relationships above you.'
+    ];
+    var DD_READING = [
+      [ // EP
+        { title: 'Nobody Tells You This On Your First Day', href: 'nobody-tells-you-this-on-your-first-day.html' },
+        { title: "You're Not Stuck. You're On The Wrong Ladder", href: 'youre-not-stuck-youre-on-the-wrong-ladder.html' }
+      ],
+      [ // CC
+        { title: 'You Will Get 3 in 10 Wrong. Make The Call Anyway', href: 'you-will-get-3-in-10-wrong-make-the-call-anyway.html' },
+        { title: 'The Difference Between a Manager and a Leader', href: 'the-difference-between-a-manager-and-a-leader.html' }
+      ],
+      [ // LW
+        { title: 'Lead With and Through Others \u2014 The Playbook', href: 'lead-with-and-through-others.html' }
+      ],
+      [ // MU
+        { title: 'Manage and Influence Upwards \u2014 The Playbook', href: 'manage-and-influence-upwards.html' },
+        { title: 'The Half of Management Nobody Teaches You', href: 'the-half-of-management-nobody-teaches-you.html' }
+      ]
+    ];
+
+    // ─── DEEP DIVE STATE ───
+    var dd = {
+      phase: 0,
+      mcIdx: 0, mcScores: [], mcAnswers: [],
+      rankIdx: 0, rankScores: [], rankOrders: [],
+      forcedIdx: 0, forcedScores: [],
+      openIdx: 0, openAnswers: [],
+      openScores: [], openFeedbacks: [],
+      pillarScores: [0, 0, 0, 0],
+      advancing: false
+    };
+    var ddRankOrder = [];
+    var ddMobileRanks = [];
+    var ddDragSrcPos = null;
+
+    var ddSection       = document.getElementById('deepDiveSection');
+    var ddLoadingSection= document.getElementById('deepDiveLoadingSection');
+    var ddResultsSection= document.getElementById('deepDiveResultsSection');
+    var ddProgressFill  = document.getElementById('ddProgressFill');
+    var ddProgressLabel = document.getElementById('ddProgressLabel');
+    var ddProgressQ     = document.getElementById('ddProgressQ');
+    var ddProgressTime  = document.getElementById('ddProgressTime');
+    var ddSectionIntro  = document.getElementById('ddSectionIntro');
+    var ddMCWrap        = document.getElementById('ddMCWrap');
+    var ddRankWrap      = document.getElementById('ddRankWrap');
+    var ddForcedWrap    = document.getElementById('ddForcedWrap');
+    var ddOpenWrap      = document.getElementById('ddOpenWrap');
+
+    var SECTION_META = [
+      { label: 'Section 1 of 4 \u2014 Multiple Choice', time: '~5 mins',  total: 10 },
+      { label: 'Section 2 of 4 \u2014 Ranking',         time: '~10 mins', total: 10 },
+      { label: 'Section 3 of 4 \u2014 Forced Choice',   time: '~3 mins',  total: 5  },
+      { label: 'Section 4 of 4 \u2014 Open Questions',  time: '~12 mins', total: 5  }
+    ];
+
+    function ddUpdateProgress(phase, qIdx) {
+      var meta = SECTION_META[phase];
+      ddProgressLabel.textContent = meta.label;
+      ddProgressTime.textContent  = meta.time;
+      var sectionBase = [0, 10, 20, 25][phase];
+      var totalQs = 30;
+      var pct = ((sectionBase + qIdx) / totalQs) * 100;
+      ddProgressFill.style.width = pct + '%';
+      ddProgressQ.textContent = (qIdx + 1) + ' / ' + meta.total;
+    }
+
+    function ddShowSubscreen(el) {
+      [ddSectionIntro, ddMCWrap, ddRankWrap, ddForcedWrap, ddOpenWrap].forEach(function(e) {
+        e.style.display = 'none';
+      });
+      el.style.display = '';
+    }
+
+    function ddShowIntro(phase, onBegin) {
+      var intros = [
+        { num: '01', title: 'Multiple Choice', desc: '10 scenario-based questions. Select the best response. Questions advance automatically.' },
+        { num: '02', title: 'Ranking',          desc: '10 questions. Rank all four options from best to worst. Drag to reorder on desktop \u2014 tap numbers on mobile.' },
+        { num: '03', title: 'Forced Choice',    desc: '5 questions. Two options only. Pick the one that better reflects how you actually operate.' },
+        { num: '04', title: 'Open Questions',   desc: '5 questions. Write real answers \u2014 minimum 50 characters each. JAWS will read them.' }
+      ];
+      var info = intros[phase];
+      document.getElementById('ddIntroNum').textContent   = info.num;
+      document.getElementById('ddIntroTitle').textContent = info.title;
+      document.getElementById('ddIntroDesc').textContent  = info.desc;
+      ddShowSubscreen(ddSectionIntro);
+      document.getElementById('ddBeginBtn').onclick = function() {
+        ddSectionIntro.style.display = 'none';
+        onBegin();
+      };
+    }
+
+    // ─── SECTION 1: MC ───
+    function ddStartMC() {
+      dd.mcIdx = 0; dd.mcScores = []; dd.mcAnswers = [];
+      dd.advancing = false;
+      ddShowIntro(0, function() { ddShowSubscreen(ddMCWrap); ddLoadMCQuestion(0); });
+    }
+
+    function ddLoadMCQuestion(idx, preselect) {
+      var qObj = QUESTION_BANK[DD_MC_INDICES[idx]];
+      dd.advancing = false;
+      ddUpdateProgress(0, idx);
+      document.getElementById('ddMCNumber').textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      document.getElementById('ddMCQuestion').textContent = qObj.q;
+
+      var backBtn = document.getElementById('ddMCBackBtn');
+      if (idx > 0) { backBtn.classList.remove('hidden'); } else { backBtn.classList.add('hidden'); }
+
+      var optionsEl = document.getElementById('ddMCOptions');
+      optionsEl.classList.remove('locked');
+      optionsEl.innerHTML = '';
+      qObj.options.forEach(function(opt, i) {
+        var btn = document.createElement('button');
+        btn.className = 'quiz-option' + (preselect === i ? ' selected' : '');
+        var letter = document.createElement('span');
+        letter.className = 'quiz-option-letter';
+        letter.textContent = LETTERS[i];
+        var text = document.createElement('span');
+        text.className = 'quiz-option-text';
+        text.textContent = opt.text;
+        btn.appendChild(letter); btn.appendChild(text);
+        btn.dataset.points = opt.points; btn.dataset.idx = i;
+        btn.addEventListener('click', function() { ddMCSelect(i, opt.points); });
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function ddMCSelect(optIdx, points) {
+      if (dd.advancing) return;
+      dd.advancing = true;
+      var optionsEl = document.getElementById('ddMCOptions');
+      optionsEl.classList.add('locked');
+      var allOpts = optionsEl.querySelectorAll('.quiz-option');
+      allOpts.forEach(function(b) { b.classList.remove('selected'); });
+      allOpts[optIdx].classList.add('confirmed');
+      setTimeout(function() {
+        dd.mcScores.push(points);
+        dd.mcAnswers.push({ optIdx: optIdx, points: points });
+        dd.mcIdx++;
+        var wrap = document.getElementById('ddMCQuestionWrap');
+        wrap.classList.add('transitioning');
+        setTimeout(function() {
+          if (dd.mcIdx >= DD_MC_INDICES.length) {
+            wrap.classList.remove('transitioning');
+            ddStartRanking();
+          } else {
+            ddLoadMCQuestion(dd.mcIdx);
+            wrap.classList.remove('transitioning');
+          }
+        }, 250);
+      }, 600);
+    }
+
+    document.getElementById('ddMCBackBtn').addEventListener('click', function() {
+      if (dd.mcIdx === 0 || dd.advancing) return;
+      var prev = dd.mcAnswers.pop();
+      dd.mcScores.pop();
+      dd.mcIdx--;
+      dd.advancing = false;
+      ddLoadMCQuestion(dd.mcIdx, prev.optIdx);
+    });
+
+    // ─── SECTION 2: RANKING ───
+    function ddStartRanking() {
+      dd.rankIdx = 0; dd.rankScores = []; dd.rankOrders = [];
+      ddShowIntro(1, function() { ddShowSubscreen(ddRankWrap); ddLoadRankQuestion(0); });
+    }
+
+    function ddLoadRankQuestion(idx) {
+      var q = DD_RANKING[idx];
+      ddUpdateProgress(1, idx);
+      document.getElementById('ddRankNumber').textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      document.getElementById('ddRankQuestion').textContent = q.q;
+      document.getElementById('ddRankNextBtn').disabled = false;
+
+      var isMobile = window.innerWidth < 768;
+      document.getElementById('ddRankDesktop').style.display = isMobile ? 'none' : '';
+      document.getElementById('ddRankMobile').style.display  = isMobile ? '' : 'none';
+
+      ddRankOrder = [0, 1, 2, 3];
+      if (isMobile) {
+        ddMobileRanks = [null, null, null, null];
+        ddRenderMobileRank(q.options);
+      } else {
+        ddRenderDragRank(q.options);
+      }
+    }
+
+    function ddRenderDragRank(options) {
+      var list = document.getElementById('ddRankList');
+      list.innerHTML = '';
+      ddRankOrder.forEach(function(optIdx, pos) {
+        var item = document.createElement('div');
+        item.className = 'rank-item';
+        item.draggable = true;
+        item.dataset.pos = pos;
+        item.dataset.optIdx = optIdx;
+        item.innerHTML =
+          '<span class="rank-handle">\u283f</span>' +
+          '<span class="rank-pos">' + (pos + 1) + '</span>' +
+          '<span class="rank-text">' + options[optIdx] + '</span>';
+        item.addEventListener('dragstart', function(e) {
+          ddDragSrcPos = pos;
+          item.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        item.addEventListener('dragend', function() { item.classList.remove('dragging'); });
+        item.addEventListener('dragover', function(e) { e.preventDefault(); item.classList.add('drag-over'); });
+        item.addEventListener('dragleave', function() { item.classList.remove('drag-over'); });
+        item.addEventListener('drop', function(e) {
+          e.preventDefault();
+          item.classList.remove('drag-over');
+          if (ddDragSrcPos === null || ddDragSrcPos === pos) return;
+          var moved = ddRankOrder.splice(ddDragSrcPos, 1)[0];
+          ddRankOrder.splice(pos, 0, moved);
+          ddDragSrcPos = null;
+          ddRenderDragRank(DD_RANKING[dd.rankIdx].options);
+        });
+        list.appendChild(item);
+      });
+    }
+
+    function ddRenderMobileRank(options) {
+      var list = document.getElementById('ddRankMobileList');
+      list.innerHTML = '';
+      options.forEach(function(text, optIdx) {
+        var item = document.createElement('div');
+        item.className = 'rank-mobile-item';
+        var textEl = document.createElement('span');
+        textEl.className = 'rank-mobile-text';
+        textEl.textContent = text;
+        var btns = document.createElement('div');
+        btns.className = 'rank-mobile-btns';
+        [1, 2, 3, 4].forEach(function(rank) {
+          var btn = document.createElement('button');
+          btn.className = 'rank-num-btn' + (ddMobileRanks[optIdx] === rank ? ' active' : '');
+          btn.textContent = rank;
+          btn.addEventListener('click', function() {
+            var prevHolder = ddMobileRanks.indexOf(rank);
+            if (prevHolder !== -1 && prevHolder !== optIdx) ddMobileRanks[prevHolder] = null;
+            ddMobileRanks[optIdx] = rank;
+            ddRankOrder = [0, 1, 2, 3];
+            ddRenderMobileRank(DD_RANKING[dd.rankIdx].options);
+            var allAssigned = ddMobileRanks.every(function(r) { return r !== null; });
+            document.getElementById('ddRankNextBtn').disabled = !allAssigned;
+          });
+          btns.appendChild(btn);
+        });
+        item.appendChild(textEl); item.appendChild(btns);
+        list.appendChild(item);
+      });
+    }
+
+    function ddScoreRanking(userOrder, ideal) {
+      var total = 0;
+      for (var i = 0; i < 4; i++) {
+        var userRank = userOrder.indexOf(i) + 1;
+        var idealRank = ideal[i];
+        var diff = Math.abs(userRank - idealRank);
+        total += diff === 0 ? 10 : diff === 1 ? 7 : diff === 2 ? 4 : 0;
+      }
+      return total / 4;
+    }
+
+    document.getElementById('ddRankNextBtn').addEventListener('click', function() {
+      var q = DD_RANKING[dd.rankIdx];
+      var isMobile = window.innerWidth < 768;
+      var userOrder;
+      if (isMobile) {
+        userOrder = [0, 0, 0, 0];
+        ddMobileRanks.forEach(function(rank, optIdx) { userOrder[rank - 1] = optIdx; });
+      } else {
+        userOrder = ddRankOrder.slice();
+      }
+      var score = ddScoreRanking(userOrder, q.ideal);
+      dd.rankScores.push(score);
+      dd.rankOrders.push(userOrder);
+      dd.rankIdx++;
+      if (dd.rankIdx >= DD_RANKING.length) {
+        ddStartForced();
+      } else {
+        ddLoadRankQuestion(dd.rankIdx);
+      }
+    });
+
+    // ─── SECTION 3: FORCED CHOICE ───
+    function ddStartForced() {
+      dd.forcedIdx = 0; dd.forcedScores = [];
+      ddShowIntro(2, function() { ddShowSubscreen(ddForcedWrap); ddLoadForcedQuestion(0); });
+    }
+
+    function ddLoadForcedQuestion(idx) {
+      var q = DD_FORCED[idx];
+      ddUpdateProgress(2, idx);
+      document.getElementById('ddForcedNumber').textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      document.getElementById('ddForcedQuestion').textContent = q.q;
+      var btnA = document.getElementById('ddForcedA');
+      var btnB = document.getElementById('ddForcedB');
+      btnA.className = 'forced-btn'; btnA.textContent = q.a.text;
+      btnB.className = 'forced-btn'; btnB.textContent = q.b.text;
+      btnA.onclick = function() { ddForcedSelect(q.a.score, btnA, btnB); };
+      btnB.onclick = function() { ddForcedSelect(q.b.score, btnB, btnA); };
+    }
+
+    function ddForcedSelect(score, chosen, other) {
+      chosen.classList.add('confirmed');
+      other.classList.add('faded');
+      dd.forcedScores.push(score);
+      dd.forcedIdx++;
+      setTimeout(function() {
+        if (dd.forcedIdx >= DD_FORCED.length) {
+          ddStartOpen();
+        } else {
+          ddLoadForcedQuestion(dd.forcedIdx);
+        }
+      }, 500);
+    }
+
+    // ─── SECTION 4: OPEN TEXT ───
+    function ddStartOpen() {
+      dd.openIdx = 0; dd.openAnswers = [];
+      ddShowIntro(3, function() { ddShowSubscreen(ddOpenWrap); ddLoadOpenQuestion(0); });
+    }
+
+    function ddLoadOpenQuestion(idx) {
+      ddUpdateProgress(3, idx);
+      document.getElementById('ddOpenNumber').textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      document.getElementById('ddOpenQuestion').textContent = DD_OPEN[idx];
+      var ta = document.getElementById('ddOpenTextarea');
+      var hint = document.getElementById('ddOpenHint');
+      var nextBtn = document.getElementById('ddOpenNextBtn');
+      ta.value = '';
+      hint.textContent = 'Minimum 50 characters';
+      nextBtn.disabled = true;
+      ta.oninput = function() {
+        var len = ta.value.trim().length;
+        var rem = Math.max(0, 50 - len);
+        if (rem > 0) {
+          hint.textContent = rem + ' more characters needed';
+          nextBtn.disabled = true;
+        } else {
+          hint.textContent = '\u2713 Good to go';
+          nextBtn.disabled = false;
+        }
+      };
+    }
+
+    document.getElementById('ddOpenNextBtn').addEventListener('click', function() {
+      var ta = document.getElementById('ddOpenTextarea');
+      dd.openAnswers.push(ta.value.trim());
+      dd.openIdx++;
+      if (dd.openIdx >= DD_OPEN.length) {
+        ddSubmitOpen();
+      } else {
+        ddLoadOpenQuestion(dd.openIdx);
+      }
+    });
+
+    // ─── AI EVALUATION ───
+    function ddSubmitOpen() {
+      fadeOut(ddSection, function() {
+        ddSection.style.display = 'none';
+        ddLoadingSection.style.display = 'flex';
+        fadeIn(ddLoadingSection);
+      });
+
+      var WORKER = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+      fetch(WORKER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'evaluate_open_text',
+          answers: DD_OPEN.map(function(q, i) { return { question: q, answer: dd.openAnswers[i] }; })
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        dd.openScores    = (data.results || []).map(function(r) { return r.score || 5; });
+        dd.openFeedbacks = (data.results || []).map(function(r) { return r.feedback || ''; });
+        ddShowDeepDiveResults();
+      })
+      .catch(function() {
+        dd.openScores    = DD_OPEN.map(function() { return 5; });
+        dd.openFeedbacks = DD_OPEN.map(function() { return 'Unable to evaluate \u2014 connection error.'; });
+        ddShowDeepDiveResults();
+      });
+    }
+
+    // ─── DEEP DIVE RESULTS ───
+    function ddShowDeepDiveResults() {
+      var pillar = [0, 0, 0, 0];
+      dd.mcScores.forEach(function(s, i)     { pillar[DD_MC_PILLARS[i]]    += s; });
+      dd.rankScores.forEach(function(s, i)   { pillar[DD_RANK_PILLARS[i]]  += s; });
+      dd.forcedScores.forEach(function(s, i) { pillar[DD_FORCED_PILLARS[i]]+= s; });
+      dd.openScores.forEach(function(s, i)   { pillar[DD_OPEN_PILLARS[i]]  += s; });
+      dd.pillarScores = pillar;
+
+      var totalActual = pillar.reduce(function(a, b) { return a + b; }, 0);
+      var finalScore  = Math.round((totalActual / 300) * 100);
+      var rating = getRating(finalScore);
+
+      window._ddScore  = finalScore;
+      window._ddRating = rating.label;
+
+      document.getElementById('ddResultLabel').textContent = rating.label;
+      document.getElementById('ddResultDesc').textContent  = rating.desc;
+
+      // Pillar bars
+      var pillarPcts = pillar.map(function(s, i) { return Math.round((s / DD_PILLAR_MAX[i]) * 100); });
+      ['ddP0', 'ddP1', 'ddP2', 'ddP3'].forEach(function(id, i) {
+        document.getElementById(id + 'Pct').textContent = pillarPcts[i] + '%';
+      });
+
+      // Edge / Blindspot
+      var maxIdx = pillarPcts.indexOf(Math.max.apply(null, pillarPcts));
+      var minIdx = pillarPcts.indexOf(Math.min.apply(null, pillarPcts));
+      document.getElementById('ddEdgeTitle').textContent  = DD_PILLAR_NAMES[maxIdx];
+      document.getElementById('ddEdgeDesc').textContent   = DD_PILLAR_EDGE[maxIdx];
+      document.getElementById('ddBlindTitle').textContent = DD_PILLAR_NAMES[minIdx];
+      document.getElementById('ddBlindDesc').textContent  = DD_PILLAR_BLIND[minIdx];
+
+      // AI feedback
+      var feedbackContainer = document.getElementById('ddFeedbackItems');
+      feedbackContainer.innerHTML = '';
+      dd.openFeedbacks.forEach(function(fb, i) {
+        if (!fb) return;
+        var item = document.createElement('div');
+        item.className = 'dd-feedback-item';
+        item.innerHTML = '<p class="dd-feedback-q">Q' + (i + 1) + '</p><p class="dd-feedback-text">' + fb + '</p>';
+        feedbackContainer.appendChild(item);
+      });
+
+      // Reading links
+      var readingLinks = document.getElementById('ddReadingLinks');
+      readingLinks.innerHTML = '';
+      DD_READING[minIdx].forEach(function(link) {
+        var a = document.createElement('a');
+        a.className = 'dd-reading-link';
+        a.href = link.href;
+        a.textContent = link.title + ' \u2192';
+        readingLinks.appendChild(a);
+      });
+
+      fadeOut(ddLoadingSection, function() {
+        ddLoadingSection.style.display = 'none';
+        contactBar.style.display = '';
+        pageFooter.style.display = '';
+        ddResultsSection.style.display = 'flex';
+        fadeIn(ddResultsSection);
+        animateScore2(finalScore);
+        // Animate bars after render
+        setTimeout(function() {
+          ['ddP0', 'ddP1', 'ddP2', 'ddP3'].forEach(function(id, i) {
+            document.getElementById(id + 'Fill').style.width = pillarPcts[i] + '%';
+          });
+        }, 300);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    function animateScore2(target) {
+      var el = document.getElementById('ddResultScore');
+      var duration = 1500, start = null;
+      function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.floor(ease(p) * target);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ─── START DEEP DIVE ───
+    function startDeepDive() {
+      dd.phase = 1;
+      dd.mcIdx = 0; dd.mcScores = []; dd.mcAnswers = [];
+      dd.rankIdx = 0; dd.rankScores = []; dd.rankOrders = [];
+      dd.forcedIdx = 0; dd.forcedScores = [];
+      dd.openIdx = 0; dd.openAnswers = [];
+      dd.openScores = []; dd.openFeedbacks = [];
+      dd.pillarScores = [0,0,0,0];
+      dd.advancing = false;
+      ddProgressFill.style.width = '0%';
+
+      fadeOut(heroSection, function() {
+        heroSection.style.display = 'none';
+        contactBar.style.display = 'none';
+        pageFooter.style.display = 'none';
+        ddSection.style.display = 'flex';
+        fadeIn(ddSection);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        ddStartMC();
+      });
+    }
+
+    document.getElementById('startDeepDiveBtn').addEventListener('click', startDeepDive);
+    document.getElementById('fromResultsDeepDiveBtn').addEventListener('click', function() {
+      fadeOut(resultsSection, function() {
+        resultsSection.style.display = 'none';
+        startDeepDive();
+      });
+    });
+
+    // ─── RETAKE DEEP DIVE ───
+    document.getElementById('ddRetakeBtn').addEventListener('click', function() {
+      fadeOut(ddResultsSection, function() {
+        ddResultsSection.style.display = 'none';
+        heroSection.style.display = 'flex';
+        fadeIn(heroSection);
+        contactBar.style.display = '';
+        pageFooter.style.display = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ─── ASK JAWS (DEEP DIVE) ───
+    document.getElementById('ddAskJawsBtn').addEventListener('click', function() {
+      var score  = window._ddScore  || 0;
+      var rating = window._ddRating || '';
+      var blind  = dd.pillarScores ? DD_PILLAR_NAMES[dd.pillarScores.map(function(s,i){ return s/DD_PILLAR_MAX[i]; }).indexOf(Math.min.apply(null, dd.pillarScores.map(function(s,i){ return s/DD_PILLAR_MAX[i]; })))] : '';
+      var msg = 'I just completed the JAWS Deep Dive and scored ' + score + '/100 \u2014 ' + rating + '. My biggest blindspot is ' + blind + '. What should I specifically focus on to improve, and which articles or playbook pages should I read first?';
+      window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(msg);
+    });
+
+    // ─── SHARE (DEEP DIVE) ───
+    (function() {
+      var PAGE_URL = 'https://jawsadvantage.com/jaws-score.html';
+      document.getElementById('ddShareTw').addEventListener('click', function() {
+        var txt = 'I scored ' + (window._ddScore||0) + '/100 on the JAWS Deep Dive \u2014 ' + (window._ddRating||'') + '. 30 questions. No hiding. Find out where you stand: ' + PAGE_URL;
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank');
+      });
+      document.getElementById('ddShareLi').addEventListener('click', function() {
+        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + encodeURIComponent(PAGE_URL), '_blank');
+      });
+      document.getElementById('ddShareCopy').addEventListener('click', function() {
+        navigator.clipboard.writeText(PAGE_URL).then(function() {
+          var icon = document.getElementById('ddCopyIcon');
+          if (icon) { icon.className = 'fa-solid fa-check'; setTimeout(function() { icon.className = 'fa-solid fa-link'; }, 2000); }
+        });
+      });
+    })();
 
     // ─── SCROLL ANIMATIONS ───
     var fadeObserver = new IntersectionObserver(function (entries) {

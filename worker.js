@@ -101,6 +101,39 @@ export default {
     try {
       const body = await request.json();
 
+      if (body.action === 'evaluate_open_text') {
+        const answers = body.answers || [];
+        if (!answers.length) {
+          return new Response(JSON.stringify({ ok: false, error: 'no answers' }), { status: 400, headers: corsHeaders(origin) });
+        }
+        const evalPrompt = 'You are evaluating career intelligence quiz responses. For each answer, score 0-10 based on: specificity (real example vs vague?), self-awareness (honest reflection?), quality of action (did they do something smart?). Return ONLY a valid JSON array with no markdown, one object per answer: [{"score": X, "feedback": "one sentence of specific feedback"}, ...]. Evaluate ' + answers.length + ' answers now.';
+        const userContent = answers.map(function(a, i) {
+          return 'Q' + (i+1) + ': ' + a.question + '\nAnswer: ' + a.answer;
+        }).join('\n\n');
+        const evalResponse = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': env.ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 1024,
+            system: evalPrompt,
+            messages: [{ role: 'user', content: userContent }],
+          }),
+        });
+        if (!evalResponse.ok) {
+          return new Response(JSON.stringify({ ok: false, error: 'eval failed' }), { status: 502, headers: corsHeaders(origin) });
+        }
+        const evalData = await evalResponse.json();
+        const rawText = evalData.content?.[0]?.text || '[]';
+        let results;
+        try { results = JSON.parse(rawText); } catch(e) { results = answers.map(() => ({ score: 5, feedback: 'Could not evaluate this answer.' })); }
+        return new Response(JSON.stringify({ ok: true, results }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+      }
+
       if (body.action === 'rate_article') {
         const article = (body.article || '').slice(0, 200);
         const rating = body.rating;
