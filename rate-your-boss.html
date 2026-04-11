@@ -671,17 +671,6 @@
       display: none;
     }
     /* Download card button */
-    .sq-download-card-btn {
-      display: block; width: 100%; max-width: 400px; margin: 0 auto 20px;
-      padding: 14px 24px; background: transparent;
-      border: 1px solid var(--red); color: var(--red);
-      font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px;
-      cursor: pointer; transition: background 0.2s, box-shadow 0.2s;
-    }
-    .sq-download-card-btn:hover {
-      background: rgba(165,42,26,0.12);
-      box-shadow: 0 0 14px rgba(165,42,26,0.4);
-    }
   </style>
 </head>
 <body>
@@ -774,6 +763,9 @@
         <button class="share-btn" id="shareWhatsApp" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
         <button class="share-btn" id="shareEmail" title="Share by Email"><i class="fa-solid fa-envelope"></i></button>
         <button class="share-btn" id="shareCopy" title="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
+        <button class="share-btn" id="rybShareCard" onclick="rybShareCardBtn()" title="Share result card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        </button>
       </div>
       <div class="quiz-rating" id="rybRating">
         <p class="quiz-rating-label">Rate this quiz</p>
@@ -789,7 +781,6 @@
         </div>
         <p class="quiz-rating-thankyou" id="rybRateThanks">Thanks for the feedback.</p>
       </div>
-      <button class="sq-download-card-btn" onclick="rybDownloadCard()">&#8659; DOWNLOAD RESULT CARD</button>
       <button class="ryb-discuss-btn" onclick="rybDiscussWithJaws()">DISCUSS MY BOSS WITH JAWS →</button>
       <div class="results-bottom-nav">
         <button class="results-nav-btn results-nav-btn--secondary" onclick="rybRetake()">↺ Retake the Quiz</button>
@@ -1461,14 +1452,20 @@
       .catch(function() {});
     }
 
-    // ─── DOWNLOAD CARD ───
-    function generateShareCard(config) {
+    // ─── SHARE CARD ───
+    function shareResultCard(config, btnId) {
+      var btn = document.getElementById(btnId);
+      if (btn) btn.style.opacity = '0.5';
+
       var card = document.getElementById('jawsShareCard');
-      document.getElementById('scCardEyebrow').textContent  = config.eyebrow  || 'YOUR RESULT';
+      card.style.left = '-9999px';
+      card.style.display = 'flex';
+
+      document.getElementById('scCardEyebrow').textContent  = config.eyebrow  || '';
       document.getElementById('scCardScore').textContent    = config.score    || '0';
       document.getElementById('scCardCategory').textContent = config.category || '';
       document.getElementById('scCardTagline').textContent  = config.tagline  || '';
-      document.getElementById('scCardQuizName').textContent = config.quizName || 'THE JAWS ADVANTAGE';
+      document.getElementById('scCardQuizName').textContent = config.quizName || '';
 
       var pillarsEl    = document.getElementById('scCardPillars');
       var pillarBarsEl = document.getElementById('scCardPillarBars');
@@ -1480,10 +1477,10 @@
           row.style.cssText = 'margin-bottom:10px;';
           row.innerHTML =
             '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">' +
-              '<span style="font-size:10px;color:rgba(245,243,239,0.6);font-family:\'DM Sans\',sans-serif;letter-spacing:1px;">' + p.name.toUpperCase() + '</span>' +
-              '<span style="font-size:10px;color:#a52a1a;font-family:\'DM Sans\',sans-serif;">' + p.pct + '%</span>' +
+              '<span style="font-size:10px;color:rgba(245,243,239,0.6);font-family:DM Sans,sans-serif;letter-spacing:1px;">' + p.name.toUpperCase() + '</span>' +
+              '<span style="font-size:10px;color:#a52a1a;font-family:DM Sans,sans-serif;">' + p.pct + '%</span>' +
             '</div>' +
-            '<div style="height:3px;background:rgba(255,255,255,0.1);border-radius:0;">' +
+            '<div style="height:3px;background:rgba(255,255,255,0.1);">' +
               '<div style="height:3px;width:' + p.pct + '%;background:#a52a1a;"></div>' +
             '</div>';
           pillarBarsEl.appendChild(row);
@@ -1492,39 +1489,74 @@
         pillarsEl.style.display = 'none';
       }
 
-      card.style.left = '-9999px';
-      card.style.display = 'flex';
-
       setTimeout(function() {
         html2canvas(card, {
-          width: 540,
-          height: 675,
-          scale: 2,
-          backgroundColor: '#0a0a0a',
-          useCORS: true,
-          logging: false
+          width: 540, height: 675, scale: 2,
+          backgroundColor: '#0a0a0a', useCORS: true, logging: false
         }).then(function(canvas) {
           card.style.display = 'none';
-          var link = document.createElement('a');
-          link.download = 'jaws-boss-rating.png';
-          link.href = canvas.toDataURL('image/png');
-          link.click();
+          if (btn) btn.style.opacity = '1';
+          canvas.toBlob(function(blob) {
+            if (!blob) { fallbackDownload(canvas, config.quizName); return; }
+            var file = new File([blob], 'jaws-result.png', { type: 'image/png' });
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+              navigator.share({
+                title: 'My JAWS Result — ' + config.category,
+                text: 'I scored ' + config.score + '/100 on The JAWS Advantage. Find out where you stand: jawsadvantage.com',
+                files: [file]
+              }).catch(function() { tryClipboard(blob, canvas, config.quizName); });
+              return;
+            }
+            tryClipboard(blob, canvas, config.quizName);
+          }, 'image/png');
         }).catch(function() {
           card.style.display = 'none';
-          alert('Could not generate card. Try screenshotting your results instead.');
+          if (btn) btn.style.opacity = '1';
+          showShareToast('Could not generate card. Try screenshotting instead.');
         });
       }, 100);
     }
 
-    function rybDownloadCard() {
-      generateShareCard({
+    function tryClipboard(blob, canvas, quizName) {
+      if (navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]).then(function() {
+          showShareToast('Result card copied to clipboard. Paste it anywhere.');
+        }).catch(function() { fallbackDownload(canvas, quizName); });
+      } else {
+        fallbackDownload(canvas, quizName);
+      }
+    }
+
+    function fallbackDownload(canvas, quizName) {
+      var link = document.createElement('a');
+      link.download = 'jaws-result.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showShareToast('Result card downloaded.');
+    }
+
+    function showShareToast(msg) {
+      var existing = document.getElementById('shareToast');
+      if (existing) existing.remove();
+      var toast = document.createElement('div');
+      toast.id = 'shareToast';
+      toast.textContent = msg;
+      toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0a0a0a;border:1px solid rgba(255,255,255,0.2);color:#f5f3ef;font-family:DM Sans,sans-serif;font-size:13px;padding:12px 24px;z-index:9999;letter-spacing:0.5px;';
+      document.body.appendChild(toast);
+      setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
+    }
+
+    function rybShareCardBtn() {
+      shareResultCard({
         eyebrow:  'RATE YOUR BOSS',
         score:    window._rybScore    || 0,
         category: window._rybCategory || '',
         tagline:  window._rybTagline  || '',
         quizName: 'RATE YOUR BOSS',
         pillars:  null
-      });
+      }, 'rybShareCard');
     }
 
     // ─── KEYBOARD SHORTCUTS ───
