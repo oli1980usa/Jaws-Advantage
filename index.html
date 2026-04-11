@@ -130,15 +130,16 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--off-white) !important;
-      border: 1px solid var(--red);
+      color: var(--red-accent, #a52a1a) !important;
+      background: transparent;
+      border: 1px solid var(--red-accent, #a52a1a);
       padding: 8px 20px;
       transition: background 0.2s, color 0.2s !important;
     }
 
     .nav-cta:hover {
-      background: var(--red) !important;
-      color: var(--off-white) !important;
+      background: var(--red-accent, #a52a1a) !important;
+      color: #fff !important;
     }
 
     /* ─── THEME TOGGLE ─── */
@@ -319,30 +320,6 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--off-white-dim);
-    }
-
-    .hero-cta-wrap {
-      margin-top: 40px;
-    }
-    .hero-cta-btn {
-      display: inline-block;
-      background: var(--red-accent, #a52a1a);
-      color: #fff;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 3px;
-      padding: 16px 40px;
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-    .hero-cta-btn:hover {
-      opacity: 0.85;
-    }
-    .hero-cta-trust {
-      margin-top: 12px;
-      font-size: 12px;
-      color: rgba(245, 243, 239, 0.45);
-      letter-spacing: 0.5px;
     }
 
     /* ─── SECTION LAYOUT ─── */
@@ -1273,7 +1250,7 @@
 
   <!-- ─── ANNOUNCEMENT BANNER ─── -->
   <div class="announce-banner" id="announceBanner">
-    <span class="announce-banner-text">FIND OUT WHERE YOU STAND &mdash; TAKE THE <strong>JAWS SCORE</strong> <strong>&rarr;</strong></span>
+    <span class="announce-banner-text">ARE YOU BAIT? FIND OUT &mdash; TAKE THE <strong>JAWS SCORE</strong> <strong>&rarr;</strong></span>
     <button class="announce-dismiss" id="announceDismiss" aria-label="Dismiss">&#215;</button>
   </div>
 
@@ -1299,10 +1276,6 @@
         <span class="stat-number">One</span>
         <span class="stat-label">Playbook</span>
       </div>
-    </div>
-    <div class="hero-cta-wrap fade-in">
-      <a href="jaws-score.html" class="hero-cta-btn">ARE YOU BAIT? FIND OUT →</a>
-      <p class="hero-cta-trust">No email. No phone number. No catch.</p>
     </div>
   </section>
 
