@@ -935,6 +935,7 @@
           <span class="quiz-number" id="ddMCNumber">01</span>
           <h2 class="quiz-question" id="ddMCQuestion"></h2>
           <div class="quiz-options" id="ddMCOptions"></div>
+          <p class="quiz-kbd-hint" id="ddKbdHint">Press A, B, C or D to answer</p>
         </div>
       </div>
 
@@ -1740,10 +1741,15 @@
       }
 
       // Deep dive MC
-      if (ddSection.style.display === 'flex' && ddMCWrap.style.display !== 'none') {
+      if (ddCurrentSection === 'mc') {
         if (dd.advancing) return;
         var ddOpts = document.getElementById('ddMCOptions').querySelectorAll('.quiz-option');
         if (!ddOpts[idx]) return;
+        if (!ddKbdHintUsed) {
+          ddKbdHintUsed = true;
+          var ddHint = document.getElementById('ddKbdHint');
+          if (ddHint) ddHint.classList.add('hidden');
+        }
         ddMCSelect(idx, parseInt(ddOpts[idx].dataset.points, 10));
       }
     });
@@ -2016,6 +2022,8 @@
     var ddRankOrder = [];
     var ddMobileRanks = [];
     var ddDragSrcPos = null;
+    var ddCurrentSection = null;
+    var ddKbdHintUsed = false;
 
     var ddSection       = document.getElementById('deepDiveSection');
     var ddLoadingSection= document.getElementById('deepDiveLoadingSection');
@@ -2053,6 +2061,10 @@
         e.style.display = 'none';
       });
       el.style.display = '';
+      ddCurrentSection = el === ddMCWrap ? 'mc' :
+                         el === ddRankWrap ? 'rank' :
+                         el === ddForcedWrap ? 'forced' :
+                         el === ddOpenWrap ? 'open' : null;
     }
 
     function ddShowIntro(phase, onBegin) {
@@ -2089,6 +2101,9 @@
 
       var backBtn = document.getElementById('ddMCBackBtn');
       if (idx > 0) { backBtn.classList.remove('hidden'); } else { backBtn.classList.add('hidden'); }
+
+      var ddHint = document.getElementById('ddKbdHint');
+      if (ddHint) { ddKbdHintUsed ? ddHint.classList.add('hidden') : ddHint.classList.remove('hidden'); }
 
       var optionsEl = document.getElementById('ddMCOptions');
       optionsEl.classList.remove('locked');
