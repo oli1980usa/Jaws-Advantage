@@ -126,21 +126,20 @@
     }
 
     .nav-cta {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--off-white, #f5f3ef) !important;
       background: transparent;
       border: 1px solid rgba(245, 243, 239, 0.6);
+      color: var(--off-white, #f5f3ef);
       padding: 8px 20px;
-      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
     .nav-cta:hover {
-      background: rgba(245, 243, 239, 0.1) !important;
-      border-color: var(--off-white, #f5f3ef) !important;
-      color: var(--off-white, #f5f3ef) !important;
+      background: rgba(245, 243, 239, 0.1);
     }
 
     /* ─── THEME TOGGLE ─── */
@@ -180,14 +179,12 @@
     }
 
     body.light-mode .nav-cta {
-      color: var(--black, #0a0a0a) !important;
-      border-color: rgba(10, 10, 10, 0.5);
+      border-color: rgba(10, 10, 10, 0.4);
+      color: #0a0a0a;
     }
 
     body.light-mode .nav-cta:hover {
-      background: rgba(10, 10, 10, 0.08) !important;
-      border-color: var(--black, #0a0a0a) !important;
-      color: var(--black, #0a0a0a) !important;
+      background: rgba(10, 10, 10, 0.06);
     }
 
     body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
