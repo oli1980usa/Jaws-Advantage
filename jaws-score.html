@@ -762,29 +762,33 @@
       letter-spacing: 0.08em; color: var(--off-white); margin-bottom: 16px;
     }
     .dd-feedback-item {
-      padding: 28px 0;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin: 0;
-      background: transparent;
+      overflow: hidden;
     }
     .dd-feedback-item:last-of-type {
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .dd-feedback-text { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
-    .dd-feedback-header {
+    .dd-feedback-trigger {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 18px 0;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
+      text-align: left;
     }
-    .dd-feedback-label {
+    .dd-feedback-trigger:hover { background: transparent; }
+    .dd-feedback-trigger-label {
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--off-white-dim);
       font-weight: 600;
+      white-space: nowrap;
     }
-    .dd-feedback-score {
+    .dd-feedback-trigger-score {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       font-weight: 700;
@@ -792,11 +796,35 @@
       padding: 3px 8px;
       border-radius: 2px;
       line-height: 1.4;
+      white-space: nowrap;
     }
-    .dd-feedback-score-denom {
-      font-weight: 400;
-      opacity: 0.7;
+    .dd-feedback-trigger-preview {
+      font-size: 13px;
+      color: var(--off-white-dim);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+    .dd-feedback-trigger-arrow {
+      font-size: 11px;
+      color: var(--off-white-dim);
+      transition: transform 0.25s ease;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+    .dd-feedback-item.open .dd-feedback-trigger-arrow {
+      transform: rotate(180deg);
+    }
+    .dd-feedback-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .dd-feedback-item.open .dd-feedback-body {
+      max-height: 600px;
+    }
+    .dd-feedback-body-inner { padding: 0 0 20px 0; }
     .dd-feedback-question {
       font-size: 15px;
       font-weight: 600;
@@ -814,6 +842,13 @@
       border-radius: 2px;
       line-height: 1.7;
     }
+    .dd-feedback-text {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+    }
     .dd-discuss-btn {
       margin-top: 4px;
       background: transparent;
@@ -830,11 +865,7 @@
       opacity: 0.85;
       transition: opacity 0.2s ease;
     }
-    .dd-discuss-btn:hover {
-      opacity: 1;
-      background: transparent;
-      color: var(--red);
-    }
+    .dd-discuss-btn:hover { opacity: 1; }
     .dd-discuss-full-btn {
       display: block;
       width: 100%;
@@ -2563,6 +2594,19 @@
       });
     }
 
+    function ddToggleFeedback(trigger) {
+      var item = trigger.parentElement;
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.dd-feedback-item.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      // Open this one if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+
     function ddDiscussQuestion(idx) {
       var question = DD_OPEN[idx] || '';
       var answer = dd.openAnswers[idx] || '';
@@ -2653,17 +2697,26 @@
         var score = dd.openScores[i] || 0;
         var question = DD_OPEN[i] || '';
         var answer = dd.openAnswers[i] || '';
+        var preview = question.length > 50 ? question.substring(0, 50) + '...' : question;
+        var scoreColor = score <= 4 ? 'background:rgba(165,42,26,0.25);color:#e05a4a' : score <= 7 ? 'background:rgba(200,160,0,0.2);color:#c8a000' : 'background:rgba(255,255,255,0.1);color:#f5f3ef';
+
         var item = document.createElement('div');
         item.className = 'dd-feedback-item';
         item.innerHTML =
-          '<div class="dd-feedback-header">' +
-            '<span class="dd-feedback-label">Q' + (i + 1) + ' of 5</span>' +
-            '<span class="dd-feedback-score" style="background:' + (score <= 4 ? 'rgba(165,42,26,0.25);color:#e05a4a' : score <= 7 ? 'rgba(200,160,0,0.2);color:#c8a000' : 'rgba(255,255,255,0.1);color:#f5f3ef') + '">' + score + '<span class="dd-feedback-score-denom"> / 10</span></span>' +
-          '</div>' +
-          '<p class="dd-feedback-question">' + question + '</p>' +
-          '<p class="dd-feedback-answer">\u201c' + answer + '\u201d</p>' +
-          '<p class="dd-feedback-text">' + fb + '</p>' +
-          '<button class="dd-discuss-btn" onclick="ddDiscussQuestion(' + i + ')">Discuss this with JAWS \u2192</button>';
+          '<button class="dd-feedback-trigger" onclick="ddToggleFeedback(this)">' +
+            '<span class="dd-feedback-trigger-label">Q' + (i + 1) + ' of 5</span>' +
+            '<span class="dd-feedback-trigger-score" style="' + scoreColor + '">' + score + ' / 10</span>' +
+            '<span class="dd-feedback-trigger-preview">' + preview + '</span>' +
+            '<span class="dd-feedback-trigger-arrow">&#9660;</span>' +
+          '</button>' +
+          '<div class="dd-feedback-body">' +
+            '<div class="dd-feedback-body-inner">' +
+              '<p class="dd-feedback-question">' + question + '</p>' +
+              '<p class="dd-feedback-answer">\u201c' + answer + '\u201d</p>' +
+              '<p class="dd-feedback-text">' + fb + '</p>' +
+              '<button class="dd-discuss-btn" onclick="ddDiscussQuestion(' + i + ')">Discuss this with JAWS \u2192</button>' +
+            '</div>' +
+          '</div>';
         feedbackContainer.appendChild(item);
       });
 
