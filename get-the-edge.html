@@ -1449,7 +1449,26 @@
           messagesEl.innerHTML = '';
 
           // Show a friendly user bubble in the UI
-          appendUserMessage('I just completed a JAWS assessment. Based on my results, what should I focus on first?');
+          var visiblePrompt;
+          if (decoded.indexOf('one specific question') !== -1) {
+            // Extract question and answer from the context string for the visible bubble
+            var qMatch = decoded.match(/QUESTION[^\n]*:\n([^\n]+)/);
+            var aMatch = decoded.match(/THEIR ANSWER:\n([^\n]+)/);
+            var scoreMatch = decoded.match(/SCORE FOR THIS ANSWER: (\d+)/);
+            var q = qMatch ? qMatch[1].substring(0, 80) + (qMatch[1].length > 80 ? '...' : '') : 'my answer';
+            var a = aMatch ? aMatch[1].substring(0, 100) + (aMatch[1].length > 100 ? '...' : '') : '';
+            var s = scoreMatch ? scoreMatch[1] : '';
+            visiblePrompt = 'Q: ' + q + (s ? ' (' + s + '/10)' : '') + (a ? '\n\nMy answer: \u201c' + a + '\u201d' : '') + '\n\nCan we dig into this?';
+          } else if (decoded.indexOf('Rate Your Boss') !== -1) {
+            var catMatch = decoded.match(/CATEGORY: ([^\n]+)/);
+            var scoreMatch2 = decoded.match(/BOSS RATING: (\d+)/);
+            var cat = catMatch ? catMatch[1] : 'my boss result';
+            var sc = scoreMatch2 ? scoreMatch2[1] + '/100 — ' : '';
+            visiblePrompt = 'I just rated my boss: ' + sc + cat + '. Can you help me think through what to do about it?';
+          } else {
+            visiblePrompt = 'I just completed a JAWS assessment. Based on my results, what should I focus on first?';
+          }
+          appendUserMessage(visiblePrompt);
 
           // Add the full context to history then get JAWS to respond
           // Do NOT call sendMessage — call the API directly so we don't double-push
