@@ -1460,7 +1460,8 @@
           conversationHistory.push({ role: 'user', content: decoded });
 
           setTimeout(function() {
-            appendLoadingIndicator();
+            showTyping();
+            setInputDisabled(true);
             fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -1468,18 +1469,22 @@
             })
             .then(function(r) { return r.json(); })
             .then(function(data) {
-              removeLoadingIndicator();
+              hideTyping();
+              setInputDisabled(false);
               var reply = data.content && data.content[0] && data.content[0].text;
               if (reply) {
                 conversationHistory.push({ role: 'assistant', content: reply });
-                appendMessage('assistant', reply);
-                saveSession();
+                appendJAWSMessage(reply);
+                saveHistory();
+                saveChatHtml();
                 scrollToBottom();
+                incrementCount();
               }
             })
             .catch(function() {
-              removeLoadingIndicator();
-              appendMessage('assistant', 'Something went wrong. Try asking your question directly.');
+              hideTyping();
+              setInputDisabled(false);
+              appendJAWSMessage('Something went wrong. Try asking your question directly.');
             });
           }, 600);
         }
