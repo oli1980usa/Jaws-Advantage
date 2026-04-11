@@ -41,6 +41,7 @@
       --black-3: #181818;
       --red: #a52a1a;
       --red-dark: #a93226;
+      --red-accent: #a52a1a;
       --off-white: #f5f3ef;
       --off-white-dim: #b8b5b0;
       --border: rgba(245, 243, 239, 0.08);
@@ -128,11 +129,6 @@
 
     /* ─── HERO ─── */
     .score-hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 120px 48px 100px;
       position: relative; overflow: hidden;
     }
     .score-hero::before {
@@ -508,6 +504,107 @@
       border: 1px solid rgba(245,243,239,0.12);
     }
     body.light-mode .sq-format-list li { border-color: rgba(10,10,10,0.15); }
+
+    /* ─── QUIZ MENU ─── */
+    .sq-menu-wrap {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .sq-menu-category {
+      margin-bottom: 48px;
+    }
+    .sq-menu-cat-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--red-accent);
+      font-weight: 600;
+      margin: 0 0 20px;
+    }
+    .sq-menu-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .sq-menu-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sq-menu-card--coming {
+      opacity: 0.6;
+    }
+    .sq-menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .sq-menu-card-tag {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--red-accent);
+      color: #fff;
+      padding: 3px 8px;
+      font-weight: 600;
+    }
+    .sq-menu-card-tag--serious {
+      background: rgba(165,42,26,0.3);
+      color: var(--red-accent);
+      border: 1px solid var(--red-accent);
+    }
+    .sq-menu-card-tag--soon {
+      background: transparent;
+      color: var(--off-white-dim);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .sq-menu-card-time {
+      font-size: 11px;
+      color: var(--off-white-dim);
+      letter-spacing: 1px;
+    }
+    .sq-menu-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--off-white);
+      margin: 0 0 10px;
+    }
+    .sq-menu-card-desc {
+      font-size: 13px;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+      margin: 0 0 16px;
+      flex: 1;
+    }
+    .sq-menu-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .sq-menu-card-pills li {
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--off-white-dim);
+      padding: 3px 8px;
+    }
+    .sq-menu-btn {
+      width: 100%;
+      text-align: center;
+    }
+    body.light-mode .sq-menu-card {
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.1);
+    }
 
     /* ─── SHORT QUIZ TRANSITION CARDS ─── */
     .sq-trans { text-align: center; padding: 52px 0; }
@@ -1034,7 +1131,6 @@
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
-      .score-hero { padding: 120px 24px 80px; }
       .quiz-wrap, .results-wrap { padding: 40px 24px 60px; }
       footer { padding: 48px 24px; }
       .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
@@ -1096,18 +1192,82 @@
 
   <!-- ─── HERO ─── -->
   <section id="heroSection" class="score-hero">
-    <span class="score-eyebrow fade-in">The JAWS Score</span>
-    <h1 class="score-headline fade-in">How well are you<br>playing the game?</h1>
-    <p class="score-subheading fade-in">10 questions. Three formats. One score.</p>
-    <ul class="sq-format-list fade-in">
-      <li>5 multiple choice</li>
-      <li>5 forced choice</li>
-    </ul>
-    <div class="score-hero-btns fade-in">
-      <button class="score-btn-primary" id="startQuizBtn">Take the Test</button>
-      <button class="score-btn-outline" id="startDeepDiveBtn">I'm Serious &mdash; 30 Questions (~30 Mins)</button>
+
+    <div class="sq-menu-wrap fade-in">
+
+      <div class="sq-menu-category">
+        <p class="sq-menu-cat-label">KNOW YOURSELF</p>
+        <div class="sq-menu-cards">
+
+          <div class="sq-menu-card">
+            <div class="sq-menu-card-top">
+              <span class="sq-menu-card-tag">Quick</span>
+              <span class="sq-menu-card-time">~5 mins</span>
+            </div>
+            <h2 class="sq-menu-card-title">THE JAWS SCORE</h2>
+            <p class="sq-menu-card-desc">10 questions. Two formats. Find out where you actually stand.</p>
+            <ul class="sq-menu-card-pills">
+              <li>5 Multiple Choice</li>
+              <li>5 Forced Choice</li>
+            </ul>
+            <button class="score-btn-primary sq-menu-btn" id="startQuizBtn">TAKE THE TEST</button>
+            <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
+          </div>
+
+          <div class="sq-menu-card">
+            <div class="sq-menu-card-top">
+              <span class="sq-menu-card-tag sq-menu-card-tag--serious">Serious</span>
+              <span class="sq-menu-card-time">~30 mins</span>
+            </div>
+            <h2 class="sq-menu-card-title">THE DEEP DIVE</h2>
+            <p class="sq-menu-card-desc">30 questions. AI evaluation. A full pillar breakdown and personalised debrief.</p>
+            <ul class="sq-menu-card-pills">
+              <li>10 Multiple Choice</li>
+              <li>10 Ranking</li>
+              <li>5 Forced Choice</li>
+              <li>5 Open Text</li>
+            </ul>
+            <button class="score-btn-outline sq-menu-btn" id="startDeepDiveBtn">I'M SERIOUS →</button>
+            <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sq-menu-category">
+        <p class="sq-menu-cat-label">KNOW YOUR WORLD</p>
+        <div class="sq-menu-cards">
+
+          <div class="sq-menu-card">
+            <div class="sq-menu-card-top">
+              <span class="sq-menu-card-tag">New</span>
+              <span class="sq-menu-card-time">~5 mins</span>
+            </div>
+            <h2 class="sq-menu-card-title">RATE YOUR BOSS</h2>
+            <p class="sq-menu-card-desc">10 questions. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.</p>
+            <ul class="sq-menu-card-pills">
+              <li>10 Multiple Choice</li>
+            </ul>
+            <a href="rate-your-boss.html" class="score-btn-primary sq-menu-btn" style="display:block; text-align:center; text-decoration:none;">RATE YOUR BOSS →</a>
+          </div>
+
+          <div class="sq-menu-card sq-menu-card--coming">
+            <div class="sq-menu-card-top">
+              <span class="sq-menu-card-tag sq-menu-card-tag--soon">Coming Soon</span>
+            </div>
+            <h2 class="sq-menu-card-title">SALARY NEGOTIATION</h2>
+            <p class="sq-menu-card-desc">Practice the real conversation. JAWS plays the other side. No script. No safety net.</p>
+            <ul class="sq-menu-card-pills">
+              <li>AI Roleplay</li>
+            </ul>
+            <button class="score-btn-outline sq-menu-btn" disabled style="opacity:0.4; cursor:not-allowed;">COMING SOON</button>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-    <p class="dd-trust-line fade-in">No email. No phone number. No catch.<br>You do the work, you get the results. Every time.</p>
+
   </section>
 
   <!-- ─── QUIZ ─── -->
