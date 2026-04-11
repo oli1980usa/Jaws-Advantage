@@ -753,51 +753,93 @@
       letter-spacing: 0.08em; color: var(--off-white); margin-bottom: 16px;
     }
     .dd-feedback-item {
-      padding: 14px 18px; border-left: 2px solid rgba(165,42,26,0.4);
-      margin-bottom: 10px; background: rgba(165,42,26,0.04);
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 0;
+      background: transparent;
     }
-    .dd-feedback-q {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--red); opacity: 0.75; margin-bottom: 4px;
+    .dd-feedback-item:last-of-type {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .dd-feedback-text { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
     .dd-feedback-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
     }
     .dd-feedback-label {
-      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--red); font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      font-weight: 600;
     }
     .dd-feedback-score {
-      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-      color: var(--off-white); line-height: 1;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      line-height: 1.4;
     }
     .dd-feedback-score-denom {
-      font-size: 14px; color: var(--off-white-dim);
-      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      opacity: 0.7;
     }
     .dd-feedback-question {
-      font-size: 14px; font-weight: 600; color: var(--off-white);
-      margin: 0 0 8px 0; line-height: 1.5;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--off-white);
+      margin: 0 0 12px 0;
+      line-height: 1.5;
     }
     .dd-feedback-answer {
-      font-size: 13px; font-style: italic; color: var(--off-white-dim);
-      margin: 0 0 12px 0; padding: 8px 12px;
-      border-left: 2px solid var(--red); line-height: 1.6;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--off-white-dim);
+      margin: 0 0 14px 0;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 2px;
+      line-height: 1.7;
     }
     .dd-discuss-btn {
-      margin-top: 12px; background: transparent; border: 1px solid var(--red);
-      color: var(--red); font-family: 'DM Sans', sans-serif;
-      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
-      padding: 8px 16px; cursor: pointer; transition: all 0.2s ease;
+      margin-top: 4px;
+      background: transparent;
+      border: none;
+      color: var(--red);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
     }
-    .dd-discuss-btn:hover { background: var(--red); color: #fff; }
+    .dd-discuss-btn:hover {
+      opacity: 1;
+      background: transparent;
+      color: var(--red);
+    }
     .dd-discuss-full-btn {
-      display: block; width: 100%; max-width: 400px;
-      margin: 32px auto 0 auto; background: var(--red);
-      border: none; color: #fff; font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px; letter-spacing: 2px; padding: 16px 32px;
-      cursor: pointer; transition: opacity 0.2s ease;
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 40px auto 0 auto;
+      background: var(--red);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 3px;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
     }
     .dd-discuss-full-btn:hover { opacity: 0.85; }
     .dd-reading {
@@ -2606,7 +2648,7 @@
         item.innerHTML =
           '<div class="dd-feedback-header">' +
             '<span class="dd-feedback-label">Q' + (i + 1) + ' of 5</span>' +
-            '<span class="dd-feedback-score">' + score + '<span class="dd-feedback-score-denom"> / 10</span></span>' +
+            '<span class="dd-feedback-score" style="background:' + (score <= 4 ? 'rgba(165,42,26,0.25);color:#e05a4a' : score <= 7 ? 'rgba(200,160,0,0.2);color:#c8a000' : 'rgba(255,255,255,0.1);color:#f5f3ef') + '">' + score + '<span class="dd-feedback-score-denom"> / 10</span></span>' +
           '</div>' +
           '<p class="dd-feedback-question">' + question + '</p>' +
           '<p class="dd-feedback-answer">\u201c' + answer + '\u201d</p>' +
