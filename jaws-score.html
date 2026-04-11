@@ -645,6 +645,18 @@
       background: rgba(0,0,0,0.03);
       border-color: rgba(0,0,0,0.1);
     }
+    .sq-saved-result {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(165,42,26,0.1);
+      border-left: 2px solid var(--red-accent);
+      letter-spacing: 0.3px;
+    }
+    .sq-saved-result strong {
+      color: var(--off-white);
+    }
 
     /* ─── SHORT QUIZ TRANSITION CARDS ─── */
     .sq-trans { text-align: center; padding: 52px 0; }
@@ -1239,7 +1251,7 @@
         <p class="sq-menu-cat-label">KNOW YOURSELF</p>
         <div class="sq-menu-cards">
 
-          <div class="sq-menu-card">
+          <div class="sq-menu-card" id="sqCardShort">
             <div class="sq-menu-card-top">
               <span class="sq-menu-card-tag">Quick</span>
               <span class="sq-menu-card-time">~5 mins</span>
@@ -1254,7 +1266,7 @@
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
-          <div class="sq-menu-card sq-menu-card--premium">
+          <div class="sq-menu-card sq-menu-card--premium" id="sqCardDeep">
             <div class="sq-menu-card-top">
               <span class="sq-menu-card-tag--premium">Serious</span>
               <span class="sq-menu-card-time">~30 mins</span>
@@ -1278,7 +1290,7 @@
         <p class="sq-menu-cat-label">KNOW YOUR WORLD</p>
         <div class="sq-menu-cards">
 
-          <div class="sq-menu-card">
+          <div class="sq-menu-card" id="sqCardBoss">
             <div class="sq-menu-card-top">
               <span class="sq-menu-card-tag">FUN</span>
               <span class="sq-menu-card-time">~5 mins</span>
@@ -3845,6 +3857,46 @@
         setTimeout(function () { h.classList.remove('hero-glow'); }, 1500);
       }, 500);
     })();
+
+    // ─── SAVED RESULT INDICATORS ───
+    function sqShowSavedResults() {
+      var keys = [
+        { key: 'jawsShortQuiz', cardId: 'sqCardShort', ratingFn: getRating },
+        { key: 'jawsDeepDive',  cardId: 'sqCardDeep',  ratingFn: getRating },
+        { key: 'jawsBossQuiz',  cardId: 'sqCardBoss',  ratingFn: null }
+      ];
+
+      keys.forEach(function(item) {
+        try {
+          var saved = sessionStorage.getItem(item.key);
+          if (!saved) return;
+          var state = JSON.parse(saved);
+          if (!state || !state.screen) return;
+          var age = Date.now() - (state.savedAt || 0);
+          if (age > 7200000) { sessionStorage.removeItem(item.key); return; }
+
+          var card = document.getElementById(item.cardId);
+          if (!card) return;
+
+          var score = (state.finalScore !== null && state.finalScore !== undefined) ? state.finalScore : null;
+          var label = state.finalCategory || (score !== null && item.ratingFn ? item.ratingFn(score).label : null);
+          if (score === null) return;
+
+          // Remove any existing saved result line
+          var existing = card.querySelector('.sq-saved-result');
+          if (existing) existing.remove();
+
+          var line = document.createElement('div');
+          line.className = 'sq-saved-result';
+          line.innerHTML = 'Last result: <strong>' + score + '/100' + (label ? ' \u2014 ' + label : '') + '</strong>';
+
+          // Insert before the button
+          var btn = card.querySelector('button, a.score-btn-primary');
+          if (btn) card.insertBefore(line, btn);
+        } catch(e) {}
+      });
+    }
+    sqShowSavedResults();
   </script>
 
 </body>
