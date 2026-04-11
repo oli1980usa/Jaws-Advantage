@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics -->
+  <script>
+    if (localStorage.getItem('cookieConsent') === 'essential') {
+      window['ga-disable-G-5RC382BRZF'] = true;
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | The JAWS Advantage</title>
+  <meta name="description" content="Privacy Policy for The JAWS Advantage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo span { color: var(--red); }
+    .nav-logo:hover { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white) !important;
+      border: 1px solid var(--red);
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--off-white) !important;
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 2px;
+      color: var(--off-white-dim);
+      line-height: 1;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover { color: var(--red); }
+    .theme-toggle svg { display: block; }
+
+    /* ─── HAMBURGER / MOBILE MENU ─── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--red);
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .nav-hamburger:hover { opacity: 0.8; }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      z-index: 99;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 8px 0 16px;
+    }
+
+    .nav-mobile-menu.is-open { display: flex; }
+
+    .nav-mobile-menu a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s;
+      text-align: right;
+    }
+
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef;
+      --black-2: #e8e6e2;
+      --black-3: #dedad4;
+      --off-white: #0a0a0a;
+      --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+
+    body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
+    body.light-mode .nav-cta { color: var(--red) !important; }
+    body.light-mode .nav-cta:hover { color: #f5f3ef !important; }
+    body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
+    body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
+    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
+    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
+    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
+    body.light-mode .nav-logo img { mix-blend-mode: multiply; }
+    body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
+    body.light-mode .footer-tagline { color: rgba(10, 10, 10, 0.5); }
+    body.light-mode .contact-bar { color: rgba(10, 10, 10, 0.4); border-color: rgba(10, 10, 10, 0.08); }
+    body.light-mode .contact-bar a { color: var(--red); }
+    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
+    body.light-mode .footer-legal,
+    body.light-mode .footer-legal a { color: rgba(10,10,10,0.3); }
+    body.light-mode .footer-legal a:hover { color: rgba(10,10,10,0.6); }
+
+    /* ─── PAGE LAYOUT ─── */
+    .legal-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 120px 48px 100px;
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .legal-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+
+    .legal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 80px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 16px;
+    }
+
+    .legal-date {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--off-white-dim);
+      opacity: 0.5;
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── BODY ─── */
+    .legal-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .legal-body p {
+      margin-bottom: 20px;
+      color: rgba(245, 243, 239, 0.75);
+    }
+
+    .legal-body p:last-child { margin-bottom: 0; }
+
+    .legal-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.06em;
+      color: var(--off-white);
+      margin: 48px 0 14px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .legal-section-heading:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .legal-contact-link {
+      color: var(--red);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .legal-contact-link:hover { opacity: 0.75; }
+
+    .legal-body a {
+      color: var(--off-white-dim);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+
+    .legal-body a:hover { color: var(--red); }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(184, 181, 176, 0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-bar a {
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-bar a:hover { color: var(--red); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+    }
+
+    .footer-logo span { color: var(--red); }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(184, 181, 176, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.3);
+    }
+
+    .footer-legal {
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      margin-top: 20px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-legal a {
+      color: rgba(245,243,239,0.3);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-legal a:hover { color: rgba(245,243,239,0.6); }
+    .footer-legal span { opacity: 0.4; }
+
+    /* ─── COOKIE CONSENT ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: #111111;
+      border-top: 1px solid rgba(245, 243, 239, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner.hidden { display: none; }
+    .cookie-inner { padding: 18px 48px 20px; }
+    .cookie-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cookie-text {
+      font-size: 12px; font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.5; flex: 1; min-width: 200px;
+    }
+    .cookie-text a { color: inherit; text-decoration: underline; opacity: 0.7; }
+    .cookie-text a:hover { opacity: 1; }
+    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 8px 18px;
+      border-radius: 0; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .cookie-accept { background: var(--red); color: #ffffff; border: 1px solid var(--red); }
+    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .cookie-essential {
+      background: transparent; color: var(--off-white-dim);
+      border: 1px solid rgba(245, 243, 239, 0.2);
+    }
+    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
+    .cookie-details-toggle {
+      background: none; border: none; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      padding: 6px 0 0; opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s; display: block;
+    }
+    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
+    .cookie-details {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(245, 243, 239, 0.08);
+      columns: 3; column-gap: 40px;
+    }
+    .cookie-details.is-open { display: block; }
+    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
+    .cookie-detail-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 0.1em; color: var(--red);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .cookie-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 1px 5px; vertical-align: middle;
+    }
+    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
+    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
+    .cookie-detail-list li {
+      font-size: 11px; font-weight: 300; color: var(--off-white-dim);
+      line-height: 1.5; padding: 3px 0 3px 14px; position: relative;
+    }
+    .cookie-detail-list li::before { content: '–'; position: absolute; left: 0; color: rgba(245,243,239,0.25); }
+    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .legal-wrap { padding: 100px 24px 80px; }
+      footer { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .contact-bar { padding: 24px; }
+      .cookie-inner { padding: 14px 20px 16px; }
+      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cookie-details { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Intelligence</a></li>
+      <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
+      <li><a href="sharpen-your-edge.html">Sharpen Your Edge</a></li>
+      <li><a href="get-the-edge.html">Ask JAWS</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">The Intelligence</a>
+    <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
+    <a href="sharpen-your-edge.html">Sharpen Your Edge</a>
+    <a href="get-the-edge.html">Ask JAWS</a>
+  </div>
+
+  <!-- ─── CONTENT ─── -->
+  <main class="legal-wrap">
+
+    <p class="legal-eyebrow">Legal</p>
+    <h1 class="legal-title">Privacy Policy</h1>
+    <p class="legal-date">Effective date: April 2026</p>
+
+    <div class="legal-body">
+
+      <h2 class="legal-section-heading">1. What We Collect</h2>
+      <p>Analytics data via Google Analytics — page views, session data, general location. No personally identifiable information. Cookie preferences stored locally in your browser. Quiz results stored temporarily in your browser's sessionStorage — we do not transmit or store your quiz answers on our servers. Text you paste into JAWS Decode or Job Posting Analyzer is sent to our AI provider (Anthropic) for processing and is not stored by us after processing. Anonymous thumbs up/down votes stored in aggregate only with no user identification.</p>
+
+      <h2 class="legal-section-heading">2. What We Don't Collect</h2>
+      <p>We do not collect your name, email address, phone number, or any personally identifiable information unless you contact us directly at <a href="mailto:info@jawsadvantage.com" class="legal-contact-link">info@jawsadvantage.com</a>.</p>
+
+      <h2 class="legal-section-heading">3. Cookies</h2>
+      <p>We use essential cookies for site functionality and analytics cookies via Google Analytics. You can manage your preferences via the cookie banner.</p>
+
+      <h2 class="legal-section-heading">4. Third Parties</h2>
+      <p><strong style="color: var(--off-white); font-weight: 500;">Google Analytics</strong> — anonymized usage data. See Google's privacy policy at <a href="https://policies.google.com" target="_blank" rel="noopener">policies.google.com</a>.</p>
+      <p><strong style="color: var(--off-white); font-weight: 500;">Anthropic</strong> — AI processing of tool inputs. See Anthropic's privacy policy at <a href="https://anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy</a>.</p>
+      <p><strong style="color: var(--off-white); font-weight: 500;">Cloudflare</strong> — hosting and security. See Cloudflare's privacy policy at <a href="https://cloudflare.com/privacypolicy" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.</p>
+
+      <h2 class="legal-section-heading">5. Your Rights</h2>
+      <p>If you are in the EU or UK, you have rights under GDPR including access, deletion, and portability of any personal data we hold. Since we hold no personally identifiable data, there is typically nothing to action. Contact <a href="mailto:info@jawsadvantage.com" class="legal-contact-link">info@jawsadvantage.com</a> with any requests.</p>
+
+      <h2 class="legal-section-heading">6. Children</h2>
+      <p>This site is not intended for users under 16.</p>
+
+      <h2 class="legal-section-heading">7. Changes</h2>
+      <p>We may update this policy. The effective date above will reflect any changes.</p>
+
+      <h2 class="legal-section-heading">8. Contact</h2>
+      <p><a href="mailto:info@jawsadvantage.com" class="legal-contact-link">info@jawsadvantage.com</a></p>
+
+    </div>
+
+  </main>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+    <div class="footer-legal">
+      <a href="terms.html">Terms of Service</a>
+      <span>·</span>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div class="cookie-main">
+        <p class="cookie-text">We use cookies and local storage to make this site work and to understand how it's used. No ads. No selling your data. <a href="privacy.html">Privacy Policy</a></p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
+          <button class="cookie-btn cookie-essential" id="cookieEssential">Essentials Only</button>
+        </div>
+      </div>
+      <button class="cookie-details-toggle" id="cookieDetailsToggle">Show details &#9662;</button>
+      <div class="cookie-details" id="cookieDetails">
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
+            <li><strong>Cookie preferences</strong> — saved locally so we don't ask again</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">We Don't</h4>
+          <ul class="cookie-detail-list">
+            <li>Sell your data</li>
+            <li>Use advertising cookies</li>
+            <li>Collect your name, email, or any personally identifiable information</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── NAV BACKGROUND ON SCROLL ───
+    (function () {
+      var navEl = document.querySelector('nav');
+      window.addEventListener('scroll', function () {
+        navEl.style.borderBottomColor = window.scrollY > 20
+          ? (document.body.classList.contains('light-mode') ? 'rgba(10, 10, 10, 0.2)' : 'rgba(245, 243, 239, 0.12)')
+          : '';
+      }, { passive: true });
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function () {
+      var btn = document.getElementById('themeToggle');
+      var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+      function applyTheme(mode) {
+        if (mode === 'light') {
+          document.body.classList.add('light-mode');
+          btn.innerHTML = moonIcon;
+        } else {
+          document.body.classList.remove('light-mode');
+          btn.innerHTML = sunIcon;
+        }
+      }
+
+      var saved = localStorage.getItem('jaws_theme') || 'dark';
+      applyTheme(saved);
+
+      btn.addEventListener('click', function () {
+        var current = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        var next = current === 'light' ? 'dark' : 'light';
+        localStorage.setItem('jaws_theme', next);
+        applyTheme(next);
+      });
+    })();
+
+    // ─── MOBILE NAV ───
+    (function () {
+      var hamburger = document.getElementById('navHamburger');
+      var mobileMenu = document.getElementById('navMobileMenu');
+      hamburger.addEventListener('click', function () {
+        mobileMenu.classList.toggle('is-open');
+      });
+    })();
+
+    // ─── COOKIE CONSENT ───
+    (function () {
+      var GA_ID = 'G-5RC382BRZF';
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('cookieConsent');
+
+      function disableGA() { window['ga-disable-' + GA_ID] = true; }
+
+      function hideBanner() {
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      }
+
+      if (consent) {
+        banner.classList.add('hidden');
+        if (consent === 'essential') disableGA();
+        return;
+      }
+
+      setTimeout(function () { banner.classList.add('visible'); }, 800);
+
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'all');
+        hideBanner();
+      });
+
+      document.getElementById('cookieEssential').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'essential');
+        disableGA();
+        hideBanner();
+      });
+
+      var toggle = document.getElementById('cookieDetailsToggle');
+      var details = document.getElementById('cookieDetails');
+      toggle.addEventListener('click', function () {
+        var open = details.classList.toggle('is-open');
+        toggle.textContent = open ? 'Hide details ▴' : 'Show details ▾';
+      });
+    })();
+  </script>
+</body>
+</html>
