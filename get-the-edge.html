@@ -1439,14 +1439,33 @@
         var ddContext = params.get('ddContext');
         if (ddContext) {
           var decoded = decodeURIComponent(ddContext);
-          // Remove the param from URL without reload
           var cleanUrl = window.location.pathname;
           window.history.replaceState({}, '', cleanUrl);
-          // Push as context and auto-send so JAWS responds immediately
+
+          // Clear any existing session so context starts fresh
+          sessionStorage.removeItem('jaws_chat_history');
+          sessionStorage.removeItem('jaws_chat_html');
+          conversationHistory = [];
+          messagesEl.innerHTML = '';
+
+          // Add context as a hidden system-style user message
+          // then show a visible prompt to the user
           conversationHistory.push({ role: 'user', content: decoded });
+
+          // Show a visible user bubble with a friendly prompt instead of the raw context
+          var visiblePrompt = 'I just completed a JAWS assessment. Based on my results, what should I focus on first?';
+
           setTimeout(function() {
+            // Show the friendly prompt in the UI
+            var userBubble = document.createElement('div');
+            userBubble.className = 'message user-message';
+            userBubble.textContent = visiblePrompt;
+            messagesEl.appendChild(userBubble);
+            scrollToBottom();
+
+            // Send the full context to JAWS but show friendly reply
             sendMessage(decoded);
-          }, 800);
+          }, 600);
         }
       })();
 
