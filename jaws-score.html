@@ -761,6 +761,45 @@
       text-transform: uppercase; color: var(--red); opacity: 0.75; margin-bottom: 4px;
     }
     .dd-feedback-text { font-size: 13px; font-weight: 300; color: var(--off-white-dim); line-height: 1.6; }
+    .dd-feedback-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+    }
+    .dd-feedback-label {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--red); font-weight: 600;
+    }
+    .dd-feedback-score {
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      color: var(--off-white); line-height: 1;
+    }
+    .dd-feedback-score-denom {
+      font-size: 14px; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .dd-feedback-question {
+      font-size: 14px; font-weight: 600; color: var(--off-white);
+      margin: 0 0 8px 0; line-height: 1.5;
+    }
+    .dd-feedback-answer {
+      font-size: 13px; font-style: italic; color: var(--off-white-dim);
+      margin: 0 0 12px 0; padding: 8px 12px;
+      border-left: 2px solid var(--red); line-height: 1.6;
+    }
+    .dd-discuss-btn {
+      margin-top: 12px; background: transparent; border: 1px solid var(--red);
+      color: var(--red); font-family: 'DM Sans', sans-serif;
+      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+      padding: 8px 16px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .dd-discuss-btn:hover { background: var(--red); color: #fff; }
+    .dd-discuss-full-btn {
+      display: block; width: 100%; max-width: 400px;
+      margin: 32px auto 0 auto; background: var(--red);
+      border: none; color: #fff; font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 2px; padding: 16px 32px;
+      cursor: pointer; transition: opacity 0.2s ease;
+    }
+    .dd-discuss-full-btn:hover { opacity: 0.85; }
     .dd-reading {
       padding: 24px; border: 1px solid rgba(165,42,26,0.3);
       background: rgba(165,42,26,0.04); margin: 28px 0;
@@ -1029,6 +1068,7 @@
       <div class="dd-ai-feedback" id="ddAiFeedback">
         <p class="dd-ai-feedback-heading">What JAWS saw in your answers</p>
         <div id="ddFeedbackItems"></div>
+        <button class="dd-discuss-full-btn" onclick="ddDiscussFullResults()">DISCUSS MY FULL RESULTS WITH JAWS</button>
       </div>
       <div class="dd-reading" id="ddReading">
         <p class="dd-reading-heading">Recommended Reading for Your Blindspot</p>
@@ -2471,6 +2511,55 @@
       });
     }
 
+    function ddDiscussQuestion(idx) {
+      var question = DD_OPEN[idx] || '';
+      var answer = dd.openAnswers[idx] || '';
+      var score = dd.openScores[idx] || 0;
+      var feedback = dd.openFeedbacks[idx] || '';
+      var pillarName = DD_PILLAR_NAMES[DD_OPEN_PILLARS[idx]] || '';
+      var context = 'The user just completed the JAWS Deep Dive assessment. They want to discuss one specific question from the open text section.\n\n' +
+        'QUESTION (Pillar: ' + pillarName + '):\n' + question + '\n\n' +
+        'THEIR ANSWER:\n' + answer + '\n\n' +
+        'JAWS SCORE FOR THIS ANSWER: ' + score + '/10\n\n' +
+        'AI FEEDBACK GIVEN:\n' + feedback + '\n\n' +
+        'Help them dig deeper into this. Ask them a sharp follow-up question or challenge their thinking. Be direct.';
+      var encoded = encodeURIComponent(context);
+      window.location.href = 'get-the-edge.html?ddContext=' + encoded;
+    }
+
+    function ddDiscussFullResults() {
+      var score = window._ddScore || 0;
+      var rating = window._ddRating || '';
+      var pillarNames = DD_PILLAR_NAMES;
+      var pillarScores = dd.pillarScores || [0, 0, 0, 0];
+
+      var pillarBreakdown = pillarNames.map(function(name, i) {
+        return name + ': ' + pillarScores[i];
+      }).join(', ');
+
+      var openSummary = DD_OPEN.map(function(q, i) {
+        return 'Q' + (i + 1) + ' [' + (dd.openScores[i] || 0) + '/10]: ' + q +
+          '\nAnswer: ' + (dd.openAnswers[i] || '') +
+          '\nFeedback: ' + (dd.openFeedbacks[i] || '');
+      }).join('\n\n');
+
+      var mcSummary = DD_MC_INDICES.map(function(qIdx, i) {
+        var q = QUESTION_BANK[qIdx];
+        var chosen = dd.mcAnswers[i];
+        var chosenText = chosen ? q.options[chosen.optIdx].text : 'No answer';
+        return 'MC Q' + (i + 1) + ': ' + q.q + '\nChose: ' + chosenText;
+      }).join('\n');
+
+      var context = 'The user has just completed the full JAWS Deep Dive (30 questions). Here is their complete profile:\n\n' +
+        'OVERALL SCORE: ' + score + '/100 \u2014 ' + rating + '\n\n' +
+        'PILLAR SCORES: ' + pillarBreakdown + '\n\n' +
+        'OPEN TEXT Q&A WITH SCORES AND FEEDBACK:\n' + openSummary + '\n\n' +
+        'MULTIPLE CHOICE ANSWERS:\n' + mcSummary + '\n\n' +
+        'Use this full picture to have a sharp, personalised conversation. Do not repeat back the data \u2014 ask one incisive question that challenges them or helps them go deeper on their biggest blindspot.';
+      var encoded = encodeURIComponent(context);
+      window.location.href = 'get-the-edge.html?ddContext=' + encoded;
+    }
+
     // ─── DEEP DIVE RESULTS ───
     function ddShowDeepDiveResults() {
       var pillar = [0, 0, 0, 0];
@@ -2509,9 +2598,20 @@
       feedbackContainer.innerHTML = '';
       dd.openFeedbacks.forEach(function(fb, i) {
         if (!fb) return;
+        var score = dd.openScores[i] || 0;
+        var question = DD_OPEN[i] || '';
+        var answer = dd.openAnswers[i] || '';
         var item = document.createElement('div');
         item.className = 'dd-feedback-item';
-        item.innerHTML = '<p class="dd-feedback-q">Q' + (i + 1) + '</p><p class="dd-feedback-text">' + fb + '</p>';
+        item.innerHTML =
+          '<div class="dd-feedback-header">' +
+            '<span class="dd-feedback-label">Q' + (i + 1) + ' of 5</span>' +
+            '<span class="dd-feedback-score">' + score + '<span class="dd-feedback-score-denom"> / 10</span></span>' +
+          '</div>' +
+          '<p class="dd-feedback-question">' + question + '</p>' +
+          '<p class="dd-feedback-answer">\u201c' + answer + '\u201d</p>' +
+          '<p class="dd-feedback-text">' + fb + '</p>' +
+          '<button class="dd-discuss-btn" onclick="ddDiscussQuestion(' + i + ')">Discuss this with JAWS \u2192</button>';
         feedbackContainer.appendChild(item);
       });
 

@@ -1433,6 +1433,23 @@
         }
       }
 
+      // Handle deep dive context handoff
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var ddContext = params.get('ddContext');
+        if (ddContext) {
+          var decoded = decodeURIComponent(ddContext);
+          // Remove the param from URL without reload
+          var cleanUrl = window.location.pathname;
+          window.history.replaceState({}, '', cleanUrl);
+          // Push as context and auto-send so JAWS responds immediately
+          conversationHistory.push({ role: 'user', content: decoded });
+          setTimeout(function() {
+            sendMessage(decoded);
+          }, 800);
+        }
+      })();
+
       // Check cookie consent and show note if essential only
       var consent = localStorage.getItem('cookieConsent');
       if (consent === 'essential') {
