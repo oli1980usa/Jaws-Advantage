@@ -1448,23 +1448,39 @@
           conversationHistory = [];
           messagesEl.innerHTML = '';
 
-          // Add context as a hidden system-style user message
-          // then show a visible prompt to the user
+          // Show a friendly user bubble in the UI
+          var userBubble = document.createElement('div');
+          userBubble.className = 'message user-message';
+          userBubble.textContent = 'I just completed a JAWS assessment. Based on my results, what should I focus on first?';
+          messagesEl.appendChild(userBubble);
+          scrollToBottom();
+
+          // Add the full context to history then get JAWS to respond
+          // Do NOT call sendMessage — call the API directly so we don't double-push
           conversationHistory.push({ role: 'user', content: decoded });
 
-          // Show a visible user bubble with a friendly prompt instead of the raw context
-          var visiblePrompt = 'I just completed a JAWS assessment. Based on my results, what should I focus on first?';
-
           setTimeout(function() {
-            // Show the friendly prompt in the UI
-            var userBubble = document.createElement('div');
-            userBubble.className = 'message user-message';
-            userBubble.textContent = visiblePrompt;
-            messagesEl.appendChild(userBubble);
-            scrollToBottom();
-
-            // Send the full context to JAWS but show friendly reply
-            sendMessage(decoded);
+            appendLoadingIndicator();
+            fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ messages: conversationHistory })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+              removeLoadingIndicator();
+              var reply = data.content && data.content[0] && data.content[0].text;
+              if (reply) {
+                conversationHistory.push({ role: 'assistant', content: reply });
+                appendMessage('assistant', reply);
+                saveSession();
+                scrollToBottom();
+              }
+            })
+            .catch(function() {
+              removeLoadingIndicator();
+              appendMessage('assistant', 'Something went wrong. Try asking your question directly.');
+            });
           }, 600);
         }
       })();
