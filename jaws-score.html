@@ -657,6 +657,39 @@
     .sq-saved-result strong {
       color: var(--off-white);
     }
+    #sqCardDeep .sq-saved-result {
+      background: rgba(74, 127, 165, 0.1);
+      border-left: 2px solid #4a7fa5;
+    }
+    #sqCardDeep .sq-saved-result strong {
+      color: #4a7fa5;
+    }
+    .sq-view-results-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+    .sq-view-results-btn:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    #sqCardDeep .sq-view-results-btn {
+      border-color: rgba(74,127,165,0.4);
+      color: #4a7fa5;
+    }
+    #sqCardDeep .sq-view-results-btn:hover {
+      border-color: #4a7fa5;
+      background: rgba(74,127,165,0.1);
+    }
 
     /* ─── SHORT QUIZ TRANSITION CARDS ─── */
     .sq-trans { text-align: center; padding: 52px 0; }
@@ -3900,17 +3933,34 @@
           var label = state.finalCategory || (score !== null && item.ratingFn ? item.ratingFn(score).label : null);
           if (score === null) return;
 
-          // Remove any existing saved result line
+          // Remove any existing saved result line and view button
           var existing = card.querySelector('.sq-saved-result');
           if (existing) existing.remove();
+          var existingBtn = card.querySelector('.sq-view-results-btn');
+          if (existingBtn) existingBtn.remove();
 
           var line = document.createElement('div');
           line.className = 'sq-saved-result';
           line.innerHTML = 'Last result: <strong>' + score + '/100' + (label ? ' \u2014 ' + label : '') + '</strong>';
 
-          // Insert before the button
+          var viewBtn = document.createElement('button');
+          viewBtn.className = 'sq-view-results-btn';
+          viewBtn.textContent = 'VIEW MY RESULTS \u2192';
+          if (item.cardId === 'sqCardBoss') {
+            viewBtn.onclick = function() {
+              window.location.href = 'rate-your-boss.html';
+            };
+          } else {
+            viewBtn.onclick = function() {
+              sessionStorage.removeItem('jawsShowMenu');
+              window.location.href = 'jaws-score.html';
+            };
+          }
+
+          // Insert before the primary button
           var btn = card.querySelector('button, a.score-btn-primary');
           if (btn) card.insertBefore(line, btn);
+          if (btn) card.insertBefore(viewBtn, btn);
         } catch(e) {}
       });
     }
