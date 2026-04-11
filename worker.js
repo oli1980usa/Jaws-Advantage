@@ -191,6 +191,64 @@ export default {
         return new Response(JSON.stringify({ ok: true, counts }), { status: 200, headers: corsHeaders(origin) });
       }
 
+      if (body.action === 'jaws_decode') {
+        const text = body.text || '';
+        if (!text || text.length < 10) {
+          return new Response(JSON.stringify({ error: 'No text provided' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+        }
+
+        const decodePrompt = `You are JAWS — the unfiltered career intelligence engine. A user has pasted a piece of corporate communication. Your job is to decode it — cut through the spin, the jargon, and the corporate language and tell them what it actually means.
+
+Return ONLY valid JSON with no markdown, in this exact format:
+{
+  "translations": [
+    {"phrase": "the exact corporate phrase", "meaning": "what it actually means in plain English"},
+    {"phrase": "another phrase", "meaning": "what it actually means"}
+  ],
+  "verdict": "One sharp paragraph. What does this communication actually mean overall? What is the person really saying or doing? What should the reader do about it? Be direct. Be specific. Use the JAWS voice — authoritative, unfiltered, no fluff."
+}
+
+Rules:
+- Pick the 3-6 most significant corporate phrases, jargon, or euphemisms from the text
+- Translations should be sharp, specific, and sometimes darkly funny — but always accurate
+- The verdict should be the most useful thing — what does this mean for the person reading it and what should they do?
+- Never be vague. Never hedge. Never use corporate language yourself.
+- If the text is genuinely clear and honest, say so — not everything is spin`;
+
+        const decodeResponse = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': env.ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 1024,
+            system: decodePrompt,
+            messages: [{ role: 'user', content: 'Decode this corporate communication:\n\n' + text }],
+          }),
+        });
+
+        if (!decodeResponse.ok) {
+          return new Response(JSON.stringify({ error: 'decode failed' }), { status: 502, headers: corsHeaders(origin) });
+        }
+
+        const decodeData = await decodeResponse.json();
+        let rawText = (decodeData.content && decodeData.content[0] && decodeData.content[0].text) ? decodeData.content[0].text : '{}';
+        rawText = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+        let result;
+        try {
+          result = JSON.parse(rawText);
+        } catch(e) {
+          result = { translations: [], verdict: 'JAWS could not decode this one. Try pasting a different section.' };
+        }
+        return new Response(JSON.stringify(result), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) }
+        });
+      }
+
       const messages = body.messages || [];
 
       if (!messages.length) {

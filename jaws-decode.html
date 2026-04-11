@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics -->
+  <script>
+    if (localStorage.getItem('cookieConsent') === 'essential') {
+      window['ga-disable-G-5RC382BRZF'] = true;
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JAWS Decode | The JAWS Advantage</title>
+  <meta name="description" content="Paste any corporate email, memo, or message. JAWS tells you what it actually means — no spin, no filter.">
+  <meta property="og:title" content="JAWS Decode | The JAWS Advantage">
+  <meta property="og:description" content="Paste any corporate email, memo, or message. JAWS tells you what it actually means — no spin, no filter.">
+  <meta property="og:url" content="https://jawsadvantage.com/jaws-decode.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JAWS Decode | The JAWS Advantage">
+  <meta name="twitter:description" content="Paste any corporate email, memo, or message. JAWS tells you what it actually means — no spin, no filter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --red-accent: #a52a1a;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+      letter-spacing: 0.12em; color: var(--off-white);
+      text-decoration: none; transition: color 0.2s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none; border: none; cursor: pointer;
+      padding: 4px 2px; color: var(--off-white-dim);
+      line-height: 1; transition: color 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .theme-toggle:hover { color: var(--red); }
+    .theme-toggle svg { display: block; }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef; --black-2: #e8e6e2; --black-3: #dedad4;
+      --off-white: #0a0a0a; --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+    body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
+    body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
+    body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
+    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
+    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
+    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
+    body.light-mode .nav-logo img { mix-blend-mode: multiply; }
+    body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
+    body.light-mode .footer-tagline { color: rgba(10, 10, 10, 0.5); }
+    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
+
+    /* ─── PAGE WRAPPER ─── */
+    .decode-page {
+      padding-top: 64px;
+      min-height: 100vh;
+    }
+
+    /* ─── DECODE STYLES ─── */
+    .decode-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .decode-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--red-accent);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 12px;
+    }
+    .decode-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 3px;
+      color: var(--off-white);
+      margin: 0 0 12px;
+      line-height: 1;
+    }
+    .decode-subheading {
+      font-size: 15px;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+    .decode-textarea {
+      width: 100%;
+      min-height: 200px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 16px;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+    .decode-textarea:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .decode-char-count {
+      font-size: 11px;
+      color: var(--off-white-dim);
+      text-align: right;
+      margin: 6px 0 20px;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .decode-char-count.at-limit { color: var(--red-accent); }
+    .decode-btn {
+      display: block;
+      width: 100%;
+      background: var(--red-accent);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .decode-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .decode-btn:not(:disabled):hover { opacity: 0.85; }
+    .decode-trust {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      text-align: center;
+      margin-top: 12px;
+      opacity: 0.6;
+    }
+    .decode-loading {
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .decode-loading-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+    .decode-output { display: none; }
+    .decode-section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red-accent);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 16px;
+    }
+    .decode-original {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--off-white-dim);
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid rgba(255,255,255,0.1);
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+    .decode-translations {
+      margin: 0 0 32px;
+    }
+    .decode-phrase-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .decode-phrase-original {
+      font-size: 13px;
+      color: var(--off-white-dim);
+      font-style: italic;
+      margin: 0 0 6px;
+    }
+    .decode-phrase-meaning {
+      font-size: 14px;
+      color: var(--off-white);
+      font-weight: 500;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .decode-phrase-meaning::before {
+      content: '→ ';
+      color: var(--red-accent);
+      font-weight: 700;
+    }
+    .decode-verdict {
+      background: rgba(165,42,26,0.08);
+      border: 1px solid rgba(165,42,26,0.2);
+      padding: 24px;
+      margin: 0 0 32px;
+    }
+    .decode-verdict-text {
+      font-size: 15px;
+      color: var(--off-white);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .decode-copy-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      cursor: pointer;
+      margin-bottom: 32px;
+      transition: all 0.2s ease;
+    }
+    .decode-copy-btn:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    .decode-again-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--red-accent);
+      color: var(--red-accent);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 14px 32px;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: all 0.2s ease;
+    }
+    .decode-again-btn:hover {
+      background: var(--red-accent);
+      color: #fff;
+    }
+    .decode-disclaimer {
+      font-size: 11px;
+      color: rgba(245,243,239,0.25);
+      text-align: center;
+      margin-top: 48px;
+      letter-spacing: 0.5px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    body.light-mode .decode-textarea {
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.12);
+      color: #0a0a0a;
+    }
+    body.light-mode .decode-original {
+      background: rgba(0,0,0,0.03);
+    }
+
+    /* ─── LOADING DOTS ─── */
+    .dd-loading-dots { display: flex; gap: 10px; justify-content: center; }
+    .dd-loading-dot {
+      width: 9px; height: 9px; background: var(--red);
+      border-radius: 50%; animation: ddDot 1.4s infinite ease-in-out both;
+    }
+    .dd-loading-dot:nth-child(1) { animation-delay: 0s; }
+    .dd-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .dd-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes ddDot {
+      0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* ─── QUIZ RATING WIDGET ─── */
+    .quiz-rating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 32px auto;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      max-width: 400px;
+    }
+    .quiz-rating-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+    .quiz-rating-btns {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .quiz-rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: transform 0.15s ease;
+    }
+    .quiz-rating-btn:hover { transform: scale(1.1); }
+    .quiz-rating-btn.voted { opacity: 1; }
+    .quiz-rating-btn:not(.voted) { opacity: 0.6; }
+    .quiz-rating-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--off-white-dim);
+      transition: color 0.2s ease;
+    }
+    .quiz-rating-btn.voted-up .quiz-rating-icon { color: #a52a1a; }
+    .quiz-rating-btn.voted-down .quiz-rating-icon { color: rgba(245,243,239,0.4); }
+    .quiz-rating-count {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--off-white);
+      letter-spacing: 1px;
+    }
+    .quiz-rating-thankyou {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px; font-weight: 300;
+      color: rgba(184, 181, 176, 0.4); letter-spacing: 0.04em;
+    }
+    .contact-bar a {
+      color: var(--off-white-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .contact-bar a:hover { color: var(--red); }
+    body.light-mode .contact-bar { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.08); }
+    body.light-mode .contact-bar a { color: var(--red); }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 64px 48px; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.12em; color: var(--off-white); }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
+    .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
+
+    /* ─── COOKIE CONSENT ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: #111111;
+      border-top: 1px solid rgba(245, 243, 239, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner.hidden { display: none; }
+    .cookie-inner { padding: 18px 48px 20px; }
+    .cookie-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cookie-text {
+      font-size: 12px; font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.5; flex: 1; min-width: 200px;
+    }
+    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 8px 18px;
+      border-radius: 0; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .cookie-accept {
+      background: var(--red); color: #ffffff; border: 1px solid var(--red);
+    }
+    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .cookie-essential {
+      background: transparent; color: var(--off-white-dim);
+      border: 1px solid rgba(245, 243, 239, 0.2);
+    }
+    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
+    .cookie-details-toggle {
+      background: none; border: none; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      padding: 6px 0 0; opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s; display: block;
+    }
+    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
+    .cookie-details {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(245, 243, 239, 0.08);
+      columns: 3; column-gap: 40px;
+    }
+    .cookie-details.is-open { display: block; }
+    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
+    .cookie-detail-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 0.1em; color: var(--red);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .cookie-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 1px 5px; vertical-align: middle;
+    }
+    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
+    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
+    .cookie-detail-list li {
+      font-size: 11px; font-weight: 300; color: var(--off-white-dim);
+      line-height: 1.5; padding: 3px 0 3px 14px; position: relative;
+    }
+    .cookie-detail-list li::before {
+      content: '–'; position: absolute; left: 0;
+      color: rgba(245,243,239,0.25);
+    }
+    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
+
+    /* ─── HAMBURGER / MOBILE MENU ─── */
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      color: var(--red); font-size: 22px; cursor: pointer;
+      padding: 4px 8px; line-height: 1; transition: color 0.2s;
+    }
+    .nav-hamburger:hover { opacity: 0.8; }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 8px 0 16px;
+    }
+    .nav-mobile-menu.is-open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--off-white-dim); text-decoration: none;
+      padding: 16px 24px; border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s; text-align: right;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      footer { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .cookie-inner { padding: 14px 20px 16px; }
+      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cookie-details { columns: 1; }
+      .contact-bar { padding: 24px; }
+      .decode-headline { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Intelligence</a></li>
+      <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
+      <li><a href="sharpen-your-edge.html">Sharpen Your Edge</a></li>
+      <li><a href="get-the-edge.html">Ask JAWS</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">The Intelligence</a>
+    <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
+    <a href="sharpen-your-edge.html">Sharpen Your Edge</a>
+    <a href="get-the-edge.html">Ask JAWS</a>
+  </div>
+
+  <!-- ─── MAIN ─── -->
+  <div class="decode-page">
+    <div class="decode-wrap">
+
+      <!-- INPUT SCREEN -->
+      <div id="decodeInputScreen">
+        <p class="decode-eyebrow">SHARPEN YOUR EDGE</p>
+        <h1 class="decode-headline">JAWS DECODE</h1>
+        <p class="decode-subheading">Paste any corporate email, memo, or message. We'll tell you what it actually means.</p>
+        <textarea class="decode-textarea" id="decodeInput" maxlength="2000" placeholder="Paste your corporate email, memo, meeting invite, or message here..."></textarea>
+        <p class="decode-char-count" id="decodeCharCount">0 / 2000</p>
+        <button class="decode-btn" id="decodeBtn" disabled>DECODE THIS &rarr;</button>
+        <p class="decode-trust">No email. No sign-up. No catch.</p>
+      </div>
+
+      <!-- LOADING SCREEN -->
+      <div id="decodeLoadingScreen" style="display:none;">
+        <div class="decode-loading">
+          <p class="decode-loading-text">JAWS IS READING BETWEEN THE LINES...</p>
+          <div class="dd-loading-dots">
+            <div class="dd-loading-dot"></div>
+            <div class="dd-loading-dot"></div>
+            <div class="dd-loading-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTPUT SCREEN -->
+      <div id="decodeOutputScreen" class="decode-output">
+        <p class="decode-section-label">WHAT THEY SAID. WHAT THEY MEANT.</p>
+        <div class="decode-original" id="decodeOriginalText"></div>
+
+        <p class="decode-section-label">THE TRANSLATION</p>
+        <div class="decode-translations" id="decodeTranslations"></div>
+
+        <p class="decode-section-label">THE VERDICT</p>
+        <div class="decode-verdict">
+          <p class="decode-verdict-text" id="decodeVerdictText"></p>
+        </div>
+
+        <button class="decode-copy-btn" id="decodeCopyBtn">COPY DECODED OUTPUT</button>
+
+        <div class="quiz-rating" id="decodeRating">
+          <p class="quiz-rating-label">Rate this tool</p>
+          <div class="quiz-rating-btns">
+            <button class="quiz-rating-btn" id="decodeUpBtn" onclick="decodeVote('up')">
+              <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+              <span class="quiz-rating-count" id="decodeUpCount">&mdash;</span>
+            </button>
+            <button class="quiz-rating-btn" id="decodeDownBtn" onclick="decodeVote('down')">
+              <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+              <span class="quiz-rating-count" id="decodeDownCount">&mdash;</span>
+            </button>
+          </div>
+          <p class="quiz-rating-thankyou" id="decodeThanks" style="display:none;">Thanks for the feedback.</p>
+        </div>
+
+        <button class="decode-again-btn" id="decodeAgainBtn">DECODE ANOTHER &rarr;</button>
+
+        <p class="decode-disclaimer">This analysis is generated by AI and is intended for informational purposes only.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div class="cookie-main">
+        <p class="cookie-text">We use cookies and local storage to make this site work and to understand how it's used. No ads. No selling your data.</p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
+          <button class="cookie-btn cookie-essential" id="cookieEssential">Essentials Only</button>
+        </div>
+      </div>
+      <button class="cookie-details-toggle" id="cookieDetailsToggle">Show details &#9662;</button>
+      <div class="cookie-details" id="cookieDetails">
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
+            <li><strong>Daily chat question limit</strong> — saved locally so the chatbot tracks your daily usage</li>
+            <li><strong>Article ratings</strong> — saved locally so the site remembers if you've already rated an article</li>
+            <li><strong>Chat session history</strong> — stored temporarily in your browser only, never on our servers</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
+            <li><strong>Quiz score events</strong> — your score tier (e.g. Tiger Shark) sent to Google Analytics anonymously. Exact score not stored by us.</li>
+            <li><strong>Article rating counts</strong> — aggregate vote counts stored on our servers with no personal information attached.</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">We Don't</h4>
+          <ul class="cookie-detail-list">
+            <li>Sell your data</li>
+            <li>Use advertising cookies</li>
+            <li>Collect your name, email, or any personally identifiable information</li>
+            <li>Track you across other websites</li>
+            <li>Store your chat conversations on our servers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+    var decodeInput = document.getElementById('decodeInput');
+    var decodeBtn = document.getElementById('decodeBtn');
+    var decodeCharCount = document.getElementById('decodeCharCount');
+    var decodeInputScreen = document.getElementById('decodeInputScreen');
+    var decodeLoadingScreen = document.getElementById('decodeLoadingScreen');
+    var decodeOutputScreen = document.getElementById('decodeOutputScreen');
+
+    var DECODE_OFFSETS = { up: 2100, down: 290 };
+    var currentDecodeResult = null;
+
+    function formatCount(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return String(n);
+    }
+
+    decodeInput.addEventListener('input', function() {
+      var len = decodeInput.value.length;
+      decodeCharCount.textContent = len + ' / 2000';
+      decodeCharCount.classList.toggle('at-limit', len >= 2000);
+      decodeBtn.disabled = len < 50;
+    });
+
+    decodeBtn.addEventListener('click', function() {
+      var text = decodeInput.value.trim();
+      if (text.length < 50) return;
+
+      decodeInputScreen.style.display = 'none';
+      decodeLoadingScreen.style.display = 'block';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'jaws_decode', text: text })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        decodeLoadingScreen.style.display = 'none';
+        if (data.error || !data.translations) {
+          showDecodeError();
+          return;
+        }
+        currentDecodeResult = data;
+        renderDecodeOutput(text, data);
+      })
+      .catch(function() {
+        decodeLoadingScreen.style.display = 'none';
+        showDecodeError();
+      });
+    });
+
+    function renderDecodeOutput(originalText, data) {
+      var preview = originalText.length > 150 ? originalText.substring(0, 150) + '...' : originalText;
+      document.getElementById('decodeOriginalText').textContent = '\u201c' + preview + '\u201d';
+
+      var translationsEl = document.getElementById('decodeTranslations');
+      translationsEl.innerHTML = '';
+      (data.translations || []).forEach(function(t) {
+        var item = document.createElement('div');
+        item.className = 'decode-phrase-item';
+        item.innerHTML =
+          '<p class="decode-phrase-original">\u201c' + t.phrase + '\u201d</p>' +
+          '<p class="decode-phrase-meaning">' + t.meaning + '</p>';
+        translationsEl.appendChild(item);
+      });
+
+      document.getElementById('decodeVerdictText').textContent = data.verdict || '';
+
+      decodeOutputScreen.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      decodeLoadVotes();
+    }
+
+    function showDecodeError() {
+      decodeInputScreen.style.display = 'block';
+      alert('JAWS couldn\'t decode this one. Try rephrasing or paste a different section.');
+    }
+
+    document.getElementById('decodeCopyBtn').addEventListener('click', function() {
+      if (!currentDecodeResult) return;
+      var lines = (currentDecodeResult.translations || []).map(function(t) {
+        return '\u201c' + t.phrase + '\u201d \u2192 ' + t.meaning;
+      }).join('\n');
+      var full = 'JAWS DECODE\n\nTHE TRANSLATION:\n' + lines + '\n\nTHE VERDICT:\n' + (currentDecodeResult.verdict || '');
+      navigator.clipboard.writeText(full).then(function() {
+        var btn = document.getElementById('decodeCopyBtn');
+        btn.textContent = 'COPIED';
+        setTimeout(function() { btn.textContent = 'COPY DECODED OUTPUT'; }, 2000);
+      }).catch(function() {});
+    });
+
+    document.getElementById('decodeAgainBtn').addEventListener('click', function() {
+      decodeOutputScreen.style.display = 'none';
+      decodeInput.value = '';
+      decodeCharCount.textContent = '0 / 2000';
+      decodeBtn.disabled = true;
+      currentDecodeResult = null;
+      decodeInputScreen.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function decodeLoadVotes() {
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_quiz_votes', quizId: 'jaws-decode' })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('decodeUpCount').textContent = formatCount((data.up || 0) + DECODE_OFFSETS.up);
+        document.getElementById('decodeDownCount').textContent = formatCount((data.down || 0) + DECODE_OFFSETS.down);
+      })
+      .catch(function() {
+        document.getElementById('decodeUpCount').textContent = formatCount(DECODE_OFFSETS.up);
+        document.getElementById('decodeDownCount').textContent = formatCount(DECODE_OFFSETS.down);
+      });
+    }
+
+    function decodeVote(direction) {
+      var key = 'jawsToolVote_jaws-decode';
+      if (localStorage.getItem(key)) return;
+      localStorage.setItem(key, direction);
+
+      var upBtn = document.getElementById('decodeUpBtn');
+      var downBtn = document.getElementById('decodeDownBtn');
+      var thanks = document.getElementById('decodeThanks');
+
+      if (direction === 'up') {
+        upBtn.classList.add('voted', 'voted-up');
+        downBtn.classList.add('voted');
+      } else {
+        downBtn.classList.add('voted', 'voted-down');
+        upBtn.classList.add('voted');
+      }
+      if (thanks) thanks.style.display = 'block';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'vote_quiz', quizId: 'jaws-decode', direction: direction })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('decodeUpCount').textContent = formatCount((data.up || 0) + DECODE_OFFSETS.up);
+        document.getElementById('decodeDownCount').textContent = formatCount((data.down || 0) + DECODE_OFFSETS.down);
+      })
+      .catch(function() {});
+    }
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    (function () {
+      var navEl = document.querySelector('nav');
+      window.addEventListener('scroll', function () {
+        navEl.style.borderBottomColor = window.scrollY > 20
+          ? (document.body.classList.contains('light-mode') ? 'rgba(10, 10, 10, 0.2)' : 'rgba(245, 243, 239, 0.12)')
+          : '';
+      }, { passive: true });
+    })();
+
+    // ─── COOKIE CONSENT ───
+    (function () {
+      var GA_ID = 'G-5RC382BRZF';
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('cookieConsent');
+
+      function disableGA() { window['ga-disable-' + GA_ID] = true; }
+
+      function hideBanner() {
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      }
+
+      if (consent) {
+        banner.classList.add('hidden');
+        if (consent === 'essential') disableGA();
+        return;
+      }
+
+      setTimeout(function () { banner.classList.add('visible'); }, 800);
+
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'all');
+        hideBanner();
+      });
+
+      document.getElementById('cookieEssential').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'essential');
+        disableGA();
+        hideBanner();
+      });
+
+      var toggle = document.getElementById('cookieDetailsToggle');
+      var details = document.getElementById('cookieDetails');
+      toggle.addEventListener('click', function () {
+        var open = details.classList.toggle('is-open');
+        toggle.textContent = open ? 'Hide details \u25b4' : 'Show details \u25be';
+      });
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function () {
+      var btn = document.getElementById('themeToggle');
+      var MOON_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN_SVG  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+      function applyTheme(dark) {
+        if (dark) {
+          document.body.classList.remove('light-mode');
+          btn.innerHTML = MOON_SVG;
+          btn.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.add('light-mode');
+          btn.innerHTML = SUN_SVG;
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+        }
+      }
+      var saved = localStorage.getItem('jaws_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved ? (saved === 'dark') : (prefersDark !== false));
+      btn.addEventListener('click', function () {
+        var nowDark = !document.body.classList.contains('light-mode');
+        localStorage.setItem('jaws_theme', nowDark ? 'light' : 'dark');
+        applyTheme(!nowDark);
+      });
+    })();
+
+    // ─── HAMBURGER MENU ───
+    (function () {
+      var hamburger = document.getElementById('navHamburger');
+      var menu = document.getElementById('navMobileMenu');
+      if (!hamburger || !menu) return;
+      hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('is-open');
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
+      });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
