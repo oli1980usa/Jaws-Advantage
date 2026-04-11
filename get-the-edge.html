@@ -1419,6 +1419,8 @@
 
     // ─── INIT ───
     (function init() {
+      var isHandoff = false; // true when arriving via ddContext quiz handoff
+
       // Restore session if available
       var savedHistory = sessionStorage.getItem('jaws_chat_history');
       var savedHtml = sessionStorage.getItem('jaws_chat_html');
@@ -1438,6 +1440,7 @@
         var params = new URLSearchParams(window.location.search);
         var ddContext = params.get('ddContext');
         if (ddContext) {
+          isHandoff = true;
           var decoded = decodeURIComponent(ddContext);
           var cleanUrl = window.location.pathname;
           window.history.replaceState({}, '', cleanUrl);
@@ -1493,7 +1496,7 @@
                 saveHistory();
                 saveChatHtml();
                 scrollToBottom();
-                incrementCount();
+                // Note: intentionally no incrementCount() — quiz handoffs are free
               }
             })
             .catch(function() {
@@ -1511,8 +1514,8 @@
         appendConsentNote();
       }
 
-      // Check limit on load
-      if (isLimitReached()) {
+      // Check limit on load — skip if arriving via quiz handoff (always get that response free)
+      if (!isHandoff && isLimitReached()) {
         appendSystemMessage("You've used your 10 free questions today. Come back tomorrow for more career intelligence. 🦈");
         setInputDisabled(true);
       }
