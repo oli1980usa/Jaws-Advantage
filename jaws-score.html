@@ -1406,7 +1406,7 @@
       </div>
       <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
         <button class="result-retake-btn" id="resultRetakeBtn">↺ Retake the Test</button>
-        <a href="jaws-score.html" class="result-retake-btn" style="text-decoration:none;">← All Quizzes</a>
+        <button class="result-retake-btn" onclick="sqGoToMenu()">← All Quizzes</button>
       </div>
     </div>
   </section>
@@ -1567,7 +1567,7 @@
       <div style="text-align:center; margin-top: 16px;">
         <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
           <button class="result-retake-btn" id="ddRetakeBtn">↺ Retake the Deep Dive</button>
-          <a href="jaws-score.html" class="result-retake-btn" style="text-decoration:none;">← All Quizzes</a>
+          <button class="result-retake-btn" onclick="ddGoToMenu()">← All Quizzes</button>
         </div>
       </div>
     </div>
@@ -2484,6 +2484,16 @@
         pageFooter.style.display = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+    }
+
+    function sqGoToMenu() {
+      sessionStorage.setItem('jawsShowMenu', 'true');
+      window.location.href = 'jaws-score.html';
+    }
+
+    function ddGoToMenu() {
+      sessionStorage.setItem('jawsShowMenu', 'true');
+      window.location.href = 'jaws-score.html';
     }
 
     // ─── EVENT LISTENERS ───
@@ -3717,6 +3727,10 @@
     // ─── DEEP DIVE SESSION RESTORE ───
     (function() {
       try {
+        if (sessionStorage.getItem('jawsShowMenu') === 'true') {
+          sessionStorage.removeItem('jawsShowMenu');
+          return;
+        }
         var saved = sessionStorage.getItem('jawsDeepDive');
         if (!saved) return;
         var state = JSON.parse(saved);
@@ -3763,6 +3777,10 @@
     // ─── SHORT QUIZ SESSION RESTORE ───
     (function() {
       try {
+        if (sessionStorage.getItem('jawsShowMenu') === 'true') {
+          sessionStorage.removeItem('jawsShowMenu');
+          return;
+        }
         var saved = sessionStorage.getItem('jawsShortQuiz');
         if (!saved) return;
         var state = JSON.parse(saved);

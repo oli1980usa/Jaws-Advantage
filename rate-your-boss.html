@@ -958,6 +958,10 @@
     // ─── SESSION RESTORE ───
     (function() {
       try {
+        if (sessionStorage.getItem('jawsShowMenu') === 'true') {
+          sessionStorage.removeItem('jawsShowMenu');
+          return;
+        }
         var saved = sessionStorage.getItem('jawsBossQuiz');
         if (!saved) return;
         var state = JSON.parse(saved);
