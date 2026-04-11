@@ -639,6 +639,17 @@
       padding: 14px 40px; cursor: pointer; transition: background 0.2s;
     }
     .dd-begin-btn:hover { background: var(--red-dark); }
+    .dd-skip-link {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--off-white-dim);
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.5;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s ease;
+    }
+    .dd-skip-link:hover { opacity: 0.8; }
     .dd-trust-line {
       margin-top: 14px;
       font-size: 13px;
@@ -1084,6 +1095,7 @@
           <h2 class="quiz-question" id="ddMCQuestion"></h2>
           <div class="quiz-options" id="ddMCOptions"></div>
           <p class="quiz-kbd-hint" id="ddKbdHint">Press A, B, C or D to answer</p>
+          <p class="dd-skip-link" onclick="ddSkipMC()">Skip this question</p>
         </div>
       </div>
 
@@ -1100,6 +1112,7 @@
           <div id="ddRankMobileList"></div>
         </div>
         <button class="rank-next-btn" id="ddRankNextBtn" disabled>Next &rarr;</button>
+        <p class="dd-skip-link" onclick="ddSkipRank()">Skip this question</p>
       </div>
 
       <div id="ddForcedWrap" style="display:none;">
@@ -1110,6 +1123,7 @@
           <button class="forced-btn" id="ddForcedA"></button>
           <button class="forced-btn" id="ddForcedB"></button>
         </div>
+        <p class="dd-skip-link" onclick="ddSkipForced()">Skip this question</p>
       </div>
 
       <div id="ddOpenWrap" style="display:none;">
@@ -1119,6 +1133,7 @@
         <textarea class="dd-textarea" id="ddOpenTextarea" placeholder="Write your answer here..." rows="6"></textarea>
         <span class="dd-textarea-hint" id="ddOpenHint">Minimum 50 characters</span>
         <button class="open-next-btn" id="ddOpenNextBtn" disabled>Next &rarr;</button>
+        <p class="dd-skip-link" onclick="ddSkipOpen()">Skip this question</p>
       </div>
     </div>
   </section>
@@ -2315,7 +2330,7 @@
       dd.mcScores.pop();
       dd.mcIdx--;
       dd.advancing = false;
-      ddLoadMCQuestion(dd.mcIdx, prev.optIdx);
+      ddLoadMCQuestion(dd.mcIdx, prev ? prev.optIdx : undefined);
     });
 
     document.getElementById('ddRankBackBtn').addEventListener('click', function() {
@@ -2525,6 +2540,35 @@
       }
     });
 
+    function ddSkipMC() {
+      if (dd.advancing) return;
+      dd.advancing = true;
+      dd.mcScores.push(5);
+      dd.mcAnswers.push(null);
+      dd.mcIdx++;
+      var wrap = document.getElementById('ddMCQuestionWrap');
+      wrap.classList.add('transitioning');
+      setTimeout(function() {
+        wrap.classList.remove('transitioning');
+        if (dd.mcIdx >= DD_MC_INDICES.length) {
+          ddStartRanking();
+        } else {
+          ddLoadMCQuestion(dd.mcIdx);
+        }
+      }, 250);
+    }
+
+    function ddSkipRank() {
+      dd.rankScores.push(5);
+      dd.rankOrders.push([0, 1, 2, 3]);
+      dd.rankIdx++;
+      if (dd.rankIdx >= DD_RANKING.length) {
+        ddStartForced();
+      } else {
+        ddLoadRankQuestion(dd.rankIdx);
+      }
+    }
+
     // ─── SECTION 3: FORCED CHOICE ───
     function ddStartForced() {
       dd.forcedIdx = 0; dd.forcedScores = [];
@@ -2557,6 +2601,16 @@
           ddLoadForcedQuestion(dd.forcedIdx);
         }
       }, 500);
+    }
+
+    function ddSkipForced() {
+      dd.forcedScores.push(5);
+      dd.forcedIdx++;
+      if (dd.forcedIdx >= DD_FORCED.length) {
+        ddStartOpen();
+      } else {
+        ddLoadForcedQuestion(dd.forcedIdx);
+      }
     }
 
     // ─── SECTION 4: OPEN TEXT ───
@@ -2599,6 +2653,16 @@
         ddLoadOpenQuestion(dd.openIdx);
       }
     });
+
+    function ddSkipOpen() {
+      dd.openAnswers.push('');
+      dd.openIdx++;
+      if (dd.openIdx >= DD_OPEN.length) {
+        ddSubmitOpen();
+      } else {
+        ddLoadOpenQuestion(dd.openIdx);
+      }
+    }
 
     // ─── AI EVALUATION ───
     function ddSubmitOpen() {
