@@ -130,7 +130,7 @@
     .hero-inner {
       max-width: 900px;
       margin: 0 auto;
-      padding: 80px 48px 48px;
+      padding: 80px 48px 0;
       text-align: center;
     }
     .score-eyebrow {
@@ -147,7 +147,7 @@
     }
     .score-subheading {
       font-size: 18px; font-weight: 300; line-height: 1.7;
-      color: var(--off-white-dim); margin-bottom: 52px;
+      color: var(--off-white-dim); margin-bottom: 8px;
       max-width: 480px; margin-left: auto; margin-right: auto;
     }
 
@@ -302,6 +302,8 @@
     .footer-logo span { color: var(--red); }
     .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
     .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
+    .footer-disclaimer { font-size: 11px; color: rgba(184, 181, 176, 0.3); text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); letter-spacing: 0.03em; }
+    body.light-mode .footer-disclaimer { color: rgba(10,10,10,0.3); border-color: rgba(10,10,10,0.08); }
 
     /* ─── FLOATING CHAT BAR ─── */
     .float-chat {
@@ -566,7 +568,7 @@
     <div class="hero-inner">
       <span class="score-eyebrow">SHARPEN YOUR EDGE</span>
       <h1 class="score-headline">TOOLS THAT GIVE YOU THE EDGE</h1>
-      <p class="score-subheading">AI-powered. No fluff. Built for people who want to move faster.</p>
+      <p class="score-subheading">No fluff. Built for people who want to move faster.</p>
     </div>
 
     <div class="sq-menu-wrap fade-in">
@@ -582,10 +584,6 @@
             </div>
             <h2 class="sq-menu-card-title">JAWS DECODE</h2>
             <p class="sq-menu-card-desc">Paste any corporate email, memo, or job posting. JAWS tells you what it actually means — no spin, no filter.</p>
-            <ul class="sq-menu-card-pills">
-              <li>AI Powered</li>
-              <li>Instant</li>
-            </ul>
             <a href="jaws-decode.html" class="score-btn-primary sq-menu-btn" style="display:block; text-align:center; text-decoration:none;">DECODE NOW &rarr;</a>
           </div>
 
@@ -595,9 +593,6 @@
             </div>
             <h2 class="sq-menu-card-title">JOB POSTING ANALYSER</h2>
             <p class="sq-menu-card-desc">Paste a job description. JAWS reads between the lines — red flags, hidden meaning, and whether it's worth your time.</p>
-            <ul class="sq-menu-card-pills">
-              <li>AI Powered</li>
-            </ul>
             <button class="score-btn-outline sq-menu-btn" disabled style="opacity:0.4; cursor:not-allowed;">COMING SOON</button>
           </div>
 
@@ -607,9 +602,6 @@
             </div>
             <h2 class="sq-menu-card-title">CAREER ROAST</h2>
             <p class="sq-menu-card-desc">Paste your job title and experience. JAWS roasts your career choices — brutally, honestly, and usefully.</p>
-            <ul class="sq-menu-card-pills">
-              <li>AI Powered</li>
-            </ul>
             <button class="score-btn-outline sq-menu-btn" disabled style="opacity:0.4; cursor:not-allowed;">COMING SOON</button>
           </div>
 
@@ -619,9 +611,6 @@
             </div>
             <h2 class="sq-menu-card-title">SALARY NEGOTIATION</h2>
             <p class="sq-menu-card-desc">Practice the real conversation. JAWS plays the other side. No script. No safety net.</p>
-            <ul class="sq-menu-card-pills">
-              <li>AI Roleplay</li>
-            </ul>
             <button class="score-btn-outline sq-menu-btn" disabled style="opacity:0.4; cursor:not-allowed;">COMING SOON</button>
           </div>
 
@@ -643,6 +632,7 @@
       <div class="footer-tagline">Career intelligence without the noise</div>
       <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
     </div>
+    <p class="footer-disclaimer">Tools on this page are AI-powered. Results are intended for informational purposes only.</p>
   </footer>
 
   <!-- ─── FLOATING CHAT BAR ─── -->
