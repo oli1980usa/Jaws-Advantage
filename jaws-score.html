@@ -495,6 +495,75 @@
     .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
     .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
 
+    /* ─── SHORT QUIZ FORMAT LIST ─── */
+    .sq-format-list {
+      list-style: none;
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 44px; margin-top: -20px;
+    }
+    .sq-format-list li {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.6; padding: 3px 10px;
+      border: 1px solid rgba(245,243,239,0.12);
+    }
+    body.light-mode .sq-format-list li { border-color: rgba(10,10,10,0.15); }
+
+    /* ─── SHORT QUIZ TRANSITION CARDS ─── */
+    .sq-trans { text-align: center; padding: 52px 0; }
+    .sq-trans-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      display: block; margin-bottom: 10px;
+    }
+    .sq-trans-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px; letter-spacing: 0.06em;
+      color: var(--off-white); margin-bottom: 14px; line-height: 1;
+    }
+    .sq-trans-desc {
+      font-size: 15px; font-weight: 300; color: var(--off-white-dim);
+      line-height: 1.7; margin-bottom: 28px;
+      max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ─── SHORT QUIZ PILLAR BARS ─── */
+    .sq-pillar-bars { margin: 28px 0 24px; text-align: left; }
+    .sq-pillar-bars-heading {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      opacity: 0.5; margin-bottom: 16px; display: block;
+    }
+    .sq-pillar-row { margin-bottom: 12px; }
+    .sq-pillar-name {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: 'Bebas Neue', sans-serif; font-size: 12px;
+      letter-spacing: 0.1em; color: var(--off-white); margin-bottom: 5px;
+    }
+    .sq-pillar-pct {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; color: var(--red);
+    }
+    .sq-pillar-track {
+      width: 100%; height: 2px; background: var(--border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .sq-pillar-fill {
+      height: 100%; background: var(--red); border-radius: 2px;
+      width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sq-pillar-nudge {
+      font-size: 12px; font-weight: 300; color: var(--off-white-dim);
+      opacity: 0.7; text-align: center; margin: 0 0 36px;
+      letter-spacing: 0.02em;
+    }
+    .sq-pillar-nudge-link {
+      color: var(--red); background: none; border: none;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: 12px; text-decoration: underline;
+      text-underline-offset: 2px; padding: 0;
+    }
+
     /* ─── ANIMATIONS ─── */
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -1019,7 +1088,12 @@
   <section id="heroSection" class="score-hero">
     <span class="score-eyebrow fade-in">The JAWS Score</span>
     <h1 class="score-headline fade-in">How well are you<br>playing the game?</h1>
-    <p class="score-subheading fade-in">10 questions. No right answers on your CV.<br>Find out where you actually stand.</p>
+    <p class="score-subheading fade-in">10 questions. Three formats. One score.</p>
+    <ul class="sq-format-list fade-in">
+      <li>5 multiple choice</li>
+      <li>3 ranking</li>
+      <li>2 forced choice</li>
+    </ul>
     <div class="score-hero-btns fade-in">
       <button class="score-btn-primary" id="startQuizBtn">Take the Test</button>
       <button class="score-btn-outline" id="startDeepDiveBtn">I'm Serious &mdash; 30 Questions (~30 Mins)</button>
@@ -1036,13 +1110,70 @@
         </div>
         <span class="quiz-progress-text" id="quizProgressText">1 / 10</span>
       </div>
-      <div class="quiz-question-wrap" id="quizQuestionWrap">
+
+      <!-- Transition: MC -->
+      <div id="sqTransMC" class="sq-trans" style="display:none;">
+        <span class="sq-trans-eyebrow">Section 1 of 3</span>
+        <h2 class="sq-trans-title">Multiple Choice</h2>
+        <p class="sq-trans-desc">5 scenario-based questions. Select the best response. Questions advance automatically.</p>
+        <button class="dd-begin-btn" onclick="sqStartMC()">Begin</button>
+      </div>
+
+      <!-- Transition: Ranking -->
+      <div id="sqTransRank" class="sq-trans" style="display:none;">
+        <span class="sq-trans-eyebrow">Section 2 of 3</span>
+        <h2 class="sq-trans-title">Ranking</h2>
+        <p class="sq-trans-desc">3 questions. Rank all four options from best to worst. Drag to reorder on desktop &mdash; tap numbers on mobile.</p>
+        <button class="dd-begin-btn" onclick="sqStartRank()">Begin</button>
+      </div>
+
+      <!-- Transition: Forced Choice -->
+      <div id="sqTransForced" class="sq-trans" style="display:none;">
+        <span class="sq-trans-eyebrow">Section 3 of 3</span>
+        <h2 class="sq-trans-title">Forced Choice</h2>
+        <p class="sq-trans-desc">2 questions. Two options only. Pick the one that better reflects how you actually operate.</p>
+        <button class="dd-begin-btn" onclick="sqStartForced()">Begin</button>
+      </div>
+
+      <!-- MC panel -->
+      <div class="quiz-question-wrap" id="quizQuestionWrap" style="display:none;">
         <button class="quiz-back-btn hidden" id="quizBackBtn">&#8592; Back</button>
         <span class="quiz-number" id="quizNumber">01</span>
         <h2 class="quiz-question" id="quizQuestion"></h2>
         <div class="quiz-options" id="quizOptions"></div>
         <p class="quiz-kbd-hint" id="quizKbdHint">Press A, B, C or D to answer</p>
+        <p class="dd-skip-link" onclick="sqSkipMC()">Skip this question</p>
       </div>
+
+      <!-- Rank panel -->
+      <div id="sqRankWrap" style="display:none;">
+        <button class="quiz-back-btn hidden" id="sqRankBackBtn">&#8592; Back</button>
+        <span class="quiz-number" id="sqRankNumber">01</span>
+        <h2 class="quiz-question" id="sqRankQuestion"></h2>
+        <div id="sqRankDesktop">
+          <span class="rank-instruction">Drag to reorder &mdash; 1 is best</span>
+          <div class="rank-list" id="sqRankList"></div>
+        </div>
+        <div id="sqRankMobile" style="display:none;">
+          <span class="rank-instruction">Tap a number to assign rank &mdash; 1 is best</span>
+          <div id="sqRankMobileList"></div>
+        </div>
+        <button class="rank-next-btn" id="sqRankNextBtn" disabled>Next &rarr;</button>
+        <p class="dd-skip-link" onclick="sqSkipRank()">Skip this question</p>
+      </div>
+
+      <!-- Forced panel -->
+      <div id="sqForcedWrap" style="display:none;">
+        <button class="quiz-back-btn hidden" id="sqForcedBackBtn">&#8592; Back</button>
+        <span class="quiz-number" id="sqForcedNumber">01</span>
+        <h2 class="quiz-question" id="sqForcedQuestion"></h2>
+        <div class="forced-options" id="sqForcedOptions">
+          <button class="forced-btn" id="sqForcedA"></button>
+          <button class="forced-btn" id="sqForcedB"></button>
+        </div>
+        <p class="dd-skip-link" onclick="sqSkipForced()">Skip this question</p>
+      </div>
+
     </div>
   </section>
 
@@ -1056,6 +1187,8 @@
       </div>
       <h2 class="result-label" id="resultLabel"></h2>
       <p class="result-desc" id="resultDesc"></p>
+      <div class="sq-pillar-bars" id="sqPillarBars"></div>
+      <p class="sq-pillar-nudge" id="sqPillarNudge" style="display:none;">Snapshot from 10 questions. <button class="sq-pillar-nudge-link" id="sqDeepDiveNudgeBtn">Take the 30-question deep dive</button> for your full pillar breakdown.</p>
       <div class="result-share-bar">
         <span class="share-label">Share</span>
         <button class="share-btn" id="shareTwitter" aria-label="Share on X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
@@ -1657,14 +1790,16 @@
       }
     ];
 
-    // Fisher-Yates shuffle — pick 10 random questions each load
-    function shuffleAndPick(arr, n) {
-      var copy = arr.slice();
-      for (var i = copy.length - 1; i > 0; i--) {
+    // Fisher-Yates in-place shuffle
+    function shuffleArr(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var tmp = copy[i]; copy[i] = copy[j]; copy[j] = tmp;
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
       }
-      return copy.slice(0, n);
+      return arr;
+    }
+    function shuffleAndPick(arr, n) {
+      return shuffleArr(arr.slice()).slice(0, n);
     }
 
     var QUESTIONS = shuffleAndPick(QUESTION_BANK, 10);
@@ -1686,6 +1821,127 @@
         if (score <= RATINGS[i].max) return RATINGS[i];
       }
       return RATINGS[RATINGS.length - 1];
+    }
+
+    // ─── SHORT QUIZ STATE ───
+    var sq = {
+      mcQuestions: [], mcPillars: [],
+      rankQuestions: [], rankPillars: [],
+      forcedQuestions: [], forcedPillars: [],
+      mcIdx: 0, mcScores: [], mcAnswers: [],
+      rankIdx: 0, rankScores: [],
+      forcedIdx: 0, forcedScores: [],
+      pillarScores: [0, 0, 0, 0],
+      phase: 0,
+      advancing: false
+    };
+
+    var sqCurrentPanel = null;
+    var sqRankOrder = [];
+    var sqMobileRanks = [];
+    var sqDragSrcPos = null;
+    var sqDropIndicator = null;
+
+    function sqShowPanel(id) {
+      ['sqTransMC','sqTransRank','sqTransForced','quizQuestionWrap','sqRankWrap','sqForcedWrap'].forEach(function(elId) {
+        var el = document.getElementById(elId);
+        if (el) el.style.display = 'none';
+      });
+      var target = document.getElementById(id);
+      if (target) target.style.display = '';
+      sqCurrentPanel = id;
+    }
+
+    function sqUpdateProgress(absIdx) {
+      var fill = document.getElementById('quizProgressFill');
+      var text = document.getElementById('quizProgressText');
+      if (fill) fill.style.width = (absIdx / 10 * 100) + '%';
+      if (text) text.textContent = (absIdx + 1) + ' / 10';
+    }
+
+    // Pillar-aware quiz builder
+    // DD_MC_INDICES / DD_MC_PILLARS are available later in the script via hoisting of vars —
+    // buildShortQuiz() is only ever called at runtime (after parse), so they will be defined.
+    function buildShortQuiz() {
+      // ── 5 MC: 1 per pillar + 1 extra ──
+      var mcByPillar = [[], [], [], []];
+      for (var i = 0; i < DD_MC_INDICES.length; i++) {
+        mcByPillar[DD_MC_PILLARS[i]].push(i);
+      }
+      var chosen = [];
+      for (var p = 0; p < 4; p++) {
+        var pool = mcByPillar[p].slice();
+        shuffleArr(pool);
+        chosen.push({ idx: pool[0], pillar: p });
+      }
+      // 5th pick from remainder
+      var remaining = [];
+      for (var i = 0; i < DD_MC_INDICES.length; i++) {
+        if (chosen.every(function(c) { return c.idx !== i; })) remaining.push(i);
+      }
+      shuffleArr(remaining);
+      chosen.push({ idx: remaining[0], pillar: DD_MC_PILLARS[remaining[0]] });
+      shuffleArr(chosen);
+      sq.mcQuestions = chosen.map(function(c) { return QUESTION_BANK[DD_MC_INDICES[c.idx]]; });
+      sq.mcPillars   = chosen.map(function(c) { return c.pillar; });
+
+      // ── 3 Ranking: 1 from each of 3 random pillars ──
+      var rankByPillar = [[], [], [], []];
+      for (var i = 0; i < DD_RANKING.length; i++) {
+        rankByPillar[DD_RANK_PILLARS[i]].push(i);
+      }
+      var availRankPillars = [];
+      for (var p = 0; p < 4; p++) { if (rankByPillar[p].length) availRankPillars.push(p); }
+      shuffleArr(availRankPillars);
+      var chosenRankPillars = availRankPillars.slice(0, 3);
+      sq.rankQuestions = [];
+      sq.rankPillars   = [];
+      chosenRankPillars.forEach(function(pillar) {
+        var pool = rankByPillar[pillar].slice();
+        shuffleArr(pool);
+        sq.rankQuestions.push(DD_RANKING[pool[0]]);
+        sq.rankPillars.push(pillar);
+      });
+
+      // ── 2 Forced: from 2 different pillars ──
+      var forcedByPillar = [[], [], [], []];
+      for (var i = 0; i < DD_FORCED.length; i++) {
+        forcedByPillar[DD_FORCED_PILLARS[i]].push(i);
+      }
+      var availForcedPillars = [];
+      for (var p = 0; p < 4; p++) { if (forcedByPillar[p].length) availForcedPillars.push(p); }
+      shuffleArr(availForcedPillars);
+      var chosenForcedPillars = availForcedPillars.slice(0, 2);
+      sq.forcedQuestions = [];
+      sq.forcedPillars   = [];
+      chosenForcedPillars.forEach(function(pillar) {
+        var pool = forcedByPillar[pillar].slice();
+        shuffleArr(pool);
+        sq.forcedQuestions.push(DD_FORCED[pool[0]]);
+        sq.forcedPillars.push(pillar);
+      });
+    }
+
+    function sqComputePillarData() {
+      var maxPerPillar    = [0, 0, 0, 0];
+      var actualPerPillar = [0, 0, 0, 0];
+      sq.mcPillars.forEach(function(p, i) {
+        maxPerPillar[p]    += 10;
+        actualPerPillar[p] += (sq.mcScores[i] || 0);
+      });
+      sq.rankPillars.forEach(function(p, i) {
+        maxPerPillar[p]    += 10;
+        actualPerPillar[p] += Math.round(sq.rankScores[i] || 0);
+      });
+      sq.forcedPillars.forEach(function(p, i) {
+        maxPerPillar[p]    += 10;
+        actualPerPillar[p] += (sq.forcedScores[i] || 0);
+      });
+      var pcts = maxPerPillar.map(function(max, i) {
+        return max > 0 ? Math.round((actualPerPillar[i] / max) * 100) : 0;
+      });
+      sq.pillarScores = actualPerPillar;
+      return { actual: actualPerPillar, max: maxPerPillar, pcts: pcts };
     }
 
     // ─── TOPIC MAP ───
@@ -1739,138 +1995,337 @@
     }
 
     function startQuiz() {
-      currentQ = 0;
-      totalScore = 0;
-      questionScores = [];
-      questionAnswers = [];
+      buildShortQuiz();
+      sq.mcIdx = 0; sq.mcScores = []; sq.mcAnswers = [];
+      sq.rankIdx = 0; sq.rankScores = [];
+      sq.forcedIdx = 0; sq.forcedScores = [];
+      sq.pillarScores = [0,0,0,0];
+      sq.phase = 0; sq.advancing = false;
       keyboardUsed = false;
-      advancing = false;
 
       fadeOut(heroSection, function () {
         heroSection.style.display = 'none';
         contactBar.style.display = 'none';
         pageFooter.style.display = 'none';
-        loadQuestion(0);
         quizSection.style.display = 'flex';
         fadeIn(quizSection);
+        sqUpdateProgress(0);
+        sqShowPanel('sqTransMC');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
-    function loadQuestion(index, preSelectedIdx) {
-      var q = QUESTIONS[index];
-      var num = index + 1;
+    // ─── SHORT QUIZ: MC ───
+    function sqStartMC() {
+      sq.advancing = false;
+      sqShowPanel('quizQuestionWrap');
+      sqLoadMCQuestion(0);
+    }
 
-      advancing = false;
-      progressFill.style.width = ((index / QUESTIONS.length) * 100) + '%';
-      progressText.textContent = num + ' / ' + QUESTIONS.length;
-      questionNum.textContent = (num < 10 ? '0' : '') + num;
+    function sqLoadMCQuestion(idx, preselect) {
+      var q = sq.mcQuestions[idx];
+      sq.advancing = false;
+      sqUpdateProgress(idx);
+      questionNum.textContent = (idx < 9 ? '0' : '') + (idx + 1);
       questionText.textContent = q.q;
 
-      // Back button: hide on Q1, show otherwise
-      if (index > 0) {
-        backBtn.classList.remove('hidden');
-      } else {
-        backBtn.classList.add('hidden');
-      }
-
-      // Keyboard hint: hide once keyboard has been used
-      if (keyboardUsed) {
-        kbdHint.classList.add('hidden');
-      } else {
-        kbdHint.classList.remove('hidden');
-      }
+      if (idx > 0) { backBtn.classList.remove('hidden'); } else { backBtn.classList.add('hidden'); }
+      if (keyboardUsed) { kbdHint.classList.add('hidden'); } else { kbdHint.classList.remove('hidden'); }
 
       optionsEl.classList.remove('locked');
       optionsEl.innerHTML = '';
-
-      q.options.forEach(function (opt, i) {
+      q.options.forEach(function(opt, i) {
         var btn = document.createElement('button');
-        btn.className = 'quiz-option';
-        if (preSelectedIdx !== undefined && preSelectedIdx === i) {
-          btn.classList.add('selected');
-        }
-
-        var letter = document.createElement('span');
-        letter.className = 'quiz-option-letter';
-        letter.textContent = LETTERS[i];
-
-        var text = document.createElement('span');
-        text.className = 'quiz-option-text';
-        text.textContent = opt.text;
-
-        btn.appendChild(letter);
-        btn.appendChild(text);
-        btn.dataset.points = opt.points;
-        btn.dataset.idx = i;
-
-        btn.addEventListener('click', function () {
-          selectAndAdvance(i, parseInt(btn.dataset.points, 10));
-        });
-
+        btn.className = 'quiz-option' + (preselect === i ? ' selected' : '');
+        var letter = document.createElement('span'); letter.className = 'quiz-option-letter'; letter.textContent = LETTERS[i];
+        var text = document.createElement('span');   text.className = 'quiz-option-text';   text.textContent = opt.text;
+        btn.appendChild(letter); btn.appendChild(text);
+        btn.dataset.points = opt.points; btn.dataset.idx = i;
+        btn.addEventListener('click', function() { sqMCSelect(i, opt.points); });
         optionsEl.appendChild(btn);
       });
     }
 
-    function selectAndAdvance(optIdx, points) {
-      if (advancing) return;
-      advancing = true;
+    function sqMCSelect(optIdx, points) {
+      if (sq.advancing) return;
+      sq.advancing = true;
       optionsEl.classList.add('locked');
-
       var allOpts = optionsEl.querySelectorAll('.quiz-option');
-      allOpts.forEach(function (b) { b.classList.remove('selected'); });
+      allOpts.forEach(function(b) { b.classList.remove('selected'); });
       allOpts[optIdx].classList.add('confirmed');
-
-      setTimeout(function () { doAdvance(optIdx, points); }, 600);
+      setTimeout(function() {
+        sq.mcScores.push(points);
+        sq.mcAnswers.push({ optIdx: optIdx, points: points });
+        sq.mcIdx++;
+        questionWrap.classList.add('transitioning');
+        setTimeout(function() {
+          questionWrap.classList.remove('transitioning');
+          if (sq.mcIdx >= sq.mcQuestions.length) {
+            sqUpdateProgress(5);
+            sqShowPanel('sqTransRank');
+          } else {
+            sqLoadMCQuestion(sq.mcIdx);
+          }
+        }, 250);
+      }, 600);
     }
 
-    function doAdvance(optIdx, points) {
-      totalScore += points;
-      questionScores.push(points);
-      questionAnswers.push({ optIdx: optIdx, points: points });
-
+    function sqSkipMC() {
+      if (sq.advancing) return;
+      sq.advancing = true;
+      sq.mcScores.push(5);
+      sq.mcAnswers.push(null);
+      sq.mcIdx++;
       questionWrap.classList.add('transitioning');
-
-      setTimeout(function () {
-        currentQ++;
-        if (currentQ >= QUESTIONS.length) {
-          showResults();
+      setTimeout(function() {
+        questionWrap.classList.remove('transitioning');
+        sq.advancing = false;
+        if (sq.mcIdx >= sq.mcQuestions.length) {
+          sqUpdateProgress(5);
+          sqShowPanel('sqTransRank');
         } else {
-          loadQuestion(currentQ);
-          questionWrap.classList.remove('transitioning');
+          sqLoadMCQuestion(sq.mcIdx);
         }
       }, 250);
     }
 
+    // ─── SHORT QUIZ: RANKING ───
+    function sqStartRank() {
+      sq.rankIdx = 0;
+      sqShowPanel('sqRankWrap');
+      sqLoadSQRankQuestion(0);
+    }
+
+    function sqLoadSQRankQuestion(idx) {
+      var q = sq.rankQuestions[idx];
+      sqUpdateProgress(5 + idx);
+      document.getElementById('sqRankNumber').textContent = '0' + (idx + 1);
+      document.getElementById('sqRankQuestion').textContent = q.q;
+      document.getElementById('sqRankNextBtn').disabled = false;
+
+      var backBtn2 = document.getElementById('sqRankBackBtn');
+      if (idx > 0) { backBtn2.classList.remove('hidden'); } else { backBtn2.classList.add('hidden'); }
+
+      var isMobile = window.innerWidth < 768;
+      document.getElementById('sqRankDesktop').style.display = isMobile ? 'none' : '';
+      document.getElementById('sqRankMobile').style.display  = isMobile ? '' : 'none';
+      sqRankOrder = [0, 1, 2, 3];
+      if (isMobile) {
+        sqMobileRanks = [null, null, null, null];
+        sqRenderMobileRank(q.options);
+        document.getElementById('sqRankNextBtn').disabled = true;
+      } else {
+        sqRenderDragRank(q.options);
+      }
+    }
+
+    function sqRenderDragRank(options) {
+      var list = document.getElementById('sqRankList');
+      list.innerHTML = '';
+      sqDropIndicator = null;
+
+      function clearIndicators() {
+        list.querySelectorAll('.rank-item').forEach(function(el) {
+          el.classList.remove('drop-above', 'drop-below');
+        });
+      }
+
+      sqRankOrder.forEach(function(optIdx, pos) {
+        var item = document.createElement('div');
+        item.className = 'rank-item';
+        item.draggable = true;
+        item.dataset.pos = pos;
+        item.innerHTML =
+          '<span class="rank-handle">\u283f</span>' +
+          '<span class="rank-pos">' + (pos + 1) + '</span>' +
+          '<span class="rank-text">' + options[optIdx] + '</span>';
+        item.addEventListener('dragstart', function(e) {
+          sqDragSrcPos = pos;
+          item.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        item.addEventListener('dragend', function() {
+          item.classList.remove('dragging');
+          clearIndicators();
+          sqDragSrcPos = null; sqDropIndicator = null;
+        });
+        item.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          var rect = item.getBoundingClientRect();
+          clearIndicators();
+          if (e.clientY < rect.top + rect.height / 2) {
+            item.classList.add('drop-above'); sqDropIndicator = 'above';
+          } else {
+            item.classList.add('drop-below'); sqDropIndicator = 'below';
+          }
+        });
+        item.addEventListener('dragleave', function(e) {
+          if (!item.contains(e.relatedTarget)) item.classList.remove('drop-above', 'drop-below');
+        });
+        item.addEventListener('drop', function(e) {
+          e.preventDefault();
+          clearIndicators();
+          var src = sqDragSrcPos, tgt = pos, indicator = sqDropIndicator;
+          sqDragSrcPos = null; sqDropIndicator = null;
+          if (src === null || src === tgt) return;
+          var moved = sqRankOrder.splice(src, 1)[0];
+          var adj = tgt - (src < tgt ? 1 : 0);
+          sqRankOrder.splice(indicator === 'below' ? adj + 1 : adj, 0, moved);
+          sqRenderDragRank(sq.rankQuestions[sq.rankIdx].options);
+        });
+        list.appendChild(item);
+      });
+    }
+
+    function sqRenderMobileRank(options) {
+      var list = document.getElementById('sqRankMobileList');
+      list.innerHTML = '';
+      options.forEach(function(text, optIdx) {
+        var item = document.createElement('div');
+        item.className = 'rank-mobile-item';
+        var textEl = document.createElement('span'); textEl.className = 'rank-mobile-text'; textEl.textContent = text;
+        var btns = document.createElement('div'); btns.className = 'rank-mobile-btns';
+        [1,2,3,4].forEach(function(rank) {
+          var btn = document.createElement('button');
+          btn.className = 'rank-num-btn' + (sqMobileRanks[optIdx] === rank ? ' active' : '');
+          btn.textContent = rank;
+          btn.addEventListener('click', function() {
+            var prev = sqMobileRanks.indexOf(rank);
+            if (prev !== -1 && prev !== optIdx) sqMobileRanks[prev] = null;
+            sqMobileRanks[optIdx] = rank;
+            sqRenderMobileRank(sq.rankQuestions[sq.rankIdx].options);
+            var allDone = sqMobileRanks.every(function(r) { return r !== null; });
+            document.getElementById('sqRankNextBtn').disabled = !allDone;
+          });
+          btns.appendChild(btn);
+        });
+        item.appendChild(textEl); item.appendChild(btns);
+        list.appendChild(item);
+      });
+    }
+
+    function sqSkipRank() {
+      sq.rankScores.push(5);
+      sq.rankIdx++;
+      if (sq.rankIdx >= sq.rankQuestions.length) {
+        sqUpdateProgress(8);
+        sqShowPanel('sqTransForced');
+      } else {
+        sqLoadSQRankQuestion(sq.rankIdx);
+      }
+    }
+
+    // ─── SHORT QUIZ: FORCED CHOICE ───
+    function sqStartForced() {
+      sq.forcedIdx = 0;
+      sqShowPanel('sqForcedWrap');
+      sqLoadForcedQuestion(0);
+    }
+
+    function sqLoadForcedQuestion(idx) {
+      var q = sq.forcedQuestions[idx];
+      sqUpdateProgress(8 + idx);
+      document.getElementById('sqForcedNumber').textContent = '0' + (idx + 1);
+      document.getElementById('sqForcedQuestion').textContent = q.q;
+      var btnA = document.getElementById('sqForcedA');
+      var btnB = document.getElementById('sqForcedB');
+      btnA.className = 'forced-btn'; btnA.textContent = q.a.text;
+      btnB.className = 'forced-btn'; btnB.textContent = q.b.text;
+      btnA.onclick = function() { sqForcedSelect(q.a.score, btnA, btnB); };
+      btnB.onclick = function() { sqForcedSelect(q.b.score, btnB, btnA); };
+      var backBtn3 = document.getElementById('sqForcedBackBtn');
+      if (idx > 0) { backBtn3.classList.remove('hidden'); } else { backBtn3.classList.add('hidden'); }
+    }
+
+    function sqForcedSelect(score, chosen, other) {
+      chosen.classList.add('confirmed'); other.classList.add('faded');
+      sq.forcedScores.push(score);
+      sq.forcedIdx++;
+      setTimeout(function() {
+        if (sq.forcedIdx >= sq.forcedQuestions.length) {
+          showResults();
+        } else {
+          sqLoadForcedQuestion(sq.forcedIdx);
+        }
+      }, 500);
+    }
+
+    function sqSkipForced() {
+      sq.forcedScores.push(5);
+      sq.forcedIdx++;
+      if (sq.forcedIdx >= sq.forcedQuestions.length) {
+        showResults();
+      } else {
+        sqLoadForcedQuestion(sq.forcedIdx);
+      }
+    }
+
     function goBack() {
-      if (currentQ === 0 || advancing) return;
-      var prev = questionAnswers.pop();
-      totalScore -= prev.points;
-      questionScores.pop();
-      currentQ--;
-      advancing = false;
+      if (sq.mcIdx === 0 || sq.advancing) return;
+      var prev = sq.mcAnswers.pop();
+      sq.mcScores.pop();
+      sq.mcIdx--;
+      sq.advancing = false;
       questionWrap.classList.add('transitioning');
-      setTimeout(function () {
-        loadQuestion(currentQ, prev.optIdx);
+      setTimeout(function() {
+        sqLoadMCQuestion(sq.mcIdx, prev ? prev.optIdx : undefined);
         questionWrap.classList.remove('transitioning');
       }, 250);
     }
 
     function showResults() {
-      fadeOut(quizSection, function () {
+      fadeOut(quizSection, function() {
         quizSection.style.display = 'none';
         contactBar.style.display = '';
         pageFooter.style.display = '';
 
-        var rating = getRating(totalScore);
+        var total = 0;
+        sq.mcScores.forEach(function(s)     { total += (s || 0); });
+        sq.rankScores.forEach(function(s)   { total += Math.round(s || 0); });
+        sq.forcedScores.forEach(function(s) { total += (s || 0); });
+        total = Math.min(100, Math.round(total));
+        totalScore = total;
+
+        var rating = getRating(total);
         document.getElementById('resultLabel').textContent = rating.label;
-        document.getElementById('resultDesc').textContent = rating.desc;
-        window._jawsScore = totalScore;
+        document.getElementById('resultDesc').textContent  = rating.desc;
+        window._jawsScore  = total;
         window._jawsRating = rating.label;
+
+        // Render pillar bars
+        var pillarData = sqComputePillarData();
+        var barsContainer = document.getElementById('sqPillarBars');
+        barsContainer.innerHTML = '<span class="sq-pillar-bars-heading">Pillar Breakdown</span>';
+        var hasAnyPillar = false;
+        DD_PILLAR_NAMES.forEach(function(name, i) {
+          if (pillarData.max[i] === 0) return;
+          hasAnyPillar = true;
+          var row = document.createElement('div');
+          row.className = 'sq-pillar-row';
+          row.innerHTML =
+            '<div class="sq-pillar-name">' + name +
+            '<span class="sq-pillar-pct" id="sqP' + i + 'Pct">0%</span></div>' +
+            '<div class="sq-pillar-track"><div class="sq-pillar-fill" id="sqP' + i + 'Fill"></div></div>';
+          barsContainer.appendChild(row);
+        });
+        var nudge = document.getElementById('sqPillarNudge');
+        if (nudge) nudge.style.display = hasAnyPillar ? '' : 'none';
 
         resultsSection.style.display = 'flex';
         fadeIn(resultsSection);
-        animateScore(totalScore);
+        animateScore(total);
+
+        setTimeout(function() {
+          DD_PILLAR_NAMES.forEach(function(name, i) {
+            var fill = document.getElementById('sqP' + i + 'Fill');
+            var pct  = document.getElementById('sqP' + i + 'Pct');
+            if (fill && pillarData.max[i] > 0) {
+              fill.style.width = pillarData.pcts[i] + '%';
+              if (pct) pct.textContent = pillarData.pcts[i] + '%';
+            }
+          });
+        }, 300);
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
@@ -1890,10 +2345,12 @@
     }
 
     function retakeQuiz() {
-      questionAnswers = [];
+      sq.mcAnswers = []; sq.mcScores = [];
+      sq.rankScores = []; sq.forcedScores = [];
+      sq.mcIdx = 0; sq.rankIdx = 0; sq.forcedIdx = 0;
+      sq.pillarScores = [0,0,0,0]; sq.advancing = false;
       keyboardUsed = false;
-      advancing = false;
-      fadeOut(resultsSection, function () {
+      fadeOut(resultsSection, function() {
         resultsSection.style.display = 'none';
         heroSection.style.display = 'flex';
         fadeIn(heroSection);
@@ -1908,19 +2365,75 @@
     document.getElementById('quizBackBtn').addEventListener('click', goBack);
     document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
 
+    document.getElementById('sqRankNextBtn').addEventListener('click', function() {
+      var q = sq.rankQuestions[sq.rankIdx];
+      var isMobile = window.innerWidth < 768;
+      var userOrder;
+      if (isMobile) {
+        userOrder = [0, 0, 0, 0];
+        sqMobileRanks.forEach(function(rank, optIdx) { userOrder[rank - 1] = optIdx; });
+      } else {
+        userOrder = sqRankOrder.slice();
+      }
+      var score = ddScoreRanking(userOrder, q.ideal);
+      sq.rankScores.push(score);
+      sq.rankIdx++;
+      if (sq.rankIdx >= sq.rankQuestions.length) {
+        sqUpdateProgress(8);
+        sqShowPanel('sqTransForced');
+      } else {
+        sqLoadSQRankQuestion(sq.rankIdx);
+      }
+    });
+
+    document.getElementById('sqRankBackBtn').addEventListener('click', function() {
+      if (sq.rankIdx === 0) {
+        sq.mcIdx = sq.mcQuestions.length - 1;
+        var prev = sq.mcAnswers.pop();
+        sq.mcScores.pop();
+        sq.advancing = false;
+        sqShowPanel('quizQuestionWrap');
+        sqLoadMCQuestion(sq.mcIdx, prev ? prev.optIdx : undefined);
+      } else {
+        sq.rankScores.pop();
+        sq.rankIdx--;
+        sqLoadSQRankQuestion(sq.rankIdx);
+      }
+    });
+
+    document.getElementById('sqForcedBackBtn').addEventListener('click', function() {
+      if (sq.forcedIdx === 0) {
+        sq.rankIdx = sq.rankQuestions.length - 1;
+        sq.rankScores.pop();
+        sqShowPanel('sqRankWrap');
+        sqLoadSQRankQuestion(sq.rankIdx);
+      } else {
+        sq.forcedScores.pop();
+        sq.forcedIdx--;
+        sqLoadForcedQuestion(sq.forcedIdx);
+      }
+    });
+
+    var sqDeepDiveNudgeBtn = document.getElementById('sqDeepDiveNudgeBtn');
+    if (sqDeepDiveNudgeBtn) {
+      sqDeepDiveNudgeBtn.addEventListener('click', function() {
+        document.getElementById('fromResultsDeepDiveBtn').click();
+      });
+    }
+
     // ─── KEYBOARD SHORTCUTS (A / B / C / D) ───
     document.addEventListener('keydown', function (e) {
       var key = e.key.toUpperCase();
       var idx = ['A', 'B', 'C', 'D'].indexOf(key);
       if (idx === -1) return;
 
-      // 10-question quiz
-      if (quizSection.style.display === 'flex') {
-        if (advancing) return;
+      // Short quiz MC
+      if (quizSection.style.display === 'flex' && sqCurrentPanel === 'quizQuestionWrap') {
+        if (sq.advancing) return;
         var allOpts = optionsEl.querySelectorAll('.quiz-option');
         if (!allOpts[idx]) return;
         if (!keyboardUsed) { keyboardUsed = true; kbdHint.classList.add('hidden'); }
-        selectAndAdvance(idx, parseInt(allOpts[idx].dataset.points, 10));
+        sqMCSelect(idx, parseInt(allOpts[idx].dataset.points, 10));
         return;
       }
 
@@ -1984,25 +2497,21 @@
 
     // ─── ASK JAWS BUTTON ───
     document.getElementById('askJawsBtn').addEventListener('click', function () {
-      var score = window._jawsScore || 0;
+      var score  = window._jawsScore  || 0;
       var rating = window._jawsRating || '';
 
-      var weakTopics = [];
-      for (var i = 0; i < questionScores.length; i++) {
-        if (questionScores[i] === 0 || questionScores[i] === 4) {
-          weakTopics.push(TOPIC_MAP[i]);
-        }
-      }
+      var pillarData = sqComputePillarData();
+      var weakPillarIdx = 0, minPct = Infinity;
+      pillarData.pcts.forEach(function(pct, i) {
+        if (pillarData.max[i] > 0 && pct < minPct) { minPct = pct; weakPillarIdx = i; }
+      });
+      var weakPillar = DD_PILLAR_NAMES[weakPillarIdx];
 
-      var msg;
-      if (weakTopics.length === 0) {
-        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. What should I focus on to keep improving, and which articles or playbook pages would you recommend?';
-      } else if (weakTopics.length === 1) {
-        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. My weakest area was ' + weakTopics[0] + '. What should I focus on to improve, and which articles or playbook pages should I read?';
-      } else {
-        var listed = weakTopics.slice(0, -1).join(', ') + ' and ' + weakTopics[weakTopics.length - 1];
-        msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. My weakest areas were ' + listed + '. What should I focus on to improve, and which articles or playbook pages should I read?';
-      }
+      var breakdown = DD_PILLAR_NAMES.map(function(name, i) {
+        return pillarData.max[i] > 0 ? name + ': ' + pillarData.pcts[i] + '%' : null;
+      }).filter(Boolean).join(', ');
+
+      var msg = 'I just scored ' + score + '/100 on the JAWS Score \u2014 ' + rating + '. My pillar breakdown: ' + breakdown + '. My weakest area was ' + weakPillar + '. What should I focus on to improve, and which articles should I read?';
 
       window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(msg);
     });
