@@ -1091,8 +1091,7 @@
     <p class="score-subheading fade-in">10 questions. Three formats. One score.</p>
     <ul class="sq-format-list fade-in">
       <li>5 multiple choice</li>
-      <li>3 ranking</li>
-      <li>2 forced choice</li>
+      <li>5 forced choice</li>
     </ul>
     <div class="score-hero-btns fade-in">
       <button class="score-btn-primary" id="startQuizBtn">Take the Test</button>
@@ -1113,26 +1112,18 @@
 
       <!-- Transition: MC -->
       <div id="sqTransMC" class="sq-trans" style="display:none;">
-        <span class="sq-trans-eyebrow">Section 1 of 3</span>
+        <span class="sq-trans-eyebrow">Section 1 of 2</span>
         <h2 class="sq-trans-title">Multiple Choice</h2>
         <p class="sq-trans-desc">5 scenario-based questions. Select the best response. Questions advance automatically.</p>
         <button class="dd-begin-btn" onclick="sqStartMC()">Begin</button>
       </div>
 
-      <!-- Transition: Ranking -->
-      <div id="sqTransRank" class="sq-trans" style="display:none;">
-        <span class="sq-trans-eyebrow">Section 2 of 3</span>
-        <h2 class="sq-trans-title">Ranking</h2>
-        <p class="sq-trans-desc">3 questions. Rank all four options from best to worst. Drag to reorder on desktop &mdash; tap numbers on mobile.</p>
-        <button class="dd-begin-btn" onclick="sqStartRank()">Begin</button>
-      </div>
-
       <!-- Transition: Forced Choice -->
       <div id="sqTransForced" class="sq-trans" style="display:none;">
-        <span class="sq-trans-eyebrow">Section 3 of 3</span>
-        <h2 class="sq-trans-title">Forced Choice</h2>
-        <p class="sq-trans-desc">2 questions. Two options only. Pick the one that better reflects how you actually operate.</p>
-        <button class="dd-begin-btn" onclick="sqStartForced()">Begin</button>
+        <span class="sq-trans-eyebrow">Next Up</span>
+        <h2 class="sq-trans-title">5 Forced Choices</h2>
+        <p class="sq-trans-desc">Two options. No middle ground. Pick one.</p>
+        <button class="dd-begin-btn" onclick="sqStartForced()">Continue &rarr;</button>
       </div>
 
       <!-- MC panel -->
@@ -1143,23 +1134,6 @@
         <div class="quiz-options" id="quizOptions"></div>
         <p class="quiz-kbd-hint" id="quizKbdHint">Press A, B, C or D to answer</p>
         <p class="dd-skip-link" onclick="sqSkipMC()">Skip this question</p>
-      </div>
-
-      <!-- Rank panel -->
-      <div id="sqRankWrap" style="display:none;">
-        <button class="quiz-back-btn hidden" id="sqRankBackBtn">&#8592; Back</button>
-        <span class="quiz-number" id="sqRankNumber">01</span>
-        <h2 class="quiz-question" id="sqRankQuestion"></h2>
-        <div id="sqRankDesktop">
-          <span class="rank-instruction">Drag to reorder &mdash; 1 is best</span>
-          <div class="rank-list" id="sqRankList"></div>
-        </div>
-        <div id="sqRankMobile" style="display:none;">
-          <span class="rank-instruction">Tap a number to assign rank &mdash; 1 is best</span>
-          <div id="sqRankMobileList"></div>
-        </div>
-        <button class="rank-next-btn" id="sqRankNextBtn" disabled>Next &rarr;</button>
-        <p class="dd-skip-link" onclick="sqSkipRank()">Skip this question</p>
       </div>
 
       <!-- Forced panel -->
@@ -1826,10 +1800,8 @@
     // ─── SHORT QUIZ STATE ───
     var sq = {
       mcQuestions: [], mcPillars: [],
-      rankQuestions: [], rankPillars: [],
       forcedQuestions: [], forcedPillars: [],
       mcIdx: 0, mcScores: [], mcAnswers: [],
-      rankIdx: 0, rankScores: [],
       forcedIdx: 0, forcedScores: [],
       pillarScores: [0, 0, 0, 0],
       phase: 0,
@@ -1837,13 +1809,9 @@
     };
 
     var sqCurrentPanel = null;
-    var sqRankOrder = [];
-    var sqMobileRanks = [];
-    var sqDragSrcPos = null;
-    var sqDropIndicator = null;
 
     function sqShowPanel(id) {
-      ['sqTransMC','sqTransRank','sqTransForced','quizQuestionWrap','sqRankWrap','sqForcedWrap'].forEach(function(elId) {
+      ['sqTransMC','sqTransForced','quizQuestionWrap','sqForcedWrap'].forEach(function(elId) {
         var el = document.getElementById(elId);
         if (el) el.style.display = 'none';
       });
@@ -1885,41 +1853,31 @@
       sq.mcQuestions = chosen.map(function(c) { return QUESTION_BANK[DD_MC_INDICES[c.idx]]; });
       sq.mcPillars   = chosen.map(function(c) { return c.pillar; });
 
-      // ── 3 Ranking: 1 from each of 3 random pillars ──
-      var rankByPillar = [[], [], [], []];
-      for (var i = 0; i < DD_RANKING.length; i++) {
-        rankByPillar[DD_RANK_PILLARS[i]].push(i);
-      }
-      var availRankPillars = [];
-      for (var p = 0; p < 4; p++) { if (rankByPillar[p].length) availRankPillars.push(p); }
-      shuffleArr(availRankPillars);
-      var chosenRankPillars = availRankPillars.slice(0, 3);
-      sq.rankQuestions = [];
-      sq.rankPillars   = [];
-      chosenRankPillars.forEach(function(pillar) {
-        var pool = rankByPillar[pillar].slice();
-        shuffleArr(pool);
-        sq.rankQuestions.push(DD_RANKING[pool[0]]);
-        sq.rankPillars.push(pillar);
-      });
-
-      // ── 2 Forced: from 2 different pillars ──
+      // ── 5 Forced: 1 per pillar + 1 extra ──
       var forcedByPillar = [[], [], [], []];
       for (var i = 0; i < DD_FORCED.length; i++) {
         forcedByPillar[DD_FORCED_PILLARS[i]].push(i);
       }
-      var availForcedPillars = [];
-      for (var p = 0; p < 4; p++) { if (forcedByPillar[p].length) availForcedPillars.push(p); }
-      shuffleArr(availForcedPillars);
-      var chosenForcedPillars = availForcedPillars.slice(0, 2);
-      sq.forcedQuestions = [];
-      sq.forcedPillars   = [];
-      chosenForcedPillars.forEach(function(pillar) {
-        var pool = forcedByPillar[pillar].slice();
+      var fcChosen = [];
+      for (var p = 0; p < 4; p++) {
+        if (!forcedByPillar[p].length) continue;
+        var pool = forcedByPillar[p].slice();
         shuffleArr(pool);
-        sq.forcedQuestions.push(DD_FORCED[pool[0]]);
-        sq.forcedPillars.push(pillar);
-      });
+        fcChosen.push({ idx: pool[0], pillar: p });
+      }
+      // 5th pick from any remaining unused question
+      var fcPicked = fcChosen.map(function(c) { return c.idx; });
+      var fcRemaining = [];
+      for (var i = 0; i < DD_FORCED.length; i++) {
+        if (fcPicked.indexOf(i) === -1) fcRemaining.push(i);
+      }
+      if (fcRemaining.length > 0) {
+        shuffleArr(fcRemaining);
+        fcChosen.push({ idx: fcRemaining[0], pillar: DD_FORCED_PILLARS[fcRemaining[0]] });
+      }
+      shuffleArr(fcChosen);
+      sq.forcedQuestions = fcChosen.map(function(c) { return DD_FORCED[c.idx]; });
+      sq.forcedPillars   = fcChosen.map(function(c) { return c.pillar; });
     }
 
     function sqComputePillarData() {
@@ -1928,10 +1886,6 @@
       sq.mcPillars.forEach(function(p, i) {
         maxPerPillar[p]    += 10;
         actualPerPillar[p] += (sq.mcScores[i] || 0);
-      });
-      sq.rankPillars.forEach(function(p, i) {
-        maxPerPillar[p]    += 10;
-        actualPerPillar[p] += Math.round(sq.rankScores[i] || 0);
       });
       sq.forcedPillars.forEach(function(p, i) {
         maxPerPillar[p]    += 10;
@@ -1997,7 +1951,6 @@
     function startQuiz() {
       buildShortQuiz();
       sq.mcIdx = 0; sq.mcScores = []; sq.mcAnswers = [];
-      sq.rankIdx = 0; sq.rankScores = [];
       sq.forcedIdx = 0; sq.forcedScores = [];
       sq.pillarScores = [0,0,0,0];
       sq.phase = 0; sq.advancing = false;
@@ -2061,8 +2014,7 @@
         setTimeout(function() {
           questionWrap.classList.remove('transitioning');
           if (sq.mcIdx >= sq.mcQuestions.length) {
-            sqUpdateProgress(5);
-            sqShowPanel('sqTransRank');
+            sqShowPanel('sqTransForced');
           } else {
             sqLoadMCQuestion(sq.mcIdx);
           }
@@ -2081,138 +2033,11 @@
         questionWrap.classList.remove('transitioning');
         sq.advancing = false;
         if (sq.mcIdx >= sq.mcQuestions.length) {
-          sqUpdateProgress(5);
-          sqShowPanel('sqTransRank');
+          sqShowPanel('sqTransForced');
         } else {
           sqLoadMCQuestion(sq.mcIdx);
         }
       }, 250);
-    }
-
-    // ─── SHORT QUIZ: RANKING ───
-    function sqStartRank() {
-      sq.rankIdx = 0;
-      sqShowPanel('sqRankWrap');
-      sqLoadSQRankQuestion(0);
-    }
-
-    function sqLoadSQRankQuestion(idx) {
-      var q = sq.rankQuestions[idx];
-      sqUpdateProgress(5 + idx);
-      document.getElementById('sqRankNumber').textContent = '0' + (idx + 1);
-      document.getElementById('sqRankQuestion').textContent = q.q;
-      document.getElementById('sqRankNextBtn').disabled = false;
-
-      var backBtn2 = document.getElementById('sqRankBackBtn');
-      if (idx > 0) { backBtn2.classList.remove('hidden'); } else { backBtn2.classList.add('hidden'); }
-
-      var isMobile = window.innerWidth < 768;
-      document.getElementById('sqRankDesktop').style.display = isMobile ? 'none' : '';
-      document.getElementById('sqRankMobile').style.display  = isMobile ? '' : 'none';
-      sqRankOrder = [0, 1, 2, 3];
-      if (isMobile) {
-        sqMobileRanks = [null, null, null, null];
-        sqRenderMobileRank(q.options);
-        document.getElementById('sqRankNextBtn').disabled = true;
-      } else {
-        sqRenderDragRank(q.options);
-      }
-    }
-
-    function sqRenderDragRank(options) {
-      var list = document.getElementById('sqRankList');
-      list.innerHTML = '';
-      sqDropIndicator = null;
-
-      function clearIndicators() {
-        list.querySelectorAll('.rank-item').forEach(function(el) {
-          el.classList.remove('drop-above', 'drop-below');
-        });
-      }
-
-      sqRankOrder.forEach(function(optIdx, pos) {
-        var item = document.createElement('div');
-        item.className = 'rank-item';
-        item.draggable = true;
-        item.dataset.pos = pos;
-        item.innerHTML =
-          '<span class="rank-handle">\u283f</span>' +
-          '<span class="rank-pos">' + (pos + 1) + '</span>' +
-          '<span class="rank-text">' + options[optIdx] + '</span>';
-        item.addEventListener('dragstart', function(e) {
-          sqDragSrcPos = pos;
-          item.classList.add('dragging');
-          e.dataTransfer.effectAllowed = 'move';
-        });
-        item.addEventListener('dragend', function() {
-          item.classList.remove('dragging');
-          clearIndicators();
-          sqDragSrcPos = null; sqDropIndicator = null;
-        });
-        item.addEventListener('dragover', function(e) {
-          e.preventDefault();
-          var rect = item.getBoundingClientRect();
-          clearIndicators();
-          if (e.clientY < rect.top + rect.height / 2) {
-            item.classList.add('drop-above'); sqDropIndicator = 'above';
-          } else {
-            item.classList.add('drop-below'); sqDropIndicator = 'below';
-          }
-        });
-        item.addEventListener('dragleave', function(e) {
-          if (!item.contains(e.relatedTarget)) item.classList.remove('drop-above', 'drop-below');
-        });
-        item.addEventListener('drop', function(e) {
-          e.preventDefault();
-          clearIndicators();
-          var src = sqDragSrcPos, tgt = pos, indicator = sqDropIndicator;
-          sqDragSrcPos = null; sqDropIndicator = null;
-          if (src === null || src === tgt) return;
-          var moved = sqRankOrder.splice(src, 1)[0];
-          var adj = tgt - (src < tgt ? 1 : 0);
-          sqRankOrder.splice(indicator === 'below' ? adj + 1 : adj, 0, moved);
-          sqRenderDragRank(sq.rankQuestions[sq.rankIdx].options);
-        });
-        list.appendChild(item);
-      });
-    }
-
-    function sqRenderMobileRank(options) {
-      var list = document.getElementById('sqRankMobileList');
-      list.innerHTML = '';
-      options.forEach(function(text, optIdx) {
-        var item = document.createElement('div');
-        item.className = 'rank-mobile-item';
-        var textEl = document.createElement('span'); textEl.className = 'rank-mobile-text'; textEl.textContent = text;
-        var btns = document.createElement('div'); btns.className = 'rank-mobile-btns';
-        [1,2,3,4].forEach(function(rank) {
-          var btn = document.createElement('button');
-          btn.className = 'rank-num-btn' + (sqMobileRanks[optIdx] === rank ? ' active' : '');
-          btn.textContent = rank;
-          btn.addEventListener('click', function() {
-            var prev = sqMobileRanks.indexOf(rank);
-            if (prev !== -1 && prev !== optIdx) sqMobileRanks[prev] = null;
-            sqMobileRanks[optIdx] = rank;
-            sqRenderMobileRank(sq.rankQuestions[sq.rankIdx].options);
-            var allDone = sqMobileRanks.every(function(r) { return r !== null; });
-            document.getElementById('sqRankNextBtn').disabled = !allDone;
-          });
-          btns.appendChild(btn);
-        });
-        item.appendChild(textEl); item.appendChild(btns);
-        list.appendChild(item);
-      });
-    }
-
-    function sqSkipRank() {
-      sq.rankScores.push(5);
-      sq.rankIdx++;
-      if (sq.rankIdx >= sq.rankQuestions.length) {
-        sqUpdateProgress(8);
-        sqShowPanel('sqTransForced');
-      } else {
-        sqLoadSQRankQuestion(sq.rankIdx);
-      }
     }
 
     // ─── SHORT QUIZ: FORCED CHOICE ───
@@ -2224,7 +2049,7 @@
 
     function sqLoadForcedQuestion(idx) {
       var q = sq.forcedQuestions[idx];
-      sqUpdateProgress(8 + idx);
+      sqUpdateProgress(5 + idx);
       document.getElementById('sqForcedNumber').textContent = '0' + (idx + 1);
       document.getElementById('sqForcedQuestion').textContent = q.q;
       var btnA = document.getElementById('sqForcedA');
@@ -2281,7 +2106,6 @@
 
         var total = 0;
         sq.mcScores.forEach(function(s)     { total += (s || 0); });
-        sq.rankScores.forEach(function(s)   { total += Math.round(s || 0); });
         sq.forcedScores.forEach(function(s) { total += (s || 0); });
         total = Math.min(100, Math.round(total));
         totalScore = total;
@@ -2346,8 +2170,8 @@
 
     function retakeQuiz() {
       sq.mcAnswers = []; sq.mcScores = [];
-      sq.rankScores = []; sq.forcedScores = [];
-      sq.mcIdx = 0; sq.rankIdx = 0; sq.forcedIdx = 0;
+      sq.forcedScores = [];
+      sq.mcIdx = 0; sq.forcedIdx = 0;
       sq.pillarScores = [0,0,0,0]; sq.advancing = false;
       keyboardUsed = false;
       fadeOut(resultsSection, function() {
@@ -2365,48 +2189,15 @@
     document.getElementById('quizBackBtn').addEventListener('click', goBack);
     document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
 
-    document.getElementById('sqRankNextBtn').addEventListener('click', function() {
-      var q = sq.rankQuestions[sq.rankIdx];
-      var isMobile = window.innerWidth < 768;
-      var userOrder;
-      if (isMobile) {
-        userOrder = [0, 0, 0, 0];
-        sqMobileRanks.forEach(function(rank, optIdx) { userOrder[rank - 1] = optIdx; });
-      } else {
-        userOrder = sqRankOrder.slice();
-      }
-      var score = ddScoreRanking(userOrder, q.ideal);
-      sq.rankScores.push(score);
-      sq.rankIdx++;
-      if (sq.rankIdx >= sq.rankQuestions.length) {
-        sqUpdateProgress(8);
-        sqShowPanel('sqTransForced');
-      } else {
-        sqLoadSQRankQuestion(sq.rankIdx);
-      }
-    });
-
-    document.getElementById('sqRankBackBtn').addEventListener('click', function() {
-      if (sq.rankIdx === 0) {
+    document.getElementById('sqForcedBackBtn').addEventListener('click', function() {
+      if (sq.forcedIdx === 0) {
+        // Back to last MC question
         sq.mcIdx = sq.mcQuestions.length - 1;
         var prev = sq.mcAnswers.pop();
         sq.mcScores.pop();
         sq.advancing = false;
         sqShowPanel('quizQuestionWrap');
         sqLoadMCQuestion(sq.mcIdx, prev ? prev.optIdx : undefined);
-      } else {
-        sq.rankScores.pop();
-        sq.rankIdx--;
-        sqLoadSQRankQuestion(sq.rankIdx);
-      }
-    });
-
-    document.getElementById('sqForcedBackBtn').addEventListener('click', function() {
-      if (sq.forcedIdx === 0) {
-        sq.rankIdx = sq.rankQuestions.length - 1;
-        sq.rankScores.pop();
-        sqShowPanel('sqRankWrap');
-        sqLoadSQRankQuestion(sq.rankIdx);
       } else {
         sq.forcedScores.pop();
         sq.forcedIdx--;
