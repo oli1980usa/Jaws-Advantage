@@ -17,15 +17,15 @@
     gtag('config', 'G-5RC382BRZF');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Playbook | The JAWS Advantage</title>
-  <meta name="description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
-  <meta property="og:title" content="The Playbook | The JAWS Advantage">
-  <meta property="og:description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
+  <title>The Intelligence | The JAWS Advantage</title>
+  <meta name="description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
+  <meta property="og:title" content="The Intelligence | The JAWS Advantage">
+  <meta property="og:description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
   <meta property="og:url" content="https://jawsadvantage.com/playbook.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Playbook | The JAWS Advantage">
-  <meta name="twitter:description" content="Four pillars. Seventeen years. One multi-billion dollar company. The unfiltered playbook on how careers actually move.">
+  <meta name="twitter:title" content="The Intelligence | The JAWS Advantage">
+  <meta name="twitter:description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
@@ -861,6 +861,130 @@
       line-height: 1;
     }
 
+    /* ─── ARTICLES SECTION ─── */
+    .intel-articles-section {
+      padding: 64px 48px 80px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .articles-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 36px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .article-row:hover {
+      padding-left: 16px;
+      padding-right: 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      background: var(--black-2);
+    }
+
+    .article-row:hover .article-title {
+      color: var(--red);
+    }
+
+    .article-row:hover .article-arrow {
+      transform: translateX(6px);
+      color: var(--red);
+    }
+
+    .article-tag {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 5px 10px;
+      text-align: center;
+      width: 160px;
+      flex-shrink: 0;
+    }
+
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      transition: color 0.2s;
+      line-height: 1.1;
+    }
+
+    .article-excerpt {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.6;
+    }
+
+    .article-meta {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.5);
+      letter-spacing: 0.06em;
+    }
+
+    .article-arrow {
+      font-size: 20px;
+      color: var(--off-white-dim);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    @media (max-width: 640px) {
+      .intel-articles-section {
+        padding: 48px 24px 64px;
+      }
+
+      .article-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .article-tag {
+        width: auto;
+        align-self: flex-start;
+      }
+
+      .article-arrow {
+        display: none;
+      }
+
+      .articles-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -872,7 +996,7 @@
       THE <span>JAWS</span> ADVANTAGE
     </a>
     <ul class="nav-links">
-      <li><a href="playbook.html">The Playbook</a></li>
+      <li><a href="playbook.html">The Intelligence</a></li>
       <li><a href="the-take.html">The Take</a></li>
       <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
       <li><a href="get-the-edge.html">Ask JAWS</a></li>
@@ -886,7 +1010,7 @@
   </nav>
   <div class="nav-mobile-menu" id="navMobileMenu">
     <a href="index.html">Home</a>
-    <a href="playbook.html">The Playbook</a>
+    <a href="playbook.html">The Intelligence</a>
     <a href="the-take.html">The Take</a>
     <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
     <a href="get-the-edge.html">Ask JAWS</a>
@@ -894,12 +1018,13 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <p class="hero-eyebrow fade-in">The Playbook</p>
-    <h1 class="hero-headline fade-in">The game has rules.<br>Here they are.</h1>
-    <p class="hero-sub fade-in">Four pillars. Seventeen years. One multi-billion dollar company. This is the unfiltered playbook on how careers actually move — what nobody hands you on day one, and what separates the people who climb from the people who plateau.</p>
+    <p class="hero-eyebrow fade-in">CAREER INTELLIGENCE</p>
+    <h1 class="hero-headline fade-in">THE INTELLIGENCE</h1>
+    <p class="hero-sub fade-in">Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.</p>
   </section>
 
   <!-- ─── PILLAR GRID ─── -->
+  <p class="section-label" style="text-align:center; margin: 48px 48px 0;">THE FRAMEWORK</p>
   <section class="pillars-section">
     <p class="section-label">The Four Pillars</p>
     <div class="pillars-grid">
@@ -931,6 +1056,80 @@
         <p class="pillar-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
         <a href="manage-and-influence-upwards.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
       </div>
+
+    </div>
+  </section>
+
+  <!-- ─── ARTICLES ─── -->
+  <section class="intel-articles-section">
+    <div class="articles-header">
+      <div>
+        <p class="section-label">The Articles</p>
+        <h2 class="section-title fade-in">Six issues.<br>Zero filler.</h2>
+      </div>
+    </div>
+
+    <div class="articles-list">
+
+      <a href="nobody-tells-you-this-on-your-first-day.html" class="article-row fade-in">
+        <span class="article-tag">Networking</span>
+        <div class="article-content">
+          <h3 class="article-title">Nobody tells you this on your first day. They should.</h3>
+          <p class="article-excerpt">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations.</p>
+          <span class="article-meta">3 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="youre-not-stuck-youre-on-the-wrong-ladder.html" class="article-row fade-in">
+        <span class="article-tag">Career Strategy</span>
+        <div class="article-content">
+          <h3 class="article-title">You're not stuck. You're on the wrong ladder.</h3>
+          <p class="article-excerpt">Most people climb the first ladder they find. The ones who move fast know which ladder to be on — and when to jump.</p>
+          <span class="article-meta">4 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="the-difference-between-a-manager-and-a-leader.html" class="article-row fade-in">
+        <span class="article-tag">Leadership</span>
+        <div class="article-content">
+          <h3 class="article-title">The difference between a manager and a leader.</h3>
+          <p class="article-excerpt">Every organisation has managers. Far fewer have leaders. Here's what actually separates them.</p>
+          <span class="article-meta">4 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="the-half-of-management-nobody-teaches-you.html" class="article-row fade-in">
+        <span class="article-tag">Leadership</span>
+        <div class="article-content">
+          <h3 class="article-title">The half of management nobody teaches you.</h3>
+          <p class="article-excerpt">Managing down is only half the job. The other half is what actually moves your career.</p>
+          <span class="article-meta">4 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="you-will-get-3-in-10-wrong-make-the-call-anyway.html" class="article-row fade-in">
+        <span class="article-tag">Decision Making</span>
+        <div class="article-content">
+          <h3 class="article-title">You will get 3 in 10 wrong. Make the call anyway.</h3>
+          <p class="article-excerpt">The fear of deciding wrong stops more careers than wrong decisions ever has. Here's why.</p>
+          <span class="article-meta">5 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
+
+      <a href="you-are-busy-but-are-you-thinking.html" class="article-row fade-in">
+        <span class="article-tag">Leadership Strategy</span>
+        <div class="article-content">
+          <h3 class="article-title">You're busy. But are you thinking?</h3>
+          <p class="article-excerpt">Most managers are flat out. Every single day. But hard at what? If every hour is consumed by what's urgent right now, nobody is building what matters next.</p>
+          <span class="article-meta">3 min read</span>
+        </div>
+        <span class="article-arrow">&rarr;</span>
+      </a>
 
     </div>
   </section>
