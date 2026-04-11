@@ -959,6 +959,19 @@
       transition: transform 0.2s, color 0.2s;
     }
 
+    .intel-article-votes {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 6px;
+    }
+    .intel-article-votes svg {
+      opacity: 0.5;
+    }
+
     @media (max-width: 640px) {
       .intel-articles-section {
         padding: 48px 24px 64px;
@@ -1024,7 +1037,6 @@
   </section>
 
   <!-- ─── PILLAR GRID ─── -->
-  <p class="section-label" style="text-align:center; margin: 48px 48px 0;">THE FRAMEWORK</p>
   <section class="pillars-section">
     <p class="section-label">The Four Pillars</p>
     <div class="pillars-grid">
@@ -1077,6 +1089,12 @@
           <h3 class="article-title">Nobody tells you this on your first day. They should.</h3>
           <p class="article-excerpt">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations.</p>
           <span class="article-meta">3 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="nobody-tells-you-this-on-your-first-day" data-offset="4800">4.8k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="nobody-tells-you-this-on-your-first-day" data-offset="1200">1.2k</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
@@ -1087,6 +1105,12 @@
           <h3 class="article-title">You're not stuck. You're on the wrong ladder.</h3>
           <p class="article-excerpt">Most people climb the first ladder they find. The ones who move fast know which ladder to be on — and when to jump.</p>
           <span class="article-meta">4 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="youre-not-stuck-youre-on-the-wrong-ladder" data-offset="3900">3.9k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="youre-not-stuck-youre-on-the-wrong-ladder" data-offset="980">980</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
@@ -1097,6 +1121,12 @@
           <h3 class="article-title">The difference between a manager and a leader.</h3>
           <p class="article-excerpt">Every organisation has managers. Far fewer have leaders. Here's what actually separates them.</p>
           <span class="article-meta">4 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="the-difference-between-a-manager-and-a-leader" data-offset="5200">5.2k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="the-difference-between-a-manager-and-a-leader" data-offset="1500">1.5k</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
@@ -1107,6 +1137,12 @@
           <h3 class="article-title">The half of management nobody teaches you.</h3>
           <p class="article-excerpt">Managing down is only half the job. The other half is what actually moves your career.</p>
           <span class="article-meta">4 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="the-half-of-management-nobody-teaches-you" data-offset="4400">4.4k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="the-half-of-management-nobody-teaches-you" data-offset="1100">1.1k</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
@@ -1117,6 +1153,12 @@
           <h3 class="article-title">You will get 3 in 10 wrong. Make the call anyway.</h3>
           <p class="article-excerpt">The fear of deciding wrong stops more careers than wrong decisions ever has. Here's why.</p>
           <span class="article-meta">5 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="you-will-get-3-in-10-wrong-make-the-call-anyway" data-offset="4100">4.1k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="you-will-get-3-in-10-wrong-make-the-call-anyway" data-offset="890">890</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
@@ -1127,6 +1169,12 @@
           <h3 class="article-title">You're busy. But are you thinking?</h3>
           <p class="article-excerpt">Most managers are flat out. Every single day. But hard at what? If every hour is consumed by what's urgent right now, nobody is building what matters next.</p>
           <span class="article-meta">3 min read</span>
+          <div class="intel-article-votes">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+            <span class="intel-vote-up" data-article="you-are-busy-but-are-you-thinking" data-offset="3700">3.7k</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+            <span class="intel-vote-down" data-article="you-are-busy-but-are-you-thinking" data-offset="760">760</span>
+          </div>
         </div>
         <span class="article-arrow">&rarr;</span>
       </a>
