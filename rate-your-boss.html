@@ -1103,7 +1103,6 @@
 
     // ─── RESULTS ───
     function showResults() {
-      rybSaveState('results');
       var total = 0;
       quiz.scores.forEach(function(s) { total += (s || 0); });
       total = Math.min(100, Math.round(total));
@@ -1118,6 +1117,7 @@
       window._rybScore    = total;
       window._rybCategory = cat.name;
       window._rybTagline  = cat.tagline;
+      rybSaveState('results');
 
       document.getElementById('resultCategory').textContent = cat.name;
       document.getElementById('resultTagline').textContent   = cat.tagline;
