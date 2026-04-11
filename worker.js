@@ -191,6 +191,84 @@ export default {
         return new Response(JSON.stringify({ ok: true, counts }), { status: 200, headers: corsHeaders(origin) });
       }
 
+      if (body.action === 'job_posting_analyse') {
+        const text = body.text || '';
+        const mode = body.mode || 'jaws';
+        if (!text || text.length < 50) {
+          return new Response(JSON.stringify({ error: 'No text provided' }), { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+        }
+
+        const jawsPrompt = `You are JAWS — the unfiltered career intelligence engine. A user has pasted a job posting. Analyse it ruthlessly. Cut through the corporate language, identify the red flags, decode what they really want, reality-check the requirements, and give an honest verdict on whether this role is worth pursuing.
+
+Return ONLY valid JSON with no markdown in this exact format:
+{
+  "redFlags": ["specific red flag 1", "specific red flag 2", "specific red flag 3"],
+  "whatTheyWant": "A paragraph explaining what skills and experience they actually need vs what they've listed. Be specific about what matters.",
+  "requirementsCheck": "A paragraph being honest about the requirements. Which ones are real dealbreakers? Which are aspirational padding? What would they probably accept from a strong candidate who doesn't tick every box? Be direct — if they're asking for 10 years experience for a role that doesn't need it, say so.",
+  "hiddenSubtext": "A paragraph on what this role really is. Is it a replacement for someone who just left? A stretched team desperate for help? A role with no budget for the right person? Read between the lines.",
+  "verdict": "One sharp paragraph. Is this worth applying for? Who should apply and who should run? What's the one thing the applicant needs to nail to get this role? Be direct."
+}
+
+Rules:
+- Red flags should be specific to THIS posting, not generic advice
+- Requirements reality check is the most important section — be genuinely useful about what they'd probably accept
+- Never be vague
+- If the posting is genuinely good and honest, say so`;
+
+        const chumPrompt = `You are a shark who has spent 20 years hiring people and has seen every corporate trick in the book. A user has pasted a job posting. Tear it apart — savagely, vulgarly, and hilariously. Use shark and ocean metaphors. Swear freely. Be savage but be RIGHT.
+
+Return ONLY valid JSON with no markdown in this exact format:
+{
+  "redFlags": ["savage red flag 1", "savage red flag 2", "savage red flag 3"],
+  "whatTheyWant": "What they ACTUALLY want vs this wishlist of delusion. Be sweary and use shark metaphors.",
+  "requirementsCheck": "The requirements reality check in full CHUM MODE. Call out every ridiculous ask. '10 years experience in a framework that's been around for 3 years' type energy. What would they actually accept when the perfect candidate doesn't materialise? Be vulgar and funny but be accurate.",
+  "hiddenSubtext": "What is this role REALLY? Is someone being replaced? Is the team a disaster? Is the salary going to be an insult? Read between every line and say it out loud with zero filter.",
+  "verdict": "The savage verdict. Should they apply or swim away fast? Use shark language — chum, bait, feeding frenzy, dead in the water. Make it funny. Make it accurate. Make it the thing they send to their mate."
+}
+
+Rules:
+- Be sweary and use shark/ocean metaphors throughout
+- Requirements reality check should be the most useful AND the funniest section
+- Specific to THIS posting not generic
+- Funny but accurate — the humour comes from being RIGHT, not just being crude
+- If the posting is actually decent, say so — even sharks respect honest prey`;
+
+        const analysePrompt = mode === 'chum' ? chumPrompt : jawsPrompt;
+
+        const analyseResponse = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': env.ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 1500,
+            system: analysePrompt,
+            messages: [{ role: 'user', content: 'Analyse this job posting:\n\n' + text }],
+          }),
+        });
+
+        if (!analyseResponse.ok) {
+          return new Response(JSON.stringify({ error: 'analysis failed' }), { status: 502, headers: corsHeaders(origin) });
+        }
+
+        const analyseData = await analyseResponse.json();
+        let rawText = (analyseData.content && analyseData.content[0] && analyseData.content[0].text) ? analyseData.content[0].text : '{}';
+        rawText = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+        let result;
+        try {
+          result = JSON.parse(rawText);
+        } catch(e) {
+          result = { redFlags: ['Could not analyse this posting. Try pasting a different section.'], whatTheyWant: '', requirementsCheck: '', hiddenSubtext: '', verdict: '' };
+        }
+        return new Response(JSON.stringify(result), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) }
+        });
+      }
+
       if (body.action === 'jaws_decode') {
         const text = body.text || '';
         if (!text || text.length < 10) {

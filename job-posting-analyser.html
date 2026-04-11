@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Google Analytics -->
+  <script>
+    if (localStorage.getItem('cookieConsent') === 'essential') {
+      window['ga-disable-G-5RC382BRZF'] = true;
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Posting Analyser | The JAWS Advantage</title>
+  <meta name="description" content="Paste any job posting. JAWS reads between the lines — red flags, hidden meaning, requirements reality check, and whether it's worth your time.">
+  <meta property="og:title" content="Job Posting Analyser | The JAWS Advantage">
+  <meta property="og:description" content="Paste any job posting. JAWS reads between the lines — red flags, hidden meaning, requirements reality check, and whether it's worth your time.">
+  <meta property="og:url" content="https://jawsadvantage.com/job-posting-analyser.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Job Posting Analyser | The JAWS Advantage">
+  <meta name="twitter:description" content="Paste any job posting. JAWS reads between the lines — red flags, hidden meaning, requirements reality check, and whether it's worth your time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --red-accent: #a52a1a;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+      letter-spacing: 0.12em; color: var(--off-white);
+      text-decoration: none; transition: color 0.2s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--off-white-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none; border: none; cursor: pointer;
+      padding: 4px 2px; color: var(--off-white-dim);
+      line-height: 1; transition: color 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .theme-toggle:hover { color: var(--red); }
+    .theme-toggle svg { display: block; }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef; --black-2: #e8e6e2; --black-3: #dedad4;
+      --off-white: #0a0a0a; --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+    body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
+    body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
+    body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
+    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
+    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
+    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
+    body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
+    body.light-mode .nav-logo img { mix-blend-mode: multiply; }
+    body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
+    body.light-mode .footer-tagline { color: rgba(10, 10, 10, 0.5); }
+    body.light-mode .nav-mobile-menu { background: rgba(245, 243, 239, 0.97); }
+
+    /* ─── PAGE WRAPPER ─── */
+    .decode-page {
+      padding-top: 64px;
+      min-height: 100vh;
+    }
+
+    /* ─── SHARED DECODE/JPA STYLES ─── */
+    .decode-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .decode-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--red-accent);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 12px;
+    }
+    .decode-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 3px;
+      color: var(--off-white);
+      margin: 0 0 12px;
+      line-height: 1;
+    }
+    .decode-subheading {
+      font-size: 15px;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+    .decode-textarea {
+      width: 100%;
+      min-height: 220px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 16px;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+    .decode-textarea:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .decode-char-count {
+      font-size: 11px;
+      color: var(--off-white-dim);
+      text-align: right;
+      margin: 6px 0 20px;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .decode-char-count.at-limit { color: var(--red-accent); }
+    .decode-btn {
+      display: block;
+      width: 100%;
+      background: var(--red-accent);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .decode-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .decode-btn:not(:disabled):hover { opacity: 0.85; }
+    .decode-trust {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      text-align: center;
+      margin-top: 12px;
+      opacity: 0.6;
+    }
+    .decode-policy-warning {
+      font-size: 13px;
+      color: rgba(245,243,239,0.55);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.2px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .decode-mode-toggle {
+      display: flex;
+      gap: 0;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      width: fit-content;
+    }
+    .decode-mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--off-white-dim);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .decode-mode-btn.active {
+      background: var(--red-accent);
+      color: #fff;
+    }
+    .decode-mode-btn:not(.active):hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--off-white);
+    }
+    .decode-mode-warning {
+      font-size: 11px;
+      color: var(--red-accent);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+    .dd-share-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,243,239,0.25);
+      background: transparent;
+      color: var(--off-white-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+    .dd-share-btn:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    body.light-mode .dd-share-btn {
+      border-color: rgba(10,10,10,0.2);
+      color: rgba(10,10,10,0.5);
+    }
+    body.light-mode .dd-share-btn:hover {
+      border-color: #0a0a0a;
+      color: #0a0a0a;
+    }
+    .decode-tool-share {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .decode-tool-share-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      opacity: 0.6;
+    }
+    .decode-tool-share-btns {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .decode-loading {
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .decode-loading-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 3px;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+    .decode-section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red-accent);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 16px;
+    }
+    .decode-verdict {
+      background: rgba(165,42,26,0.08);
+      border: 1px solid rgba(165,42,26,0.2);
+      padding: 24px;
+      margin: 0 0 32px;
+    }
+    .decode-verdict-text {
+      font-size: 16px;
+      color: var(--off-white);
+      line-height: 1.9;
+      margin: 0;
+    }
+    .decode-copy-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      cursor: pointer;
+      margin-bottom: 32px;
+      transition: all 0.2s ease;
+    }
+    .decode-copy-btn:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    .decode-again-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--red-accent);
+      color: var(--red-accent);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 14px 32px;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: all 0.2s ease;
+    }
+    .decode-again-btn:hover {
+      background: var(--red-accent);
+      color: #fff;
+    }
+    .decode-disclaimer {
+      font-size: 11px;
+      color: rgba(245,243,239,0.25);
+      text-align: center;
+      margin-top: 48px;
+      letter-spacing: 0.5px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    body.light-mode .decode-textarea {
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.12);
+      color: #0a0a0a;
+    }
+
+    .decode-share-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .decode-share-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      margin-right: 4px;
+    }
+
+    /* ─── LOADING DOTS ─── */
+    .dd-loading-dots { display: flex; gap: 10px; justify-content: center; }
+    .dd-loading-dot {
+      width: 9px; height: 9px; background: var(--red);
+      border-radius: 50%; animation: ddDot 1.4s infinite ease-in-out both;
+    }
+    .dd-loading-dot:nth-child(1) { animation-delay: 0s; }
+    .dd-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .dd-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes ddDot {
+      0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* ─── JPA SECTION STYLES ─── */
+    .jpa-section {
+      margin-bottom: 28px;
+    }
+    .jpa-section-content {
+      font-size: 16px;
+      color: var(--off-white);
+      line-height: 1.8;
+    }
+    .jpa-section-content ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .jpa-section-content li {
+      margin-bottom: 8px;
+      color: var(--off-white-dim);
+    }
+    .jpa-section-content li::marker {
+      color: var(--red-accent);
+    }
+
+    /* ─── QUIZ RATING WIDGET ─── */
+    .quiz-rating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 32px auto;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      max-width: 400px;
+    }
+    .quiz-rating-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+    .quiz-rating-btns {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .quiz-rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: transform 0.15s ease;
+    }
+    .quiz-rating-btn:hover { transform: scale(1.1); }
+    .quiz-rating-btn.voted { opacity: 1; }
+    .quiz-rating-btn:not(.voted) { opacity: 0.6; }
+    .quiz-rating-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--off-white-dim);
+      transition: color 0.2s ease;
+    }
+    .quiz-rating-btn.voted-up .quiz-rating-icon { color: #a52a1a; }
+    .quiz-rating-btn.voted-down .quiz-rating-icon { color: rgba(245,243,239,0.4); }
+    .quiz-rating-count {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--off-white);
+      letter-spacing: 1px;
+    }
+    .quiz-rating-thankyou {
+      font-size: 12px;
+      color: var(--off-white-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px; font-weight: 300;
+      color: rgba(184, 181, 176, 0.4); letter-spacing: 0.04em;
+    }
+    .contact-bar a {
+      color: var(--off-white-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .contact-bar a:hover { color: var(--red); }
+    body.light-mode .contact-bar { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.08); }
+    body.light-mode .contact-bar a { color: var(--red); }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 64px 48px; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.12em; color: var(--off-white); }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; font-weight: 300; letter-spacing: 0.06em; color: rgba(184, 181, 176, 0.4); text-transform: uppercase; }
+    .footer-copy { font-size: 12px; color: rgba(184, 181, 176, 0.3); }
+
+    /* ─── COOKIE CONSENT ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: #111111;
+      border-top: 1px solid rgba(245, 243, 239, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner.hidden { display: none; }
+    .cookie-inner { padding: 18px 48px 20px; }
+    .cookie-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cookie-text {
+      font-size: 12px; font-weight: 300;
+      color: var(--off-white-dim);
+      line-height: 1.5; flex: 1; min-width: 200px;
+    }
+    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 8px 18px;
+      border-radius: 0; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .cookie-accept {
+      background: var(--red); color: #ffffff; border: 1px solid var(--red);
+    }
+    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .cookie-essential {
+      background: transparent; color: var(--off-white-dim);
+      border: 1px solid rgba(245, 243, 239, 0.2);
+    }
+    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
+    .cookie-details-toggle {
+      background: none; border: none; color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      padding: 6px 0 0; opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s; display: block;
+    }
+    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
+    .cookie-details {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(245, 243, 239, 0.08);
+      columns: 3; column-gap: 40px;
+    }
+    .cookie-details.is-open { display: block; }
+    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
+    .cookie-detail-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 0.1em; color: var(--red);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .cookie-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 1px 5px; vertical-align: middle;
+    }
+    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
+    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
+    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
+    .cookie-detail-list li {
+      font-size: 11px; font-weight: 300; color: var(--off-white-dim);
+      line-height: 1.5; padding: 3px 0 3px 14px; position: relative;
+    }
+    .cookie-detail-list li::before {
+      content: '–'; position: absolute; left: 0;
+      color: rgba(245,243,239,0.25);
+    }
+    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
+
+    /* ─── HAMBURGER / MOBILE MENU ─── */
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      color: var(--red); font-size: 22px; cursor: pointer;
+      padding: 4px 8px; line-height: 1; transition: color 0.2s;
+    }
+    .nav-hamburger:hover { opacity: 0.8; }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 8px 0 16px;
+    }
+    .nav-mobile-menu.is-open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--off-white-dim); text-decoration: none;
+      padding: 16px 24px; border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s; text-align: right;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--red); background: var(--black-2); }
+
+    /* ─── SHARE CARD (off-screen) ─── */
+    #jpaShareCard {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      width: 600px;
+      height: 315px;
+      background: #0a0a0a;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .jpa-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .jpa-card-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: #f5f3ef;
+    }
+    .jpa-card-brand span { color: #a52a1a; }
+    .jpa-card-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #a52a1a;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .jpa-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 3px;
+      color: #f5f3ef;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .jpa-card-verdict {
+      font-size: 13px;
+      color: #b8b5b0;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .jpa-card-footer {
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      letter-spacing: 1px;
+      margin-top: 16px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      footer { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .cookie-inner { padding: 14px 20px 16px; }
+      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cookie-details { columns: 1; }
+      .contact-bar { padding: 24px; }
+      .decode-headline { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Intelligence</a></li>
+      <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
+      <li><a href="sharpen-your-edge.html">Sharpen Your Edge</a></li>
+      <li><a href="get-the-edge.html">Ask JAWS</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">The Intelligence</a>
+    <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
+    <a href="sharpen-your-edge.html">Sharpen Your Edge</a>
+    <a href="get-the-edge.html">Ask JAWS</a>
+  </div>
+
+  <!-- ─── MAIN ─── -->
+  <div class="decode-page">
+    <div class="decode-wrap">
+
+      <!-- INPUT SCREEN -->
+      <div id="jpaInputScreen">
+        <p class="decode-eyebrow">SHARPEN YOUR EDGE</p>
+        <h1 class="decode-headline">JOB POSTING ANALYSER</h1>
+        <p class="decode-subheading">Paste any job posting. We'll tell you what it actually means, what they really want, and whether it's worth your time.</p>
+        <div class="decode-mode-toggle">
+          <button class="decode-mode-btn active" id="modeBtnJaws" onclick="setAnalyseMode('jaws')">JAWS MODE</button>
+          <button class="decode-mode-btn" id="modeBtnChum" onclick="setAnalyseMode('chum')">CHUM MODE</button>
+        </div>
+        <p class="decode-mode-warning" id="analyseModeWarning" style="display:none;">Contains strong language. You asked for it.</p>
+        <textarea class="decode-textarea" id="jpaInput" maxlength="4000" placeholder="Paste the full job posting here..."></textarea>
+        <p class="decode-char-count" id="jpaCharCount">0 / 4000</p>
+        <button class="decode-btn" id="jpaBtn" disabled>ANALYSE THIS &rarr;</button>
+        <p class="decode-trust">No email. No sign-up. No catch.</p>
+        <p class="decode-policy-warning">Before you paste anything: check your company's AI policy. Don't share confidential information with external AI tools if your employer prohibits it. We don't store what you paste — but your IT team might not know that.</p>
+        <div class="decode-tool-share">
+          <span class="decode-tool-share-label">Share this tool</span>
+          <div class="decode-tool-share-btns">
+            <button class="dd-share-btn" onclick="jpaToolShareX()" title="Share on X">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </button>
+            <button class="dd-share-btn" onclick="jpaToolShareLinkedIn()" title="Share on LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </button>
+            <button class="dd-share-btn" onclick="jpaToolShareWhatsApp()" title="Share on WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </button>
+            <button class="dd-share-btn" onclick="jpaToolShareEmail()" title="Share via Email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </button>
+            <button class="dd-share-btn" onclick="jpaToolCopyLink()" title="Copy link" id="jpaToolCopyBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOADING SCREEN -->
+      <div id="jpaLoadingScreen" style="display:none;">
+        <div class="decode-loading">
+          <p class="decode-loading-text">JAWS IS READING BETWEEN THE LINES...</p>
+          <div class="dd-loading-dots">
+            <div class="dd-loading-dot"></div>
+            <div class="dd-loading-dot"></div>
+            <div class="dd-loading-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTPUT SCREEN -->
+      <div id="jpaOutputScreen" style="display:none;">
+
+        <div class="jpa-section">
+          <p class="decode-section-label">RED FLAGS</p>
+          <div class="jpa-section-content" id="jpaRedFlags"></div>
+        </div>
+
+        <div class="jpa-section">
+          <p class="decode-section-label">WHAT THEY REALLY WANT</p>
+          <div class="jpa-section-content" id="jpaWhatTheyWant"></div>
+        </div>
+
+        <div class="jpa-section">
+          <p class="decode-section-label">REQUIREMENTS REALITY CHECK</p>
+          <div class="jpa-section-content" id="jpaRequirementsCheck"></div>
+        </div>
+
+        <div class="jpa-section">
+          <p class="decode-section-label">THE HIDDEN SUBTEXT</p>
+          <div class="jpa-section-content" id="jpaHiddenSubtext"></div>
+        </div>
+
+        <p class="decode-section-label">THE VERDICT</p>
+        <div class="decode-verdict">
+          <p class="decode-verdict-text" id="jpaVerdict"></p>
+        </div>
+
+        <div class="decode-share-row">
+          <span class="decode-share-label">SHARE</span>
+          <button class="dd-share-btn" onclick="jpaShareX()" title="Share on X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </button>
+          <button class="dd-share-btn" onclick="jpaShareLinkedIn()" title="Share on LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </button>
+          <button class="dd-share-btn" onclick="jpaShareReddit()" title="Share on Reddit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          </button>
+          <button class="dd-share-btn" onclick="jpaShareWhatsApp()" title="Share on WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+          <button class="dd-share-btn" onclick="jpaShareEmail()" title="Share via Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </button>
+          <button class="dd-share-btn" onclick="jpaShareCard()" title="Share as image">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          </button>
+        </div>
+
+        <button class="decode-copy-btn" id="jpaCopyBtn">COPY ANALYSIS</button>
+
+        <div class="quiz-rating" id="jpaRating">
+          <p class="quiz-rating-label">Rate this tool</p>
+          <div class="quiz-rating-btns">
+            <button class="quiz-rating-btn" id="jpaUpBtn" onclick="jpaVote('up')">
+              <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
+              <span class="quiz-rating-count" id="jpaUpCount">&mdash;</span>
+            </button>
+            <button class="quiz-rating-btn" id="jpaDownBtn" onclick="jpaVote('down')">
+              <svg class="quiz-rating-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
+              <span class="quiz-rating-count" id="jpaDownCount">&mdash;</span>
+            </button>
+          </div>
+          <p class="quiz-rating-thankyou" id="jpaThanks" style="display:none;">Thanks for the feedback.</p>
+        </div>
+
+        <button class="decode-again-btn" id="jpaAgainBtn">ANALYSE ANOTHER &rarr;</button>
+
+        <p class="decode-disclaimer">This analysis is generated by AI and is intended for informational purposes only.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── SHARE CARD (off-screen) ─── -->
+  <div id="jpaShareCard">
+    <div class="jpa-card-header">
+      <div class="jpa-card-brand">THE <span>JAWS</span> ADVANTAGE</div>
+    </div>
+    <div>
+      <p class="jpa-card-eyebrow" id="jpaCardEyebrow">JAWS MODE</p>
+      <p class="jpa-card-title">JOB POSTING ANALYSER</p>
+      <p class="jpa-card-verdict" id="jpaCardVerdict"></p>
+    </div>
+    <p class="jpa-card-footer">www.jawsadvantage.com</p>
+  </div>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+  </footer>
+
+  <!-- ─── COOKIE CONSENT ─── -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-inner">
+      <div class="cookie-main">
+        <p class="cookie-text">We use cookies and local storage to make this site work and to understand how it's used. No ads. No selling your data.</p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
+          <button class="cookie-btn cookie-essential" id="cookieEssential">Essentials Only</button>
+        </div>
+      </div>
+      <button class="cookie-details-toggle" id="cookieDetailsToggle">Show details &#9662;</button>
+      <div class="cookie-details" id="cookieDetails">
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
+            <li><strong>Daily chat question limit</strong> — saved locally so the chatbot tracks your daily usage</li>
+            <li><strong>Article ratings</strong> — saved locally so the site remembers if you've already rated an article</li>
+            <li><strong>Chat session history</strong> — stored temporarily in your browser only, never on our servers</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
+          <ul class="cookie-detail-list">
+            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
+            <li><strong>Quiz score events</strong> — your score tier sent to Google Analytics anonymously. Exact score not stored by us.</li>
+            <li><strong>Article rating counts</strong> — aggregate vote counts stored on our servers with no personal information attached.</li>
+          </ul>
+        </div>
+        <div class="cookie-detail-section">
+          <h4 class="cookie-detail-heading">We Don't</h4>
+          <ul class="cookie-detail-list">
+            <li>Sell your data</li>
+            <li>Use advertising cookies</li>
+            <li>Collect your name, email, or any personally identifiable information</li>
+            <li>Track you across other websites</li>
+            <li>Store your chat conversations on our servers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+    var currentAnalyseMode = 'jaws';
+    var jpaInput = document.getElementById('jpaInput');
+    var jpaBtn = document.getElementById('jpaBtn');
+    var jpaCharCount = document.getElementById('jpaCharCount');
+    var jpaInputScreen = document.getElementById('jpaInputScreen');
+    var jpaLoadingScreen = document.getElementById('jpaLoadingScreen');
+    var jpaOutputScreen = document.getElementById('jpaOutputScreen');
+    var JPA_OFFSETS = { up: 1800, down: 220 };
+    var currentJpaResult = null;
+
+    function formatCount(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return String(n);
+    }
+
+    function setAnalyseMode(mode) {
+      currentAnalyseMode = mode;
+      document.getElementById('modeBtnJaws').classList.toggle('active', mode === 'jaws');
+      document.getElementById('modeBtnChum').classList.toggle('active', mode === 'chum');
+      var warning = document.getElementById('analyseModeWarning');
+      if (warning) warning.style.display = mode === 'chum' ? 'block' : 'none';
+    }
+
+    jpaInput.addEventListener('input', function() {
+      var len = jpaInput.value.length;
+      jpaCharCount.textContent = len + ' / 4000';
+      jpaCharCount.classList.toggle('at-limit', len >= 4000);
+      jpaBtn.disabled = len < 100;
+    });
+
+    jpaBtn.addEventListener('click', function() {
+      var text = jpaInput.value.trim();
+      if (text.length < 100) return;
+
+      jpaInputScreen.style.display = 'none';
+      jpaLoadingScreen.style.display = 'block';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'job_posting_analyse', text: text, mode: currentAnalyseMode })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        jpaLoadingScreen.style.display = 'none';
+        if (data.error || !data.verdict) {
+          showJpaError();
+          return;
+        }
+        currentJpaResult = data;
+        renderJpaOutput(data);
+      })
+      .catch(function() {
+        jpaLoadingScreen.style.display = 'none';
+        showJpaError();
+      });
+    });
+
+    function renderJpaOutput(data) {
+      // Red Flags — render as list
+      var redFlagsEl = document.getElementById('jpaRedFlags');
+      redFlagsEl.innerHTML = '';
+      var flags = data.redFlags || [];
+      if (flags.length) {
+        var ul = document.createElement('ul');
+        flags.forEach(function(flag) {
+          var li = document.createElement('li');
+          li.textContent = flag;
+          ul.appendChild(li);
+        });
+        redFlagsEl.appendChild(ul);
+      }
+
+      // Paragraphs
+      document.getElementById('jpaWhatTheyWant').textContent = data.whatTheyWant || '';
+      document.getElementById('jpaRequirementsCheck').textContent = data.requirementsCheck || '';
+      document.getElementById('jpaHiddenSubtext').textContent = data.hiddenSubtext || '';
+      document.getElementById('jpaVerdict').textContent = data.verdict || '';
+
+      jpaOutputScreen.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      jpaLoadVotes();
+    }
+
+    function showJpaError() {
+      jpaInputScreen.style.display = 'block';
+      alert('JAWS couldn\'t analyse this one. Try pasting a different section or the full posting.');
+    }
+
+    document.getElementById('jpaCopyBtn').addEventListener('click', function() {
+      if (!currentJpaResult) return;
+      var flags = (currentJpaResult.redFlags || []).map(function(f) { return '• ' + f; }).join('\n');
+      var full = 'JOB POSTING ANALYSIS\n\nRED FLAGS:\n' + flags +
+        '\n\nWHAT THEY REALLY WANT:\n' + (currentJpaResult.whatTheyWant || '') +
+        '\n\nREQUIREMENTS REALITY CHECK:\n' + (currentJpaResult.requirementsCheck || '') +
+        '\n\nTHE HIDDEN SUBTEXT:\n' + (currentJpaResult.hiddenSubtext || '') +
+        '\n\nTHE VERDICT:\n' + (currentJpaResult.verdict || '');
+      navigator.clipboard.writeText(full).then(function() {
+        var btn = document.getElementById('jpaCopyBtn');
+        btn.textContent = 'COPIED';
+        setTimeout(function() { btn.textContent = 'COPY ANALYSIS'; }, 2000);
+      }).catch(function() {});
+    });
+
+    document.getElementById('jpaAgainBtn').addEventListener('click', function() {
+      jpaOutputScreen.style.display = 'none';
+      jpaInput.value = '';
+      jpaCharCount.textContent = '0 / 4000';
+      jpaBtn.disabled = true;
+      currentJpaResult = null;
+      jpaInputScreen.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function jpaLoadVotes() {
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_quiz_votes', quizId: 'job-posting-analyser' })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('jpaUpCount').textContent = formatCount((data.up || 0) + JPA_OFFSETS.up);
+        document.getElementById('jpaDownCount').textContent = formatCount((data.down || 0) + JPA_OFFSETS.down);
+      })
+      .catch(function() {
+        document.getElementById('jpaUpCount').textContent = formatCount(JPA_OFFSETS.up);
+        document.getElementById('jpaDownCount').textContent = formatCount(JPA_OFFSETS.down);
+      });
+    }
+
+    function jpaVote(direction) {
+      var key = 'jawsToolVote_job-posting-analyser';
+      if (localStorage.getItem(key)) return;
+      localStorage.setItem(key, direction);
+
+      var upBtn = document.getElementById('jpaUpBtn');
+      var downBtn = document.getElementById('jpaDownBtn');
+      var thanks = document.getElementById('jpaThanks');
+
+      if (direction === 'up') {
+        upBtn.classList.add('voted', 'voted-up');
+        downBtn.classList.add('voted');
+      } else {
+        downBtn.classList.add('voted', 'voted-down');
+        upBtn.classList.add('voted');
+      }
+      if (thanks) thanks.style.display = 'block';
+
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'vote_quiz', quizId: 'job-posting-analyser', direction: direction })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('jpaUpCount').textContent = formatCount((data.up || 0) + JPA_OFFSETS.up);
+        document.getElementById('jpaDownCount').textContent = formatCount((data.down || 0) + JPA_OFFSETS.down);
+      })
+      .catch(function() {});
+    }
+
+    // ─── OUTPUT SHARE FUNCTIONS ───
+    function jpaShareX() {
+      var shareMsg = currentAnalyseMode === 'chum'
+        ? 'I ran a job posting through JAWS in CHUM MODE. The verdict is savage. www.jawsadvantage.com/job-posting-analyser.html'
+        : 'I analysed a job posting with JAWS. The verdict is brutal. www.jawsadvantage.com/job-posting-analyser.html';
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareMsg), '_blank');
+    }
+
+    function jpaShareLinkedIn() {
+      var url = encodeURIComponent('https://www.jawsadvantage.com/job-posting-analyser.html');
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+
+    function jpaShareReddit() {
+      var url = encodeURIComponent('https://www.jawsadvantage.com/job-posting-analyser.html');
+      var title = encodeURIComponent('JAWS Job Posting Analyser — paste any job description and find out what it actually means');
+      window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+    }
+
+    function jpaShareWhatsApp() {
+      var shareMsg = currentAnalyseMode === 'chum'
+        ? 'I ran a job posting through JAWS in CHUM MODE. The verdict is savage. www.jawsadvantage.com/job-posting-analyser.html'
+        : 'I analysed a job posting with JAWS. The verdict is brutal. www.jawsadvantage.com/job-posting-analyser.html';
+      window.open('https://wa.me/?text=' + encodeURIComponent(shareMsg), '_blank');
+    }
+
+    function jpaShareEmail() {
+      var subject = encodeURIComponent('You need to see this — JAWS Job Posting Analyser');
+      var shareMsg = currentAnalyseMode === 'chum'
+        ? 'I ran a job posting through JAWS in CHUM MODE. The verdict is savage. www.jawsadvantage.com/job-posting-analyser.html'
+        : 'I analysed a job posting with JAWS. The verdict is brutal. www.jawsadvantage.com/job-posting-analyser.html';
+      window.location.href = 'mailto:?subject=' + subject + '&body=' + encodeURIComponent(shareMsg);
+    }
+
+    function jpaShareCard() {
+      if (!currentJpaResult) return;
+      var verdictText = (currentJpaResult.verdict || '');
+      var truncated = verdictText.length > 250 ? verdictText.substring(0, 250) + '...' : verdictText;
+      document.getElementById('jpaCardEyebrow').textContent = currentAnalyseMode === 'chum' ? 'CHUM MODE' : 'JAWS MODE';
+      document.getElementById('jpaCardVerdict').textContent = truncated;
+      var card = document.getElementById('jpaShareCard');
+      html2canvas(card, { backgroundColor: '#0a0a0a', scale: 2, useCORS: true, logging: false })
+        .then(function(canvas) {
+          canvas.toBlob(function(blob) {
+            if (!blob) return;
+            var file = new File([blob], 'jaws-analysis.png', { type: 'image/png' });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              navigator.share({ files: [file], title: 'JAWS Job Posting Analysis' }).catch(function() {});
+            } else {
+              var url = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = url;
+              a.download = 'jaws-analysis.png';
+              a.click();
+              setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+            }
+          }, 'image/png');
+        })
+        .catch(function() {});
+    }
+
+    // ─── TOOL SHARE FUNCTIONS (input screen) ───
+    var JPA_TOOL_URL = 'https://www.jawsadvantage.com/job-posting-analyser.html';
+    var JPA_TOOL_MSG = 'This tool analyses job postings and tells you what they actually mean — red flags, requirements reality check, and whether it\'s worth applying.';
+
+    function jpaToolShareX() {
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(JPA_TOOL_MSG + ' ' + JPA_TOOL_URL), '_blank');
+    }
+
+    function jpaToolShareLinkedIn() {
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(JPA_TOOL_URL), '_blank');
+    }
+
+    function jpaToolShareWhatsApp() {
+      window.open('https://wa.me/?text=' + encodeURIComponent(JPA_TOOL_MSG + ' ' + JPA_TOOL_URL), '_blank');
+    }
+
+    function jpaToolShareEmail() {
+      var subject = encodeURIComponent('You need to try this — JAWS Job Posting Analyser');
+      var body = encodeURIComponent(JPA_TOOL_MSG + '\n\n' + JPA_TOOL_URL);
+      window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    }
+
+    function jpaToolCopyLink() {
+      navigator.clipboard.writeText(JPA_TOOL_URL).then(function() {
+        var btn = document.getElementById('jpaToolCopyBtn');
+        var original = btn.innerHTML;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+        setTimeout(function() { btn.innerHTML = original; }, 2000);
+      }).catch(function() {});
+    }
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    (function () {
+      var navEl = document.querySelector('nav');
+      window.addEventListener('scroll', function () {
+        navEl.style.borderBottomColor = window.scrollY > 20
+          ? (document.body.classList.contains('light-mode') ? 'rgba(10, 10, 10, 0.2)' : 'rgba(245, 243, 239, 0.12)')
+          : '';
+      }, { passive: true });
+    })();
+
+    // ─── COOKIE CONSENT ───
+    (function () {
+      var GA_ID = 'G-5RC382BRZF';
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('cookieConsent');
+
+      function disableGA() { window['ga-disable-' + GA_ID] = true; }
+
+      function hideBanner() {
+        banner.classList.remove('visible');
+        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+      }
+
+      if (consent) {
+        banner.classList.add('hidden');
+        if (consent === 'essential') disableGA();
+        return;
+      }
+
+      setTimeout(function () { banner.classList.add('visible'); }, 800);
+
+      document.getElementById('cookieAccept').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'all');
+        hideBanner();
+      });
+
+      document.getElementById('cookieEssential').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'essential');
+        disableGA();
+        hideBanner();
+      });
+
+      var toggle = document.getElementById('cookieDetailsToggle');
+      var details = document.getElementById('cookieDetails');
+      toggle.addEventListener('click', function () {
+        var open = details.classList.toggle('is-open');
+        toggle.textContent = open ? 'Hide details \u25b4' : 'Show details \u25be';
+      });
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function () {
+      var btn = document.getElementById('themeToggle');
+      var MOON_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN_SVG  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+      function applyTheme(dark) {
+        if (dark) {
+          document.body.classList.remove('light-mode');
+          btn.innerHTML = MOON_SVG;
+          btn.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.add('light-mode');
+          btn.innerHTML = SUN_SVG;
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+        }
+      }
+      var saved = localStorage.getItem('jaws_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(saved ? (saved === 'dark') : (prefersDark !== false));
+      btn.addEventListener('click', function () {
+        var nowDark = !document.body.classList.contains('light-mode');
+        localStorage.setItem('jaws_theme', nowDark ? 'light' : 'dark');
+        applyTheme(!nowDark);
+      });
+    })();
+
+    // ─── HAMBURGER MENU ───
+    (function () {
+      var hamburger = document.getElementById('navHamburger');
+      var menu = document.getElementById('navMobileMenu');
+      if (!hamburger || !menu) return;
+      hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('is-open');
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
+      });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
