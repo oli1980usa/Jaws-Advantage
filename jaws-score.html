@@ -535,6 +535,51 @@
       padding: 8px; transition: color 0.2s;
     }
     .result-retake-btn:hover { color: var(--red); }
+    .results-bottom-nav {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .results-nav-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 0;
+    }
+    .results-nav-btn--primary {
+      background: transparent;
+      border: 1px solid var(--off-white, #f5f3ef);
+      color: var(--off-white, #f5f3ef);
+    }
+    .results-nav-btn--primary:hover {
+      background: rgba(245,243,239,0.1);
+    }
+    .results-nav-btn--secondary {
+      background: transparent;
+      border: 1px solid rgba(245,243,239,0.3);
+      color: var(--off-white-dim);
+    }
+    .results-nav-btn--secondary:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    body.light-mode .results-nav-btn--primary {
+      border-color: #0a0a0a;
+      color: #0a0a0a;
+    }
+    body.light-mode .results-nav-btn--primary:hover {
+      background: rgba(10,10,10,0.08);
+    }
+    body.light-mode .results-nav-btn--secondary {
+      border-color: rgba(10,10,10,0.3);
+      color: rgba(10,10,10,0.6);
+    }
 
     /* ─── CONTACT BAR ─── */
     .contact-bar {
@@ -1544,9 +1589,9 @@
         <a href="playbook.html" class="result-cta-primary">Read the Playbook</a>
         <button class="result-cta-outline" id="fromResultsDeepDiveBtn">Take the Full 30-Question Test</button>
       </div>
-      <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
-        <button class="result-retake-btn" id="resultRetakeBtn">↺ Retake the Test</button>
-        <button class="result-retake-btn" onclick="sqGoToMenu()">← All Quizzes</button>
+      <div class="results-bottom-nav">
+        <button class="results-nav-btn results-nav-btn--secondary" id="resultRetakeBtn">↺ Retake the Test</button>
+        <button class="results-nav-btn results-nav-btn--primary" onclick="sqGoToMenu()">← All Quizzes</button>
       </div>
     </div>
   </section>
@@ -1719,11 +1764,9 @@
         <p class="quiz-rating-thankyou" id="ddRateThanks">Thanks for the feedback.</p>
       </div>
       <button class="sq-download-card-btn" onclick="ddDownloadCard()">&#8659; DOWNLOAD RESULT CARD</button>
-      <div style="text-align:center; margin-top: 16px;">
-        <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
-          <button class="result-retake-btn" id="ddRetakeBtn">↺ Retake the Deep Dive</button>
-          <button class="result-retake-btn" onclick="ddGoToMenu()">← All Quizzes</button>
-        </div>
+      <div class="results-bottom-nav">
+        <button class="results-nav-btn results-nav-btn--secondary" id="ddRetakeBtn">↺ Retake the Deep Dive</button>
+        <button class="results-nav-btn results-nav-btn--primary" onclick="ddGoToMenu()">← All Quizzes</button>
       </div>
     </div>
   </section>

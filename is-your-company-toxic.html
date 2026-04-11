@@ -407,6 +407,51 @@
       padding: 8px; transition: color 0.2s; opacity: 0.5;
     }
     .result-retake-btn:hover { color: var(--red); opacity: 1; }
+    .results-bottom-nav {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .results-nav-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 0;
+    }
+    .results-nav-btn--primary {
+      background: transparent;
+      border: 1px solid var(--off-white, #f5f3ef);
+      color: var(--off-white, #f5f3ef);
+    }
+    .results-nav-btn--primary:hover {
+      background: rgba(245,243,239,0.1);
+    }
+    .results-nav-btn--secondary {
+      background: transparent;
+      border: 1px solid rgba(245,243,239,0.3);
+      color: var(--off-white-dim);
+    }
+    .results-nav-btn--secondary:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    body.light-mode .results-nav-btn--primary {
+      border-color: #0a0a0a;
+      color: #0a0a0a;
+    }
+    body.light-mode .results-nav-btn--primary:hover {
+      background: rgba(10,10,10,0.08);
+    }
+    body.light-mode .results-nav-btn--secondary {
+      border-color: rgba(10,10,10,0.3);
+      color: rgba(10,10,10,0.6);
+    }
     .ict-discuss-btn {
       display: block;
       width: 100%;
@@ -736,11 +781,9 @@
       </div>
       <button class="sq-download-card-btn" onclick="ictDownloadCard()">&#8659; DOWNLOAD RESULT CARD</button>
       <button class="ict-discuss-btn" onclick="ictDiscussWithJaws()">DISCUSS MY COMPANY WITH JAWS &rarr;</button>
-      <div class="result-bottom">
-        <div style="display:flex; gap:24px; justify-content:center; align-items:center; margin-top:16px; flex-wrap:wrap;">
-          <button class="result-retake-btn" onclick="ictRetake()">&#8634; Retake the Quiz</button>
-          <button class="result-retake-btn" onclick="ictGoToMenu()">&#8592; All Quizzes</button>
-        </div>
+      <div class="results-bottom-nav">
+        <button class="results-nav-btn results-nav-btn--secondary" onclick="ictRetake()">↺ Retake the Quiz</button>
+        <button class="results-nav-btn results-nav-btn--primary" onclick="ictGoToMenu()">← All Quizzes</button>
       </div>
     </div>
   </section>
