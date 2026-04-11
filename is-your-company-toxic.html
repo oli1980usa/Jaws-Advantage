@@ -585,19 +585,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       background: transparent;
       border: none;
       cursor: pointer;
-      padding: 8px 16px;
+      padding: 6px 12px;
       transition: transform 0.15s ease;
     }
     .quiz-rating-btn:hover { transform: scale(1.1); }
     .quiz-rating-btn.voted { opacity: 1; }
     .quiz-rating-btn:not(.voted) { opacity: 0.6; }
     .quiz-rating-icon {
-      width: 32px;
-      height: 32px;
+      width: 20px;
+      height: 20px;
       color: var(--off-white-dim);
       transition: color 0.2s ease;
     }
@@ -605,7 +605,7 @@
     .quiz-rating-btn.voted-down .quiz-rating-icon { color: rgba(245,243,239,0.4); }
     .quiz-rating-count {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 14px;
       color: var(--off-white);
       letter-spacing: 1px;
     }
@@ -1310,6 +1310,11 @@
 
     var QUIZ_VOTE_KEY_PREFIX = 'jawsQuizVote_';
 
+    function formatQuizCount(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return String(n);
+    }
+
     function quizLoadVotes(quizId, upId, downId) {
       fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
         method: 'POST',
@@ -1321,15 +1326,15 @@
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = document.getElementById(upId);
         var downEl = document.getElementById(downId);
-        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
-        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount((data.up || 0) + offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount((data.down || 0) + offsets.down);
       })
       .catch(function() {
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = document.getElementById(upId);
         var downEl = document.getElementById(downId);
-        if (upEl) upEl.textContent = offsets.up.toLocaleString();
-        if (downEl) downEl.textContent = offsets.down.toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount(offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount(offsets.down);
       });
     }
 
@@ -1364,8 +1369,8 @@
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = container.querySelector('[id$="RateUpCount"]');
         var downEl = container.querySelector('[id$="RateDownCount"]');
-        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
-        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount((data.up || 0) + offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount((data.down || 0) + offsets.down);
       })
       .catch(function() {});
     }

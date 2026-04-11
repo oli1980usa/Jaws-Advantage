@@ -367,19 +367,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       background: transparent;
       border: none;
       cursor: pointer;
-      padding: 8px 16px;
+      padding: 6px 12px;
       transition: transform 0.15s ease;
     }
     .quiz-rating-btn:hover { transform: scale(1.1); }
     .quiz-rating-btn.voted { opacity: 1; }
     .quiz-rating-btn:not(.voted) { opacity: 0.6; }
     .quiz-rating-icon {
-      width: 32px;
-      height: 32px;
+      width: 20px;
+      height: 20px;
       color: var(--off-white-dim);
       transition: color 0.2s ease;
     }
@@ -387,7 +387,7 @@
     .quiz-rating-btn.voted-down .quiz-rating-icon { color: rgba(245,243,239,0.4); }
     .quiz-rating-count {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 14px;
       color: var(--off-white);
       letter-spacing: 1px;
     }
@@ -655,9 +655,24 @@
     }
     .sq-menu-card-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 8px;
       margin-bottom: 16px;
+    }
+    .sq-menu-card-time {
+      margin-left: 0;
+    }
+    .sq-card-votes {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--off-white-dim);
+      font-family: 'DM Sans', sans-serif;
+      margin-left: auto;
+    }
+    .sq-card-votes svg {
+      opacity: 0.5;
     }
     .sq-menu-card-tag {
       font-size: 10px;
@@ -1400,7 +1415,7 @@
 
           <div class="sq-menu-card" id="sqCardBoss">
             <div class="sq-menu-card-top">
-              <span class="sq-menu-card-tag">FUN</span>
+              <span class="sq-menu-card-tag">QUICK</span>
               <span class="sq-menu-card-time">~5 mins</span>
             </div>
             <h2 class="sq-menu-card-title">RATE YOUR BOSS</h2>
@@ -1414,7 +1429,7 @@
 
           <div class="sq-menu-card" id="sqCardToxic">
             <div class="sq-menu-card-top">
-              <span class="sq-menu-card-tag">New</span>
+              <span class="sq-menu-card-tag">QUICK</span>
               <span class="sq-menu-card-time">~5 mins</span>
             </div>
             <h2 class="sq-menu-card-title">IS YOUR COMPANY TOXIC?</h2>
@@ -4090,6 +4105,53 @@
 
     var QUIZ_VOTE_KEY_PREFIX = 'jawsQuizVote_';
 
+    function sqLoadCardVotes() {
+      var cards = [
+        { quizId: 'jaws-score',    cardId: 'sqCardShort' },
+        { quizId: 'deep-dive',     cardId: 'sqCardDeep' },
+        { quizId: 'rate-boss',     cardId: 'sqCardBoss' },
+        { quizId: 'company-toxic', cardId: 'sqCardToxic' }
+      ];
+      cards.forEach(function(item) {
+        var card = document.getElementById(item.cardId);
+        if (!card) return;
+        var offsets = QUIZ_OFFSETS[item.quizId] || { up: 0, down: 0 };
+        fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'get_quiz_votes', quizId: item.quizId })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var up   = formatQuizCount((data.up   || 0) + offsets.up);
+          var down = formatQuizCount((data.down || 0) + offsets.down);
+          injectCardVotes(card, up, down);
+        })
+        .catch(function() {
+          injectCardVotes(card, formatQuizCount(offsets.up), formatQuizCount(offsets.down));
+        });
+      });
+    }
+
+    function injectCardVotes(card, up, down) {
+      var existing = card.querySelector('.sq-card-votes');
+      if (existing) existing.remove();
+      var el = document.createElement('div');
+      el.className = 'sq-card-votes';
+      el.innerHTML =
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>' +
+        '<span>' + up + '</span>' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>' +
+        '<span>' + down + '</span>';
+      var top = card.querySelector('.sq-menu-card-top');
+      if (top) top.appendChild(el);
+    }
+
+    function formatQuizCount(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return String(n);
+    }
+
     function quizLoadVotes(quizId, upId, downId) {
       fetch('https://jaws-advantage-api.oliverfrancis.workers.dev', {
         method: 'POST',
@@ -4101,15 +4163,15 @@
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = document.getElementById(upId);
         var downEl = document.getElementById(downId);
-        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
-        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount((data.up || 0) + offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount((data.down || 0) + offsets.down);
       })
       .catch(function() {
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = document.getElementById(upId);
         var downEl = document.getElementById(downId);
-        if (upEl) upEl.textContent = offsets.up.toLocaleString();
-        if (downEl) downEl.textContent = offsets.down.toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount(offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount(offsets.down);
       });
     }
 
@@ -4144,11 +4206,13 @@
         var offsets = QUIZ_OFFSETS[quizId] || { up: 0, down: 0 };
         var upEl = container.querySelector('[id$="RateUpCount"]');
         var downEl = container.querySelector('[id$="RateDownCount"]');
-        if (upEl) upEl.textContent = ((data.up || 0) + offsets.up).toLocaleString();
-        if (downEl) downEl.textContent = ((data.down || 0) + offsets.down).toLocaleString();
+        if (upEl) upEl.textContent = formatQuizCount((data.up || 0) + offsets.up);
+        if (downEl) downEl.textContent = formatQuizCount((data.down || 0) + offsets.down);
       })
       .catch(function() {});
     }
+
+    sqLoadCardVotes();
 
     function generateShareCard(config) {
       var card = document.getElementById('jawsShareCard');
