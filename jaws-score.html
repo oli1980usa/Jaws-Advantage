@@ -537,6 +537,35 @@
     .sq-menu-card--coming {
       opacity: 0.6;
     }
+    .sq-menu-card--premium {
+      border-color: rgba(74, 127, 165, 0.4);
+      background: rgba(74, 127, 165, 0.05);
+    }
+    .sq-menu-card-tag--premium {
+      background: rgba(74, 127, 165, 0.2);
+      color: #4a7fa5;
+      border: 1px solid #4a7fa5;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      font-weight: 600;
+    }
+    .score-btn-outline--premium {
+      border-color: #4a7fa5;
+      color: #4a7fa5;
+    }
+    .score-btn-outline--premium:hover {
+      background: #4a7fa5;
+      color: #fff;
+    }
+    .sq-menu-card--premium .sq-menu-card-title {
+      color: #4a7fa5;
+    }
+    body.light-mode .sq-menu-card--premium {
+      border-color: rgba(74, 127, 165, 0.5);
+      background: rgba(74, 127, 165, 0.06);
+    }
     .sq-menu-card-top {
       display: flex;
       justify-content: space-between;
@@ -1214,9 +1243,9 @@
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
-          <div class="sq-menu-card">
+          <div class="sq-menu-card sq-menu-card--premium">
             <div class="sq-menu-card-top">
-              <span class="sq-menu-card-tag sq-menu-card-tag--serious">Serious</span>
+              <span class="sq-menu-card-tag sq-menu-card-tag--premium">Serious</span>
               <span class="sq-menu-card-time">~30 mins</span>
             </div>
             <h2 class="sq-menu-card-title">THE DEEP DIVE</h2>
@@ -1227,7 +1256,7 @@
               <li>5 Forced Choice</li>
               <li>5 Open Text</li>
             </ul>
-            <button class="score-btn-outline sq-menu-btn" id="startDeepDiveBtn">I'M SERIOUS →</button>
+            <button class="score-btn-outline score-btn-outline--premium sq-menu-btn" id="startDeepDiveBtn">I'M SERIOUS →</button>
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
