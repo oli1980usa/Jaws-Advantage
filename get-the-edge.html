@@ -1449,11 +1449,7 @@
           messagesEl.innerHTML = '';
 
           // Show a friendly user bubble in the UI
-          var userBubble = document.createElement('div');
-          userBubble.className = 'message user-message';
-          userBubble.textContent = 'I just completed a JAWS assessment. Based on my results, what should I focus on first?';
-          messagesEl.appendChild(userBubble);
-          scrollToBottom();
+          appendUserMessage('I just completed a JAWS assessment. Based on my results, what should I focus on first?');
 
           // Add the full context to history then get JAWS to respond
           // Do NOT call sendMessage — call the API directly so we don't double-push
