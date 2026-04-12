@@ -214,6 +214,39 @@
       font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
       color: var(--off-white-dim); opacity: 0.35; text-transform: uppercase;
     }
+    .quiz-legal-notice {
+      margin: 0 auto 20px auto;
+      max-width: 520px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.02);
+    }
+    .quiz-legal-notice-text {
+      font-size: 12px;
+      color: rgba(245,243,239,0.5);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      letter-spacing: 0.2px;
+    }
+    .quiz-legal-notice-text a {
+      color: rgba(245,243,239,0.6);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .quiz-legal-notice-text a:hover {
+      color: rgba(245,243,239,0.9);
+    }
+    body.light-mode .quiz-legal-notice {
+      border-color: rgba(0,0,0,0.1);
+      background: rgba(0,0,0,0.02);
+    }
+    body.light-mode .quiz-legal-notice-text {
+      color: rgba(10,10,10,0.5);
+    }
+    body.light-mode .quiz-legal-notice-text a {
+      color: rgba(10,10,10,0.6);
+    }
 
     /* ─── QUIZ SECTION ─── */
     .quiz-section {
@@ -855,6 +888,9 @@
     <h1 class="ryb-headline fade-in">Rate Your Boss</h1>
     <p class="ryb-subheading fade-in">10 questions. No HR filter. Find out if you're working for an Apex Predator or Dead Bait — and what to do about it.</p>
     <span class="ryb-pill fade-in">10 Multiple Choice</span>
+    <div class="quiz-legal-notice">
+      <p class="quiz-legal-notice-text">By starting this quiz you confirm that you will not include the names of individuals, colleagues, employers, or organisations in any open-ended responses. All responses are processed by AI. Results are for your personal use only and may not be shared, reproduced, or distributed in any form. The JAWS Advantage accepts no liability for decisions made based on quiz results. Your use of this quiz is subject to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
+    </div>
     <button class="ryb-start-btn fade-in" id="startBtn">RATE MY BOSS →</button>
     <p class="ryb-trust fade-in">No email. No phone number. No catch.</p>
   </section>
