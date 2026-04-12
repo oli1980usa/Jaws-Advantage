@@ -14,6 +14,9 @@
   }
 
   function declineSiteConsent() {
+    localStorage.setItem('jawsConsentDeclined', '1');
+    var modal = document.getElementById('consentModal');
+    if (modal) modal.style.display = 'none';
     window.location.href = 'index.html';
   }
   </script>
@@ -1595,30 +1598,28 @@
     // ─── CONSENT MODAL ───
     (function() {
       var agreed = localStorage.getItem('jawsConsentV1');
-      if (!agreed) {
-        var modal = document.getElementById('consentModal');
-        if (modal) modal.style.display = 'flex';
-        var scrollEl = document.getElementById('consentScroll');
-        var checks = document.getElementById('consentChecks');
-        var indicator = document.getElementById('consentScrollIndicator');
-        var scrolled = false;
-
-        function checkScrollPosition() {
-          if (scrolled) return;
-          var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
-                         scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
-          if (atBottom) {
-            scrolled = true;
-            if (checks) checks.style.display = 'flex';
-            if (indicator) indicator.style.display = 'none';
-          }
+      var declined = localStorage.getItem('jawsConsentDeclined');
+      if (agreed) return;
+      if (declined) return;
+      var modal = document.getElementById('consentModal');
+      if (modal) modal.style.display = 'flex';
+      var scrollEl = document.getElementById('consentScroll');
+      var checks = document.getElementById('consentChecks');
+      var indicator = document.getElementById('consentScrollIndicator');
+      var scrolled = false;
+      function checkScrollPosition() {
+        if (scrolled) return;
+        var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
+                       scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+        if (atBottom) {
+          scrolled = true;
+          if (checks) checks.style.display = 'flex';
+          if (indicator) indicator.style.display = 'none';
         }
-
-        if (scrollEl) {
-          scrollEl.addEventListener('scroll', checkScrollPosition);
-          // Check immediately in case content fits without scrolling
-          setTimeout(checkScrollPosition, 300);
-        }
+      }
+      if (scrollEl) {
+        scrollEl.addEventListener('scroll', checkScrollPosition);
+        setTimeout(checkScrollPosition, 300);
       }
     })();
 
@@ -1637,6 +1638,7 @@
         version: '1.0',
         checks: { terms: true, satirical: true, age: true, cookies: true }
       }));
+      localStorage.removeItem('jawsConsentDeclined');
       var modal = document.getElementById('consentModal');
       if (modal) modal.style.display = 'none';
     }
