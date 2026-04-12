@@ -4124,7 +4124,6 @@
     (function() {
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
-          sessionStorage.removeItem('jawsShowMenu');
           return;
         }
         var saved = sessionStorage.getItem('jawsDeepDive');
@@ -4175,6 +4174,12 @@
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
           sessionStorage.removeItem('jawsShowMenu');
+          heroSection.style.display = 'block';
+          var rSec = document.getElementById('resultsSection');
+          if (rSec) { rSec.style.display = 'none'; rSec.style.opacity = '0'; }
+          var ddSec = document.getElementById('deepDiveResultsSection');
+          if (ddSec) ddSec.style.display = 'none';
+          window.scrollTo(0, 0);
           return;
         }
         var saved = sessionStorage.getItem('jawsShortQuiz');
