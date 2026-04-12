@@ -458,67 +458,6 @@
       letter-spacing: 1px;
       display: none;
     }
-    /* ─── SHARE BAR ─── */
-    .result-share-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-    .share-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--off-white-dim);
-      opacity: 0.5; margin-right: 6px;
-    }
-    .share-btn {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: #181818; border: 1px solid var(--red);
-      color: var(--red); font-size: 15px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, box-shadow 0.2s;
-      flex-shrink: 0; padding: 0;
-    }
-    .share-btn:hover {
-      background: rgba(165, 42, 26, 0.15);
-      box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
-    }
-    body.light-mode .share-btn {
-      background: transparent;
-      color: #0a0a0a;
-      border-color: #0a0a0a;
-    }
-    body.light-mode .share-btn:hover {
-      background: rgba(10,10,10,0.08);
-      box-shadow: none;
-    }
-    /* ─── DD SHARE ROW ─── */
-    .dd-share-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; flex-wrap: wrap; margin-bottom: 36px;
-    }
-    .dd-share-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--off-white-dim);
-      opacity: 0.5; margin-right: 6px;
-    }
-    .dd-share-btn {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: #181818; border: 1px solid var(--red);
-      color: var(--red); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, box-shadow 0.2s;
-      flex-shrink: 0; padding: 0;
-    }
-    .dd-share-btn:hover {
-      background: rgba(165,42,26,0.15);
-      box-shadow: 0 0 10px rgba(165,42,26,0.6), 0 0 22px rgba(165,42,26,0.3);
-    }
-    body.light-mode .dd-share-btn {
-      background: transparent; color: #0a0a0a; border-color: #0a0a0a;
-    }
-    body.light-mode .dd-share-btn:hover { background: rgba(10,10,10,0.08); box-shadow: none; }
     /* ─── IMPROVE SECTION ─── */
     .result-improve {
       margin-top: 0;
@@ -1886,17 +1825,6 @@
       <p class="result-desc" id="resultDesc"></p>
       <div class="sq-pillar-bars" id="sqPillarBars"></div>
       <p class="sq-pillar-nudge" id="sqPillarNudge" style="display:none;">Snapshot from 10 questions. <button class="sq-pillar-nudge-link" id="sqDeepDiveNudgeBtn">Take the 30-question deep dive</button> for your full pillar breakdown.</p>
-      <div class="result-share-bar">
-        <span class="share-label">Share</span>
-        <button class="share-btn" id="shareTwitter" aria-label="Share on X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
-        <button class="share-btn" id="shareLinkedIn" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
-        <button class="share-btn" id="shareReddit" aria-label="Share on Reddit"><i class="fa-brands fa-reddit-alien"></i></button>
-        <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
-        <button class="share-btn" id="shareCopy" aria-label="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
-        <button class="share-btn" id="sqShareCard" onclick="sqShareCard()" title="Share result card">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-        </button>
-      </div>
       <div class="quiz-rating" id="sqRating">
         <p class="quiz-rating-label">Rate this quiz</p>
         <div class="quiz-rating-btns">
@@ -2059,30 +1987,6 @@
       <div class="dd-reading" id="ddReading">
         <p class="dd-reading-heading">Recommended Reading for Your Blindspot</p>
         <div id="ddReadingLinks"></div>
-      </div>
-      <div class="dd-share-row">
-        <span class="dd-share-label">SHARE</span>
-        <button class="dd-share-btn" onclick="ddShareX()" title="Share on X">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </button>
-        <button class="dd-share-btn" onclick="ddShareLinkedIn()" title="Share on LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </button>
-        <button class="dd-share-btn" onclick="ddShareReddit()" title="Share on Reddit">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
-        </button>
-        <button class="dd-share-btn" onclick="ddShareWhatsApp()" title="Share on WhatsApp">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </button>
-        <button class="dd-share-btn" onclick="ddShareEmail()" title="Share via Email">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </button>
-        <button class="dd-share-btn" onclick="ddShareCopy()" title="Copy link" id="ddCopyBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-        </button>
-        <button class="dd-share-btn" id="ddShareCardBtn" onclick="ddShareCard()" title="Share result card">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-        </button>
       </div>
       <div class="quiz-rating" id="ddRating">
         <p class="quiz-rating-label">Rate this quiz</p>
@@ -3187,50 +3091,6 @@
         ddMCSelect(idx, parseInt(ddOpts[idx].dataset.points, 10));
       }
     });
-    // ─── SHARE BUTTONS ───
-    (function () {
-      var PAGE_URL = 'https://jawsadvantage.com/jaws-score';
-
-      function getShareText() {
-        var score = window._jawsScore || 0;
-        var rating = window._jawsRating || '';
-        return 'I scored ' + score + '/100 on the JAWS Score. ' + rating + '. Are you Bait or an Apex Predator? Find out: ' + PAGE_URL;
-      }
-
-      var tw = document.getElementById('shareTwitter');
-      var li = document.getElementById('shareLinkedIn');
-      var rd = document.getElementById('shareReddit');
-      var wa = document.getElementById('shareWhatsApp');
-      var cp = document.getElementById('shareCopy');
-
-      if (tw) tw.addEventListener('click', function () {
-        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(getShareText()), '_blank');
-      });
-
-      if (li) li.addEventListener('click', function () {
-        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + encodeURIComponent(PAGE_URL), '_blank');
-      });
-
-      if (rd) rd.addEventListener('click', function () {
-        var score = window._jawsScore || 0;
-        var title = 'I scored ' + score + '/100 on the JAWS Score \u2014 are you Bait or an Apex Predator?';
-        window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(PAGE_URL) + '&title=' + encodeURIComponent(title), '_blank');
-      });
-
-      if (wa) wa.addEventListener('click', function () {
-        window.open('https://wa.me/?text=' + encodeURIComponent(getShareText()), '_blank');
-      });
-
-      if (cp) cp.addEventListener('click', function () {
-        navigator.clipboard.writeText(PAGE_URL).then(function () {
-          var icon = document.getElementById('copyIcon');
-          if (icon) {
-            icon.className = 'fa-solid fa-check';
-            setTimeout(function () { icon.className = 'fa-solid fa-link'; }, 2000);
-          }
-        });
-      });
-    })();
 
     // ─── ASK JAWS BUTTON ───
     document.getElementById('askJawsBtn').addEventListener('click', function () {
@@ -4242,46 +4102,6 @@
       });
     });
 
-    // ─── SHARE (DEEP DIVE) ───
-    var _DD_PAGE_URL = 'https://jawsadvantage.com/jaws-score.html';
-
-    function ddShareX() {
-      var txt = 'I scored ' + (window._ddScore||0) + '/100 on the JAWS Deep Dive \u2014 ' + (window._ddRating||'') + '. 30 questions. No hiding. Find out where you stand: ' + _DD_PAGE_URL;
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank');
-    }
-    function ddShareLinkedIn() {
-      window.open('https://www.linkedin.com/sharing/share-offsite?url=' + encodeURIComponent(_DD_PAGE_URL), '_blank');
-    }
-    function ddShareReddit() {
-      var score = window._ddScore || 0;
-      var rating = window._ddRating || '';
-      var txt = encodeURIComponent('I scored ' + score + '/100 on the JAWS Deep Dive \u2014 ' + rating + '. 30 questions. No hiding. Find out where you stand:');
-      var url = encodeURIComponent(_DD_PAGE_URL);
-      window.open('https://www.reddit.com/submit?url=' + url + '&title=' + txt, '_blank');
-    }
-    function ddShareWhatsApp() {
-      var score = window._ddScore || 0;
-      var rating = window._ddRating || '';
-      var txt = encodeURIComponent('I scored ' + score + '/100 on the JAWS Deep Dive \u2014 ' + rating + '. Find out where you stand: ' + _DD_PAGE_URL);
-      window.open('https://wa.me/?text=' + txt, '_blank');
-    }
-    function ddShareEmail() {
-      var score = window._ddScore || 0;
-      var rating = window._ddRating || '';
-      var subject = encodeURIComponent('I scored ' + score + '/100 on the JAWS Score');
-      var body = encodeURIComponent('I just completed the JAWS Deep Dive and scored ' + score + '/100 \u2014 ' + rating + '.\n\nFind out where you stand: ' + _DD_PAGE_URL);
-      window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-    }
-    function ddShareCopy() {
-      navigator.clipboard.writeText(_DD_PAGE_URL).then(function() {
-        var btn = document.getElementById('ddCopyBtn');
-        if (btn) {
-          var orig = btn.innerHTML;
-          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-          setTimeout(function() { btn.innerHTML = orig; }, 2000);
-        }
-      });
-    }
 
     // ─── SCROLL ANIMATIONS ───
     var fadeObserver = new IntersectionObserver(function (entries) {
@@ -4632,183 +4452,6 @@
 
     sqLoadCardVotes();
 
-    function generateShareCard(config) {
-      var card = document.getElementById('jawsShareCard');
-      document.getElementById('scCardEyebrow').textContent  = config.eyebrow  || 'YOUR RESULT';
-      document.getElementById('scCardScore').textContent    = config.score    || '0';
-      document.getElementById('scCardCategory').textContent = config.category || '';
-      document.getElementById('scCardTagline').textContent  = config.tagline  || '';
-      document.getElementById('scCardQuizName').textContent = config.quizName || 'THE JAWS ADVANTAGE';
-
-      var pillarsEl    = document.getElementById('scCardPillars');
-      var pillarBarsEl = document.getElementById('scCardPillarBars');
-      if (config.pillars && config.pillars.length) {
-        pillarsEl.style.display = 'block';
-        pillarBarsEl.innerHTML = '';
-        config.pillars.forEach(function(p) {
-          var row = document.createElement('div');
-          row.style.cssText = 'margin-bottom:10px;';
-          row.innerHTML =
-            '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">' +
-              '<span style="font-size:10px;color:rgba(245,243,239,0.6);font-family:\'DM Sans\',sans-serif;letter-spacing:1px;">' + p.name.toUpperCase() + '</span>' +
-              '<span style="font-size:10px;color:#a52a1a;font-family:\'DM Sans\',sans-serif;">' + p.pct + '%</span>' +
-            '</div>' +
-            '<div style="height:3px;background:rgba(255,255,255,0.1);border-radius:0;">' +
-              '<div style="height:3px;width:' + p.pct + '%;background:#a52a1a;"></div>' +
-            '</div>';
-          pillarBarsEl.appendChild(row);
-        });
-      } else {
-        pillarsEl.style.display = 'none';
-      }
-
-      card.style.left = '-9999px';
-      card.style.display = 'flex';
-
-      setTimeout(function() {
-        html2canvas(card, {
-          width: 540,
-          height: 675,
-          scale: 2,
-          backgroundColor: '#0a0a0a',
-          useCORS: true,
-          logging: false
-        }).then(function(canvas) {
-          card.style.display = 'none';
-          var link = document.createElement('a');
-          link.download = 'jaws-score.png';
-          link.href = canvas.toDataURL('image/png');
-          link.click();
-        }).catch(function() {
-          card.style.display = 'none';
-          alert('Could not generate card. Try screenshotting your results instead.');
-        });
-      }, 100);
-    }
-
-    function shareResultCard(config, btnId) {
-      var btn = document.getElementById(btnId);
-      if (btn) btn.style.opacity = '0.5';
-
-      var card = document.getElementById('jawsShareCard');
-      card.style.left = '-9999px';
-      card.style.display = 'flex';
-
-      document.getElementById('scCardEyebrow').textContent  = config.eyebrow  || '';
-      document.getElementById('scCardScore').textContent    = config.score    || '0';
-      document.getElementById('scCardCategory').textContent = config.category || '';
-      document.getElementById('scCardTagline').textContent  = config.tagline  || '';
-      document.getElementById('scCardQuizName').textContent = config.quizName || '';
-
-      var pillarsEl    = document.getElementById('scCardPillars');
-      var pillarBarsEl = document.getElementById('scCardPillarBars');
-      if (config.pillars && config.pillars.length) {
-        pillarsEl.style.display = 'block';
-        pillarBarsEl.innerHTML = '';
-        config.pillars.forEach(function(p) {
-          var row = document.createElement('div');
-          row.style.cssText = 'margin-bottom:10px;';
-          row.innerHTML =
-            '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">' +
-              '<span style="font-size:10px;color:rgba(245,243,239,0.6);font-family:DM Sans,sans-serif;letter-spacing:1px;">' + p.name.toUpperCase() + '</span>' +
-              '<span style="font-size:10px;color:#a52a1a;font-family:DM Sans,sans-serif;">' + p.pct + '%</span>' +
-            '</div>' +
-            '<div style="height:3px;background:rgba(255,255,255,0.1);">' +
-              '<div style="height:3px;width:' + p.pct + '%;background:#a52a1a;"></div>' +
-            '</div>';
-          pillarBarsEl.appendChild(row);
-        });
-      } else {
-        pillarsEl.style.display = 'none';
-      }
-
-      setTimeout(function() {
-        html2canvas(card, {
-          width: 540, height: 675, scale: 2,
-          backgroundColor: '#0a0a0a', useCORS: true, logging: false
-        }).then(function(canvas) {
-          card.style.display = 'none';
-          if (btn) btn.style.opacity = '1';
-          canvas.toBlob(function(blob) {
-            if (!blob) { fallbackDownload(canvas, config.quizName); return; }
-            var file = new File([blob], 'jaws-result.png', { type: 'image/png' });
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-              navigator.share({
-                title: 'My JAWS Result — ' + config.category,
-                text: 'I scored ' + config.score + '/100 on The JAWS Advantage. Find out where you stand: jawsadvantage.com',
-                files: [file]
-              }).catch(function() { tryClipboard(blob, canvas, config.quizName); });
-              return;
-            }
-            tryClipboard(blob, canvas, config.quizName);
-          }, 'image/png');
-        }).catch(function() {
-          card.style.display = 'none';
-          if (btn) btn.style.opacity = '1';
-          showShareToast('Could not generate card. Try screenshotting instead.');
-        });
-      }, 100);
-    }
-
-    function tryClipboard(blob, canvas, quizName) {
-      if (navigator.clipboard && navigator.clipboard.write) {
-        navigator.clipboard.write([
-          new ClipboardItem({ 'image/png': blob })
-        ]).then(function() {
-          showShareToast('Result card copied to clipboard. Paste it anywhere.');
-        }).catch(function() { fallbackDownload(canvas, quizName); });
-      } else {
-        fallbackDownload(canvas, quizName);
-      }
-    }
-
-    function fallbackDownload(canvas, quizName) {
-      var link = document.createElement('a');
-      link.download = 'jaws-result.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      showShareToast('Result card downloaded.');
-    }
-
-    function showShareToast(msg) {
-      var existing = document.getElementById('shareToast');
-      if (existing) existing.remove();
-      var toast = document.createElement('div');
-      toast.id = 'shareToast';
-      toast.textContent = msg;
-      toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0a0a0a;border:1px solid rgba(255,255,255,0.2);color:#f5f3ef;font-family:DM Sans,sans-serif;font-size:13px;padding:12px 24px;z-index:9999;letter-spacing:0.5px;';
-      document.body.appendChild(toast);
-      setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
-    }
-
-    function sqShareCard() {
-      var rating = getRating(totalScore);
-      shareResultCard({
-        eyebrow:  'JAWS SCORE',
-        score:    totalScore,
-        category: rating.label,
-        tagline:  rating.desc,
-        quizName: 'THE JAWS SCORE',
-        pillars:  null
-      }, 'sqShareCard');
-    }
-
-    function ddShareCard() {
-      var pillarData = [];
-      DD_PILLAR_NAMES.forEach(function(name, i) {
-        var fill = document.getElementById('ddP' + i + 'Fill');
-        var pct  = fill ? parseInt(fill.style.width) || 0 : 0;
-        pillarData.push({ name: name, pct: pct });
-      });
-      shareResultCard({
-        eyebrow:  'JAWS DEEP DIVE',
-        score:    window._ddScore  || 0,
-        category: window._ddRating || '',
-        tagline:  getRating(window._ddScore || 0).desc,
-        quizName: 'THE DEEP DIVE',
-        pillars:  pillarData
-      }, 'ddShareCardBtn');
-    }
     // ─── CONSENT MODAL ───
     (function() {
       var agreed = localStorage.getItem('jawsConsentV1');
@@ -4854,19 +4497,6 @@
       if (modal) modal.style.display = 'none';
     }
   </script>
-
-  <!-- ─── SHARE CARD TEMPLATE ─── -->
-  <div id="jawsShareCard" style="position:fixed; left:-9999px; top:0; width:540px; height:675px; background:#0a0a0a; padding:48px; box-sizing:border-box; font-family:'Bebas Neue',sans-serif; display:none; flex-direction:column; justify-content:space-between;">
-
-    <div style="display:flex; align-items:center; gap:12px;">
-      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 70 C20 40 40 20 70 15 C80 13 90 12 92 18 C94 24 88 32 75 42 C55 58 50 75 55 88 C58 96 50 98 42 92 C25 80 15 78 10 70Z" fill="#a52a1a"/>
-      </svg>
-      <div>
-        <div style="color:#f5f3ef; font-size:14px; letter-spacing:3px;">THE JAWS ADVANTAGE</div>
-        <div style="color:#a52a1a; font-size:10px; letter-spacing:2px; font-family:'DM Sans',sans-serif;">CAREER INTELLIGENCE — UNFILTERED</div>
-      </div>
-    </div>
 
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px 0;">
       <div id="scCardEyebrow" style="color:#a52a1a; font-size:12px; letter-spacing:3px; margin-bottom:8px; font-family:'DM Sans',sans-serif;"></div>

@@ -921,58 +921,6 @@
       margin-bottom: 20px;
     }
 
-    /* ─── SHARE BAR ─── */
-    .article-share {
-      margin-top: 56px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .share-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--off-white-dim);
-      opacity: 0.5;
-      margin-right: 6px;
-    }
-
-    .share-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #181818;
-      border: 1px solid var(--red);
-      color: var(--red);
-      font-size: 15px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, box-shadow 0.2s;
-      flex-shrink: 0;
-      padding: 0;
-    }
-
-    .share-btn:hover {
-      background: rgba(165, 42, 26, 0.15);
-      box-shadow: 0 0 10px rgba(165, 42, 26, 0.6), 0 0 22px rgba(165, 42, 26, 0.3);
-    }
-    body.light-mode .share-btn {
-      background: transparent;
-      color: #0a0a0a;
-      border-color: #0a0a0a;
-    }
-    body.light-mode .share-btn:hover {
-      background: rgba(10,10,10,0.08);
-      box-shadow: none;
-    }
-
     /* ─── BACK TO TOP ─── */
     .back-to-top {
       position: fixed;
@@ -1205,16 +1153,6 @@
         </button>
       </div>
       <p class="article-rating-confirm" id="ratingConfirm"></p>
-    </div>
-
-    <div class="article-share">
-      <span class="share-label">Share</span>
-      <button class="share-btn" id="shareTwitter" aria-label="Share on X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
-      <button class="share-btn" id="shareLinkedIn" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
-      <button class="share-btn" id="shareReddit" aria-label="Share on Reddit"><i class="fa-brands fa-reddit-alien"></i></button>
-      <button class="share-btn" id="shareWhatsApp" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
-      <button class="share-btn" id="shareTikTok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></button>
-      <button class="share-btn" id="shareCopy" aria-label="Copy link"><i class="fa-solid fa-link" id="copyIcon"></i></button>
     </div>
   </main>
 
@@ -1539,49 +1477,6 @@
       });
     })();
 
-    // ─── SHARE BUTTONS ───
-    (function () {
-      var pageUrl = encodeURIComponent(window.location.href);
-      var pageTitle = encodeURIComponent(document.title);
-      var brand = encodeURIComponent(' — The JAWS Advantage');
-
-      var tw = document.getElementById('shareTwitter');
-      var li = document.getElementById('shareLinkedIn');
-      var rd = document.getElementById('shareReddit');
-      var wa = document.getElementById('shareWhatsApp');
-      var tt = document.getElementById('shareTikTok');
-      var cp = document.getElementById('shareCopy');
-
-      if (tw) tw.addEventListener('click', function () {
-        window.open('https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle + brand, '_blank');
-      });
-
-      if (li) li.addEventListener('click', function () {
-        window.open('https://www.linkedin.com/sharing/share-offsite?url=' + pageUrl, '_blank');
-      });
-
-      if (rd) rd.addEventListener('click', function () {
-        window.open('https://www.reddit.com/submit?url=' + pageUrl + '&title=' + pageTitle, '_blank');
-      });
-
-      if (wa) wa.addEventListener('click', function () {
-        window.open('https://wa.me/?text=' + pageTitle + brand + '%20' + pageUrl, '_blank');
-      });
-
-      if (tt) tt.addEventListener('click', function () {
-        window.open('https://www.tiktok.com/@JAWSadvantage', '_blank');
-      });
-
-      if (cp) cp.addEventListener('click', function () {
-        navigator.clipboard.writeText(window.location.href).then(function () {
-          var icon = document.getElementById('copyIcon');
-          if (icon) {
-            icon.className = 'fa-solid fa-check';
-            setTimeout(function () { icon.className = 'fa-solid fa-link'; }, 2000);
-          }
-        });
-      });
-    })();
   </script>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
