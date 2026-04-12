@@ -8,6 +8,57 @@
     if (localStorage.getItem('cookieConsent') === 'essential') {
       window['ga-disable-G-5RC382BRZF'] = true;
     }
+
+    var quizConsentCallback = null;
+
+    function showQuizConsent(callback) {
+      var agreed = sessionStorage.getItem('jawsQuizConsent');
+      if (agreed) {
+        callback();
+        return;
+      }
+
+      quizConsentCallback = callback;
+      var modal = document.getElementById('quizConsentModal');
+      if (modal) modal.style.display = 'flex';
+
+      var scrollEl = document.getElementById('quizConsentScroll');
+      var checks = document.getElementById('quizConsentChecks');
+      var indicator = document.getElementById('quizConsentIndicator');
+      var scrolled = false;
+
+      function checkScroll() {
+        if (scrolled) return;
+        var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
+                       scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+        if (atBottom) {
+          scrolled = true;
+          if (checks) checks.style.display = 'flex';
+          if (indicator) indicator.style.display = 'none';
+        }
+      }
+
+      if (scrollEl) {
+        scrollEl.addEventListener('scroll', checkScroll);
+        setTimeout(checkScroll, 300);
+      }
+    }
+
+    function validateQuizConsent() {
+      var c1 = document.getElementById('quizCheck1');
+      var c2 = document.getElementById('quizCheck2');
+      var c3 = document.getElementById('quizCheck3');
+      var c4 = document.getElementById('quizCheck4');
+      var btn = document.getElementById('quizConsentBtn');
+      if (btn) btn.disabled = !(c1.checked && c2.checked && c3.checked && c4.checked);
+    }
+
+    function acceptQuizConsent() {
+      sessionStorage.setItem('jawsQuizConsent', '1');
+      var modal = document.getElementById('quizConsentModal');
+      if (modal) modal.style.display = 'none';
+      if (quizConsentCallback) quizConsentCallback();
+    }
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1130,38 +1181,149 @@
       transition: opacity 0.2s ease;
     }
     .dd-skip-link:hover { opacity: 0.8; }
-    .quiz-legal-notice {
-      margin: 0 auto 20px auto;
-      max-width: 520px;
-      padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.02);
+    .quiz-consent-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.96);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
     }
-    .quiz-legal-notice-text {
-      font-size: 12px;
+    .quiz-consent-box {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.15);
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .quiz-consent-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .quiz-consent-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 8px;
+    }
+    .quiz-consent-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--off-white, #f5f3ef);
+      margin: 0 0 8px;
+      line-height: 1;
+    }
+    .quiz-consent-sub {
+      font-size: 13px;
       color: rgba(245,243,239,0.5);
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .quiz-consent-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 32px;
+      min-height: 0;
+    }
+    .quiz-consent-section {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .quiz-consent-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .quiz-consent-section-title {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 6px;
+    }
+    .quiz-consent-section-text {
+      font-size: 13px;
+      color: rgba(245,243,239,0.6);
       font-family: 'DM Sans', sans-serif;
       line-height: 1.7;
       margin: 0;
-      letter-spacing: 0.2px;
     }
-    .quiz-legal-notice-text a {
-      color: rgba(245,243,239,0.6);
+    .quiz-consent-section-text a {
+      color: rgba(245,243,239,0.8);
       text-decoration: underline;
-      text-underline-offset: 3px;
     }
-    .quiz-legal-notice-text a:hover {
-      color: rgba(245,243,239,0.9);
+    .quiz-consent-scroll-indicator {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 1px;
+      padding: 12px 0 0;
     }
-    body.light-mode .quiz-legal-notice {
-      border-color: rgba(0,0,0,0.1);
-      background: rgba(0,0,0,0.02);
+    .quiz-consent-checks {
+      padding: 20px 32px 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
     }
-    body.light-mode .quiz-legal-notice-text {
+    .quiz-consent-btn {
+      background: var(--red-accent, #a52a1a);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 4px;
+      width: 100%;
+    }
+    .quiz-consent-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .quiz-consent-btn:not(:disabled):hover { opacity: 0.85; }
+    .quiz-consent-footer {
+      font-size: 11px;
+      color: rgba(245,243,239,0.25);
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+    }
+    body.light-mode .quiz-consent-box {
+      background: #f5f3ef;
+      border-color: rgba(0,0,0,0.15);
+    }
+    body.light-mode .quiz-consent-heading {
+      color: #0a0a0a;
+    }
+    body.light-mode .quiz-consent-section-text {
+      color: rgba(10,10,10,0.6);
+    }
+    body.light-mode .quiz-consent-sub {
       color: rgba(10,10,10,0.5);
     }
-    body.light-mode .quiz-legal-notice-text a {
-      color: rgba(10,10,10,0.6);
+    body.light-mode .quiz-consent-footer {
+      color: rgba(10,10,10,0.25);
     }
     .dd-trust-line {
       margin-top: 14px;
@@ -1562,10 +1724,7 @@
               <li>5 Multiple Choice</li>
               <li>5 Forced Choice</li>
             </ul>
-            <div class="quiz-legal-notice">
-              <p class="quiz-legal-notice-text">By starting this quiz you confirm that you will not include the names of individuals, colleagues, employers, or organisations in any open-ended responses. All responses are processed by AI. Results are for your personal use only and may not be shared, reproduced, or distributed in any form. The JAWS Advantage accepts no liability for decisions made based on quiz results. Your use of this quiz is subject to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
-            </div>
-            <button class="score-btn-primary sq-menu-btn" id="startQuizBtn">TAKE THE TEST</button>
+<button class="score-btn-primary sq-menu-btn" id="startQuizBtn">TAKE THE TEST</button>
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
@@ -1582,10 +1741,7 @@
               <li>5 Forced Choice</li>
               <li>5 Open Text</li>
             </ul>
-            <div class="quiz-legal-notice">
-              <p class="quiz-legal-notice-text">By starting this quiz you confirm that you will not include the names of individuals, colleagues, employers, or organisations in any open-ended responses. All responses are processed by AI. Results are for your personal use only and may not be shared, reproduced, or distributed in any form. The JAWS Advantage accepts no liability for decisions made based on quiz results. Your use of this quiz is subject to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
-            </div>
-            <button class="score-btn-outline score-btn-outline--premium sq-menu-btn" id="startDeepDiveBtn">I'M SERIOUS →</button>
+<button class="score-btn-outline score-btn-outline--premium sq-menu-btn" id="startDeepDiveBtn">I'M SERIOUS →</button>
             <p class="dd-trust-line" style="margin-top:12px;">No email. No phone number. No catch.</p>
           </div>
 
@@ -2854,7 +3010,9 @@
     }
 
     // ─── EVENT LISTENERS ───
-    document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
+    document.getElementById('startQuizBtn').addEventListener('click', function() {
+      showQuizConsent(function() { startQuiz(); });
+    });
     document.getElementById('quizBackBtn').addEventListener('click', goBack);
     document.getElementById('resultRetakeBtn').addEventListener('click', retakeQuiz);
 
@@ -3964,7 +4122,9 @@
       });
     }
 
-    document.getElementById('startDeepDiveBtn').addEventListener('click', startDeepDive);
+    document.getElementById('startDeepDiveBtn').addEventListener('click', function() {
+      showQuizConsent(function() { startDeepDive(); });
+    });
     document.getElementById('fromResultsDeepDiveBtn').addEventListener('click', function() {
       fadeOut(resultsSection, function() {
         resultsSection.style.display = 'none';
@@ -4632,6 +4792,62 @@
       <div id="scCardQuizName" style="color:rgba(245,243,239,0.4); font-size:11px; letter-spacing:1px; font-family:'DM Sans',sans-serif;"></div>
     </div>
 
+  </div>
+
+  <div id="quizConsentModal" class="quiz-consent-overlay" style="display:none;">
+    <div class="quiz-consent-box">
+      <div class="quiz-consent-header">
+        <p class="quiz-consent-eyebrow">BEFORE YOU BEGIN</p>
+        <h2 class="quiz-consent-heading">PLEASE READ AND AGREE</h2>
+        <p class="quiz-consent-sub">You must scroll through and agree to the following before starting this quiz.</p>
+      </div>
+
+      <div class="quiz-consent-scroll" id="quizConsentScroll">
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">AI PROCESSING</p>
+          <p class="quiz-consent-section-text">Your responses to this quiz are processed by AI. By proceeding you acknowledge that AI-generated analysis may be inaccurate and should not be relied upon as professional advice.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">CONFIDENTIAL INFORMATION</p>
+          <p class="quiz-consent-section-text">You confirm that you will not include the names of individuals, colleagues, employers, or organisations in any open-ended responses. Do not share confidential, proprietary, or sensitive business information in your answers.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">PERSONAL USE ONLY</p>
+          <p class="quiz-consent-section-text">Results are for your personal use only. You may not share, reproduce, screenshot, or distribute quiz results or AI-generated feedback in any form. Sharing constitutes a violation of our Terms of Service.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">LIMITATION OF LIABILITY</p>
+          <p class="quiz-consent-section-text">The JAWS Advantage accepts no liability for decisions made based on quiz results or AI-generated content. Nothing on this site constitutes legal, financial, HR, or career advice. You are solely responsible for any actions taken based on this content.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">TERMS AND PRIVACY</p>
+          <p class="quiz-consent-section-text">Your use of this quiz is subject to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>. By continuing you confirm you have read and agree to both documents.</p>
+        </div>
+        <div class="quiz-consent-scroll-indicator" id="quizConsentIndicator">&#8595; Scroll to continue</div>
+      </div>
+
+      <div class="quiz-consent-checks" id="quizConsentChecks" style="display:none;">
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="quizCheck1" class="consent-checkbox" onchange="validateQuizConsent()">
+          <span>I will not include names of individuals, employers, or organisations in any responses</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="quizCheck2" class="consent-checkbox" onchange="validateQuizConsent()">
+          <span>I understand results are for my personal use only and may not be shared in any form</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="quizCheck3" class="consent-checkbox" onchange="validateQuizConsent()">
+          <span>I accept that AI-generated content may be inaccurate and does not constitute professional advice</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="quizCheck4" class="consent-checkbox" onchange="validateQuizConsent()">
+          <span>I have read and agree to the Terms of Service and Privacy Policy</span>
+        </label>
+
+        <button class="quiz-consent-btn" id="quizConsentBtn" disabled onclick="acceptQuizConsent()">I AGREE — START THE QUIZ</button>
+        <p class="quiz-consent-footer">By clicking above you confirm you have read and agreed to all terms above.</p>
+      </div>
+    </div>
   </div>
 
 </body>
