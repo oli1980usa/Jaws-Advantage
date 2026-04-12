@@ -2875,7 +2875,6 @@
     }
 
     function showResults() {
-      sqSaveState('results');
       fadeOut(quizSection, function() {
         quizSection.style.display = 'none';
         contactBar.style.display = '';
@@ -2892,6 +2891,7 @@
         document.getElementById('resultDesc').textContent  = rating.desc;
         window._jawsScore  = total;
         window._jawsRating = rating.label;
+        sqSaveState('results');
 
         // Render pillar bars
         var pillarData = sqComputePillarData();
@@ -4293,7 +4293,7 @@
           if (!card) return;
 
           var score = (state.finalScore !== null && state.finalScore !== undefined) ? state.finalScore : null;
-          var label = state.finalCategory || (score !== null && item.ratingFn ? item.ratingFn(score).label : null);
+          var label = state.finalCategory || state.finalRating || (score !== null && item.ratingFn ? item.ratingFn(score).label : null);
           if (score === null) return;
 
           // Remove any existing saved result line and view button
