@@ -106,7 +106,7 @@ export default {
         if (!answers.length) {
           return new Response(JSON.stringify({ ok: false, error: 'no answers' }), { status: 400, headers: corsHeaders(origin) });
         }
-        const evalPrompt = 'You are evaluating career intelligence quiz responses. For each answer, score 0-10 based on: specificity (real example vs vague?), self-awareness (honest reflection?), quality of action (did they do something smart?). Return ONLY a valid JSON array with no markdown, one object per answer: [{"score": X, "feedback": "one sentence of specific feedback"}, ...]. Evaluate ' + answers.length + ' answers now.';
+        const evalPrompt = 'You are evaluating career intelligence quiz responses. For each answer, score 0-10 based on: specificity (real example vs vague?), self-awareness (honest reflection?), quality of action (did they do something smart?). Return ONLY a valid JSON array with no markdown, one object per answer: [{"score": X, "feedback": "one sentence of specific feedback"}, ...]. Evaluate ' + answers.length + ' answers now.\n\nCRITICAL RULES:\n- If any company name, employer name, brand name, or individual\'s name appears in an answer, DO NOT repeat it in your feedback — refer to it only as "this company", "your employer", or "this person"\n- Never include any identifying information in your feedback\n- Keep all feedback general and applicable — no specific names ever';
         const userContent = answers.map(function(a, i) {
           return 'Q' + (i+1) + ': ' + a.question + '\nAnswer: ' + a.answer;
         }).join('\n\n');
