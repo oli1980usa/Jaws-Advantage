@@ -845,24 +845,59 @@
       margin: 0;
       line-height: 1.6;
     }
-    body.light-mode .consent-modal {
-      background: #f5f3ef;
-      border-color: rgba(0,0,0,0.15);
+    /* ─── CONSENT MODALS ALWAYS DARK ─── */
+    .consent-modal-overlay,
+    .quiz-consent-overlay {
+      background: rgba(0,0,0,0.96) !important;
     }
-    body.light-mode .consent-modal-heading {
-      color: #0a0a0a;
+    .consent-modal,
+    .quiz-consent-box {
+      background: #0a0a0a !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
     }
-    body.light-mode .consent-modal-section-text {
-      color: rgba(10,10,10,0.6);
+    .consent-modal-eyebrow,
+    .quiz-consent-eyebrow {
+      color: #a52a1a !important;
     }
-    body.light-mode .consent-modal-sub {
-      color: rgba(10,10,10,0.5);
+    .consent-modal-heading,
+    .quiz-consent-heading {
+      color: #f5f3ef !important;
     }
-    body.light-mode .consent-checkbox-label {
-      color: rgba(10,10,10,0.7);
+    .consent-modal-sub,
+    .quiz-consent-sub {
+      color: rgba(245,243,239,0.5) !important;
     }
-    body.light-mode .consent-modal-footer-note {
-      color: rgba(10,10,10,0.25);
+    .consent-modal-section-title,
+    .quiz-consent-section-title {
+      color: #a52a1a !important;
+    }
+    .consent-modal-section-text,
+    .quiz-consent-section-text {
+      color: rgba(245,243,239,0.6) !important;
+    }
+    .consent-modal-section-text a,
+    .quiz-consent-section-text a {
+      color: #a52a1a !important;
+      text-decoration: underline !important;
+    }
+    .consent-checkbox-label {
+      color: rgba(245,243,239,0.7) !important;
+    }
+    .consent-checkbox-label a {
+      color: #a52a1a !important;
+      text-decoration: underline !important;
+    }
+    .consent-modal-footer-note,
+    .quiz-consent-footer {
+      color: rgba(245,243,239,0.25) !important;
+    }
+    .consent-modal-scroll-indicator,
+    .quiz-consent-scroll-indicator {
+      color: rgba(245,243,239,0.3) !important;
+    }
+    .consent-modal-section,
+    .quiz-consent-section {
+      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
     }
     .quiz-consent-decline-btn {
       background: transparent;
@@ -881,14 +916,6 @@
     .quiz-consent-decline-btn:hover {
       border-color: rgba(255,255,255,0.3);
       color: rgba(245,243,239,0.7);
-    }
-    body.light-mode .quiz-consent-decline-btn {
-      border-color: rgba(0,0,0,0.15);
-      color: rgba(10,10,10,0.4);
-    }
-    body.light-mode .quiz-consent-decline-btn:hover {
-      border-color: rgba(0,0,0,0.3);
-      color: rgba(10,10,10,0.7);
     }
 
     .quiz-consent-overlay {
