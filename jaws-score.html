@@ -246,14 +246,14 @@
 
     .sq-reset-wrap {
       text-align: center;
-      padding: 24px 0 8px;
+      padding: 40px 0 24px;
     }
     .sq-reset-btn {
       background: transparent;
       border: none;
-      color: rgba(245,243,239,0.2);
+      color: rgba(245,243,239,0.35);
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.5px;
       cursor: pointer;
       text-decoration: underline;
@@ -262,13 +262,13 @@
       transition: color 0.2s ease;
     }
     .sq-reset-btn:hover {
-      color: rgba(245,243,239,0.5);
+      color: rgba(245,243,239,0.65);
     }
     body.light-mode .sq-reset-btn {
-      color: rgba(10,10,10,0.2);
+      color: rgba(10,10,10,0.35);
     }
     body.light-mode .sq-reset-btn:hover {
-      color: rgba(10,10,10,0.5);
+      color: rgba(10,10,10,0.65);
     }
 
     /* ─── QUIZ SECTION ─── */
@@ -1787,11 +1787,12 @@
 
     </div>
 
-    <div class="sq-reset-wrap">
-      <button class="sq-reset-btn" onclick="resetAllQuizzes()">Reset all quiz history</button>
-    </div>
 
   </section>
+
+  <div class="sq-reset-wrap">
+    <button class="sq-reset-btn" onclick="resetAllQuizzes()">Reset all quiz history</button>
+  </div>
 
   <!-- ─── QUIZ ─── -->
   <section id="quizSection" class="quiz-section" style="display:none; opacity:0;">
