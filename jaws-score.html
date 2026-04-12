@@ -244,6 +244,33 @@
     }
     .score-btn-outline:hover { border-color: var(--red); color: var(--off-white); }
 
+    .sq-reset-wrap {
+      text-align: center;
+      padding: 24px 0 8px;
+    }
+    .sq-reset-btn {
+      background: transparent;
+      border: none;
+      color: rgba(245,243,239,0.2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .sq-reset-btn:hover {
+      color: rgba(245,243,239,0.5);
+    }
+    body.light-mode .sq-reset-btn {
+      color: rgba(10,10,10,0.2);
+    }
+    body.light-mode .sq-reset-btn:hover {
+      color: rgba(10,10,10,0.5);
+    }
+
     /* ─── QUIZ SECTION ─── */
     .quiz-section {
       min-height: calc(100vh - 64px);
@@ -1758,6 +1785,10 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="sq-reset-wrap">
+      <button class="sq-reset-btn" onclick="resetAllQuizzes()">Reset all quiz history</button>
     </div>
 
   </section>
@@ -4501,6 +4532,19 @@
       localStorage.removeItem('jawsConsentDeclined');
       var modal = document.getElementById('consentModal');
       if (modal) modal.style.display = 'none';
+    }
+
+    function resetAllQuizzes() {
+      if (!confirm('This will clear all your saved quiz results. Are you sure?')) return;
+      sessionStorage.removeItem('jawsShortQuiz');
+      sessionStorage.removeItem('jawsDeepDive');
+      sessionStorage.removeItem('jawsBossQuiz');
+      sessionStorage.removeItem('jawsToxicQuiz');
+      sessionStorage.removeItem('jawsQuizConsent');
+      // Remove VIEW MY RESULTS buttons and last result lines from cards
+      document.querySelectorAll('.sq-saved-result, .sq-view-results-btn').forEach(function(el) {
+        el.remove();
+      });
     }
   </script>
 
