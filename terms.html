@@ -741,16 +741,22 @@
         var checks = document.getElementById('consentChecks');
         var indicator = document.getElementById('consentScrollIndicator');
         var scrolled = false;
+
+        function checkScrollPosition() {
+          if (scrolled) return;
+          var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
+                         scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+          if (atBottom) {
+            scrolled = true;
+            if (checks) checks.style.display = 'flex';
+            if (indicator) indicator.style.display = 'none';
+          }
+        }
+
         if (scrollEl) {
-          scrollEl.addEventListener('scroll', function() {
-            if (scrolled) return;
-            var atBottom = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
-            if (atBottom) {
-              scrolled = true;
-              if (checks) checks.style.display = 'flex';
-              if (indicator) indicator.style.display = 'none';
-            }
-          });
+          scrollEl.addEventListener('scroll', checkScrollPosition);
+          // Check immediately in case content fits without scrolling
+          setTimeout(checkScrollPosition, 300);
         }
       }
     })();
