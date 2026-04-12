@@ -1826,9 +1826,27 @@
 
     // ─── INIT ───
     (function init() {
-      initJawsConsent(function() {
-        runInit();
-      });
+      var tier1Agreed = localStorage.getItem('jawsConsentV1');
+      var tier1Declined = localStorage.getItem('jawsConsentDeclined');
+
+      if (tier1Agreed || tier1Declined) {
+        // Tier 1 already handled — run chat consent immediately
+        initJawsConsent(function() { runInit(); });
+      } else {
+        // Wait for Tier 1 to complete before showing chat consent
+        var tier1Check = setInterval(function() {
+          var agreed = localStorage.getItem('jawsConsentV1');
+          var declined = localStorage.getItem('jawsConsentDeclined');
+          if (agreed || declined) {
+            clearInterval(tier1Check);
+            if (agreed) {
+              initJawsConsent(function() { runInit(); });
+            } else {
+              window.location.href = 'index.html';
+            }
+          }
+        }, 500);
+      }
     })();
 
     function runInit() {
