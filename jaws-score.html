@@ -1216,6 +1216,16 @@
       font-size: 11px; color: var(--off-white-dim); opacity: 0.5;
       margin-top: 6px; display: block; letter-spacing: 0.04em;
     }
+    .dd-open-disclaimer {
+      font-size: 12px;
+      color: rgba(245,243,239,0.4);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      margin: 0 0 10px;
+      padding: 8px 12px;
+      border-left: 2px solid rgba(165,42,26,0.4);
+      letter-spacing: 0.2px;
+    }
     .dd-loading-section {
       min-height: 100vh; display: flex; align-items: center;
       justify-content: center; flex-direction: column; gap: 28px;
@@ -1751,6 +1761,7 @@
         <button class="quiz-back-btn hidden" id="ddOpenBackBtn">&#8592; Back</button>
         <span class="quiz-number" id="ddOpenNumber">01</span>
         <h2 class="quiz-question" id="ddOpenQuestion"></h2>
+        <p class="dd-open-disclaimer">Do not include company names, colleague names, or confidential information in your answer. Your response is processed by AI — keep it general.</p>
         <textarea class="dd-textarea" id="ddOpenTextarea" placeholder="Write your answer here..." rows="6"></textarea>
         <span class="dd-textarea-hint" id="ddOpenHint">Minimum 50 characters</span>
         <button class="open-next-btn" id="ddOpenNextBtn" disabled>Next &rarr;</button>
