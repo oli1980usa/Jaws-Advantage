@@ -4121,6 +4121,7 @@
 
     // ─── DEEP DIVE SESSION RESTORE ───
     (function() {
+      if (sessionStorage.getItem('jawsShowMenu') === 'true') return;
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
           sessionStorage.removeItem('jawsShowMenu');
@@ -4171,6 +4172,7 @@
 
     // ─── SHORT QUIZ SESSION RESTORE ───
     (function() {
+      if (sessionStorage.getItem('jawsShowMenu') === 'true') return;
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
           sessionStorage.removeItem('jawsShowMenu');
@@ -4451,6 +4453,20 @@
     }
 
     sqLoadCardVotes();
+
+    // Check show menu flag FIRST before anything else
+    (function() {
+      if (sessionStorage.getItem('jawsShowMenu') === 'true') {
+        sessionStorage.removeItem('jawsShowMenu');
+        // Show hero section, hide everything else
+        var hero = document.getElementById('heroSection');
+        if (hero) { hero.style.display = 'flex'; }
+        var results = document.getElementById('resultsSection');
+        if (results) { results.style.display = 'none'; opacity: 0; }
+        var ddResults = document.getElementById('deepDiveResultsSection');
+        if (ddResults) { ddResults.style.display = 'none'; }
+      }
+    })();
 
     // ─── CONSENT MODAL ───
     (function() {
