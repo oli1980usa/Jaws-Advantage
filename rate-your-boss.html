@@ -59,6 +59,14 @@
       if (modal) modal.style.display = 'none';
       if (quizConsentCallback) quizConsentCallback();
     }
+
+  function declineQuizConsent() {
+    window.location.href = 'index.html';
+  }
+
+  function declineSiteConsent() {
+    window.location.href = 'index.html';
+  }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
@@ -927,6 +935,32 @@
     body.light-mode .consent-modal-footer-note {
       color: rgba(10,10,10,0.25);
     }
+    .quiz-consent-decline-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(245,243,239,0.4);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 32px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .quiz-consent-decline-btn:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(245,243,239,0.7);
+    }
+    body.light-mode .quiz-consent-decline-btn {
+      border-color: rgba(0,0,0,0.15);
+      color: rgba(10,10,10,0.4);
+    }
+    body.light-mode .quiz-consent-decline-btn:hover {
+      border-color: rgba(0,0,0,0.3);
+      color: rgba(10,10,10,0.7);
+    }
 
     /* ─── ANIMATIONS ─── */
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -1197,7 +1231,8 @@
           <span>I accept cookies for analytics purposes</span>
         </label>
 
-        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — ENTER THE SITE</button>
+        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — CONTINUE</button>
+        <button class="quiz-consent-decline-btn" onclick="declineSiteConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
         <p class="consent-modal-footer-note">By clicking above you confirm you have read and agreed to all terms above.</p>
       </div>
     </div>
@@ -2131,7 +2166,8 @@
           <span>I have read and agree to the Terms of Service and Privacy Policy</span>
         </label>
 
-        <button class="quiz-consent-btn" id="quizConsentBtn" disabled onclick="acceptQuizConsent()">I AGREE — START THE QUIZ</button>
+        <button class="quiz-consent-btn" id="quizConsentBtn" disabled onclick="acceptQuizConsent()">I AGREE — CONTINUE</button>
+        <button class="quiz-consent-decline-btn" onclick="declineQuizConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
         <p class="quiz-consent-footer">By clicking above you confirm you have read and agreed to all terms above.</p>
       </div>
     </div>
