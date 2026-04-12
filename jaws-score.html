@@ -45,7 +45,7 @@
     }
 
     function validateQuizConsent() {
-      var allChecked = ['quizCheck1','quizCheck2','quizCheck3','quizCheck4','quizCheck5']
+      var allChecked = ['quizCheck1','quizCheck2','quizCheck3','quizCheck4','quizCheck5','quizCheck6']
         .every(function(id) { var el = document.getElementById(id); return el && el.checked; });
       var btn = document.getElementById('quizConsentBtn');
       if (btn) btn.disabled = !allChecked;
@@ -4573,6 +4573,10 @@
         <label class="consent-checkbox-label">
           <input type="checkbox" id="quizCheck5" class="consent-checkbox" onchange="validateQuizConsent()">
           <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and accept full responsibility for my use of this quiz</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="quizCheck6" class="consent-checkbox" onchange="validateQuizConsent()">
+          <span>I confirm I am 18 years of age or older</span>
         </label>
 
         <button class="quiz-consent-btn" id="quizConsentBtn" disabled onclick="acceptQuizConsent()">I AGREE — START THE QUIZ</button>
