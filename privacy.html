@@ -200,12 +200,6 @@
     body.light-mode nav { background: rgba(245, 243, 239, 0.92); }
     body.light-mode .nav-cta { color: var(--red) !important; }
     body.light-mode .nav-cta:hover { color: #f5f3ef !important; }
-    body.light-mode .cookie-banner { background: var(--black-2); border-top-color: var(--border); }
-    body.light-mode .cookie-essential { border-color: rgba(10,10,10,0.25); }
-    body.light-mode .cookie-essential:hover { border-color: rgba(10,10,10,0.6); color: var(--off-white); }
-    body.light-mode .cookie-tag-always { color: rgba(10,10,10,0.4); border-color: rgba(10,10,10,0.2); }
-    body.light-mode .cookie-detail-list li::before { color: rgba(10,10,10,0.25); }
-    body.light-mode .cookie-details { border-top-color: rgba(10,10,10,0.1); }
     body.light-mode ::-webkit-scrollbar-thumb { background: var(--red); }
     body.light-mode .nav-logo img { mix-blend-mode: multiply; }
     body.light-mode .footer-copy { color: rgba(10, 10, 10, 0.4); }
@@ -376,85 +370,175 @@
     .footer-legal a:hover { color: rgba(245,243,239,0.7); }
     .footer-legal span { opacity: 0.4; }
 
-    /* ─── COOKIE CONSENT ─── */
-    .cookie-banner {
+    /* ─── CONSENT MODAL ─── */
+    .consent-modal-overlay {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 300;
-      background: #111111;
-      border-top: 1px solid rgba(245, 243, 239, 0.1);
-      transform: translateY(100%);
-      transition: transform 0.4s ease;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    .cookie-banner.visible { transform: translateY(0); }
-    .cookie-banner.hidden { display: none; }
-    .cookie-inner { padding: 18px 48px 20px; }
-    .cookie-main {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 99999;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
     }
-    .cookie-text {
-      font-size: 12px; font-weight: 300;
-      color: var(--off-white-dim);
-      line-height: 1.5; flex: 1; min-width: 200px;
+    .consent-modal {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.15);
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    .cookie-text a { color: inherit; text-decoration: underline; opacity: 0.7; }
-    .cookie-text a:hover { opacity: 1; }
-    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
-    .cookie-btn {
+    .consent-modal-header {
+      padding: 32px 32px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .consent-modal-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 8px 18px;
-      border-radius: 0; cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      margin: 0 0 8px;
     }
-    .cookie-accept { background: var(--red); color: #ffffff; border: 1px solid var(--red); }
-    .cookie-accept:hover { background: var(--red-dark); border-color: var(--red-dark); }
-    .cookie-essential {
-      background: transparent; color: var(--off-white-dim);
-      border: 1px solid rgba(245, 243, 239, 0.2);
-    }
-    .cookie-essential:hover { border-color: var(--off-white-dim); color: var(--off-white); }
-    .cookie-details-toggle {
-      background: none; border: none; color: var(--off-white-dim);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase; cursor: pointer;
-      padding: 6px 0 0; opacity: 0.6;
-      transition: opacity 0.2s, color 0.2s; display: block;
-    }
-    .cookie-details-toggle:hover { opacity: 1; color: var(--off-white); }
-    .cookie-details {
-      display: none; margin-top: 16px; padding-top: 16px;
-      border-top: 1px solid rgba(245, 243, 239, 0.08);
-      columns: 3; column-gap: 40px;
-    }
-    .cookie-details.is-open { display: block; }
-    .cookie-detail-section { break-inside: avoid; margin-bottom: 16px; }
-    .cookie-detail-heading {
+    .consent-modal-heading {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px; letter-spacing: 0.1em; color: var(--red);
-      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: #f5f3ef;
+      margin: 0 0 8px;
+      line-height: 1;
     }
-    .cookie-tag {
+    .consent-modal-sub {
+      font-size: 13px;
+      color: rgba(245,243,239,0.5);
       font-family: 'DM Sans', sans-serif;
-      font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 1px 5px; vertical-align: middle;
+      margin: 0;
+      line-height: 1.6;
     }
-    .cookie-tag-always { color: rgba(245,243,239,0.4); border: 1px solid rgba(245,243,239,0.2); }
-    .cookie-tag-consent { color: rgba(165,42,26,0.8); border: 1px solid rgba(165,42,26,0.35); }
-    .cookie-detail-list { list-style: none; padding: 0; margin: 0; }
-    .cookie-detail-list li {
-      font-size: 11px; font-weight: 300; color: var(--off-white-dim);
-      line-height: 1.5; padding: 3px 0 3px 14px; position: relative;
+    .consent-modal-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      position: relative;
     }
-    .cookie-detail-list li::before { content: '–'; position: absolute; left: 0; color: rgba(245,243,239,0.25); }
-    .cookie-detail-list strong { color: var(--off-white); font-weight: 500; }
+    .consent-modal-section {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .consent-modal-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .consent-modal-section-title {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 8px;
+    }
+    .consent-modal-section-text {
+      font-size: 13px;
+      color: rgba(245,243,239,0.6);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .consent-modal-section-text a {
+      color: rgba(245,243,239,0.8);
+      text-decoration: underline;
+    }
+    .consent-modal-scroll-indicator {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 1px;
+      padding: 16px 0 0;
+      transition: opacity 0.3s ease;
+    }
+    .consent-modal-checks {
+      padding: 24px 32px 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .consent-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      color: rgba(245,243,239,0.7);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+    .consent-checkbox-label a {
+      color: rgba(245,243,239,0.9);
+      text-decoration: underline;
+    }
+    .consent-checkbox {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: #a52a1a;
+      cursor: pointer;
+    }
+    .consent-modal-btn {
+      background: #a52a1a;
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 8px;
+      width: 100%;
+    }
+    .consent-modal-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .consent-modal-btn:not(:disabled):hover { opacity: 0.85; }
+    .consent-modal-footer-note {
+      font-size: 11px;
+      color: rgba(245,243,239,0.25);
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+    }
+    body.light-mode .consent-modal {
+      background: #f5f3ef;
+      border-color: rgba(0,0,0,0.15);
+    }
+    body.light-mode .consent-modal-heading {
+      color: #0a0a0a;
+    }
+    body.light-mode .consent-modal-section-text {
+      color: rgba(10,10,10,0.6);
+    }
+    body.light-mode .consent-modal-sub {
+      color: rgba(10,10,10,0.5);
+    }
+    body.light-mode .consent-checkbox-label {
+      color: rgba(10,10,10,0.7);
+    }
+    body.light-mode .consent-modal-footer-note {
+      color: rgba(10,10,10,0.25);
+    }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
@@ -465,9 +549,6 @@
       footer { padding: 48px 24px; }
       .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
       .contact-bar { padding: 24px; }
-      .cookie-inner { padding: 14px 20px 16px; }
-      .cookie-main { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .cookie-details { columns: 1; }
     }
   </style>
 </head>
@@ -558,39 +639,55 @@
     </div>
   </footer>
 
-  <!-- ─── COOKIE CONSENT ─── -->
-  <div class="cookie-banner" id="cookieBanner">
-    <div class="cookie-inner">
-      <div class="cookie-main">
-        <p class="cookie-text">We use cookies and local storage to make this site work and to understand how it's used. No ads. No selling your data. <a href="privacy.html">Privacy Policy</a></p>
-        <div class="cookie-actions">
-          <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
-          <button class="cookie-btn cookie-essential" id="cookieEssential">Essentials Only</button>
-        </div>
+  <!-- ─── CONSENT MODAL ─── -->
+  <div id="consentModal" class="consent-modal-overlay" style="display:none;">
+    <div class="consent-modal">
+      <div class="consent-modal-header">
+        <p class="consent-modal-eyebrow">THE JAWS ADVANTAGE</p>
+        <h2 class="consent-modal-heading">BEFORE YOU CONTINUE</h2>
+        <p class="consent-modal-sub">Please read and agree to the following before accessing this site.</p>
       </div>
-      <button class="cookie-details-toggle" id="cookieDetailsToggle">Show details &#9662;</button>
-      <div class="cookie-details" id="cookieDetails">
-        <div class="cookie-detail-section">
-          <h4 class="cookie-detail-heading">Essential <span class="cookie-tag cookie-tag-always">Always On</span></h4>
-          <ul class="cookie-detail-list">
-            <li><strong>Dark/light mode preference</strong> — saved locally on your device</li>
-            <li><strong>Cookie preferences</strong> — saved locally so we don't ask again</li>
-          </ul>
+
+      <div class="consent-modal-scroll" id="consentScroll">
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">COOKIES AND ANALYTICS</p>
+          <p class="consent-modal-section-text">This site uses Google Analytics to collect anonymous usage data — page views, session duration, and general location. No personally identifiable information is collected. You can manage preferences after agreeing.</p>
         </div>
-        <div class="cookie-detail-section">
-          <h4 class="cookie-detail-heading">Analytics <span class="cookie-tag cookie-tag-consent">With Your Consent</span></h4>
-          <ul class="cookie-detail-list">
-            <li><strong>Google Analytics</strong> — anonymous page views and usage patterns. No personally identifiable information.</li>
-          </ul>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">TERMS OF SERVICE</p>
+          <p class="consent-modal-section-text">Content on this site is for informational and entertainment purposes only. AI-generated content (JAWS Decode, Job Posting Analyzer) is satirical commentary and opinion — not factual statements about any employer, company, or individual. Nothing on this site constitutes legal, financial, HR, or career advice.</p>
         </div>
-        <div class="cookie-detail-section">
-          <h4 class="cookie-detail-heading">We Don't</h4>
-          <ul class="cookie-detail-list">
-            <li>Sell your data</li>
-            <li>Use advertising cookies</li>
-            <li>Collect your name, email, or any personally identifiable information</li>
-          </ul>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">YOUR RESPONSIBILITIES</p>
+          <p class="consent-modal-section-text">You are solely responsible for how you use content from this site. You may not share, reproduce, screenshot, or distribute AI-generated outputs in any form. The JAWS Advantage accepts no liability for decisions made based on content generated by this site.</p>
         </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">INTELLECTUAL PROPERTY</p>
+          <p class="consent-modal-section-text">The JAWS Advantage brand, content, quiz questions, frameworks, and design are the intellectual property of the site owner. You may not reproduce or commercialize them without permission.</p>
+        </div>
+        <div class="consent-modal-scroll-indicator" id="consentScrollIndicator">&#8595; Scroll to continue</div>
+      </div>
+
+      <div class="consent-modal-checks" id="consentChecks" style="display:none;">
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck1" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck2" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I understand that AI-generated content on this site is satirical opinion and not factual statements</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck3" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I am 18 years of age or older</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck4" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I accept cookies for analytics purposes</span>
+        </label>
+
+        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — ENTER THE SITE</button>
+        <p class="consent-modal-footer-note">By clicking above you confirm you have read and agreed to all terms above.</p>
       </div>
     </div>
   </div>
@@ -642,45 +739,48 @@
       });
     })();
 
-    // ─── COOKIE CONSENT ───
-    (function () {
-      var GA_ID = 'G-5RC382BRZF';
-      var banner = document.getElementById('cookieBanner');
-      var consent = localStorage.getItem('cookieConsent');
-
-      function disableGA() { window['ga-disable-' + GA_ID] = true; }
-
-      function hideBanner() {
-        banner.classList.remove('visible');
-        setTimeout(function () { banner.classList.add('hidden'); }, 400);
+    // ─── CONSENT MODAL ───
+    (function() {
+      var agreed = localStorage.getItem('jawsConsentV1');
+      if (!agreed) {
+        var modal = document.getElementById('consentModal');
+        if (modal) modal.style.display = 'flex';
+        var scrollEl = document.getElementById('consentScroll');
+        var checks = document.getElementById('consentChecks');
+        var indicator = document.getElementById('consentScrollIndicator');
+        var scrolled = false;
+        if (scrollEl) {
+          scrollEl.addEventListener('scroll', function() {
+            if (scrolled) return;
+            var atBottom = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+            if (atBottom) {
+              scrolled = true;
+              if (checks) checks.style.display = 'flex';
+              if (indicator) indicator.style.display = 'none';
+            }
+          });
+        }
       }
-
-      if (consent) {
-        banner.classList.add('hidden');
-        if (consent === 'essential') disableGA();
-        return;
-      }
-
-      setTimeout(function () { banner.classList.add('visible'); }, 800);
-
-      document.getElementById('cookieAccept').addEventListener('click', function () {
-        localStorage.setItem('cookieConsent', 'all');
-        hideBanner();
-      });
-
-      document.getElementById('cookieEssential').addEventListener('click', function () {
-        localStorage.setItem('cookieConsent', 'essential');
-        disableGA();
-        hideBanner();
-      });
-
-      var toggle = document.getElementById('cookieDetailsToggle');
-      var details = document.getElementById('cookieDetails');
-      toggle.addEventListener('click', function () {
-        var open = details.classList.toggle('is-open');
-        toggle.textContent = open ? 'Hide details ▴' : 'Show details ▾';
-      });
     })();
+
+    function validateModalConsent() {
+      var c1 = document.getElementById('modalCheck1');
+      var c2 = document.getElementById('modalCheck2');
+      var c3 = document.getElementById('modalCheck3');
+      var c4 = document.getElementById('modalCheck4');
+      var btn = document.getElementById('consentModalBtn');
+      if (btn) btn.disabled = !(c1 && c1.checked && c2 && c2.checked && c3 && c3.checked && c4 && c4.checked);
+    }
+
+    function acceptModalConsent() {
+      localStorage.setItem('jawsConsentV1', JSON.stringify({
+        agreedAt: new Date().toISOString(),
+        version: '1.0',
+        checks: { terms: true, satirical: true, age: true, cookies: true }
+      }));
+      var modal = document.getElementById('consentModal');
+      if (modal) modal.style.display = 'none';
+    }
   </script>
 </body>
 </html>
