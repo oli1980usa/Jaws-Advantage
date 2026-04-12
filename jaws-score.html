@@ -4121,7 +4121,6 @@
 
     // ─── DEEP DIVE SESSION RESTORE ───
     (function() {
-      if (sessionStorage.getItem('jawsShowMenu') === 'true') return;
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
           sessionStorage.removeItem('jawsShowMenu');
@@ -4172,7 +4171,6 @@
 
     // ─── SHORT QUIZ SESSION RESTORE ───
     (function() {
-      if (sessionStorage.getItem('jawsShowMenu') === 'true') return;
       try {
         if (sessionStorage.getItem('jawsShowMenu') === 'true') {
           sessionStorage.removeItem('jawsShowMenu');
