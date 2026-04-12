@@ -19,6 +19,56 @@
     if (modal) modal.style.display = 'none';
     window.location.href = 'index.html';
   }
+
+  var jawsConsentGiven = false;
+
+  function initJawsConsent() {
+    var agreed = sessionStorage.getItem('jawsChatConsent');
+    if (agreed) {
+      jawsConsentGiven = true;
+      return;
+    }
+    var modal = document.getElementById('jawsConsentModal');
+    if (modal) modal.style.display = 'flex';
+
+    var scrollEl = document.getElementById('jawsConsentScroll');
+    var checks = document.getElementById('jawsConsentChecks');
+    var indicator = document.getElementById('jawsConsentIndicator');
+    var scrolled = false;
+
+    function checkScroll() {
+      if (scrolled) return;
+      var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
+                     scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+      if (atBottom) {
+        scrolled = true;
+        if (checks) checks.style.display = 'flex';
+        if (indicator) indicator.style.display = 'none';
+      }
+    }
+    if (scrollEl) {
+      scrollEl.addEventListener('scroll', checkScroll);
+      setTimeout(checkScroll, 300);
+    }
+  }
+
+  function validateJawsConsent() {
+    var allChecked = ['jawsCheck1','jawsCheck2','jawsCheck3','jawsCheck4','jawsCheck5','jawsCheck6']
+      .every(function(id) { var el = document.getElementById(id); return el && el.checked; });
+    var btn = document.getElementById('jawsConsentBtn');
+    if (btn) btn.disabled = !allChecked;
+  }
+
+  function acceptJawsConsent() {
+    sessionStorage.setItem('jawsChatConsent', '1');
+    jawsConsentGiven = true;
+    var modal = document.getElementById('jawsConsentModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function declineJawsConsent() {
+    window.location.href = 'index.html';
+  }
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
   <script>
@@ -835,6 +885,151 @@
       color: rgba(10,10,10,0.7);
     }
 
+    .quiz-consent-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.96);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .quiz-consent-box {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.15);
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .quiz-consent-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .quiz-consent-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 8px;
+    }
+    .quiz-consent-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--off-white, #f5f3ef);
+      margin: 0 0 8px;
+      line-height: 1;
+    }
+    .quiz-consent-sub {
+      font-size: 13px;
+      color: rgba(245,243,239,0.5);
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .quiz-consent-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 32px;
+      min-height: 0;
+    }
+    .quiz-consent-section {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .quiz-consent-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .quiz-consent-section-title {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--red-accent, #a52a1a);
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 6px;
+    }
+    .quiz-consent-section-text {
+      font-size: 13px;
+      color: rgba(245,243,239,0.6);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .quiz-consent-section-text a {
+      color: rgba(245,243,239,0.8);
+      text-decoration: underline;
+    }
+    .quiz-consent-scroll-indicator {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(245,243,239,0.3);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 1px;
+      padding: 12px 0 0;
+    }
+    .quiz-consent-checks {
+      padding: 20px 32px 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .quiz-consent-btn {
+      background: var(--red-accent, #a52a1a);
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 4px;
+      width: 100%;
+    }
+    .quiz-consent-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .quiz-consent-btn:not(:disabled):hover { opacity: 0.85; }
+    .quiz-consent-footer {
+      font-size: 11px;
+      color: rgba(245,243,239,0.25);
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+    }
+    body.light-mode .quiz-consent-box {
+      background: #f5f3ef;
+      border-color: rgba(0,0,0,0.15);
+    }
+    body.light-mode .quiz-consent-heading {
+      color: #0a0a0a;
+    }
+    body.light-mode .quiz-consent-section-text {
+      color: rgba(10,10,10,0.6);
+    }
+    body.light-mode .quiz-consent-sub {
+      color: rgba(10,10,10,0.5);
+    }
+    body.light-mode .quiz-consent-footer {
+      color: rgba(10,10,10,0.25);
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav {
@@ -1178,8 +1373,69 @@
       <div class="consent-modal-header">
         <p class="consent-modal-eyebrow">THE JAWS ADVANTAGE</p>
         <h2 class="consent-modal-heading">BEFORE YOU CONTINUE</h2>
-        <p class="consent-modal-sub">Please read and agree to the following before accessing this site.</p>
+        <p class="consent-modal-sub">Please read and agree to the following before accessing this site. You must scroll through all sections before you can agree.</p>
       </div>
+
+      <div class="consent-modal-scroll" id="consentScroll">
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">ABOUT THIS SITE</p>
+          <p class="consent-modal-section-text">The JAWS Advantage is a career intelligence platform providing quizzes, articles, AI-powered tools, and chat. All content is provided for informational and entertainment purposes only. This site is intended for users aged 18 and over.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">COOKIES AND ANALYTICS</p>
+          <p class="consent-modal-section-text">This site uses Google Analytics to collect anonymous usage data including page views, session duration, and general location. No personally identifiable information is collected through analytics. Cookie preferences can be reviewed in our Privacy Policy.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">TERMS OF SERVICE</p>
+          <p class="consent-modal-section-text">By accessing this site you agree to our full Terms of Service. Content is for informational and entertainment purposes only. Nothing on this site constitutes legal, financial, HR, or career advice. AI-generated content is satirical commentary and opinion — not factual statements about any employer, company, or individual. You are solely responsible for any actions taken based on content from this site.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">YOUR RESPONSIBILITIES</p>
+          <p class="consent-modal-section-text">You may not share, reproduce, screenshot, or distribute AI-generated outputs from this site in any form. You may not use content from this site to harass, defame, or target any individual or organisation. You are solely responsible for how you use content from this site.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">LIMITATION OF LIABILITY</p>
+          <p class="consent-modal-section-text">The JAWS Advantage accepts no liability for decisions made based on content generated by this site, or for any consequences arising from sharing or acting on that content. AI-generated content may be inaccurate, incomplete, or inappropriate for your situation. We make no guarantees about accuracy or fitness for purpose.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">INTELLECTUAL PROPERTY</p>
+          <p class="consent-modal-section-text">The JAWS Advantage brand, content, quiz questions, frameworks, and design are the intellectual property of the site owner. You may not reproduce or commercialise them without express written permission.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">PRIVACY</p>
+          <p class="consent-modal-section-text">We do not collect your name, email address, or personally identifiable information unless you contact us directly or use our AI tools which require email consent. Full details are in our <a href="privacy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms of Service</a>.</p>
+        </div>
+        <div class="consent-modal-scroll-indicator" id="consentScrollIndicator">&#8595; Scroll to continue</div>
+      </div>
+
+      <div class="consent-modal-checks" id="consentChecks" style="display:none;">
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck1" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck2" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I understand that content on this site is for informational and entertainment purposes only and does not constitute professional advice</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck3" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I understand I may not share, reproduce, or distribute AI-generated outputs from this site</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck4" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I confirm I am 18 years of age or older</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck5" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I accept cookies for analytics purposes</span>
+        </label>
+
+        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — CONTINUE</button>
+        <button class="quiz-consent-decline-btn" onclick="declineSiteConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
+        <p class="consent-modal-footer-note">By clicking I AGREE above you confirm you have read and agreed to all terms above.</p>
+      </div>
+    </div>
+  </div>
 
       <div class="consent-modal-scroll" id="consentScroll">
         <div class="consent-modal-section">
@@ -1473,6 +1729,7 @@
     }
 
     async function handleUserInput(text) {
+      if (!jawsConsentGiven) { initJawsConsent(); return; }
       if (!text || isWaiting) return;
 
       if (isLimitReached()) {
@@ -1536,6 +1793,7 @@
 
     // ─── INIT ───
     (function init() {
+      initJawsConsent();
       var isHandoff = false; // true when arriving via ddContext quiz handoff
 
       // Restore session if available
@@ -1895,8 +2153,7 @@
     (function() {
       var agreed = localStorage.getItem('jawsConsentV1');
       var declined = localStorage.getItem('jawsConsentDeclined');
-      if (agreed) return;
-      if (declined) return;
+      if (agreed || declined) return;
       var modal = document.getElementById('consentModal');
       if (modal) modal.style.display = 'flex';
       var scrollEl = document.getElementById('consentScroll');
@@ -1920,25 +2177,96 @@
     })();
 
     function validateModalConsent() {
-      var c1 = document.getElementById('modalCheck1');
-      var c2 = document.getElementById('modalCheck2');
-      var c3 = document.getElementById('modalCheck3');
-      var c4 = document.getElementById('modalCheck4');
+      var allChecked = ['modalCheck1','modalCheck2','modalCheck3','modalCheck4','modalCheck5']
+        .every(function(id) { var el = document.getElementById(id); return el && el.checked; });
       var btn = document.getElementById('consentModalBtn');
-      if (btn) btn.disabled = !(c1 && c1.checked && c2 && c2.checked && c3 && c3.checked && c4 && c4.checked);
+      if (btn) btn.disabled = !allChecked;
     }
 
     function acceptModalConsent() {
       localStorage.setItem('jawsConsentV1', JSON.stringify({
         agreedAt: new Date().toISOString(),
         version: '1.0',
-        checks: { terms: true, satirical: true, age: true, cookies: true }
+        checks: { terms: true, content: true, sharing: true, age: true, cookies: true }
       }));
       localStorage.removeItem('jawsConsentDeclined');
       var modal = document.getElementById('consentModal');
       if (modal) modal.style.display = 'none';
     }
   </script>
+
+  <div id="jawsConsentModal" class="quiz-consent-overlay" style="display:none;">
+    <div class="quiz-consent-box">
+      <div class="quiz-consent-header">
+        <p class="quiz-consent-eyebrow">ASK JAWS — TERMS OF USE</p>
+        <h2 class="quiz-consent-heading">BEFORE YOU CHAT</h2>
+        <p class="quiz-consent-sub">Please read and agree to the following before using Ask JAWS. You must scroll through all sections.</p>
+      </div>
+
+      <div class="quiz-consent-scroll" id="jawsConsentScroll">
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">WHAT ASK JAWS IS</p>
+          <p class="quiz-consent-section-text">Ask JAWS is an AI-powered career intelligence chat tool. It is not a human advisor, counsellor, therapist, lawyer, financial advisor, or HR professional. Responses are generated by AI and reflect no verified facts or professional qualifications.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">NOT PROFESSIONAL ADVICE</p>
+          <p class="quiz-consent-section-text">Nothing in this chat constitutes legal, financial, HR, employment, career, medical, psychological, or any other form of professional advice. You must not rely on Ask JAWS as a substitute for qualified professional advice. Always seek appropriate professional guidance before making significant career, legal, or financial decisions.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">AI PROCESSING</p>
+          <p class="quiz-consent-section-text">Your conversations are processed by a third-party AI provider (Anthropic). By using this chat you acknowledge and consent to your messages being processed by Anthropic's systems. We do not store your conversations after your session ends. Anthropic's privacy policy applies to the processing of your messages.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">NO CONFIDENTIAL INFORMATION</p>
+          <p class="quiz-consent-section-text">You must not share confidential, proprietary, or sensitive business information in this chat. This includes trade secrets, unreleased financial data, personnel information, client data, or any information subject to confidentiality agreements with your employer or any third party. You are solely responsible for any information you choose to share.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">NO IDENTIFYING INFORMATION</p>
+          <p class="quiz-consent-section-text">You must not include the full names of colleagues, managers, employers, clients, or organisations in your messages. Refer to people and organisations in general terms only. Any information you share may be processed by AI systems.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">NO SHARING OF CHAT OUTPUTS</p>
+          <p class="quiz-consent-section-text">Chat responses are for your personal use only. You may not share, reproduce, screenshot, publish, or distribute chat outputs in any form including on social media, messaging platforms, or any other medium. Sharing constitutes a violation of our Terms of Service.</p>
+        </div>
+        <div class="quiz-consent-section">
+          <p class="quiz-consent-section-title">LIMITATION OF LIABILITY</p>
+          <p class="quiz-consent-section-text">The JAWS Advantage accepts no liability for decisions made based on chat responses, or for any consequences arising from your use of or reliance on this chat. AI responses may be inaccurate, outdated, or inappropriate. By proceeding you agree to hold The JAWS Advantage harmless from any claims arising from your use of this chat tool. Your use is subject to our full <a href="terms.html" target="_blank">Terms of Service</a>.</p>
+        </div>
+        <div class="quiz-consent-scroll-indicator" id="jawsConsentIndicator">&#8595; Scroll to continue</div>
+      </div>
+
+      <div class="quiz-consent-checks" id="jawsConsentChecks" style="display:none;">
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck1" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I understand Ask JAWS is not a substitute for professional legal, financial, HR, or career advice</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck2" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I will not share confidential, proprietary, or sensitive business information in this chat</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck3" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I will not include full names of individuals, employers, or organisations in my messages</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck4" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I understand my conversation is processed by AI (Anthropic) and may be inaccurate</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck5" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I will not share, screenshot, or distribute chat outputs in any form</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="jawsCheck6" class="consent-checkbox" onchange="validateJawsConsent()">
+          <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and accept full responsibility for my use of this chat</span>
+        </label>
+
+        <button class="quiz-consent-btn" id="jawsConsentBtn" disabled onclick="acceptJawsConsent()">I AGREE — START CHATTING</button>
+        <button class="quiz-consent-decline-btn" onclick="declineJawsConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
+        <p class="quiz-consent-footer">By clicking I AGREE above you confirm you have read and agreed to all terms above.</p>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
