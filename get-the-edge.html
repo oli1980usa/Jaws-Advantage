@@ -22,20 +22,21 @@
 
   var jawsConsentGiven = false;
 
-  function initJawsConsent() {
+  function initJawsConsent(callback) {
     var agreed = sessionStorage.getItem('jawsChatConsent');
     if (agreed) {
       jawsConsentGiven = true;
+      if (callback) callback();
       return;
     }
+    // Store callback to call after consent accepted
+    window._jawsConsentCallback = callback;
     var modal = document.getElementById('jawsConsentModal');
     if (modal) modal.style.display = 'flex';
-
     var scrollEl = document.getElementById('jawsConsentScroll');
     var checks = document.getElementById('jawsConsentChecks');
     var indicator = document.getElementById('jawsConsentIndicator');
     var scrolled = false;
-
     function checkScroll() {
       if (scrolled) return;
       var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
@@ -64,6 +65,10 @@
     jawsConsentGiven = true;
     var modal = document.getElementById('jawsConsentModal');
     if (modal) modal.style.display = 'none';
+    if (window._jawsConsentCallback) {
+      window._jawsConsentCallback();
+      window._jawsConsentCallback = null;
+    }
   }
 
   function declineJawsConsent() {
@@ -1793,7 +1798,12 @@
 
     // ─── INIT ───
     (function init() {
-      initJawsConsent();
+      initJawsConsent(function() {
+        runInit();
+      });
+    })();
+
+    function runInit() {
       var isHandoff = false; // true when arriving via ddContext quiz handoff
 
       // Restore session if available
@@ -1913,7 +1923,7 @@
           }, 600);
         }
       }
-    })();
+    }
 
     // ─── THEME TOGGLE ───
     (function () {
