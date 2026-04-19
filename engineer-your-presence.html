@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="canonical" href="https://www.jawsadvantage.com/engineer-your-presence.html" />
+
+  <!-- Google Analytics -->
+  <script>
+    if (localStorage.getItem('cookieConsent') === 'essential') {
+      window['ga-disable-G-5RC382BRZF'] = true;
+    }
+
+  function declineQuizConsent() {
+    window.location.href = 'index.html';
+  }
+
+  function declineSiteConsent() {
+    localStorage.setItem('jawsConsentDeclined', '1');
+    var modal = document.getElementById('consentModal');
+    if (modal) modal.style.display = 'none';
+    window.location.href = 'index.html';
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RC382BRZF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5RC382BRZF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineer Your Presence | The JAWS Advantage</title>
+  <meta name="description" content="Hard work whispers. If the right people don't see it, it didn't happen. Here's how to engineer strategic visibility — and build the career you actually want.">
+  <meta property="og:title" content="Engineer Your Presence | The JAWS Advantage">
+  <meta property="og:description" content="Hard work whispers. If the right people don't see it, it didn't happen. Here's how to engineer strategic visibility — and build the career you actually want.">
+  <meta property="og:url" content="https://jawsadvantage.com/engineer-your-presence.html">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Engineer Your Presence | The JAWS Advantage">
+  <meta name="twitter:description" content="Hard work whispers. If the right people don't see it, it didn't happen. Here's how to engineer strategic visibility.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-2: #111111;
+      --black-3: #181818;
+      --red: #a52a1a;
+      --red-dark: #a93226;
+      --off-white: #f5f3ef;
+      --off-white-dim: #b8b5b0;
+      --border: rgba(245, 243, 239, 0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-logo:hover {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white) !important;
+      border: 1px solid var(--red);
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--off-white) !important;
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 2px;
+      color: var(--off-white-dim);
+      line-height: 1;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      color: var(--red);
+    }
+
+    .theme-toggle svg {
+      display: block;
+    }
+
+    /* ─── LIGHT MODE ─── */
+    body.light-mode {
+      --black: #f5f3ef;
+      --black-2: #e8e6e2;
+      --black-3: #dedad4;
+      --off-white: #0a0a0a;
+      --off-white-dim: #444444;
+      --border: rgba(10, 10, 10, 0.12);
+    }
+
+    body.light-mode nav {
+      background: rgba(245, 243, 239, 0.92);
+    }
+
+    body.light-mode .nav-cta {
+      color: var(--red) !important;
+    }
+
+    body.light-mode .nav-cta:hover {
+      color: #f5f3ef !important;
+    }
+
+    body.light-mode ::-webkit-scrollbar-thumb {
+      background: var(--red);
+    }
+
+    body.light-mode .nav-logo img {
+      mix-blend-mode: multiply;
+    }
+
+    body.light-mode .footer-disclaimer {
+      color: rgba(10, 10, 10, 0.4);
+    }
+
+    body.light-mode .footer-copy {
+      color: rgba(10, 10, 10, 0.4);
+    }
+    body.light-mode .footer-legal,
+    body.light-mode .footer-legal a {
+      color: rgba(10,10,10,0.4);
+    }
+    body.light-mode .footer-legal a:hover {
+      color: rgba(10,10,10,0.7);
+    }
+
+    body.light-mode .footer-tagline {
+      color: rgba(10, 10, 10, 0.5);
+    }
+
+    body.light-mode .char-hint {
+      color: rgba(10, 10, 10, 0.4);
+    }
+
+    body.light-mode .contact-bar {
+      color: rgba(10, 10, 10, 0.4);
+      border-color: rgba(10, 10, 10, 0.08);
+    }
+
+    body.light-mode .contact-bar a {
+      color: var(--red);
+    }
+
+    /* ─── ARTICLE LAYOUT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 48px 120px;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 8px 18px;
+    }
+
+    .article-issue {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+
+    .article-standfirst {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--off-white-dim);
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
+    }
+
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin: 56px 0 20px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-pull-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      margin: 56px 0;
+      padding: 40px 0 40px 28px;
+      border-left: 4px solid var(--red);
+      position: relative;
+    }
+
+    .article-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 28px;
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.25;
+    }
+
+    /* ─── EXAMPLE BOX ─── */
+    .article-example {
+      margin: 48px 0;
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 24px 28px 28px;
+      background: rgba(165, 42, 26, 0.04);
+    }
+
+    .article-example-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.12);
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 4px 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .article-example p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--off-white-dim);
+      margin-bottom: 0 !important;
+    }
+
+    .article-closing {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+    }
+
+    .article-closing strong {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ─── BACK LINK ─── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      margin-bottom: 56px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--red);
+    }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      padding: 24px 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(184, 181, 176, 0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-bar a {
+      color: var(--off-white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-bar a:hover {
+      color: var(--red);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--off-white);
+    }
+
+    .footer-logo span {
+      color: var(--red);
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(184, 181, 176, 0.4);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(184, 181, 176, 0.3);
+    }
+    .footer-legal {
+      font-size: 13px;
+      color: rgba(245,243,239,0.4);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-legal a {
+      font-size: 13px;
+      color: rgba(245,243,239,0.4);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .footer-legal a:hover {
+      color: rgba(245,243,239,0.7);
+    }
+    .footer-legal span {
+      opacity: 0.4;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .article-wrap {
+        padding: 120px 24px 80px;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+
+    /* ─── FLOATING CHAT BAR ─── */
+    .float-chat {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 44px;
+      z-index: 300;
+      border-radius: 999px;
+      background: #a52a1a;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.8), 0 0 30px rgba(165, 42, 26, 0.5), 0 4px 20px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+    }
+
+    .float-chat.is-open {
+      width: 500px;
+      height: 52px;
+      cursor: default;
+      box-shadow: 0 0 0 2px rgba(165, 42, 26, 0.9), 0 0 40px rgba(165, 42, 26, 0.7), 0 0 80px rgba(165, 42, 26, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
+    }
+
+    .float-chat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .float-chat.is-open .float-chat-label {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .float-chat-input-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 6px 0 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease 0.15s;
+      pointer-events: none;
+    }
+
+    .float-chat.is-open .float-chat-input-wrap {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .float-chat-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      min-width: 0;
+    }
+
+    .float-chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .float-chat-submit {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      border: none;
+      color: #ffffff;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .float-chat-submit:hover {
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    /* ─── NAV HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--off-white-dim);
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 10, 0.97);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      flex-direction: column;
+    }
+
+    .nav-mobile-menu.is-open {
+      display: flex;
+    }
+
+    .nav-mobile-menu a {
+      padding: 16px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s;
+      text-align: right;
+    }
+
+    .nav-mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-mobile-menu a:hover {
+      color: var(--red);
+      background: var(--black-2);
+    }
+
+    .nav-mobile-menu .mobile-cta {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    body.light-mode .nav-mobile-menu {
+      background: rgba(245, 243, 239, 0.97);
+    }
+
+    @media (max-width: 768px) {
+      .nav-hamburger {
+        display: flex;
+      }
+    }
+
+    /* ─── READING PROGRESS BAR ─── */
+    .reading-progress {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(165, 42, 26, 0.8);
+      z-index: 999;
+      transition: width 0.05s linear;
+    }
+
+    /* ─── READ TIME ─── */
+    .article-read-time {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(165, 42, 26, 0.5);
+      line-height: 1;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: #bf3120;
+    }
+
+    /* ─── ARTICLE RATING ─── */
+    .article-rating {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 20px;
+      margin: 40px 0 0;
+      text-align: center;
+    }
+    .article-rating-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--off-white-dim);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .article-rating-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 88px;
+      height: 88px;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .rating-btn:hover:not(:disabled) {
+      background: rgba(165,42,26,0.15);
+    }
+    .rating-btn.selected {
+      background: var(--red);
+      color: #ffffff;
+    }
+    .rating-btn.faded {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .article-rating-confirm {
+      margin-top: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--off-white-dim);
+      letter-spacing: 0.04em;
+      min-height: 18px;
+      opacity: 0.6;
+    }
+    .rating-count {
+      font-size: 10px;
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── CONSENT MODALS ALWAYS DARK ─── */
+    .consent-modal-overlay,
+    .quiz-consent-overlay {
+      background: rgba(0,0,0,0.96) !important;
+    }
+    .consent-modal,
+    .quiz-consent-box {
+      background: #0a0a0a !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+    }
+    .consent-modal-eyebrow,
+    .quiz-consent-eyebrow {
+      color: #a52a1a !important;
+    }
+    .consent-modal-heading,
+    .quiz-consent-heading {
+      color: #f5f3ef !important;
+    }
+    .consent-modal-sub,
+    .quiz-consent-sub {
+      color: rgba(245,243,239,0.5) !important;
+    }
+    .consent-modal-section-title,
+    .quiz-consent-section-title {
+      color: #a52a1a !important;
+    }
+    .consent-modal-section-text,
+    .quiz-consent-section-text {
+      color: rgba(245,243,239,0.6) !important;
+    }
+    .consent-modal-section-text a,
+    .quiz-consent-section-text a {
+      color: #a52a1a !important;
+      text-decoration: underline !important;
+    }
+    .consent-checkbox-label {
+      color: rgba(245,243,239,0.7) !important;
+    }
+    .consent-checkbox-label a {
+      color: #a52a1a !important;
+      text-decoration: underline !important;
+    }
+    .consent-modal-footer-note,
+    .quiz-consent-footer {
+      color: rgba(245,243,239,0.25) !important;
+    }
+    .consent-modal-scroll-indicator,
+    .quiz-consent-scroll-indicator {
+      color: rgba(245,243,239,0.3) !important;
+    }
+    .consent-modal-section,
+    .quiz-consent-section {
+      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    }
+
+    /* ─── CONSENT MODAL ─── */
+    .consent-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .consent-modal {
+      max-width: 580px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .consent-modal-header {
+      padding: 32px 32px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .consent-modal-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 8px;
+    }
+    .consent-modal-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 2px;
+      margin: 0 0 8px;
+      line-height: 1;
+    }
+    .consent-modal-sub {
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .consent-modal-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      position: relative;
+    }
+    .consent-modal-section {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+    }
+    .consent-modal-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .consent-modal-section-title {
+      font-size: 10px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0 0 8px;
+    }
+    .consent-modal-section-text {
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .consent-modal-scroll-indicator {
+      text-align: center;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 1px;
+      padding: 16px 0 0;
+      transition: opacity 0.3s ease;
+    }
+    .consent-modal-checks {
+      padding: 24px 32px 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .consent-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+    .consent-checkbox {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: #a52a1a;
+      cursor: pointer;
+    }
+    .consent-modal-btn {
+      background: #a52a1a;
+      border: none;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 8px;
+      width: 100%;
+    }
+    .consent-modal-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .consent-modal-btn:not(:disabled):hover { opacity: 0.85; }
+    .consent-modal-footer-note {
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .quiz-consent-decline-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(245,243,239,0.4);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 32px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .quiz-consent-decline-btn:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(245,243,239,0.7);
+    }
+
+    /* ─── GLOW ─── */
+    @keyframes textGlow {
+      0%   { text-shadow: none; }
+      30%  { text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(165,42,26,0.8), 0 0 120px rgba(165,42,26,0.4); }
+      60%  { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 30px rgba(165,42,26,0.5); }
+      100% { text-shadow: none; }
+    }
+    .hero-glow { animation: textGlow 1.5s ease forwards; }
+
+  </style>
+</head>
+<body>
+
+  <div id="readingProgress" class="reading-progress"></div>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="shark-logo.png" alt="The JAWS Advantage" style="height: 45px; display: block;" />
+      THE <span>JAWS</span> ADVANTAGE
+    </a>
+    <ul class="nav-links">
+      <li><a href="playbook.html">The Intelligence</a></li>
+      <li><a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a></li>
+      <li><a href="get-the-edge.html">Ask JAWS</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- icon injected by JS -->
+        </button>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">&#9776;</button>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">The Intelligence</a>
+    <a href="jaws-score.html" onclick="sessionStorage.setItem('jawsShowMenu','true')">Jaws Score</a>
+    <a href="get-the-edge.html">Ask JAWS</a>
+  </div>
+
+  <!-- ─── ARTICLE ─── -->
+  <main class="article-wrap">
+
+    <a href="playbook.html" class="back-link fade-in">&larr; Back to The Playbook</a>
+
+    <header class="article-header fade-in">
+      <div class="article-eyebrow">
+        <span class="article-tag">Career Strategy</span>
+        <span class="article-issue">Pillar 01</span>
+      </div>
+      <span class="article-read-time">10 min read</span>
+      <h1 class="article-title">Engineer your presence.</h1>
+      <p class="article-standfirst">Most people think hard work speaks for itself. It doesn't. Hard work whispers. If the right people don't see it, it didn't happen.</p>
+    </header>
+
+    <div class="article-body fade-in">
+
+      <p>You can be the most talented person in your department, deliver flawless results, and hit every deadline. But if you're invisible to the people who make decisions about your future, you're playing a losing game. The harsh truth? Your career trajectory isn't determined by your performance alone — it's determined by your performance <strong>as perceived</strong> by the people who control opportunities.</p>
+
+      <p>This isn't about office politics or schmoozing. This is about <strong>strategic visibility</strong>. It's about ensuring that when opportunities arise, when budget discussions happen, when succession planning occurs, your name is already in the conversation.</p>
+
+      <p>Most people leave their career advancement to chance. Smart people engineer it.</p>
+
+      <h2 class="article-section-heading">The visibility equation</h2>
+
+      <blockquote class="article-pull-quote">High-Impact Work + Strategic Positioning + Consistent Presence = Career Acceleration</blockquote>
+
+      <div class="article-example">
+        <span class="article-example-label">The Invisible Analyst</span>
+        <p>Maya delivered exceptional analytics work that directly improved customer retention by 23%. Her reports were precise, her insights actionable, her delivery flawless. When promotion time came, she was passed over for James — someone whose work was solid but not exceptional. The difference? James presented his results at monthly leadership meetings. Maya sent hers via email. Maya's work was objectively better. James was strategically visible.</p>
+      </div>
+
+      <p><strong>High-Impact Work</strong> isn't just doing your job well. It's identifying and contributing to initiatives that matter to senior leadership. It's solving problems that keep executives awake at night. It's delivering results that move the needle on business outcomes.</p>
+
+      <p><strong>Strategic Positioning</strong> means being physically and intellectually present when important conversations happen. It means volunteering for cross-functional projects. It means being the person who bridges departments, translates between teams, and connects dots that others miss.</p>
+
+      <p><strong>Consistent Presence</strong> isn't about being seen for the sake of being seen. It's about maintaining sustained visibility over time so that when decision-makers think about talent, capability, and potential, your name comes to mind immediately.</p>
+
+      <h2 class="article-section-heading">The 80/20 rule of strategic relationships</h2>
+
+      <blockquote class="article-pull-quote">80% of your networking energy should focus on internal relationships. 20% on external industry connections.</blockquote>
+
+      <div class="article-example">
+        <span class="article-example-label">The Internal Advantage</span>
+        <p>Marcus spent every evening at industry meetups and conferences, building an impressive LinkedIn network of 3,000+ connections. Meanwhile, Sarah focused internally — she knew every VP by name, understood their priorities, and volunteered for cross-departmental initiatives. When a director role opened, Marcus wasn't even considered. Sarah got the job. The hiring VP said, "We already know Sarah can deliver. We've seen her work across multiple functions."</p>
+      </div>
+
+      <p>Internal relationships trump external networks for career acceleration. The person who promotes you, who recommends you for a stretch assignment, who mentions your name in leadership meetings — they're probably sitting three floors away from you right now.</p>
+
+      <h2 class="article-section-heading">The strategic orbit</h2>
+
+      <p>Identify the <strong>5–10 people whose opinion of you directly impacts your career trajectory</strong>. These are your strategic orbit — the individuals who, collectively, hold significant influence over opportunities that could accelerate your path forward.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">Mapping the Orbit</span>
+        <p>Priya mapped hers methodically: her director, the VP of Product, the head of Customer Success, two senior individual contributors who regularly interfaced with executives, and the Chief of Staff who managed executive priorities. Over six months, she built authentic professional relationships with each. When a new strategic initiative launched, three people independently recommended her for the team.</p>
+      </div>
+
+      <p>This isn't about sucking up or being fake. It's about being intentional. You want these people to know who you are, understand your capabilities, remember your contributions, and think of you when relevant opportunities arise.</p>
+
+      <h2 class="article-section-heading">The attribution problem</h2>
+
+      <blockquote class="article-pull-quote">Your best work means nothing if the right people don't know it's yours.</blockquote>
+
+      <div class="article-example">
+        <span class="article-example-label">The Invisible Contribution</span>
+        <p>Jamie rebuilt the entire customer onboarding process, reducing time-to-value by 40%. The results were presented to the board by his VP. When asked who led the initiative, the VP said, "It was a team effort." Jamie's name never came up. Six months later, when a senior product role opened, Jamie wasn't considered because leadership didn't know about his strategic contribution.</p>
+      </div>
+
+      <p><strong>Solving the attribution problem requires three habits:</strong></p>
+
+      <p><strong>Document your contributions clearly.</strong> When you send updates, use first person. "I implemented the new tracking system" — not "The new tracking system was implemented."</p>
+
+      <p><strong>Be present when your work gets discussed.</strong> Volunteer to present your own results. Don't let your work travel without you.</p>
+
+      <p><strong>Create paper trails.</strong> Send follow-up emails summarising your contributions after meetings. Give people the language to credit you correctly when you're not in the room.</p>
+
+      <h2 class="article-section-heading">Tactical execution</h2>
+
+      <div class="article-example">
+        <span class="article-example-label">The Strategic Coffee Chat</span>
+        <p>Maya's approach: "I'd love to get your perspective on customer retention strategies — I've been analysing our data and have some questions about market trends you might have insights on. Would you have 20 minutes for coffee?" She came prepared with thoughtful questions, shared relevant data insights, and asked about the VP's strategic priorities. She made it valuable for him — he left with customer behaviour patterns he hadn't seen before. When a customer experience role opened, he thought of Maya immediately.</p>
+      </div>
+
+      <div class="article-example">
+        <span class="article-example-label">Project Positioning</span>
+        <p>When the company launched a digital transformation initiative, Sarah volunteered to be the Marketing liaison. The role wasn't glamorous — lots of coordination meetings and status updates. But it put her in weekly conversations with the CTO, VP of Operations, and external consultants. She became the person who understood how all the pieces fit together. Six months later, when they needed someone to lead the customer-facing rollout, Sarah was the obvious choice. Her visibility across departments made her indispensable.</p>
+      </div>
+
+      <div class="article-example">
+        <span class="article-example-label">The All-Hands Advantage</span>
+        <p>In a quarterly review where revenue growth had stalled, James asked: "Looking at our customer retention data by geographic region, it seems our highest-value clients cluster in specific markets. Have we analysed whether our expansion strategy should focus on similar demographics rather than trying to penetrate everywhere?" The CEO took notes. James got invited to the strategy discussion the following week. The principle: ask questions that demonstrate business acumen, not just functional expertise.</p>
+      </div>
+
+      <h2 class="article-section-heading">The external game</h2>
+
+      <p>Industry presence amplifies internal value. When you're known outside your company, you become more valuable inside it.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">External Recognition, Internal Leverage</span>
+        <p>Marcus started writing monthly LinkedIn articles about marketing automation trends. He shared insights from his company's implementations without revealing proprietary information. When a Forbes contributor quoted one of his articles, Marcus's internal credibility skyrocketed. His VP started introducing him as "our thought leader on marketing tech." External recognition created internal leverage.</p>
+      </div>
+
+      <p>Start small: comment thoughtfully on industry leader posts. Share relevant trends that affect your company's market. Volunteer to represent your company at industry events. Write for your company blog about lessons learned. The goal isn't fame — it's the credibility that flows back through the door.</p>
+
+      <h2 class="article-section-heading">Working the system</h2>
+
+      <div class="article-example">
+        <span class="article-example-label">Intelligence Gold</span>
+        <p>Priya built a professional relationship with the Chief of Staff's assistant — not through favours or politics, but through respect and occasional useful information. She learned which executives were working on which initiatives, when important decisions were being made, and who had influence on specific topics. When the company restructured, Priya knew about new roles before they were posted. She positioned herself strategically and was considered for opportunities that never went external.</p>
+      </div>
+
+      <div class="article-example">
+        <span class="article-example-label">The Follow-Up Architecture</span>
+        <p>After every cross-functional meeting, Sarah sent a summary email to participants with clear action items and her commitments. She CC'd relevant stakeholders. This created a paper trail that consistently showed her driving results across departments. When promotion discussions happened, multiple VPs remembered Sarah as "the person who always follows through and keeps projects moving."</p>
+      </div>
+
+      <div class="article-closing">
+        <strong>Key takeaways.</strong> Visibility is a skill, not an accident — engineer it systematically. Focus 80% internal, 20% external — most opportunities come from within. Solve the attribution problem — make sure your contributions are clearly connected to your name. Map your strategic orbit — know exactly who influences your career trajectory. Be strategically present — show up where decisions get made. Build mutual value — every interaction should benefit both parties.<br><br>
+        Your talent is your foundation. Your strategic visibility is how you build on it. Most people hope to get noticed. Smart people engineer being remembered. The game is already being played. The question is whether you're playing it intentionally.
+      </div>
+
+    </div>
+
+    <!-- ─── ARTICLE RATING ─── -->
+    <div class="article-rating" id="articleRating">
+      <h3 class="article-rating-heading">Bait or JAWS?</h3>
+      <div class="article-rating-buttons">
+        <button class="rating-btn" data-rating="bait" aria-label="Bait">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span>Bait</span>
+          <span class="rating-count"></span>
+        </button>
+        <button class="rating-btn" data-rating="jaws" aria-label="JAWS">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 C4 20 8 20 12 8 C14 14 16 20 20 20"/></svg>
+          <span>JAWS</span>
+          <span class="rating-count"></span>
+        </button>
+      </div>
+      <p class="article-rating-confirm" id="ratingConfirm"></p>
+    </div>
+  </main>
+
+  <!-- ─── CONTACT BAR ─── -->
+  <div class="contact-bar">
+    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">THE <span>JAWS</span> ADVANTAGE</div>
+      <div class="footer-tagline">Career intelligence without the noise</div>
+      <div class="footer-copy">&copy; 2026 The JAWS Advantage</div>
+    </div>
+    <div class="footer-legal">
+      <a href="terms.html">Terms of Service</a>
+      <span>·</span>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- ─── FLOATING CHAT BAR ─── -->
+  <div class="float-chat" id="floatChat">
+    <span class="float-chat-label">Ask JAWS</span>
+    <div class="float-chat-input-wrap" id="floatChatInputWrap">
+      <input type="text" style="display:none;" aria-hidden="true" tabindex="-1" />
+      <input type="search" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
+    </div>
+  </div>
+
+  <!-- ─── CONSENT MODAL ─── -->
+  <div id="consentModal" class="consent-modal-overlay" style="display:none;">
+    <div class="consent-modal">
+      <div class="consent-modal-header">
+        <p class="consent-modal-eyebrow">THE JAWS ADVANTAGE</p>
+        <h2 class="consent-modal-heading">BEFORE YOU CONTINUE</h2>
+        <p class="consent-modal-sub">Please read and agree to the following before accessing this site. You must scroll through all sections before you can agree.</p>
+      </div>
+
+      <div class="consent-modal-scroll" id="consentScroll">
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">ABOUT THIS SITE</p>
+          <p class="consent-modal-section-text">The JAWS Advantage is a career intelligence platform providing quizzes, articles, AI-powered tools, and chat. All content is provided for informational and entertainment purposes only. This site is intended for users aged 18 and over.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">COOKIES AND ANALYTICS</p>
+          <p class="consent-modal-section-text">This site uses Google Analytics to collect anonymous usage data including page views, session duration, and general location. No personally identifiable information is collected through analytics. Cookie preferences can be reviewed in our Privacy Policy.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">TERMS OF SERVICE</p>
+          <p class="consent-modal-section-text">By accessing this site you agree to our full Terms of Service. Content is for informational and entertainment purposes only. Nothing on this site constitutes legal, financial, HR, or career advice. AI-generated content is satirical commentary and opinion — not factual statements about any employer, company, or individual. You are solely responsible for any actions taken based on content from this site.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">YOUR RESPONSIBILITIES</p>
+          <p class="consent-modal-section-text">You may not share, reproduce, screenshot, or distribute AI-generated outputs from this site in any form. You may not use content from this site to harass, defame, or target any individual or organisation. You are solely responsible for how you use content from this site.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">LIMITATION OF LIABILITY</p>
+          <p class="consent-modal-section-text">The JAWS Advantage accepts no liability for decisions made based on content generated by this site, or for any consequences arising from sharing or acting on that content. AI-generated content may be inaccurate, incomplete, or inappropriate for your situation. We make no guarantees about accuracy or fitness for purpose.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">INTELLECTUAL PROPERTY</p>
+          <p class="consent-modal-section-text">The JAWS Advantage brand, content, quiz questions, frameworks, and design are the intellectual property of the site owner. You may not reproduce or commercialise them without express written permission.</p>
+        </div>
+        <div class="consent-modal-section">
+          <p class="consent-modal-section-title">PRIVACY</p>
+          <p class="consent-modal-section-text">We do not collect your name, email address, or personally identifiable information unless you contact us directly or use our AI tools which require email consent. Full details are in our <a href="privacy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms of Service</a>.</p>
+        </div>
+        <div class="consent-modal-scroll-indicator" id="consentScrollIndicator">&#8595; Scroll to continue</div>
+      </div>
+
+      <div class="consent-modal-checks" id="consentChecks" style="display:none;">
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck1" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck2" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I understand that content on this site is for informational and entertainment purposes only and does not constitute professional advice</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck3" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I understand I may not share, reproduce, or distribute AI-generated outputs from this site</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck4" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I confirm I am 18 years of age or older</span>
+        </label>
+        <label class="consent-checkbox-label">
+          <input type="checkbox" id="modalCheck5" class="consent-checkbox" onchange="validateModalConsent()">
+          <span>I accept cookies for analytics purposes</span>
+        </label>
+
+        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — CONTINUE</button>
+        <button class="quiz-consent-decline-btn" onclick="declineSiteConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
+        <p class="consent-modal-footer-note">By clicking I AGREE above you confirm you have read and agreed to all terms above.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ARTICLE_CONTEXT = "the playbook page about engineering your presence, strategic visibility, the 80/20 rule of networking, mapping your strategic orbit, solving attribution problems, and building internal relationships that accelerate careers";
+
+    // ─── SCROLL ANIMATIONS ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ─── NAV BACKGROUND ON SCROLL ───
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20
+        ? (document.body.classList.contains('light-mode') ? 'rgba(10, 10, 10, 0.2)' : 'rgba(245, 243, 239, 0.12)')
+        : '';
+    }, { passive: true });
+
+    // ─── FLOATING CHAT BAR ───
+    (function () {
+      var widget = document.getElementById('floatChat');
+      var input = document.getElementById('floatChatInput');
+      var submitBtn = document.getElementById('floatChatSubmit');
+
+      function openWidget() {
+        widget.classList.add('is-open');
+        setTimeout(function () { input.focus(); }, 300);
+      }
+
+      function closeWidget() {
+        widget.classList.remove('is-open');
+        input.value = '';
+      }
+
+      widget.addEventListener('click', function () {
+        if (!widget.classList.contains('is-open')) {
+          openWidget();
+        }
+      });
+
+      input.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== submitBtn) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      submitBtn.addEventListener('blur', function () {
+        setTimeout(function () {
+          if (document.activeElement !== input) {
+            closeWidget();
+          }
+        }, 150);
+      });
+
+      function submitFloat() {
+        var q = input.value.trim();
+        var query = q
+          ? 'Regarding ' + ARTICLE_CONTEXT + ': ' + q
+          : 'Can you tell me more about ' + ARTICLE_CONTEXT + '?';
+        window.location.href = 'get-the-edge.html?q=' + encodeURIComponent(query);
+      }
+
+      submitBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        submitFloat();
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitFloat();
+        if (e.key === 'Escape') closeWidget();
+      });
+    })();
+
+    // ─── GLOW ANIMATION ───
+    (function () {
+      var headline = document.querySelector('.article-title');
+
+      function glow(el) {
+        if (!el) return;
+        el.classList.remove('hero-glow');
+        void el.offsetWidth;
+        el.classList.add('hero-glow');
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
+      }
+
+      setTimeout(function () { glow(headline); }, 300);
+    })();
+
+    // ─── THEME TOGGLE ───
+    (function () {
+      var btn = document.getElementById('themeToggle');
+
+      var MOON_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN_SVG  = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+
+      function applyTheme(dark) {
+        if (dark) {
+          document.body.classList.remove('light-mode');
+          btn.innerHTML = MOON_SVG;
+          btn.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.add('light-mode');
+          btn.innerHTML = SUN_SVG;
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+        }
+      }
+
+      var saved = localStorage.getItem('jaws_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = saved ? (saved === 'dark') : (prefersDark !== false);
+
+      applyTheme(isDark);
+
+      btn.addEventListener('click', function () {
+        var currentlyDark = !document.body.classList.contains('light-mode');
+        var newDark = !currentlyDark;
+        localStorage.setItem('jaws_theme', newDark ? 'dark' : 'light');
+        applyTheme(newDark);
+      });
+    })();
+
+    // ─── HAMBURGER MENU ───
+    (function () {
+      var hamburger = document.getElementById('navHamburger');
+      var menu = document.getElementById('navMobileMenu');
+      if (!hamburger || !menu) return;
+
+      hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('is-open');
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.innerHTML = open ? '&#10005;' : '&#9776;';
+      });
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('is-open') && !menu.contains(e.target) && e.target !== hamburger) {
+          menu.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Open menu');
+          hamburger.innerHTML = '&#9776;';
+        }
+      });
+    })();
+
+    // ─── READING PROGRESS ───
+    (function () {
+      var bar = document.getElementById('readingProgress');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
+      }, { passive: true });
+    })();
+
+    // ─── BACK TO TOP ───
+    (function () {
+      var btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+  </script>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
+
+  <script>
+    // ─── ARTICLE RATING ───
+    (function () {
+      var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
+      var articleKey = "Engineer Your Presence";
+      var storageKey = 'jaws_rating_' + encodeURIComponent(articleKey);
+      var confirmEl = document.getElementById('ratingConfirm');
+      var buttons = document.querySelectorAll('.rating-btn');
+      var existing = localStorage.getItem(storageKey);
+
+      function formatCount(n) {
+        if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+        return String(n);
+      }
+
+      function applyStateFromStorage(rating) {
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.getAttribute('data-rating') === rating) b.classList.add('selected');
+          else b.classList.add('faded');
+        });
+      }
+
+      var OFFSETS = { bait: 600, jaws: 2800 };
+
+      function renderCounts(counts) {
+        buttons.forEach(function (b) {
+          var rating = b.getAttribute('data-rating');
+          var countEl = b.querySelector('.rating-count');
+          if (countEl) {
+            countEl.textContent = formatCount((counts[rating] || 0) + (OFFSETS[rating] || 0));
+          }
+        });
+      }
+
+      // Fetch live counts
+      fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(articleKey))
+        .then(function (r) { return r.json(); })
+        .then(function (data) { if (data && data.counts) renderCounts(data.counts); })
+        .catch(function () {});
+
+      if (existing) {
+        confirmEl.textContent = 'You already rated this.';
+        applyStateFromStorage(existing);
+        return;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var rating = btn.getAttribute('data-rating');
+          localStorage.setItem(storageKey, rating);
+
+          // Optimistic increment
+          var countEl = btn.querySelector('.rating-count');
+          if (countEl) {
+            var current = parseFloat(countEl.textContent) || 0;
+            if (countEl.textContent.indexOf('k') !== -1) current = current * 1000;
+            countEl.textContent = formatCount(Math.round(current) + 1);
+          }
+
+          applyStateFromStorage(rating);
+          confirmEl.textContent = "Noted. You know what you're about.";
+
+          if (typeof gtag === 'function') {
+            gtag('event', 'article_rating', { article: articleKey, rating: rating });
+          }
+
+          fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'rate_article', article: articleKey, rating: rating, timestamp: new Date().toISOString() })
+          }).catch(function () {});
+        });
+      });
+    })();
+
+    // ─── CONSENT MODAL ───
+    (function() {
+      var agreed = localStorage.getItem('jawsConsentV1');
+      var declined = localStorage.getItem('jawsConsentDeclined');
+      if (agreed || declined) return;
+      var modal = document.getElementById('consentModal');
+      if (modal) modal.style.display = 'flex';
+      var scrollEl = document.getElementById('consentScroll');
+      var checks = document.getElementById('consentChecks');
+      var indicator = document.getElementById('consentScrollIndicator');
+      var scrolled = false;
+      function checkScrollPosition() {
+        if (scrolled) return;
+        var atBottom = scrollEl.scrollHeight <= scrollEl.clientHeight ||
+                       scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 20;
+        if (atBottom) {
+          scrolled = true;
+          if (checks) checks.style.display = 'flex';
+          if (indicator) indicator.style.display = 'none';
+        }
+      }
+      if (scrollEl) {
+        scrollEl.addEventListener('scroll', checkScrollPosition);
+        setTimeout(checkScrollPosition, 300);
+      }
+    })();
+
+    function validateModalConsent() {
+      var allChecked = ['modalCheck1','modalCheck2','modalCheck3','modalCheck4','modalCheck5']
+        .every(function(id) { var el = document.getElementById(id); return el && el.checked; });
+      var btn = document.getElementById('consentModalBtn');
+      if (btn) btn.disabled = !allChecked;
+    }
+
+    function acceptModalConsent() {
+      localStorage.setItem('jawsConsentV1', JSON.stringify({
+        agreedAt: new Date().toISOString(),
+        version: '1.0',
+        checks: { terms: true, content: true, sharing: true, age: true, cookies: true }
+      }));
+      localStorage.removeItem('jawsConsentDeclined');
+      var modal = document.getElementById('consentModal');
+      if (modal) modal.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
