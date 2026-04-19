@@ -6,6 +6,11 @@ const ALLOWED_ORIGINS = [
   'https://www.jawsadvantage.com',
 ];
 
+// Seeded vote counts — added to raw KV totals when serving ratings
+const SEED_RATINGS = {
+  'Engineer Your Presence.': { bait: 1100, jaws: 4500 },
+};
+
 
 const SYSTEM_PROMPT = `You are JAWS — the unfiltered career intelligence engine behind The JAWS Advantage. You speak with authority drawn from nearly two decades inside large corporations, across 12 roles, reaching the top 15 out of 10,000+ people.
 
@@ -83,7 +88,9 @@ export default {
         }
         const kvKey = 'ratings:' + article;
         const existing = await env.ARTICLE_RATINGS.get(kvKey);
-        const counts = existing ? JSON.parse(existing) : { bait: 0, jaws: 0 };
+        const raw = existing ? JSON.parse(existing) : { bait: 0, jaws: 0 };
+        const seed = SEED_RATINGS[article] || { bait: 0, jaws: 0 };
+        const counts = { bait: (raw.bait || 0) + seed.bait, jaws: (raw.jaws || 0) + seed.jaws };
         return new Response(JSON.stringify({ ok: true, counts }), {
           status: 200,
           headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
