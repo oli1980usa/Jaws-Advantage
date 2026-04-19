@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="canonical" href="https://www.jawsadvantage.com/playbook.html" />
+  <link rel="canonical" href="https://www.jawsadvantage.com/choose-your-battles-win-the-war.html" />
 
   <!-- Google Analytics -->
   <script>
@@ -29,18 +29,19 @@
     gtag('config', 'G-5RC382BRZF');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Intelligence | The JAWS Advantage</title>
-  <meta name="description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
-  <meta property="og:title" content="The Intelligence | The JAWS Advantage">
-  <meta property="og:description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
-  <meta property="og:url" content="https://jawsadvantage.com/playbook.html">
-  <meta property="og:type" content="website">
+  <title>Choose Your Battles, Win the War | The JAWS Advantage</title>
+  <meta name="description" content="Challenging everything gets you labeled difficult. Challenging nothing makes you invisible. Here's how to disagree strategically — and build credibility every time you do it.">
+  <meta property="og:title" content="Choose Your Battles, Win the War | The JAWS Advantage">
+  <meta property="og:description" content="Challenging everything gets you labeled difficult. Challenging nothing makes you invisible. Here's how to disagree strategically — and build credibility every time you do it.">
+  <meta property="og:url" content="https://jawsadvantage.com/choose-your-battles-win-the-war.html">
+  <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Intelligence | The JAWS Advantage">
-  <meta name="twitter:description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
+  <meta name="twitter:title" content="Choose Your Battles, Win the War | The JAWS Advantage">
+  <meta name="twitter:description" content="Challenging everything gets you labeled difficult. Challenging nothing makes you invisible. Here's how to disagree strategically.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="shark-logo.png" media="(prefers-color-scheme: light)">
   <style>
@@ -197,7 +198,6 @@
       color: #f5f3ef !important;
     }
 
-
     body.light-mode ::-webkit-scrollbar-thumb {
       background: var(--red);
     }
@@ -229,11 +229,6 @@
       color: rgba(10, 10, 10, 0.4);
     }
 
-    body.light-mode .pillar-btn-live,
-    body.light-mode .pillar-btn.active {
-      color: #ffffff;
-    }
-
     body.light-mode .contact-bar {
       color: rgba(10, 10, 10, 0.4);
       border-color: rgba(10, 10, 10, 0.08);
@@ -243,194 +238,176 @@
       color: var(--red);
     }
 
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 55vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 100px 48px 80px;
-      position: relative;
-      overflow: hidden;
+    /* ─── ARTICLE LAYOUT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 140px 48px 120px;
+    }
+
+    /* ─── ARTICLE HEADER ─── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
       border-bottom: 1px solid var(--border);
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 100% 20%, rgba(165, 42, 26, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 0% 80%, rgba(165, 42, 26, 0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--red);
+    .article-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
       margin-bottom: 28px;
     }
 
-    .hero-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 8vw, 110px);
-      line-height: 0.95;
-      letter-spacing: 0.02em;
-      color: var(--off-white);
-      max-width: 16ch;
-      margin-bottom: 32px;
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.1);
+      border: 1px solid rgba(165, 42, 26, 0.25);
+      padding: 8px 18px;
     }
 
-    .hero-sub {
-      font-size: 18px;
+    .article-issue {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+    }
+
+    .article-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--off-white);
+      margin-bottom: 24px;
+    }
+
+    .article-standfirst {
+      font-size: 20px;
       font-weight: 300;
       line-height: 1.65;
       color: var(--off-white-dim);
-      max-width: 600px;
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
     }
 
-    /* ─── SECTION LAYOUT ─── */
-    .pillars-section {
-      padding: 80px 48px 120px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-label::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: var(--red);
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: 0.04em;
-      color: var(--off-white);
-      margin-bottom: 0;
-      line-height: 1.05;
-    }
-
-    /* ─── PILLARS GRID ─── */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      margin-top: 56px;
-    }
-
-    .pillar {
-      padding: 48px 36px;
-      border-right: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pillar:last-child {
-      border-right: none;
-    }
-
-    .pillar:hover {
-      background: var(--black-3);
-    }
-
-    .pillar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    .pillar:hover::before {
-      transform: scaleX(1);
-    }
-
-    .pillar-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 56px;
-      line-height: 1;
-      color: var(--border);
-      margin-bottom: 20px;
-      transition: color 0.3s;
-    }
-
-    .pillar:hover .pillar-number {
-      color: rgba(165, 42, 26, 0.2);
-    }
-
-    .pillar-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 0.04em;
-      color: var(--off-white);
-      margin-bottom: 16px;
-      line-height: 1.1;
-    }
-
-    .pillar-desc {
-      font-size: 14px;
+    /* ─── ARTICLE BODY ─── */
+    .article-body {
+      font-size: 18px;
       font-weight: 300;
-      line-height: 1.7;
-      color: var(--off-white-dim);
-      flex: 1;
+      line-height: 1.8;
+      color: var(--off-white);
+    }
+
+    .article-body p {
       margin-bottom: 28px;
     }
 
-    .pillar-btn {
-      display: inline-block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 10px 18px;
-      text-decoration: none;
-      align-self: flex-start;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    .article-body p:last-child {
+      margin-bottom: 0;
     }
 
-    .pillar-btn-live {
-      background: var(--red);
+    .article-section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
       color: var(--off-white);
-      border: 1px solid var(--red);
+      margin: 56px 0 20px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border);
     }
 
-    .pillar-btn-live:hover {
-      background: #bf3120;
-      border-color: #bf3120;
+    .article-pull-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--off-white);
+      margin: 56px 0;
+      padding: 40px 0 40px 28px;
+      border-left: 4px solid var(--red);
+      position: relative;
     }
 
-    .pillar-btn-soon {
-      background: transparent;
-      color: rgba(184, 181, 176, 0.2);
-      border: 1px solid rgba(245, 243, 239, 0.07);
-      cursor: default;
-      pointer-events: none;
+    .article-pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 28px;
+      font-family: Georgia, serif;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.25;
+    }
+
+    /* ─── EXAMPLE BOX ─── */
+    .article-example {
+      margin: 48px 0;
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 24px 28px 28px;
+      background: rgba(165, 42, 26, 0.04);
+    }
+
+    .article-example-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.12);
+      border: 1px solid rgba(165, 42, 26, 0.3);
+      padding: 4px 12px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .article-example p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--off-white-dim);
+      margin-bottom: 0 !important;
+    }
+
+    .article-closing {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--off-white-dim);
+      line-height: 1.7;
+    }
+
+    .article-closing strong {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ─── BACK LINK ─── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      text-decoration: none;
+      margin-bottom: 56px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--red);
     }
 
     /* ─── CONTACT BAR ─── */
@@ -525,21 +502,6 @@
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .pillar:nth-child(2) {
-        border-right: none;
-      }
-
-      .pillar:nth-child(1),
-      .pillar:nth-child(2) {
-        border-bottom: 1px solid var(--border);
-      }
-    }
-
     @media (max-width: 768px) {
       nav {
         padding: 0 24px;
@@ -549,21 +511,8 @@
         display: none;
       }
 
-      .hero {
-        padding: 100px 24px 64px;
-      }
-
-      .pillars-section {
-        padding: 64px 24px 80px;
-      }
-
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pillar {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
+      .article-wrap {
+        padding: 120px 24px 80px;
       }
 
       footer {
@@ -574,10 +523,6 @@
         flex-direction: column;
         gap: 20px;
         text-align: center;
-      }
-
-      .contact-bar {
-        padding: 24px;
       }
     }
 
@@ -920,7 +865,6 @@
       opacity: 0.8;
     }
 
-
     .nav-mobile-menu {
       display: none;
       position: fixed;
@@ -978,174 +922,136 @@
       }
     }
 
-
-    .pillar-rating {
-      position: absolute;
-      bottom: 16px;
-      right: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0.4;
-      color: var(--off-white);
+    /* ─── READING PROGRESS BAR ─── */
+    .reading-progress {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(165, 42, 26, 0.8);
+      z-index: 999;
+      transition: width 0.05s linear;
     }
 
-    .pillar-rating-item {
+    /* ─── READ TIME ─── */
+    .article-read-time {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--off-white-dim);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(165, 42, 26, 0.5);
       line-height: 1;
     }
 
-    /* ─── ARTICLES SECTION ─── */
-    .intel-articles-section {
-      padding: 64px 48px 80px;
-      max-width: 960px;
-      margin: 0 auto;
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    .articles-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: #bf3120;
     }
 
-    .articles-list {
-      display: flex;
-      flex-direction: column;
+    /* ─── ARTICLE RATING ─── */
+    .article-rating {
       border-top: 1px solid var(--border);
-    }
-
-    .article-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 36px;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      transition: background 0.2s;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .article-row:hover {
-      padding-left: 16px;
-      padding-right: 16px;
-      margin-left: -16px;
-      margin-right: -16px;
-      background: var(--black-2);
-    }
-
-    .article-row:hover .article-title {
-      color: var(--red);
-    }
-
-    .article-row:hover .article-arrow {
-      transform: translateX(6px);
-      color: var(--red);
-    }
-
-    .article-tag {
-      font-size: 0.55rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--red);
-      background: rgba(165, 42, 26, 0.1);
-      border: 1px solid rgba(165, 42, 26, 0.25);
-      padding: 5px 10px;
+      padding: 24px 0 20px;
+      margin: 40px 0 0;
       text-align: center;
-      width: 160px;
-      flex-shrink: 0;
     }
-
-    .article-content {
+    .article-rating-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--off-white-dim);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .article-rating-buttons {
       display: flex;
-      align-items: flex-end;
+      justify-content: center;
       gap: 12px;
     }
-    .intel-article-content {
-      flex: 1;
+    .rating-btn {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-    }
-
-    .article-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
-      letter-spacing: 0.03em;
-      color: var(--off-white);
-      transition: color 0.2s;
-      line-height: 1.1;
-    }
-
-    .article-excerpt {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--off-white-dim);
-      line-height: 1.6;
-    }
-
-    .article-meta {
-      font-size: 12px;
-      color: rgba(184, 181, 176, 0.5);
-      letter-spacing: 0.06em;
-    }
-
-    .article-arrow {
-      font-size: 20px;
-      color: var(--off-white-dim);
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .intel-article-votes {
-      display: flex;
       align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      color: var(--off-white-dim);
+      justify-content: center;
+      gap: 8px;
+      width: 88px;
+      height: 88px;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--off-white);
       font-family: 'DM Sans', sans-serif;
-      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s, opacity 0.2s;
     }
-    .intel-article-votes svg {
-      opacity: 0.5;
+    .rating-btn:hover:not(:disabled) {
+      background: rgba(165,42,26,0.15);
     }
-
-    @media (max-width: 640px) {
-      .intel-articles-section {
-        padding: 48px 24px 64px;
-      }
-
-      .article-row {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .article-tag {
-        width: auto;
-        align-self: flex-start;
-      }
-
-      .article-arrow {
-        display: none;
-      }
-
-      .articles-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
+    .rating-btn.selected {
+      background: var(--red);
+      color: #ffffff;
+    }
+    .rating-btn.faded {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .article-rating-confirm {
+      margin-top: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--off-white-dim);
+      letter-spacing: 0.04em;
+      min-height: 18px;
+      opacity: 0.6;
+    }
+    .rating-count {
+      font-size: 10px;
+      opacity: 0.6;
+      letter-spacing: 0.04em;
     }
 
   </style>
 </head>
 <body>
+
+  <div id="readingProgress" class="reading-progress"></div>
 
   <!-- ─── NAV ─── -->
   <nav>
@@ -1172,170 +1078,123 @@
     <a href="get-the-edge.html">Ask JAWS</a>
   </div>
 
-  <!-- ─── HERO ─── -->
-  <section class="hero">
-    <p class="hero-eyebrow fade-in">CAREER INTELLIGENCE</p>
-    <h1 class="hero-headline fade-in">THE INTELLIGENCE</h1>
-    <p class="hero-sub fade-in">Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.</p>
-  </section>
+  <!-- ─── ARTICLE ─── -->
+  <main class="article-wrap">
 
-  <!-- ─── PILLAR GRID ─── -->
-  <section class="pillars-section">
-    <p class="section-label">The Four Pillars</p>
-    <div class="pillars-grid">
+    <a href="playbook.html" class="back-link fade-in">&larr; Back to The Playbook</a>
 
-      <div class="pillar fade-in">
-        <div class="pillar-number">01</div>
-        <h3 class="pillar-title">Engineer Your Presence</h3>
-        <p class="pillar-desc">Visibility is not vanity. Networking is not luck — it's architecture. The right people, the right rooms, the right moment. Being known by the people who matter before you need them is the single biggest lever in your career.</p>
-        <a href="engineer-your-presence.html" class="pillar-btn pillar-btn-live">READ THE PLAYBOOK</a>
-      </div>
-
-      <div class="pillar fade-in">
-        <div class="pillar-number">02</div>
-        <h3 class="pillar-title">Be Courageous and Curious</h3>
-        <p class="pillar-desc">Make the call. Own it. Nobody respects a leader who delegates decisions upwards. Stay curious enough to ask better questions than everyone else — and decisive enough to act on the answers, even with imperfect information.</p>
-        <a href="choose-your-battles-win-the-war.html" class="pillar-btn pillar-btn-live">READ THE PLAYBOOK</a>
-      </div>
-
-      <div class="pillar fade-in">
-        <div class="pillar-number">03</div>
-        <h3 class="pillar-title">Lead With and Through Others</h3>
-        <p class="pillar-desc">You cannot do it alone. The shift from individual contributor to leader happens when you stop asking what you can deliver and start asking what your team can deliver. Empower them. Their success is your success.</p>
-        <a href="lead-with-and-through-others.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
-      </div>
-
-      <div class="pillar fade-in">
-        <div class="pillar-number">04</div>
-        <h3 class="pillar-title">Manage and Influence Upwards</h3>
-        <p class="pillar-desc">The half of the job nobody talks about. Your relationship with the people above you determines your visibility, your resources and your trajectory. Most people only manage downward. The ones who move fast manage in every direction.</p>
-        <a href="manage-and-influence-upwards.html" class="pillar-btn pillar-btn-live">Read the Playbook</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─── ARTICLES ─── -->
-  <section class="intel-articles-section">
-    <div class="articles-header">
-      <div>
-        <p class="section-label">The Articles</p>
-        <h2 class="section-title fade-in">Six issues.<br>Zero filler.</h2>
-      </div>
-    </div>
-
-    <div class="articles-list">
-
-      <a href="nobody-tells-you-this-on-your-first-day.html" class="article-row fade-in">
-        <span class="article-tag">Networking</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">Nobody tells you this on your first day. They should.</h3>
-          <p class="article-excerpt">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations.</p>
-          <span class="article-meta">3 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="nobody-tells-you-this-on-your-first-day" data-offset="4800">4.8k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="nobody-tells-you-this-on-your-first-day" data-offset="1200">1.2k</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
-
-      <a href="youre-not-stuck-youre-on-the-wrong-ladder.html" class="article-row fade-in">
+    <header class="article-header fade-in">
+      <div class="article-eyebrow">
         <span class="article-tag">Career Strategy</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">You're not stuck. You're on the wrong ladder.</h3>
-          <p class="article-excerpt">Most people climb the first ladder they find. The ones who move fast know which ladder to be on — and when to jump.</p>
-          <span class="article-meta">4 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="youre-not-stuck-youre-on-the-wrong-ladder" data-offset="3900">3.9k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="youre-not-stuck-youre-on-the-wrong-ladder" data-offset="980">980</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
+        <span class="article-issue">Pillar 02</span>
+      </div>
+      <span class="article-read-time">8 min read</span>
+      <h1 class="article-title">Choose your battles, win the war.</h1>
+      <p class="article-standfirst">Most people think disagreeing with the boss is career suicide. Wrong. Never disagreeing — or never admitting you're wrong — both will kill your career. Here's how to challenge strategically and build credibility every time you do it.</p>
+    </header>
 
-      <a href="the-difference-between-a-manager-and-a-leader.html" class="article-row fade-in">
-        <span class="article-tag">Leadership</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">The difference between a manager and a leader.</h3>
-          <p class="article-excerpt">Every organisation has managers. Far fewer have leaders. Here's what actually separates them.</p>
-          <span class="article-meta">4 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="the-difference-between-a-manager-and-a-leader" data-offset="5200">5.2k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="the-difference-between-a-manager-and-a-leader" data-offset="1500">1.5k</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
+    <div class="article-body fade-in">
 
-      <a href="the-half-of-management-nobody-teaches-you.html" class="article-row fade-in">
-        <span class="article-tag">Leadership</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">The half of management nobody teaches you.</h3>
-          <p class="article-excerpt">Managing down is only half the job. The other half is what actually moves your career.</p>
-          <span class="article-meta">4 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="the-half-of-management-nobody-teaches-you" data-offset="4400">4.4k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="the-half-of-management-nobody-teaches-you" data-offset="1100">1.1k</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
+      <p>You can be the smartest person in the room, spot every flaw in every plan, and have better solutions to every problem. But if you challenge everything, you'll be labeled difficult. If you challenge nothing, you'll be invisible. And if you can never admit you're wrong, you'll be seen as arrogant and untrustworthy.</p>
 
-      <a href="you-will-get-3-in-10-wrong-make-the-call-anyway.html" class="article-row fade-in">
-        <span class="article-tag">Decision Making</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">You will get 3 in 10 wrong. Make the call anyway.</h3>
-          <p class="article-excerpt">The fear of deciding wrong stops more careers than wrong decisions ever has. Here's why.</p>
-          <span class="article-meta">5 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="you-will-get-3-in-10-wrong-make-the-call-anyway" data-offset="4100">4.1k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="you-will-get-3-in-10-wrong-make-the-call-anyway" data-offset="890">890</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
+      <p>The people who advance fastest understand this: <strong>strategic challenge requires both courage and curiosity.</strong> Courage to speak up when it matters. Curiosity to learn when you're wrong. And the wisdom to know which battles are worth fighting.</p>
 
-      <a href="you-are-busy-but-are-you-thinking.html" class="article-row fade-in">
-        <span class="article-tag">Leadership Strategy</span>
-        <div class="article-content">
-          <div class="intel-article-content">
-          <h3 class="article-title">You're busy. But are you thinking?</h3>
-          <p class="article-excerpt">Most managers are flat out. Every single day. But hard at what? If every hour is consumed by what's urgent right now, nobody is building what matters next.</p>
-          <span class="article-meta">3 min read</span>
-          </div>
-          <div class="intel-article-votes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.88v-2c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83V19c0 1.1.9 2 2 2h9c.83 0 1.58-.5 1.91-1.28l3-7.28c.08-.2.09-.43.09-.56v-1.95l-.01-.01.01-.04z"/></svg>
-            <span class="intel-vote-up" data-article="you-are-busy-but-are-you-thinking" data-offset="3700">3.7k</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.88v2c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V5c0-1.1-.9-2-2-2H6c-.83 0-1.58.5-1.91 1.28l-3 7.28c-.08.2-.09.43-.09.56v1.95l.01.01-.01.04z"/></svg>
-            <span class="intel-vote-down" data-article="you-are-busy-but-are-you-thinking" data-offset="760">760</span>
-          </div>
-        </div>
-        <span class="article-arrow">&rarr;</span>
-      </a>
+      <p>This isn't about being agreeable or disagreeable. This is about being strategically intelligent.</p>
+
+      <h2 class="article-section-heading">The courage-curiosity matrix</h2>
+
+      <blockquote class="article-pull-quote">Most people get one without the other. Both combinations kill careers.</blockquote>
+
+      <p><strong>Courage without curiosity</strong> makes you the office know-it-all. You challenge everything, admit nothing, and wonder why people stop listening to your ideas — even when they're good.</p>
+
+      <p><strong>Curiosity without courage</strong> makes you invisible. You see the problems, understand the risks, but never speak up. You're always learning but never leading.</p>
+
+      <p><strong>Both together</strong> makes you a strategic challenger. You pick your battles, fight them intelligently, learn from the outcomes, and build credibility with every exchange.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Two Types</span>
+        <p>Marcus had courage but no curiosity. He challenged every decision in leadership meetings, never admitted when he was proven wrong, and defended positions long after evidence shifted. His ideas were often solid, but his approach was exhausting. When promotion time came, his manager said, "Marcus is brilliant, but I can't put him in front of clients or senior leadership." Meanwhile, Sarah had curiosity but no courage. She spotted flaws in project plans, understood market risks others missed, but rarely voiced concerns. Two years later, she watched less-informed colleagues get promoted while she remained exactly where she started.</p>
+      </div>
+
+      <h2 class="article-section-heading">Battle selection criteria</h2>
+
+      <p>Not every hill is worth dying on. Strategic challengers choose their battles based on three factors.</p>
+
+      <p><strong>Impact.</strong> Does this issue materially affect outcomes that senior leadership cares about? A flawed budget assumption with million-dollar implications? Worth fighting. A suboptimal meeting format? Probably not.</p>
+
+      <p><strong>Timing.</strong> Is this the right moment to raise concerns? Mid-crisis when everyone's stressed is bad timing. During planning phases when course corrections are still possible? Perfect timing.</p>
+
+      <p><strong>Political capital.</strong> Do you have the credibility and relationships to make this challenge constructive? If you've built trust and delivered results, people will listen. If you're new or have recently burned bridges, wait for a better opportunity.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">Wrong Battle, Right Analysis</span>
+        <p>In his first month at a new company, Jamie challenged a product roadmap in front of the entire executive team. His analysis was correct — the market assumptions were flawed — but his timing and approach were terrible. Instead of being seen as insightful, he was labeled "not a team player." Six months later, when the product failed exactly as he'd predicted, nobody remembered his warning. They just remembered his poor judgment in how he delivered it.</p>
+      </div>
+
+      <h2 class="article-section-heading">The strategic challenge framework</h2>
+
+      <p>When you do choose to engage, there is a reliable way to challenge without being labeled difficult.</p>
+
+      <p><strong>Signal your intent.</strong> "I have a different perspective" or "I might be wrong, but here's what I'm seeing." This frames your challenge as exploratory, not adversarial.</p>
+
+      <p><strong>Present one clear case.</strong> One point, supported by specific evidence. Not a laundry list of concerns, not a philosophical debate. One thing, backed by data.</p>
+
+      <p><strong>Show intellectual humility.</strong> "What am I missing?" or "How do you see this differently?" This invites dialogue rather than triggering defensiveness.</p>
+
+      <p><strong>Accept the outcome.</strong> If your concern is addressed, great. If it's overruled, accept it gracefully. Don't sulk, don't say "I told you so" later, don't keep fighting a battle after it's decided.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Framework in Practice</span>
+        <p>Priya used this approach to challenge a customer acquisition strategy that was burning through budget without delivering results. Instead of saying "This isn't working" in a team meeting, she scheduled time with her director. She said, "I might be misreading the data, but it looks like our cost-per-acquisition has doubled in three months while conversion rates stayed flat. What am I missing about the strategy?" Her director appreciated the private forum and the specific observation. They adjusted the approach, results improved, and Priya's credibility soared.</p>
+      </div>
+
+      <h2 class="article-section-heading">The strategic apology</h2>
+
+      <blockquote class="article-pull-quote">When you're wrong — and you will be — own it immediately and completely.</blockquote>
+
+      <p>The fastest way to build respect is to admit mistakes before anyone has to point them out. "I was wrong about X. Here's what I learned." Then move on. Don't dwell, don't over-explain, don't make it about your feelings.</p>
+
+      <p>Strategic apologies demonstrate intellectual honesty, show learning ability, and build trust — if you admit small mistakes, people believe you when you say bigger things are going well. They also model the behaviour you want from your team, and they separate you from people who are always defensive.</p>
+
+      <p>The crucial distinction: apologise for being wrong about facts or judgment, not for having an opinion or raising a concern. "I was wrong about the timeline" builds respect. "Sorry for bringing this up" teaches people not to listen to you.</p>
+
+      <div class="article-example">
+        <span class="article-example-label">The Clean Admission</span>
+        <p>When James miscalculated market size in a strategy presentation, he could have gotten defensive or tried to explain away the error. Instead he said, "I was wrong about the addressable market — it's actually 40% smaller than I projected. This changes our year-two projections significantly." His director later said, "I trust James's numbers because when he's wrong, he tells me immediately." One honest admission built more credibility than a year of being right.</p>
+      </div>
+
+      <h2 class="article-section-heading">The compound effect</h2>
+
+      <p>Every well-chosen battle, every graceful acknowledgment of error, every moment of intellectual humility compounds. People start seeking your input because they know you'll give them honest perspective without hidden agendas or ego attachments.</p>
+
+      <p>After every engagement, ask yourself: Did I choose the right battle? Was my timing appropriate? Did I present my case clearly? What would I do differently next time? This meta-learning is what separates strategic challengers from people who just have strong opinions.</p>
+
+      <p>You become known as someone who sees around corners, speaks up when it matters, and learns from experience. Those are exactly the qualities that senior leaders want in the people they promote.</p>
+
+      <div class="article-closing">
+        <strong>Choose one battle this week.</strong> Not the biggest one, not the most obvious one — the one where your timing is right, your evidence is solid, and you have the credibility to be heard. Use the framework. Signal intent, present one clear point, show humility, accept the outcome. Then do it again next week. That's how strategic challengers are built.
+      </div>
 
     </div>
-  </section>
+
+    <!-- ─── ARTICLE RATING ─── -->
+    <div class="article-rating" id="articleRating">
+      <h3 class="article-rating-heading">Bait or JAWS?</h3>
+      <div class="article-rating-buttons">
+        <button class="rating-btn" data-rating="bait" aria-label="Bait">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span>Bait</span>
+          <span class="rating-count"></span>
+        </button>
+        <button class="rating-btn" data-rating="jaws" aria-label="JAWS">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 C4 20 8 20 12 8 C14 14 16 20 20 20"/></svg>
+          <span>JAWS</span>
+          <span class="rating-count"></span>
+        </button>
+      </div>
+      <p class="article-rating-confirm" id="ratingConfirm"></p>
+    </div>
+  </main>
 
   <!-- ─── CONTACT BAR ─── -->
   <div class="contact-bar">
@@ -1360,7 +1219,8 @@
   <div class="float-chat" id="floatChat">
     <span class="float-chat-label">Ask JAWS</span>
     <div class="float-chat-input-wrap" id="floatChatInputWrap">
-      <input type="text" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      <input type="text" style="display:none;" aria-hidden="true" tabindex="-1" />
+      <input type="search" class="float-chat-input" id="floatChatInput" placeholder="Ask a career question..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
       <button class="float-chat-submit" id="floatChatSubmit" aria-label="Ask">&#10148;</button>
     </div>
   </div>
@@ -1435,53 +1295,8 @@
     </div>
   </div>
 
-      <div class="consent-modal-scroll" id="consentScroll">
-        <div class="consent-modal-section">
-          <p class="consent-modal-section-title">COOKIES AND ANALYTICS</p>
-          <p class="consent-modal-section-text">This site uses Google Analytics to collect anonymous usage data — page views, session duration, and general location. No personally identifiable information is collected. You can manage preferences after agreeing.</p>
-        </div>
-        <div class="consent-modal-section">
-          <p class="consent-modal-section-title">TERMS OF SERVICE</p>
-          <p class="consent-modal-section-text">Content on this site is for informational and entertainment purposes only. AI-generated content (JAWS Decode, Job Posting Analyzer) is satirical commentary and opinion — not factual statements about any employer, company, or individual. Nothing on this site constitutes legal, financial, HR, or career advice.</p>
-        </div>
-        <div class="consent-modal-section">
-          <p class="consent-modal-section-title">YOUR RESPONSIBILITIES</p>
-          <p class="consent-modal-section-text">You are solely responsible for how you use content from this site. You may not share, reproduce, screenshot, or distribute AI-generated outputs in any form. The JAWS Advantage accepts no liability for decisions made based on content generated by this site.</p>
-        </div>
-        <div class="consent-modal-section">
-          <p class="consent-modal-section-title">INTELLECTUAL PROPERTY</p>
-          <p class="consent-modal-section-text">The JAWS Advantage brand, content, quiz questions, frameworks, and design are the intellectual property of the site owner. You may not reproduce or commercialize them without permission.</p>
-        </div>
-        <div class="consent-modal-scroll-indicator" id="consentScrollIndicator">&#8595; Scroll to continue</div>
-      </div>
-
-      <div class="consent-modal-checks" id="consentChecks" style="display:none;">
-        <label class="consent-checkbox-label">
-          <input type="checkbox" id="modalCheck1" class="consent-checkbox" onchange="validateModalConsent()">
-          <span>I have read and agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
-        </label>
-        <label class="consent-checkbox-label">
-          <input type="checkbox" id="modalCheck2" class="consent-checkbox" onchange="validateModalConsent()">
-          <span>I understand that AI-generated content on this site is satirical opinion and not factual statements</span>
-        </label>
-        <label class="consent-checkbox-label">
-          <input type="checkbox" id="modalCheck3" class="consent-checkbox" onchange="validateModalConsent()">
-          <span>I am 18 years of age or older</span>
-        </label>
-        <label class="consent-checkbox-label">
-          <input type="checkbox" id="modalCheck4" class="consent-checkbox" onchange="validateModalConsent()">
-          <span>I accept cookies for analytics purposes</span>
-        </label>
-
-        <button class="consent-modal-btn" id="consentModalBtn" disabled onclick="acceptModalConsent()">I AGREE — CONTINUE</button>
-        <button class="quiz-consent-decline-btn" onclick="declineSiteConsent()">I DECLINE — RETURN TO HOMEPAGE</button>
-        <p class="consent-modal-footer-note">By clicking above you confirm you have read and agreed to all terms above.</p>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const ARTICLE_CONTEXT = "the JAWS Advantage Playbook page which outlines the four pillars of career dominance";
+    const ARTICLE_CONTEXT = "the playbook page about choosing your battles, the courage-curiosity matrix, battle selection criteria based on impact timing and political capital, the strategic challenge framework, strategic apologies, and building compound credibility through intelligent disagreement";
 
     // ─── SCROLL ANIMATIONS ───
     const observer = new IntersectionObserver((entries) => {
@@ -1562,14 +1377,14 @@
 
     // ─── GLOW ANIMATION ───
     (function () {
-      var headline = document.querySelector('.hero-headline');
+      var headline = document.querySelector('.article-title');
 
       function glow(el) {
         if (!el) return;
         el.classList.remove('hero-glow');
         void el.offsetWidth;
         el.classList.add('hero-glow');
-        setTimeout(function () { el.classList.remove('hero-glow'); }, 2000);
+        setTimeout(function () { el.classList.remove('hero-glow'); }, 1500);
       }
 
       setTimeout(function () { glow(headline); }, 300);
@@ -1637,73 +1452,108 @@
         }
       });
     })();
+
+    // ─── READING PROGRESS ───
+    (function () {
+      var bar = document.getElementById('readingProgress');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
+      }, { passive: true });
+    })();
+
+    // ─── BACK TO TOP ───
+    (function () {
+      var btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
   </script>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
+
   <script>
-    // ─── LISTING RATINGS ───
+    // ─── ARTICLE RATING ───
     (function () {
       var WORKER_URL = 'https://jaws-advantage-api.oliverfrancis.workers.dev';
-      var TITLE_MAP = {
-        'engineer-your-presence.html':    'Engineer Your Presence.',
-        'lead-with-and-through-others.html': 'Lead With and Through Others.',
-        'manage-and-influence-upwards.html': 'Manage and Influence Upwards.'
-      };
-
-      var OFFSETS = {
-        'Engineer Your Presence.':        { bait: 1100, jaws: 4500 },
-        'Lead With and Through Others.':  { bait: 1300, jaws: 4600 },
-        'Manage and Influence Upwards.':  { bait: 1050, jaws: 4300 }
-      };
-
-      var SVG_UP = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
-      var SVG_DOWN = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 2l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
+      var articleKey = "Choose Your Battles, Win the War.";
+      var storageKey = 'jaws_rating_' + encodeURIComponent(articleKey);
+      var confirmEl = document.getElementById('ratingConfirm');
+      var buttons = document.querySelectorAll('.rating-btn');
+      var existing = localStorage.getItem(storageKey);
 
       function formatCount(n) {
         if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
         return String(n);
       }
 
-      document.querySelectorAll('.pillar').forEach(function (pillar) {
-        var linkEl = pillar.querySelector('.pillar-btn-live');
-        if (!linkEl) return;
-        var href = linkEl.getAttribute('href') || '';
-        var filename = href.split('/').pop();
-        var title = TITLE_MAP[filename];
-        if (!title) return;
-        var offset = OFFSETS[title] || { bait: 0, jaws: 0 };
-        if (!offset.jaws && !offset.bait) return;
+      function applyStateFromStorage(rating) {
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.getAttribute('data-rating') === rating) b.classList.add('selected');
+          else b.classList.add('faded');
+        });
+      }
 
-        // Render immediately with offset values — visible even if fetch fails
-        var container = document.createElement('div');
-        container.className = 'pillar-rating';
-        var upItem = document.createElement('span');
-        upItem.className = 'pillar-rating-item';
-        var downItem = document.createElement('span');
-        downItem.className = 'pillar-rating-item';
+      var OFFSETS = { bait: 900, jaws: 3600 };
 
-        function render(jaws, bait) {
-          upItem.innerHTML = SVG_UP + formatCount(jaws);
-          downItem.innerHTML = SVG_DOWN + formatCount(bait);
-        }
+      function renderCounts(counts) {
+        buttons.forEach(function (b) {
+          var rating = b.getAttribute('data-rating');
+          var countEl = b.querySelector('.rating-count');
+          if (countEl) {
+            countEl.textContent = formatCount((counts[rating] || 0) + (OFFSETS[rating] || 0));
+          }
+        });
+      }
 
-        render(offset.jaws, offset.bait);
-        container.appendChild(upItem);
-        container.appendChild(downItem);
-        pillar.appendChild(container);
+      // Fetch live counts
+      fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(articleKey))
+        .then(function (r) { return r.json(); })
+        .then(function (data) { if (data && data.counts) renderCounts(data.counts); })
+        .catch(function () {});
 
-        // Update with real votes if fetch succeeds
-        fetch(WORKER_URL + '?action=get_ratings&article=' + encodeURIComponent(title))
-          .then(function (r) { return r.json(); })
-          .then(function (data) {
-            if (!data || !data.counts) return;
-            render(
-              (data.counts.jaws || 0) + offset.jaws,
-              (data.counts.bait || 0) + offset.bait
-            );
-          })
-          .catch(function () {});
+      if (existing) {
+        confirmEl.textContent = 'You already rated this.';
+        applyStateFromStorage(existing);
+        return;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var rating = btn.getAttribute('data-rating');
+          localStorage.setItem(storageKey, rating);
+
+          // Optimistic increment
+          var countEl = btn.querySelector('.rating-count');
+          if (countEl) {
+            var current = parseFloat(countEl.textContent) || 0;
+            if (countEl.textContent.indexOf('k') !== -1) current = current * 1000;
+            countEl.textContent = formatCount(Math.round(current) + 1);
+          }
+
+          applyStateFromStorage(rating);
+          confirmEl.textContent = "Noted. You know what you're about.";
+
+          if (typeof gtag === 'function') {
+            gtag('event', 'article_rating', { article: articleKey, rating: rating });
+          }
+
+          fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'rate_article', article: articleKey, rating: rating, timestamp: new Date().toISOString() })
+          }).catch(function () {});
+        });
       });
     })();
+
     // ─── CONSENT MODAL ───
     (function() {
       var agreed = localStorage.getItem('jawsConsentV1');
