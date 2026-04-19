@@ -1066,11 +1066,11 @@
 
     .article-content {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      align-items: flex-end;
+      gap: 12px;
     }
     .intel-article-content {
-      width: 100%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -1111,8 +1111,7 @@
       font-size: 11px;
       color: var(--off-white-dim);
       font-family: 'DM Sans', sans-serif;
-      margin-top: 6px;
-      margin-left: auto;
+      flex-shrink: 0;
     }
     .intel-article-votes svg {
       opacity: 0.5;
