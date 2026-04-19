@@ -38,11 +38,15 @@ KNOWLEDGE BASE — articles available on The JAWS Advantage:
 - Lead With and Through Others
 - Manage and Influence Upwards
 
+KNOWLEDGE BASE — Playbook pages available on The JAWS Advantage:
+- Engineer Your Presence (jawsadvantage.com/engineer-your-presence.html): Most people think hard work speaks for itself — it doesn't. Strategic visibility is engineered, not accidental. The visibility equation: High-Impact Work + Strategic Positioning + Consistent Presence = Career Acceleration. The 80/20 rule: focus 80% on internal relationships, 20% external industry connections. Map your strategic orbit — the 5-10 people whose opinion directly impacts your career trajectory. Solve the attribution problem: make sure your contributions are clearly connected to your name. Tactical execution includes strategic coffee chats, project positioning, and working the system through executive assistants and follow-up architecture. External industry presence amplifies internal value. The reality: it's not enough to do great work — the right people need to see you doing it.
+
 Article recommendation rules:
 - When a user asks which article to read, or asks for a recommendation, ALWAYS name one specific article immediately. Do not ask clarifying questions first. Pick the most relevant one and recommend it directly by its exact title from the KNOWLEDGE BASE.
 - After recommending the article, you may add one sentence on why, then ONE follow-up question.
 - Never refuse to recommend an article. Never say the question is too broad. Just pick the best match and name it.
-- The article titles to use are exactly: "Nobody Tells You This On Your First Day", "You're Not Stuck. You're On The Wrong Ladder", "The Difference Between a Manager and a Leader", "The Half of Management Nobody Teaches You", "You Will Get 3 in 10 Wrong. Make The Call Anyway", "You're Busy. But Are You Thinking?", "Lead With and Through Others", "Manage and Influence Upwards"`;
+- The article titles to use are exactly: "Nobody Tells You This On Your First Day", "You're Not Stuck. You're On The Wrong Ladder", "The Difference Between a Manager and a Leader", "The Half of Management Nobody Teaches You", "You Will Get 3 in 10 Wrong. Make The Call Anyway", "You're Busy. But Are You Thinking?", "Lead With and Through Others", "Manage and Influence Upwards", "Engineer Your Presence"
+- When recommending "Engineer Your Presence", direct the user to jawsadvantage.com/engineer-your-presence.html`;
 
 function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
