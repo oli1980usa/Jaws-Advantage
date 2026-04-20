@@ -637,6 +637,52 @@
       color: var(--red);
     }
 
+    /* ─── CATEGORY FILTER BAR ─── */
+    .articles-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--off-white-dim);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(165, 42, 26, 0.5);
+      color: var(--off-white);
+    }
+
+    .filter-btn.active {
+      border-color: var(--red);
+      color: var(--red);
+      background: rgba(165, 42, 26, 0.08);
+    }
+
+    /* ─── ARTICLE CATEGORY PILL ─── */
+    .article-category {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .article-category[data-cat="presence"]   { color: #7c9ebf; }
+    .article-category[data-cat="courage"]    { color: var(--red); }
+    .article-category[data-cat="leadership"] { color: #8a9e7c; }
+    .article-category[data-cat="influence"]  { color: #b89a5c; }
+
     .article-tag {
       font-size: 0.55rem;
       font-weight: 600;
@@ -1487,11 +1533,20 @@
       <a href="playbook.html" class="view-all">All Articles &rarr;</a>
     </div>
 
+    <div class="articles-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="presence">Presence</button>
+      <button class="filter-btn" data-filter="courage">Courage</button>
+      <button class="filter-btn" data-filter="leadership">Leadership</button>
+      <button class="filter-btn" data-filter="influence">Influence</button>
+    </div>
+
     <div class="articles-list">
 
-      <a href="nobody-tells-you-this-on-your-first-day.html" class="article-row fade-in">
+      <a href="nobody-tells-you-this-on-your-first-day.html" class="article-row fade-in" data-category="presence">
         <span class="article-tag">Networking</span>
         <div class="article-content">
+          <span class="article-category" data-cat="presence">Presence</span>
           <h3 class="article-title">Nobody tells you this on your first day. They should.</h3>
           <p class="article-excerpt">You were hired because you were good. That's not enough. Here's what actually moves careers inside big organisations.</p>
           <span class="article-meta">6 min read</span>
@@ -1499,9 +1554,10 @@
         <span class="article-arrow">&rarr;</span>
       </a>
 
-      <a href="youre-not-stuck-youre-on-the-wrong-ladder.html" class="article-row fade-in">
+      <a href="youre-not-stuck-youre-on-the-wrong-ladder.html" class="article-row fade-in" data-category="courage">
         <span class="article-tag">Career Strategy</span>
         <div class="article-content">
+          <span class="article-category" data-cat="courage">Courage</span>
           <h3 class="article-title">You're not stuck. You're on the wrong ladder.</h3>
           <p class="article-excerpt">Most people climb the first ladder they find. The ones who move fast know which ladder to be on — and when to jump.</p>
           <span class="article-meta">7 min read</span>
@@ -1509,9 +1565,10 @@
         <span class="article-arrow">&rarr;</span>
       </a>
 
-      <a href="the-half-of-management-nobody-teaches-you.html" class="article-row fade-in">
+      <a href="the-half-of-management-nobody-teaches-you.html" class="article-row fade-in" data-category="leadership">
         <span class="article-tag">Leadership</span>
         <div class="article-content">
+          <span class="article-category" data-cat="leadership">Leadership</span>
           <h3 class="article-title">The half of management nobody teaches you.</h3>
           <p class="article-excerpt">Managing down is only half the job. The other half is what actually moves your career.</p>
           <span class="article-meta">8 min read</span>
@@ -1519,9 +1576,10 @@
         <span class="article-arrow">&rarr;</span>
       </a>
 
-      <a href="you-will-get-3-in-10-wrong-make-the-call-anyway.html" class="article-row fade-in">
+      <a href="you-will-get-3-in-10-wrong-make-the-call-anyway.html" class="article-row fade-in" data-category="courage">
         <span class="article-tag">Decision Making</span>
         <div class="article-content">
+          <span class="article-category" data-cat="courage">Courage</span>
           <h3 class="article-title">You will get 3 in 10 wrong. Make the call anyway.</h3>
           <p class="article-excerpt">The fear of deciding wrong stops more careers than wrong decisions ever has. Here's why.</p>
           <span class="article-meta">9 min read</span>
@@ -1529,9 +1587,10 @@
         <span class="article-arrow">&rarr;</span>
       </a>
 
-      <a href="the-difference-between-a-manager-and-a-leader.html" class="article-row fade-in">
+      <a href="the-difference-between-a-manager-and-a-leader.html" class="article-row fade-in" data-category="leadership">
         <span class="article-tag">Leadership</span>
         <div class="article-content">
+          <span class="article-category" data-cat="leadership">Leadership</span>
           <h3 class="article-title">The difference between a manager and a leader.</h3>
           <p class="article-excerpt">Every organisation has managers. Far fewer have leaders. Here's what actually separates them.</p>
           <span class="article-meta">7 min read</span>
@@ -1539,9 +1598,10 @@
         <span class="article-arrow">&rarr;</span>
       </a>
 
-      <a href="you-are-busy-but-are-you-thinking.html" class="article-row fade-in">
+      <a href="you-are-busy-but-are-you-thinking.html" class="article-row fade-in" data-category="courage">
         <span class="article-tag">Leadership Strategy</span>
         <div class="article-content">
+          <span class="article-category" data-cat="courage">Courage</span>
           <h3 class="article-title">You're busy. But are you thinking?</h3>
           <p class="article-excerpt">Most managers are flat out. Every single day. But hard at what? If every hour is consumed by what's urgent right now, nobody is building what matters next.</p>
           <span class="article-meta">6 min read</span>
@@ -2149,6 +2209,27 @@
       var modal = document.getElementById('consentModal');
       if (modal) modal.style.display = 'none';
     }
+  </script>
+
+  <script>
+    // ─── CATEGORY FILTER ───
+    (function () {
+      var btns = document.querySelectorAll('.filter-btn');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cat = this.getAttribute('data-filter');
+          btns.forEach(function (b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          document.querySelectorAll('#the-take .article-row').forEach(function (row) {
+            if (cat === 'all' || row.getAttribute('data-category') === cat) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
   </script>
 
 </body>
