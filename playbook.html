@@ -1995,29 +1995,44 @@
         e.preventDefault();
         var btn = document.getElementById('contactSubmit');
         var inner = document.querySelector('.contact-inner');
+        var originalText = btn.textContent;
+
+        var name    = (document.getElementById('contactName').value    || '').trim();
+        var email   = (document.getElementById('contactEmail').value   || '').trim();
+        var topic   = (document.getElementById('contactSubject').value || '').trim();
+        var message = (document.getElementById('contactMessage').value || '').trim();
+        var gotcha  = form.querySelector('[name="_gotcha"]');
+        var _gotcha = gotcha ? gotcha.value : '';
+
         btn.disabled = true;
         btn.textContent = 'Sending...';
-        fetch(form.action, {
+
+        var errorMsg = form.querySelector('.contact-error');
+        if (!errorMsg) {
+          errorMsg = document.createElement('p');
+          errorMsg.className = 'contact-error';
+          form.appendChild(errorMsg);
+        }
+        errorMsg.style.display = 'none';
+
+        fetch('https://jaws-contact-form.oliverfrancis.workers.dev', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        }).then(function (r) {
-          if (r.ok) {
-            inner.innerHTML = '<p class="contact-success"><strong>Message received.</strong><br>We\'ll be in touch at ' + (form.querySelector('#contactEmail').value) + '</p>';
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, topic: topic, message: message, _gotcha: _gotcha }),
+        })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success) {
+            inner.innerHTML = '<p class="contact-success"><strong>Message received.</strong><br>We\'ll be in touch at ' + email + '</p>';
           } else {
-            btn.disabled = false;
-            btn.textContent = 'Send Message';
-            var err = form.querySelector('.contact-error');
-            if (!err) {
-              err = document.createElement('p');
-              err.className = 'contact-error';
-              form.appendChild(err);
-            }
-            err.textContent = 'Something went wrong. Please try again or email info@jawsadvantage.com directly.';
+            throw new Error(data.error || 'Unknown error');
           }
-        }).catch(function () {
+        })
+        .catch(function () {
+          btn.textContent = originalText;
           btn.disabled = false;
-          btn.textContent = 'Send Message';
+          errorMsg.textContent = 'Something went wrong. Email us directly at info@jawsadvantage.com';
+          errorMsg.style.display = 'block';
         });
       });
     })();
