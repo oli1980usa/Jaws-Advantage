@@ -28,6 +28,7 @@
     gtag('js', new Date());
     gtag('config', 'G-5RC382BRZF');
   </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Intelligence | The JAWS Advantage</title>
   <meta name="description" content="Frameworks and articles from someone who has lived it. Twelve roles. Seventeen years. One multi-billion dollar company. No theory, no fluff — just the intelligence that actually moves careers.">
@@ -1550,6 +1551,7 @@
         </div>
         <input type="hidden" name="_subject" value="New message — The JAWS Advantage">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADAO_tgi3CPxvB7X" data-theme="dark"></div>
         <button type="submit" class="contact-submit" id="contactSubmit">Send Message</button>
       </form>
     </div>
@@ -2003,6 +2005,8 @@
         var message = (document.getElementById('contactMessage').value || '').trim();
         var gotcha  = form.querySelector('[name="_gotcha"]');
         var _gotcha = gotcha ? gotcha.value : '';
+        var turnstileEl = document.querySelector('[name="cf-turnstile-response"]');
+        var turnstileToken = turnstileEl ? turnstileEl.value : '';
 
         btn.disabled = true;
         btn.textContent = 'Sending...';
@@ -2018,7 +2022,7 @@
         fetch('https://jaws-contact-form.oliverfrancis.workers.dev', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name, email: email, topic: topic, message: message, _gotcha: _gotcha }),
+          body: JSON.stringify({ name: name, email: email, topic: topic, message: message, _gotcha: _gotcha, turnstileToken: turnstileToken }),
         })
         .then(function (res) { return res.json(); })
         .then(function (data) {

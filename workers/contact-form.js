@@ -17,10 +17,30 @@ export default {
 
     try {
       const data = await request.json();
-      const { name, email, topic, message, _gotcha } = data;
+      const { name, email, topic, message, _gotcha, turnstileToken } = data;
 
       if (_gotcha) {
         return new Response(JSON.stringify({ success: true }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+
+      const ip = request.headers.get('CF-Connecting-IP');
+      const turnstileVerification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: turnstileToken,
+          remoteip: ip,
+        }),
+      });
+
+      const turnstileResult = await turnstileVerification.json();
+
+      if (!turnstileResult.success) {
+        return new Response(JSON.stringify({ success: false, error: 'Security check failed. Please try again.' }), {
+          status: 403,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
