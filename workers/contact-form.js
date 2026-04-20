@@ -1,8 +1,12 @@
 export default {
   async fetch(request, env) {
 
+    const origin = request.headers.get('Origin');
+    const allowedOrigins = ['https://jawsadvantage.com', 'https://www.jawsadvantage.com'];
+    const allowedOrigin = allowedOrigins.includes(origin) ? origin : 'https://jawsadvantage.com';
+
     const corsHeaders = {
-      'Access-Control-Allow-Origin': 'https://jawsadvantage.com',
+      'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     };
@@ -79,9 +83,9 @@ export default {
       });
 
       if (!resendResponse.ok) {
-        const err = await resendResponse.json();
-        console.error('Resend error:', err);
-        return new Response(JSON.stringify({ success: false, error: 'Failed to send email' }), {
+        const errText = await resendResponse.text();
+        console.error('Resend error status:', resendResponse.status, errText);
+        return new Response(JSON.stringify({ success: false, error: `Resend failed: ${resendResponse.status} ${errText}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
