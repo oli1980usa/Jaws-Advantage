@@ -59,7 +59,7 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'JAWS Advantage <onboarding@resend.dev>',
+          from: 'JAWS Advantage <contact@jawsadvantage.com>',
           to: ['info@jawsadvantage.com'],
           reply_to: email,
           subject: `Contact Form: ${topic || 'General Enquiry'} — from ${name}`,
