@@ -236,13 +236,16 @@
       color: #ffffff;
     }
 
-    body.light-mode .contact-bar {
-      color: rgba(10, 10, 10, 0.4);
-      border-color: rgba(10, 10, 10, 0.08);
+    body.light-mode .contact-section {
+      background: var(--black-2);
     }
 
-    body.light-mode .contact-bar a {
-      color: var(--red);
+    body.light-mode .contact-field input,
+    body.light-mode .contact-field select,
+    body.light-mode .contact-field textarea {
+      background: var(--black);
+      color: var(--off-white);
+      border-color: var(--border);
     }
 
     /* ─── HERO ─── */
@@ -733,25 +736,136 @@
       transition: transform 0.2s, color 0.2s;
     }
 
-    /* ─── CONTACT BAR ─── */
-    .contact-bar {
-      padding: 24px 48px;
-      text-align: center;
+    /* ─── CONTACT SECTION ─── */
+    .contact-section {
+      background: var(--black-2);
       border-top: 1px solid var(--border);
-      font-size: 13px;
-      font-weight: 300;
-      color: rgba(184, 181, 176, 0.4);
+      padding: 80px 48px;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
       letter-spacing: 0.04em;
+      color: var(--off-white);
+      margin-bottom: 40px;
+      line-height: 1;
     }
 
-    .contact-bar a {
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-field label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--off-white-dim);
-      text-decoration: none;
-      transition: color 0.2s;
     }
 
-    .contact-bar a:hover {
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+      background: var(--black);
+      border: 1px solid var(--border);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: rgba(184, 181, 176, 0.3);
+    }
+
+    .contact-field input:focus,
+    .contact-field select:focus,
+    .contact-field textarea:focus {
+      border-color: var(--red);
+    }
+
+    .contact-field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8b5b0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-color: var(--black);
+      padding-right: 36px;
+    }
+
+    .contact-field textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+
+    .contact-submit {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--off-white);
+      border: 1px solid var(--red);
+      padding: 14px 32px;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .contact-submit:hover {
+      background: #bf3120;
+      border-color: #bf3120;
+    }
+
+    .contact-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .contact-success {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--off-white);
+      line-height: 1.7;
+      padding: 40px 0;
+    }
+
+    .contact-success strong {
       color: var(--red);
+    }
+
+    .contact-error {
+      font-size: 13px;
+      color: var(--red);
+      margin-top: -8px;
     }
 
     /* ─── FOOTER ─── */
@@ -920,6 +1034,19 @@
       .footer-inner {
         flex-direction: column;
         gap: 20px;
+        text-align: center;
+      }
+
+      .contact-section {
+        padding: 64px 24px;
+      }
+
+      .contact-row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-submit {
+        width: 100%;
         text-align: center;
       }
     }
@@ -1604,10 +1731,42 @@
     </div>
   </section>
 
-  <!-- ─── CONTACT BAR ─── -->
-  <div class="contact-bar">
-    Get in touch: <a href="mailto:info@jawsadvantage.com">info@jawsadvantage.com</a>
-  </div>
+  <!-- ─── CONTACT ─── -->
+  <!-- Formspree: sign up at formspree.io, create a form, and replace YOUR_FORM_ID below -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="contact-heading fade-in">Contact us.</h2>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="contact-row">
+          <div class="contact-field">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" name="name" required placeholder="Your name" autocomplete="name">
+          </div>
+          <div class="contact-field">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" required placeholder="your@email.com" autocomplete="email">
+          </div>
+        </div>
+        <div class="contact-field">
+          <label for="contactSubject">Topic</label>
+          <select id="contactSubject" name="subject">
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Media">Media</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="contact-field">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" required placeholder="Your message..."></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New message — The JAWS Advantage">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <button type="submit" class="contact-submit" id="contactSubmit">Send Message</button>
+      </form>
+    </div>
+  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -2218,6 +2377,43 @@
               row.style.display = 'none';
             }
           });
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // ─── CONTACT FORM ───
+    (function () {
+      var form = document.getElementById('contactForm');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = document.getElementById('contactSubmit');
+        var inner = document.querySelector('.contact-inner');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (r) {
+          if (r.ok) {
+            inner.innerHTML = '<p class="contact-success"><strong>Message received.</strong><br>We\'ll be in touch at ' + (form.querySelector('#contactEmail').value) + '</p>';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Send Message';
+            var err = form.querySelector('.contact-error');
+            if (!err) {
+              err = document.createElement('p');
+              err.className = 'contact-error';
+              form.appendChild(err);
+            }
+            err.textContent = 'Something went wrong. Please try again or email info@jawsadvantage.com directly.';
+          }
+        }).catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
         });
       });
     })();
