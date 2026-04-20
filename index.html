@@ -486,6 +486,21 @@
       display: block;
     }
 
+    .pillar-category {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 14px;
+      opacity: 0.55;
+    }
+
+    .pillar-category[data-cat="presence"]   { color: #7c9ebf; }
+    .pillar-category[data-cat="courage"]    { color: var(--red); }
+    .pillar-category[data-cat="leadership"] { color: #8a9e7c; }
+    .pillar-category[data-cat="influence"]  { color: #b89a5c; }
+
     .pillar-desc {
       font-size: 14px;
       font-weight: 300;
@@ -1493,6 +1508,7 @@
     <h2 class="section-title fade-in">Four Pillars of Career Dominance</h2>
     <div class="pillars-grid">
       <div class="pillar fade-in">
+        <span class="pillar-category" data-cat="presence">Presence</span>
         <div class="pillar-number">01</div>
         <h3 class="pillar-title">Circle Before You Strike</h3>
         <span class="pillar-subtitle">Engineer Your Presence</span>
@@ -1500,6 +1516,7 @@
         <a href="engineer-your-presence.html" class="pillar-btn pillar-btn-live">READ THE PLAYBOOK</a>
       </div>
       <div class="pillar fade-in">
+        <span class="pillar-category" data-cat="courage">Courage</span>
         <div class="pillar-number">02</div>
         <h3 class="pillar-title">Hunt in Packs, Rule the Waters</h3>
         <span class="pillar-subtitle">Choose Your Battles, Win the War</span>
@@ -1507,6 +1524,7 @@
         <a href="choose-your-battles-win-the-war.html" class="pillar-btn pillar-btn-live">READ THE PLAYBOOK</a>
       </div>
       <div class="pillar fade-in">
+        <span class="pillar-category" data-cat="leadership">Leadership</span>
         <div class="pillar-number">03</div>
         <h3 class="pillar-title">Control All Depths</h3>
         <span class="pillar-subtitle">Lead With and Through Others</span>
@@ -1514,6 +1532,7 @@
         <a href="lead-with-and-through-others.html" class="pillar-btn pillar-btn-live">READ THE PLAYBOOK</a>
       </div>
       <div class="pillar fade-in">
+        <span class="pillar-category" data-cat="influence">Influence</span>
         <div class="pillar-number">04</div>
         <h3 class="pillar-title">Turn Apex Predators Into Allies</h3>
         <span class="pillar-subtitle">Manage and Influence Upwards</span>
